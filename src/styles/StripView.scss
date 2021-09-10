@@ -1,0 +1,71 @@
+@import './global/index.scss';
+
+.strip-view-container {
+  height: 250px;
+  border-top: $outline-border;
+  box-sizing: border-box;
+}
+
+.strip-view-container.hidden {
+  display: none;
+
+  .strip-view-photos-container {
+    display: none;
+  }
+}
+
+.strip-year-label-outer-container.hidden {
+  display: none;
+  
+  .strip-year-label-inner-container {
+    display: none;
+  }
+}
+
+.strip-divider.hidden {
+  display: none;
+}
+
+.strip-year-label-outer-container {
+  height: 2px;
+  background-color: black;
+  margin-bottom: -1px;
+  display: flex;
+  align-items: center;
+}
+
+.strip-divider {
+  height: 36px;
+  background-image: url('../assets/textures/noise-divider.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+ 
+.strip-divider.year-2007 {
+  display: none;
+}
+
+.strip-year-label-inner-container {
+  height: 26px;
+  border: $outline-border;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-left: none;
+  width: 70px;
+  background: #FCFBF4;
+  z-index: 998;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+
+  span.strip-year-label {
+    font-family: "Sunset-Gothic", sans-serif;
+    font-weight: 500;
+  }
+}
+
+rect.image-frame {
+	stroke-width: 0.5;
+	stroke: rgb(200, 200, 200);
+	fill: none;
+}

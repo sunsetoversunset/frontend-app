@@ -1,0 +1,66 @@
+@import './global/index.scss';
+
+.nav-header {
+  position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+  height: 40px;
+  background-color: $main-bg;
+  width: 100vw;
+  font-family: "Sunset-Gothic", sans-serif;
+
+  h1 {
+    font-size: 16px;
+    margin-left: 24px;
+    font-weight: 500;
+    margin: 0px 0px 0px 28px;
+  }
+
+  h1:hover {
+    color: $rust;
+  }
+
+  a, a:active, a:visited {
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+  }
+
+  a, a:visited {
+    color: black;
+  }
+
+  .nav-links-container {
+    flex-direction: row;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 24px;
+
+    ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      column-gap: 24px;
+  
+      li {
+        display: inline-flex;
+        font-size: 16px;
+      }
+
+      .nav-link {
+        border: 1px solid $main-bg;
+        padding: 2px 12px;
+        border-radius: 50px;
+      }
+
+      .nav-link:hover {
+        border: 1px solid black;
+      }
+    }  
+  }
+}

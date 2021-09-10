@@ -1,0 +1,22 @@
+@import './global/index.scss';
+
+.modal-backdrop.hidden {
+	display: none;
+}
+
+.modal-backdrop.visible {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: 99999;
+	background: #000000b5;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.photo-viewer-modal {
+  background: $light-1;
+  border-radius: 36px;
+  padding: 36px;
+}

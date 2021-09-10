@@ -1,0 +1,24 @@
+@import './global/index.scss';
+
+button.btn-rounded {
+  font-size: 14px;
+  border-radius: 50px;
+  background: $light-2;
+  padding: 0px 24px;
+  height: 36px;
+  border: 1px solid black;
+  display: flex;
+	align-items: center;
+	column-gap: 4px;
+  font-family: "Sunset-Gothic", sans-serif;
+  font-weight: 500;
+}
+
+button.btn-rounded:active {
+  background: $light-orange;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: $med-orange;
+}

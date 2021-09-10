@@ -1,0 +1,33 @@
+@import './global/index.scss';
+
+html, body {
+  margin: 0;
+  background-color: $main-bg;
+  font-family: "Degular", sans-serif;
+}
+
+.app-page {
+  color: black;
+	height: 100vh;
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .app-page-inner.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .app-links {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
