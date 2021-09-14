@@ -46,7 +46,7 @@ export const App = () => {
     }
     
     // get all photo data
-    // fetchAllPhotoData()
+    fetchAllPhotoData()
   }, [])
 
   

@@ -1,21 +1,33 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import * as d3 from 'd3'
 import "../styles/StripView.scss"
 
 export const StripView = (props) => {
-
-  const mult = 200
-  const stripContainer = useRef(null)
-  const d3Container = useRef(null)
+  const [bbox, setBbox] = useState({});
+  const mult            = 200
+  const stripContainer  = useRef(null)
+  const d3Container     = useRef(null)
 
   // ---------------------------------------------------------------
+  const set = () => {
+    setBbox(stripContainer && stripContainer.current ? stripContainer.current.getBoundingClientRect() : {});
+  }
+
+  useEffect(() => {
+    set()
+    window.addEventListener('resize', set);
+    return () => window.removeEventListener('resize', set);
+  }, [])
+
+  // ------------------------ ---------------------------------------
   useEffect(() => {
     if (props.photoData && d3Container.current) {
       renderWireframes()
       loadImages()
     }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.photoData, props.direction])
+  }, [props.photoData, props.direction, bbox])
 
 
   // ---------------------------------------------------------------
@@ -86,7 +98,6 @@ export const StripView = (props) => {
           }
         };
       });
-
   }
 
 
