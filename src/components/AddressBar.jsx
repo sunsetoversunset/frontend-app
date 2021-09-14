@@ -1,16 +1,29 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
 
 export const AddressBar = (props) => {
-
+  const [bbox, setBbox]  = useState({});
   const addressContainer = useRef(null)
   const addressRef       = useRef(null)
   const mult             = 200
 
+  // ---------------------------------------------------------------
+  const set = () => {
+    setBbox(addressContainer && addressContainer.current ? addressContainer.current.getBoundingClientRect() : {});
+  }
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    set()
+    window.addEventListener('resize', set);
+    return () => window.removeEventListener('resize', set);
+  }, [])
+
+  // ---------------------------------------------------------------
   useEffect(() => {
     const svg = d3.select(addressRef.current)
-      .attr("width", addressContainer.current.getBoundingClientRect().width)
-      .attr("height", addressContainer.current.getBoundingClientRect().height)
+      .attr("width", bbox.width)
+      .attr("height", bbox.height)
 
     // clear out before we draw
     svg.selectAll("*").remove();
@@ -47,8 +60,9 @@ export const AddressBar = (props) => {
 				return d.address 
 			})
 
-  }, [props.addressesNData, props.addressesSData])
+  }, [props.addressesNData, props.addressesSData, bbox])
 
+  // ---------------------------------------------------------------
   return (
     <div ref={ addressContainer } className="strip-addresses">
       <svg
