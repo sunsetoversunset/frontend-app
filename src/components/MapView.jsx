@@ -1,5 +1,5 @@
 import { NavHeader } from "./NavHeader"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { StripView } from "./StripView"
 import { RoundedButton } from "./Buttons"
 import { Map } from "./Map"
@@ -32,17 +32,12 @@ export const MapView = (props) => {
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
 
   const nearbyAddressesRange = [-2.5, 2.5]
-  const mult = 200
 
   const moveSpeedOpts = {
     "slow"   : 0.2,
     "medium" : 0.8,
     "fast"   : 0.6
   }
-
-  const addressContainer = useRef(null)
-  const addressRef = useRef(null)
-
   
   // --------------------------------------------------------------------
   useEffect(() => {
