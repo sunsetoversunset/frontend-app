@@ -34,25 +34,36 @@
   justify-content: center;
   align-items: center;
   background-color: $light-1;
+
+  .minimize-map-ctrl.hidden {
+    display: none;
+  }
+
+  .minimize-map-ctrl.visible {
+    display: flex;
+  }
+  
 }
 
 .minimize-map-ctrl {
-	position: absolute;
-	top: 16px;
-	right: 16px;
-	background: white;
-	border: $outline-border;
-	border-radius: 50px;
-	height: 25px;
-	width: 25px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 50px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .minimize-map-ctrl:hover {
   cursor: pointer;
+  background-color: $light-orange;
 }
+
 
 .map-controls {
   position: relative;
@@ -71,10 +82,20 @@
     justify-content: space-between;
   }
 
+  .map-controls-right {
+    .minimize-map-ctrl.visible {
+      position: initial;
+    }
+    .minimize-map-ctrl.hidden {
+      display: none;
+    }
+  }
+
   .map-controls-right,
   .map-controls-left {
     display: flex;
     column-gap: 10px;
+    align-items: center;
   }
 
   #search.btn-rounded {

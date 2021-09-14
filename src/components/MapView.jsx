@@ -7,8 +7,11 @@ import { PhotoViewerModal } from "./PhotoViewerModal"
 import { AddressBar } from "./AddressBar"
 import { Footer } from "./Footer"
 import "../styles/MapView.scss"
+
 import iconClose from "../assets/icons/icon-close.svg"
 import iconCheck from "../assets/icons/icon-check.svg"
+import iconMinimize from "../assets/icons/icon-minimize.svg"
+import iconMaximize from "../assets/icons/icon-maximize.svg"
 
 export const MapView = (props) => {
 
@@ -172,6 +175,19 @@ export const MapView = (props) => {
               label={'Head East'}
               handleOnClicked={() => console.log('Going East')}
             />
+
+            {/* TODO - don't put this in two places */}
+            <div 
+              className={`minimize-map-ctrl ${isMapMinimized ? 'visible' : 'hidden'}`}
+              onClick={ () => setIsMapMinimized(!isMapMinimized) }
+            >
+              {isMapMinimized ? 
+                <img src={iconMaximize} alt="icon-maximize"/> : 
+                <img src={iconMinimize} alt="icon-minimize"/>
+              }
+            </div>
+
+
           </div>
         </div>
         { renderSearchAndFilter() }
@@ -188,10 +204,13 @@ export const MapView = (props) => {
         `}>
           <Map />
         <div 
-          className="minimize-map-ctrl"
+          className={`minimize-map-ctrl ${isMapMinimized === false ? 'visible' : 'hidden'}`}
           onClick={ () => setIsMapMinimized(!isMapMinimized) }
         >
-          {isMapMinimized ? "+" : "-"}
+          {isMapMinimized ? 
+            <img src={iconMaximize} alt="icon-maximize"/> : 
+            <img src={iconMinimize} alt="icon-minimize"/>
+          }
         </div>
       </div>
     )

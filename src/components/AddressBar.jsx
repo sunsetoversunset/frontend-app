@@ -23,7 +23,6 @@ export const AddressBar = (props) => {
       .enter()
       .append('text')
       .attr("x", function(d) {
-        console.log('d: ', d)
         return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
 			})
 			.attr("y", "45")
@@ -40,7 +39,7 @@ export const AddressBar = (props) => {
 			.enter()
 			.append('text')
 			.attr("x", function(d) { 
-        return -((d.coord_max + d.coord_min) / 2) * mult
+        return -((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
 			})
 			.attr("y", "45")
 			.attr("text-anchor", "middle")
