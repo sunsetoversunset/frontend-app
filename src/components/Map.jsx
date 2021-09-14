@@ -52,12 +52,13 @@ export const Map = () => {
   // Range: height of bounding rect to 0
   const yScale = d3.scaleLinear()
     .domain([yDomain[0], yDomain[1]])
-    .range([bbox.height, 0])
+    // .range([bbox.height/2, 0])
+    .range([bbox.height/4, 0])
 
   // Draws the line based on coordinate data
   const line = d3.line()
     .x(d => xScale(d[0]))
-    .y(d => yScale(d[1]))
+    .y(d => yScale(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
 
   // ---------------------------------------------------------------

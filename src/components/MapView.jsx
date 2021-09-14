@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import { StripView } from "./StripView"
 import { RoundedButton } from "./Buttons"
 import { Map } from "./Map"
-import { PhotoViewerModal } from "./PhotoViewerModal"
-import * as d3 from 'd3'
+import { PhotoViewerModal } from "./PhotoViewerModal" 
+import { AddressBar } from "./AddressBar"
 import { Footer } from "./Footer"
 import "../styles/MapView.scss"
 import iconClose from "../assets/icons/icon-close.svg"
@@ -29,6 +29,7 @@ export const MapView = (props) => {
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
 
   const nearbyAddressesRange = [-2.5, 2.5]
+  const mult = 200
 
   const moveSpeedOpts = {
     "slow"   : 0.2,
@@ -42,7 +43,6 @@ export const MapView = (props) => {
   
   // --------------------------------------------------------------------
   useEffect(() => {
-    // console.log('allPhotoData', props.allPhotoData)
     // set all years to checked by default
     let years = {}
     for (let i = 0; i < props.dataFields.length; i++) {
@@ -51,55 +51,6 @@ export const MapView = (props) => {
     setYearsShowing(years)
   }, [])
 
-
-  // --------------------------------------------------------------------
-  // TODO: obviously not working now because we have boundaries to account
-  // for and need to map
-  // --------------------------------------------------------------------
-  useEffect(() => {
-    const svg = d3.select(addressRef.current)
-      .attr("width", addressContainer.current.getBoundingClientRect().width)
-      .attr("height", addressContainer.current.getBoundingClientRect().height)
-
-    // clear out before we draw
-    svg.selectAll("*").remove();
-
-    // N addresses
-    svg.append('g')
-      .attr('class', 'addresses-text addresses-text-n')
-      .selectAll('text')
-      .data(props.addressesNData)
-      .enter()
-      .append('text')
-      .attr("x", function(d) { 
-				// index * 200 (mult)
-				// return d.index * 200;
-        return d.coord_min * 200 
-			})
-			.attr("y", "45")
-			.attr("text-anchor", "middle")
-			.text(function(d) { 
-				return d.address 
-			})
-    
-    // S addresses
-    // svg.append('g')
-    //   .attr('class', 'addresses-text addresses-text-s hidden-strip')
-    //   .selectAll('text')
-		// 	.data(props.addressesSData)
-		// 	.enter()
-		// 	.append('text')
-		// 	.attr("x", function(d) { 
-		// 		// return -d.index * 200; 
-    //     return -d.coord_min * 200
-		// 	})
-		// 	.attr("y", "45")
-		// 	.attr("text-anchor", "middle")
-		// 	.text(function(d) { 
-		// 		return d.address 
-		// 	})
-
-  }, [props.addressesNData, props.addressesSData])
 
   // --------------------------------------------------------------------
   // TODO: move to its own component
@@ -281,12 +232,11 @@ export const MapView = (props) => {
       <div className="map-and-controls-container">
         { renderMap() }
         { renderMapControls() }
-        {/* Address Bar */}
-        <div ref={ addressContainer } className="strip-addresses">
-          <svg
-            ref={addressRef}
-          />
-        </div>
+        <AddressBar 
+          directionFacing={directionFacing}
+          addressesNData={props.addressesNData}
+          addressesSData={props.addressesSData}
+        />
       </div>
       <div className={`strips-shade ${isMapMinimized ? "full" : ""} ${isSearchAndFilterShowing === true ? "visible" : ""}
       `}></div>
