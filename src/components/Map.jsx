@@ -7,13 +7,14 @@ import sunsetJson from '../assets/data/sunset.json'
   In case it's useful later - handling responsiveness:  
   https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
   --------------------------------------------------------------- */ 
-export const Map = () => {
-  const mapContainer          = useRef(null)
-  const d3Container           = useRef(null)
-  const [xDomain, setXDomain] = useState([])
-  const [yDomain, setYDomain] = useState([])
-  const [bbox, setBbox]       = useState({});
+export const Map = (props) => {
+  const mapContainer              = useRef(null)
+  const d3Container               = useRef(null)
+  const [xDomain, setXDomain]     = useState([])
+  const [yDomain, setYDomain]     = useState([])
+  const [bbox, setBbox]           = useState({});
 
+  // ---------------------------------------------------------------
   const set = () => {
     setBbox(mapContainer && mapContainer.current ? mapContainer.current.getBoundingClientRect() : {});
   }
@@ -30,6 +31,11 @@ export const Map = () => {
     setXDomain(d3.extent(xCoords))
     setYDomain(d3.extent(yCoords))
   }
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    console.log('xDomain: ', xDomain)
+  }, [xDomain])
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -61,6 +67,9 @@ export const Map = () => {
     .y(d => yScale(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
 
+
+  const defaultZoomRange = [-118.40142058250001, -118.37170226875]
+
   // ---------------------------------------------------------------
   // Renders svg map and brush controls
   // ---------------------------------------------------------------
@@ -85,30 +94,35 @@ export const Map = () => {
       .call(brush)
       // TODO: set to default coords
       // .call(brush.move, [xDomain[0], xDomain[0] + 0.0003].map(x))
-      // for now, somewhere in the middle
-      .call(brush.move, [-118.40142058250001, -118.37170226875].map(x))
+      .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
       .call(g => {
         g.select(".overlay")
           .datum({type: "selection"})
       });
   }, [xDomain, yDomain, bbox])
-
   
   // ---------------------------------------------------------------
   // Brush controls
   // ---------------------------------------------------------------
+  const handleBrushEnd = (event) => {
+    if (event.selection === null) return
+    const [x0, x1] = event.selection.map(x.invert);
+    // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
+    props.setZoomRange([x0, x1])
+  }
+
   const brushed = (event) => {
-    const selection = event.selection;
-    if (selection === null) return
-    const [x0, x1] = selection.map(x.invert);
-    console.log(`x0: ${x0} x1: ${x1}`)
+    // if (event.selection === null) return
+    // const [x0, x1] = event.selection.map(x.invert);
+    // console.log(`${x0}, ${x1}`)
     // TODO: figure out how to highlight north or south part of selection?
   }
 
   const x = d3.scaleLinear([xDomain[0], xDomain[1]], [0, bbox.width])
   const brush = d3.brushX()
     .extent([[0, 0], [bbox.width, bbox.height]])
-    .on("start brush end", brushed);
+    .on("start brush end", brushed)
+    .on("end", handleBrushEnd);
 
   // ---------------------------------------------------------------
   return (

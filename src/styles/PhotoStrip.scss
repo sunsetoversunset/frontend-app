@@ -1,15 +1,15 @@
 @import './global/index.scss';
 
-.strip-view-container {
+.strip-container {
   height: 250px;
   border-top: $outline-border;
   box-sizing: border-box;
 }
 
-.strip-view-container.hidden {
+.strip-container.hidden {
   display: none;
 
-  .strip-view-photos-container {
+  .strip-photos-container {
     display: none;
   }
 }

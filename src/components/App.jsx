@@ -31,7 +31,6 @@ export const App = () => {
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    console.log('here')
     // get all address data
     loadAddressData(baseUrl + addressBoundariesTableId)
 
@@ -46,7 +45,7 @@ export const App = () => {
     }
     
     // get all photo data
-    fetchAllPhotoData()
+    // fetchAllPhotoData()
   }, [])
 
   

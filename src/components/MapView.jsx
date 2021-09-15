@@ -1,6 +1,6 @@
 import { NavHeader } from "./NavHeader"
 import { useEffect, useState } from "react"
-import { StripView } from "./StripView"
+import { PhotoStrip } from "./PhotoStrip"
 import { RoundedButton } from "./Buttons"
 import { Map } from "./Map"
 import { PhotoViewerModal } from "./PhotoViewerModal" 
@@ -16,15 +16,14 @@ import iconMaximize from "../assets/icons/icon-maximize.svg"
 export const MapView = (props) => {
 
   // CONTROLS
-  const [ distanceInterval, setDistanceInterval ] = useState(5)
-  const [ addressRange, setAddressRange ]         = useState({})
-  const [ mapSearchInput, setMapSearchInput ]     = useState("")
-  const [ moveSpeed, setMoveSpeed ]               = useState("medium")
-  const [ scrollAmount, setScrollAmount ]         = useState(0)
-  const [ isMapMinimized, setIsMapMinimized ]     = useState(false)
-  const [ directionFacing, setDirectionFacing ]   = useState("n")
-  const [ yearsShowing, setYearsShowing ]         = useState({})
-  const [ searchInput, setSearchInput ]           = useState("")
+  const [ zoomRange, setZoomRange ]             = useState([])
+  const [ mappedZoomRange, setMappedZoomRange ] = useState([])
+  const [ moveSpeed, setMoveSpeed ]             = useState("medium")
+  const [ scrollAmount, setScrollAmount ]       = useState(0)
+  const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
+  const [ directionFacing, setDirectionFacing ] = useState("n")
+  const [ yearsShowing, setYearsShowing ]       = useState({})
+  const [ searchInput, setSearchInput ]         = useState("")
 
   // MODAL
   const [ isModalShowing, setIsModalShowing ] = useState(false)
@@ -49,6 +48,25 @@ export const MapView = (props) => {
     setYearsShowing(years)
   }, [])
 
+  // --------------------------------------------------------------------
+  const mapRange = (value, low1, high1, low2, high2) => {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+  }
+
+  // --------------------------------------------------------------------
+  useEffect(() => {
+    console.log('unmapped range: ', zoomRange)
+    // hard-coding this for now but coords will change
+    let coordRange = [-118.56112, -118.2249107]
+    let leftBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
+    let rightBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
+    setMappedZoomRange([leftBounds, rightBounds])
+  }, [zoomRange])
+
+  // --------------------------------------------------------------------
+  useEffect(() => {
+    console.log('mapped range: ', mappedZoomRange)
+  }, [mappedZoomRange])
 
   // --------------------------------------------------------------------
   // TODO: move to its own component
@@ -136,6 +154,12 @@ export const MapView = (props) => {
   }
 
   // --------------------------------------------------------------------
+  const handleScroll = (direction) => {
+    console.log(`Going ${direction}`)
+    setScrollAmount(0)
+  }
+
+  // --------------------------------------------------------------------
   const renderMapControls = () => {
     return (
       <div className="map-controls">
@@ -144,7 +168,7 @@ export const MapView = (props) => {
             <RoundedButton
               icon="icon-arrow-left" 
               label={'Head West'}
-              handleOnClicked={() => console.log('Going West')}
+              handleOnClicked={() => handleScroll('west')}
             />
             <RoundedButton 
               label={`Direction: ${directionFacing.toUpperCase()}`}
@@ -168,11 +192,12 @@ export const MapView = (props) => {
             <RoundedButton
               icon="icon-arrow-right"  
               label={'Head East'}
-              handleOnClicked={() => console.log('Going East')}
+              handleOnClicked={() => handleScroll('east')}
             />
 
             {/* TODO - don't put this in two places */}
-            <div 
+            <div
+              role="button" 
               className={`minimize-map-ctrl ${isMapMinimized ? 'visible' : 'hidden'}`}
               onClick={ () => setIsMapMinimized(!isMapMinimized) }
             >
@@ -181,8 +206,6 @@ export const MapView = (props) => {
                 <img src={iconMinimize} alt="icon-minimize"/>
               }
             </div>
-
-
           </div>
         </div>
         { renderSearchAndFilter() }
@@ -197,8 +220,14 @@ export const MapView = (props) => {
         className={`map-container 
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
-          <Map />
-        <div 
+          <Map
+            moveSpeed={ moveSpeed }
+            setMoveSpeed={ setMoveSpeed }
+            zoomRange={ zoomRange }
+            setZoomRange={ setZoomRange } 
+          />
+        <div
+          role="button" 
           className={`minimize-map-ctrl ${isMapMinimized === false ? 'visible' : 'hidden'}`}
           onClick={ () => setIsMapMinimized(!isMapMinimized) }
         >
@@ -215,7 +244,7 @@ export const MapView = (props) => {
   const renderStripViews = (direction) => {
     return props.dataFields.map((dataFieldObj) => {
       return (
-        <StripView
+        <PhotoStrip
           isVisible={yearsShowing[dataFieldObj.year]}
           handleSetModalImg={ (img) => {
             setModalImgUrl(img) 
@@ -252,7 +281,9 @@ export const MapView = (props) => {
           addressesSData={props.addressesSData}
         />
       </div>
-      <div className={`strips-shade ${isMapMinimized ? "full" : ""} ${isSearchAndFilterShowing === true ? "visible" : ""}
+      <div
+        onClick={() => setIsSearchAndFilterShowing(false)} 
+        className={`strips-shade ${isMapMinimized ? "full" : ""} ${isSearchAndFilterShowing === true ? "visible" : ""}
       `}></div>
       <div className={`strips-container ${isSearchAndFilterShowing === true ? "noscroll" : ""} ${isMapMinimized ? "full" : ""} is-showing-${directionFacing}
       `}>

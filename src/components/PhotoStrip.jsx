@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from "react"
 import * as d3 from 'd3'
-import "../styles/StripView.scss"
+import "../styles/PhotoStrip.scss"
 
-export const StripView = (props) => {
+export const PhotoStrip = (props) => {
   const [bbox, setBbox] = useState({});
   const mult            = 200
   const stripContainer  = useRef(null)
@@ -10,7 +10,9 @@ export const StripView = (props) => {
 
   // ---------------------------------------------------------------
   const set = () => {
-    setBbox(stripContainer && stripContainer.current ? stripContainer.current.getBoundingClientRect() : {});
+    setBbox(stripContainer && stripContainer.current ? 
+      stripContainer.current.getBoundingClientRect() : {}
+    );
   }
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export const StripView = (props) => {
     return () => window.removeEventListener('resize', set);
   }, [])
 
-  // ------------------------ ---------------------------------------
+  // ---------------------------------------------------------------
   useEffect(() => {
     if (props.photoData && d3Container.current) {
       renderWireframes()
@@ -100,12 +102,11 @@ export const StripView = (props) => {
       });
   }
 
-
   // ---------------------------------------------------------------
   return (
     <>
-      <div ref={stripContainer} className={`strip-view-container ${props.isVisible ? '' : 'hidden'}`}>
-        <div className={`strip-view-photos-container year-${props.year}`}>
+      <div ref={stripContainer} className={`strip-container ${props.isVisible ? '' : 'hidden'}`}>
+        <div className={`strip-photos-container year-${props.year}`}>
           {
             props.photoData ? 
             <svg
