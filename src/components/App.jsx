@@ -36,8 +36,8 @@ export const App = () => {
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      // for (let i = 0; i < 1; i++) {
-      for (let i = 0; i < dataFields.length; i++) {
+      for (let i = 0; i < 1; i++) {
+      // for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
       }
       await Promise.all(photoRequests)
@@ -45,7 +45,7 @@ export const App = () => {
     }
     
     // get all photo data
-    // fetchAllPhotoData()
+    fetchAllPhotoData()
   }, [])
 
   

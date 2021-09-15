@@ -24,19 +24,22 @@ export const MapView = (props) => {
   const [ directionFacing, setDirectionFacing ] = useState("n")
   const [ yearsShowing, setYearsShowing ]       = useState({})
   const [ searchInput, setSearchInput ]         = useState("")
-
-  // MODAL
-  const [ isModalShowing, setIsModalShowing ] = useState(false)
-  const [ modalImgUrl, setModalImgUrl ] = useState(null)
-  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
-
-  const nearbyAddressesRange = [-2.5, 2.5]
-
+  
   const moveSpeedOpts = {
     "slow"   : 0.2,
     "medium" : 0.8,
     "fast"   : 0.6
   }
+
+  // ADDRESSES
+  const [ filteredAddressesN, setFilteredAddressesN ] = useState([])
+  const [ filteredAddressesS, setFilteredAddressesS ] = useState([])
+  const nearbyAddressesRange = [-2.5, 2.5]
+
+  // MODAL
+  const [ isModalShowing, setIsModalShowing ] = useState(false)
+  const [ modalImgUrl, setModalImgUrl ] = useState(null)
+  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
   
   // --------------------------------------------------------------------
   useEffect(() => {
@@ -55,18 +58,45 @@ export const MapView = (props) => {
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    console.log('unmapped range: ', zoomRange)
     // hard-coding this for now but coords will change
     let coordRange = [-118.56112, -118.2249107]
-    let leftBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
-    let rightBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
-    setMappedZoomRange([leftBounds, rightBounds])
+    let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
+    let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
+    filterAddressesByRange(mappedZoomRange)
+    setMappedZoomRange([lBounds, rBounds])
   }, [zoomRange])
 
   // --------------------------------------------------------------------
   useEffect(() => {
     console.log('mapped range: ', mappedZoomRange)
   }, [mappedZoomRange])
+
+
+  // --------------------------------------------------------------------
+  const filterAddressesByRange = (zRange) => {
+    // let's filter both N & S
+    let filteredAddressesN = props.addressesNData.filter(address => {
+      let parsedMin = parseFloat(address.coord_min)
+      let parsedMax = parseFloat(address.coord_max)
+      return parsedMin >= zRange[0] && parsedMax <= zRange[1]
+    })
+
+    let filteredAddressesS = props.addressesSData.filter(address => {
+      let parsedMin = parseFloat(address.coord_min)
+      let parsedMax = parseFloat(address.coord_max)
+      return parsedMin >= zRange[0] && parsedMax <= zRange[1]
+    })
+
+    setFilteredAddressesN(filteredAddressesN)
+    setFilteredAddressesS(filteredAddressesS)
+  }
+
+  // --------------------------------------------------------------------
+  // Filter photo data whenever we brush the map
+  useEffect(() => {
+
+  }, [filteredAddressesN, filteredAddressesS])
+
 
   // --------------------------------------------------------------------
   // TODO: move to its own component
@@ -275,10 +305,11 @@ export const MapView = (props) => {
       <div className="map-and-controls-container">
         { renderMap() }
         { renderMapControls() }
-        <AddressBar 
-          directionFacing={directionFacing}
-          addressesNData={props.addressesNData}
-          addressesSData={props.addressesSData}
+        <AddressBar
+          scrollAmount={ scrollAmount } 
+          directionFacing={ directionFacing }
+          addressesNData={ props.addressesNData }
+          addressesSData={ props.addressesSData }
         />
       </div>
       <div
