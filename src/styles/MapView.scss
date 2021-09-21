@@ -17,7 +17,7 @@
 
 .map-container.minimized {
   height: 30px;
-  overflow: hidden;
+  // overflow: hidden;
   
   .map {
     height: 30px;
@@ -63,7 +63,6 @@
   cursor: pointer;
   background-color: $light-orange;
 }
-
 
 .map-controls {
   position: relative;

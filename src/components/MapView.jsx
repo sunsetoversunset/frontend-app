@@ -24,6 +24,9 @@ export const MapView = (props) => {
   const [ directionFacing, setDirectionFacing ] = useState("n")
   const [ yearsShowing, setYearsShowing ]       = useState({})
   const [ searchInput, setSearchInput ]         = useState("")
+
+  // hard-coding this for now but coords will change
+  const coordRange = [-118.56112, -118.2249107]
   
   const moveSpeedOpts = {
     "slow"   : 0.2,
@@ -58,43 +61,40 @@ export const MapView = (props) => {
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    // hard-coding this for now but coords will change
-    let coordRange = [-118.56112, -118.2249107]
     let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
     let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
     filterAddressesByRange(mappedZoomRange)
     setMappedZoomRange([lBounds, rBounds])
   }, [zoomRange])
 
-  // --------------------------------------------------------------------
-  useEffect(() => {
-    console.log('mapped range: ', mappedZoomRange)
-  }, [mappedZoomRange])
-
-
+  
   // --------------------------------------------------------------------
   const filterAddressesByRange = (zRange) => {
     // let's filter both N & S
-    let filteredAddressesN = props.addressesNData.filter(address => {
+    let filteredN = props.addressesNData.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
     })
 
-    let filteredAddressesS = props.addressesSData.filter(address => {
+    let filteredS = props.addressesSData.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
     })
 
-    setFilteredAddressesN(filteredAddressesN)
-    setFilteredAddressesS(filteredAddressesS)
+    setFilteredAddressesN(filteredN)
+    setFilteredAddressesS(filteredS)
   }
 
   // --------------------------------------------------------------------
   // Filter photo data whenever we brush the map
   useEffect(() => {
-
+    if (directionFacing === 'n') {
+      console.log('filtered addresses N: ', filteredAddressesN)
+    } else {
+      console.log('filtered addresses S: ', filteredAddressesS)
+    }
   }, [filteredAddressesN, filteredAddressesS])
 
 
@@ -184,66 +184,6 @@ export const MapView = (props) => {
   }
 
   // --------------------------------------------------------------------
-  const handleScroll = (direction) => {
-    console.log(`Going ${direction}`)
-    setScrollAmount(0)
-  }
-
-  // --------------------------------------------------------------------
-  const renderMapControls = () => {
-    return (
-      <div className="map-controls">
-        <div className="map-controls-inner">
-          <div className="map-controls-left">
-            <RoundedButton
-              icon="icon-arrow-left" 
-              label={'Head West'}
-              handleOnClicked={() => handleScroll('west')}
-            />
-            <RoundedButton 
-              label={`Direction: ${directionFacing.toUpperCase()}`}
-              handleOnClicked={() => {
-                if (directionFacing === 'n') {
-                  setDirectionFacing('s')
-                } else {
-                  setDirectionFacing('n')
-                }
-              }}
-            />
-          </div>
-          <div className="map-controls-right">
-            <RoundedButton
-              icon="icon-search-filter" 
-              label={'Search & Filter'}
-              handleOnClicked={() => {
-                setIsSearchAndFilterShowing(true)
-              }}
-            />
-            <RoundedButton
-              icon="icon-arrow-right"  
-              label={'Head East'}
-              handleOnClicked={() => handleScroll('east')}
-            />
-
-            {/* TODO - don't put this in two places */}
-            <div
-              role="button" 
-              className={`minimize-map-ctrl ${isMapMinimized ? 'visible' : 'hidden'}`}
-              onClick={ () => setIsMapMinimized(!isMapMinimized) }
-            >
-              {isMapMinimized ? 
-                <img src={iconMaximize} alt="icon-maximize"/> : 
-                <img src={iconMinimize} alt="icon-minimize"/>
-              }
-            </div>
-          </div>
-        </div>
-        { renderSearchAndFilter() }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
   const renderMap = () => {
     return (
       <div 
@@ -251,10 +191,15 @@ export const MapView = (props) => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
-            moveSpeed={ moveSpeed }
-            setMoveSpeed={ setMoveSpeed }
+            isMapMinimized={ isMapMinimized }
+            setIsMapMinimized={ setIsMapMinimized }
+            directionFacing={ directionFacing }
+            setDirectionFacing={ setDirectionFacing }
             zoomRange={ zoomRange }
-            setZoomRange={ setZoomRange } 
+            moveSpeed={ moveSpeed }
+            setZoomRange={ setZoomRange }
+            renderSearchAndFilter={renderSearchAndFilter}
+            setIsSearchAndFilterShowing={setIsSearchAndFilterShowing}
           />
         <div
           role="button" 
@@ -304,7 +249,6 @@ export const MapView = (props) => {
       <NavHeader />
       <div className="map-and-controls-container">
         { renderMap() }
-        { renderMapControls() }
         <AddressBar
           scrollAmount={ scrollAmount } 
           directionFacing={ directionFacing }

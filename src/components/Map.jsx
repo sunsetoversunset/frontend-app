@@ -1,7 +1,10 @@
 import { useRef, useEffect, useState } from "react";
+import { RoundedButton } from "./Buttons"
 import * as d3 from 'd3'
 import "../styles/Map.scss"
 import sunsetJson from '../assets/data/sunset.json'
+import iconMinimize from "../assets/icons/icon-minimize.svg"
+import iconMaximize from "../assets/icons/icon-maximize.svg"
 
 /* ---------------------------------------------------------------
   In case it's useful later - handling responsiveness:  
@@ -13,6 +16,7 @@ export const Map = (props) => {
   const [xDomain, setXDomain]     = useState([])
   const [yDomain, setYDomain]     = useState([])
   const [bbox, setBbox]           = useState({});
+  const defaultZoomRange = [-118.40142058250001, -118.37170226875]
 
   // ---------------------------------------------------------------
   const set = () => {
@@ -58,7 +62,6 @@ export const Map = (props) => {
   // Range: height of bounding rect to 0
   const yScale = d3.scaleLinear()
     .domain([yDomain[0], yDomain[1]])
-    // .range([bbox.height/2, 0])
     .range([bbox.height/4, 0])
 
   // Draws the line based on coordinate data
@@ -67,13 +70,11 @@ export const Map = (props) => {
     .y(d => yScale(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
 
-
-  const defaultZoomRange = [-118.40142058250001, -118.37170226875]
-
   // ---------------------------------------------------------------
   // Renders svg map and brush controls
   // ---------------------------------------------------------------
   useEffect(() => {
+    console.log('bbox.width: ', bbox.width)
     const svg = d3.select(d3Container.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
@@ -92,14 +93,13 @@ export const Map = (props) => {
     // draw brush controls
     svg.append("g")
       .call(brush)
-      // TODO: set to default coords
-      // .call(brush.move, [xDomain[0], xDomain[0] + 0.0003].map(x))
       .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
       .call(g => {
         g.select(".overlay")
           .datum({type: "selection"})
       });
   }, [xDomain, yDomain, bbox])
+  
   
   // ---------------------------------------------------------------
   // Brush controls
@@ -108,6 +108,7 @@ export const Map = (props) => {
     if (event.selection === null) return
     const [x0, x1] = event.selection.map(x.invert);
     // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
+    console.log('finished brushing')
     props.setZoomRange([x0, x1])
   }
 
@@ -124,13 +125,125 @@ export const Map = (props) => {
     .on("start brush end", brushed)
     .on("end", handleBrushEnd);
 
+
+  // --------------------------------------------------------------------
+  const handleScroll = (direction) => {
+    let rangeDiff = props.zoomRange[1] - props.zoomRange[0]
+    console.log(`Going ${direction}`)
+    
+    let lBounds, rBounds
+    if (direction === 'west') {
+      lBounds = props.zoomRange[0] - rangeDiff
+      rBounds = props.zoomRange[0]
+      if (lBounds < xDomain[0]) {
+        lBounds = xDomain[0]
+        rBounds = xDomain[0] + rangeDiff
+        props.setZoomRange([xDomain[0], rBounds])
+      } else {
+        props.setZoomRange([lBounds, rBounds])
+      }
+    } else {
+      lBounds = props.zoomRange[1]
+      rBounds = props.zoomRange[1] + rangeDiff
+      if (rBounds > xDomain[1]) {
+        rBounds = xDomain[1]
+        lBounds = xDomain[1] - rangeDiff
+        props.setZoomRange([lBounds, xDomain[1]])
+      } else {
+        props.setZoomRange([lBounds, rBounds])
+      }
+    }
+    
+    // TODO: Is this the best way...?
+    const svg = d3.select(d3Container.current)
+
+    // clear out before we draw
+    svg.selectAll("*").remove();
+
+    // draw line map
+    svg.append('path')
+      .datum(sunsetJson.features[0].geometry.coordinates)
+      .attr('d', line)
+      .attr("stroke", "black")
+      .attr("stroke-width", "6")
+      .attr("fill", "none")
+
+    svg.append("g")
+      .call(brush)
+      .call(brush.move, [lBounds, rBounds].map(x))
+      .call(g => {
+        g.select(".overlay")
+          .datum({type: "selection"})
+      });
+
+    // setScrollAmount(0)
+    console.log('handleScroll called.')
+  }
+
+  // --------------------------------------------------------------------
+  const renderMapControls = () => {
+    return (
+      <div className="map-controls">
+        <div className="map-controls-inner">
+          <div className="map-controls-left">
+            <RoundedButton
+              icon="icon-arrow-left" 
+              label={'Head West'}
+              handleOnClicked={() => handleScroll('west')}
+            />
+            <RoundedButton 
+              label={`Direction: ${props.directionFacing.toUpperCase()}`}
+              handleOnClicked={() => {
+                if (props.directionFacing === 'n') {
+                  props.setDirectionFacing('s')
+                } else {
+                  props.setDirectionFacing('n')
+                }
+              }}
+            />
+          </div>
+          <div className="map-controls-right">
+            <RoundedButton
+              icon="icon-search-filter" 
+              label={'Search & Filter'}
+              handleOnClicked={() => {
+                props.setIsSearchAndFilterShowing(true)
+              }}
+            />
+            <RoundedButton
+              icon="icon-arrow-right"  
+              label={'Head East'}
+              handleOnClicked={() => handleScroll('east')}
+            />
+
+            {/* TODO - don't put this in two places */}
+            <div
+              role="button" 
+              className={`minimize-map-ctrl ${props.isMapMinimized ? 'visible' : 'hidden'}`}
+              onClick={ () => props.setIsMapMinimized(!props.isMapMinimized) }
+            >
+              {props.isMapMinimized ? 
+                <img src={iconMaximize} alt="icon-maximize"/> : 
+                <img src={iconMinimize} alt="icon-minimize"/>
+              }
+            </div>
+          </div>
+        </div>
+        { props.renderSearchAndFilter() }
+      </div>
+    )
+  }
+
   // ---------------------------------------------------------------
   return (
-    <div className="map" ref={mapContainer}>  
-      <svg
-        className="d3-component"
-        ref={d3Container}
-      />
+    <div className="map-inner">
+      <div className="map" ref={mapContainer}>  
+        <svg
+          className="d3-component"
+          ref={d3Container}
+        />
+      </div>
+      { renderMapControls() }
     </div>
   )
 }
