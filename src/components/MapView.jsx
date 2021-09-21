@@ -24,6 +24,8 @@ export const MapView = (props) => {
   const [ directionFacing, setDirectionFacing ] = useState("n")
   const [ yearsShowing, setYearsShowing ]       = useState({})
   const [ searchInput, setSearchInput ]         = useState("")
+  const [ searchResults, setSearchResults ]     = useState([])
+  const [ allAddresses, setAllAddresses ]       = useState([])
 
   // hard-coding this for now but coords will change
   const coordRange = [-118.56112, -118.2249107]
@@ -53,6 +55,11 @@ export const MapView = (props) => {
     }
     setYearsShowing(years)
   }, [])
+
+  // --------------------------------------------------------------------
+  useEffect(() => {
+    setAllAddresses(props.addressesNData.concat(props.addressesSData))
+  }, [props.addressesSData, props.addressesNData])
 
   // --------------------------------------------------------------------
   const mapRange = (value, low1, high1, low2, high2) => {
@@ -101,6 +108,37 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   // TODO: move to its own component
   // --------------------------------------------------------------------
+  const handleSearch = (searchTerm) => {
+    setSearchInput(searchTerm)
+    let results = allAddresses.filter((addressObj) => {
+      return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
+    })
+    setSearchResults(results)
+  }
+
+  // --------------------------------------------------------------------
+  const renderSearchResults = () => {
+    return (
+      <ul className='search-results-list'>
+        {
+          searchResults.map((result, idx) => {
+            return (
+              <li key={`result-${idx}`}>
+                <div 
+                  className="result-list-item"
+                  onClick={() => console.log('handle setting address', result.address)}
+                >
+                  {result.address} Sunset Blvd.
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  }
+
+  // --------------------------------------------------------------------
   const renderSearchAndFilter = () => {
     return (
       <div className={`search-and-filter-opts 
@@ -121,11 +159,16 @@ export const MapView = (props) => {
           <input
             type="text"
             value={ searchInput }
-            onChange={ (e) => setSearchInput(e.target.value) } 
+            onChange={ (e) => handleSearch(e.target.value) } 
             placeholder="9041 Sunset Blvd."
             id="search-control-input"
           >
           </input>
+        </div>
+        <div className='search-results-outer'>
+          <div className={`search-results-inner ${ searchInput.length === 0 || searchResults.length === 0 ? 'hidden' : 'visible'}`}>
+            { renderSearchResults() }
+          </div>
         </div>
         <div className="divider"></div>
         { renderYearsControls() }

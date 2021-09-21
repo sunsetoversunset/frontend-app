@@ -100,7 +100,7 @@ export const Map = (props) => {
       });
   }, [xDomain, yDomain, bbox])
   
-  
+
   // ---------------------------------------------------------------
   // Brush controls
   // ---------------------------------------------------------------
@@ -108,7 +108,6 @@ export const Map = (props) => {
     if (event.selection === null) return
     const [x0, x1] = event.selection.map(x.invert);
     // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
-    console.log('finished brushing')
     props.setZoomRange([x0, x1])
   }
 
@@ -128,9 +127,7 @@ export const Map = (props) => {
 
   // --------------------------------------------------------------------
   const handleScroll = (direction) => {
-    let rangeDiff = props.zoomRange[1] - props.zoomRange[0]
-    console.log(`Going ${direction}`)
-    
+    let rangeDiff = props.zoomRange[1] - props.zoomRange[0]   
     let lBounds, rBounds
     if (direction === 'west') {
       lBounds = props.zoomRange[0] - rangeDiff

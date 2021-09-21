@@ -6,13 +6,12 @@ export const PhotoViewerModal = (props) => {
   return (
     <div 
       className={`modal-backdrop ${ props.isVisible ? "visible" : "hidden" }`}
-      onClick={() => props.handleShowModal() }
     >
-      <div className="photo-viewer-modal">
+      {/* <div className="photo-viewer-modal"> */}
         { props.imgUrl !== null ?
           <Viewer iiifUrl={`${baseIIIFUrl}${props.imgUrl}/info.json`}/> : null
         }
-      </div>
+      {/* </div> */}
     </div>
   )
 }
