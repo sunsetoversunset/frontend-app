@@ -1,15 +1,23 @@
 import { useState } from "react"
 import { Viewer } from "react-iiif-viewer"
 import "../styles/PhotoViewerModal.scss"
+
+import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
+import iconRightRust from "../assets/icons/icon-right-bracket-rust.svg"
 import iconCloseWhite from "../assets/icons/icon-close-white.svg"
+import iconLeftWhite from "../assets/icons/icon-left-bracket.svg"
+import iconLeftRust from "../assets/icons/icon-left-bracket-rust.svg"
 
 export const PhotoViewerModal = (props) => {
+  const [ isHoveringExpand, setIsHoveringExpand ] = useState(false)
+  const [ isHoveringCollapse, setIsHoveringCollapse ] = useState(false)
   const [ isExpanded, setIsExpanded ] = useState(false)
   const baseIIIFUrl = "https://media.getty.edu/iiif/image/"
 
   // ---------------------------------------------------------
   const renderNearbyAddresses = () => {
     return (props.nearbyAddresses.map((address, idx) => {
+      // Ultimately these should be links that open in a new tab
       return <li key={`nearby-address-${idx}`}>{ address }</li>
     }))
   }
@@ -31,15 +39,53 @@ export const PhotoViewerModal = (props) => {
         props.imgUrl !== null ?
           <Viewer iiifUrl={`${baseIIIFUrl}${props.imgUrl}/info.json`}/> : null
       }
-      <div className={
-        `nearby-addresses ${isExpanded ? 'expanded' : 'collapsed'}`
-      }>
-        <span className="nearby-addresses-label">Learn more about nearby addresses</span>
+      <div
+        onMouseEnter={() => setIsHoveringExpand(true)}
+        onMouseLeave={() => setIsHoveringExpand(false)}
+        className={
+          `nearby-addresses ${isExpanded ? 'expanded' : 'collapsed'}`
+        }
+      >
+
+        <div 
+          className="nearby-addresses-label-container"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <span className="nearby-addresses-label">
+            Learn more about nearby addresses
+          </span>
+          {
+            isExpanded === false ? 
+              isHoveringExpand === true ? 
+                <img src={iconRightRust} alt="icon-right-rust" /> :
+                <img src={iconRightWhite} alt="icon-right-white" />
+             : null
+          } 
+          
+        </div>
+        
         {
           isExpanded ? 
-          <ul>
+          <ul className="nearby-addresses-list">
             { renderNearbyAddresses() } 
           </ul> : null
+        }
+
+        {
+          isExpanded ?
+          <div 
+            className="icon-collapse-nearby"
+            onClick={() => setIsExpanded(false)}
+            onMouseEnter={() => setIsHoveringCollapse(true)}
+            onMouseLeave={() => setIsHoveringCollapse(false)}
+          >
+            {
+              isHoveringCollapse === false ? 
+              <img src={iconLeftWhite} alt="icon-left-white" /> :
+              <img src={iconLeftRust} alt="icon-left-rust" />
+            }
+            
+          </div> : null
         }
 
       </div>

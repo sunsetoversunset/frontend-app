@@ -33,15 +33,23 @@
 	border-radius: 30px;
 	display: flex;
 	align-items: center;
+	column-gap: 12px;
 }
 
-.nearby-addresses:hover {
+.nearby-addresses-label-container {
+	display: flex;
+	align-items: center;
+	column-gap: 12px;
+}
+
+.nearby-addresses-label-container:hover {
 	color: $rust;
 	cursor: pointer;
 }
 
 .nearby-addresses-label {
 	font-family: "Degular-Text";
+	font-size: 13px;
 	font-weight: 500;
 }
 
@@ -61,6 +69,11 @@
 	.modal-close-icon:hover {
 		cursor: pointer;
 	}
+}
+
+ul.nearby-addresses-list {
+	display: flex;
+	column-gap: 12px;
 }
 
 // Overrides for React IIIF Viewer

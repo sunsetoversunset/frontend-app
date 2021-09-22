@@ -47,6 +47,13 @@ export const MapView = (props) => {
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
   
   // --------------------------------------------------------------------
+  // Get new addresses anytime we click a photo in a strip
+  useEffect(() => {
+    console.log('here')
+    setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
+  }, [modalImgUrl])
+
+  // --------------------------------------------------------------------
   useEffect(() => {
     // set all years to checked by default
     let years = {}
