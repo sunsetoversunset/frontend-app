@@ -1,7 +1,6 @@
 import { NavHeader } from "./NavHeader"
 import { useEffect, useState } from "react"
 import { PhotoStrip } from "./PhotoStrip"
-import { RoundedButton } from "./Buttons"
 import { Map } from "./Map"
 import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { AddressBar } from "./AddressBar"
@@ -26,6 +25,7 @@ export const MapView = (props) => {
   const [ searchInput, setSearchInput ]         = useState("")
   const [ searchResults, setSearchResults ]     = useState([])
   const [ allAddresses, setAllAddresses ]       = useState([])
+  const [ nearbyAddresses, setNearbyAddresses ] = useState([])
 
   // hard-coding this for now but coords will change
   const coordRange = [-118.56112, -118.2249107]
@@ -70,8 +70,11 @@ export const MapView = (props) => {
   useEffect(() => {
     let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
     let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
-    filterAddressesByRange(mappedZoomRange)
     setMappedZoomRange([lBounds, rBounds])
+    console.log('zoomRange: ', zoomRange)
+    console.log('mappedZoomRange: ', [lBounds, rBounds])
+
+    filterAddressesByRange([lBounds, rBounds])
   }, [zoomRange])
 
   
@@ -98,9 +101,9 @@ export const MapView = (props) => {
   // Filter photo data whenever we brush the map
   useEffect(() => {
     if (directionFacing === 'n') {
-      console.log('filtered addresses N: ', filteredAddressesN)
+      console.log('filtered addresses N:', filteredAddressesN.length)
     } else {
-      console.log('filtered addresses S: ', filteredAddressesS)
+      console.log('filtered addresses S: ', filteredAddressesS.length)
     }
   }, [filteredAddressesN, filteredAddressesS])
 
@@ -113,7 +116,9 @@ export const MapView = (props) => {
     let results = allAddresses.filter((addressObj) => {
       return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
     })
-    setSearchResults(results)
+
+    // Return the first 8
+    setSearchResults(results.slice(0, 7))
   }
 
   // --------------------------------------------------------------------
@@ -284,9 +289,10 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   return (
     <div className="app-page">
-      <PhotoViewerModal 
+      <PhotoViewerModal
+        nearbyAddresses={ nearbyAddresses } 
         imgUrl={ modalImgUrl }
-        handleShowModal={ () => setIsModalShowing(!isModalShowing) }
+        handleHideModal={ () => setIsModalShowing(false) }
         isVisible={ isModalShowing }
       />
       <NavHeader />

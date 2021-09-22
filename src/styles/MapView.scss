@@ -298,16 +298,27 @@ text {
   justify-content: center;
 }
 
-.strips-container.full,
-.strips-shade.full {
+.strips-container.full {
   top: calc(40px + 30px + 60px); // header + max map + addresses
   height: calc(100% - (40px + 30px + 60px));
 }
 
-.strips-container,
-.strips-shade {
+.strips-shade.full {
+  top: calc(40px + 30px); // header + max map + addresses
+  height: calc(100% - (40px + 30px));
+}
+
+.strips-container {
   top: calc(40px + 150px + 60px); // header + min map + addresses
   height: calc(100% - (40px + 150px + 60px));
+  position: fixed;
+	width: 100vw;
+	overflow: scroll;
+}
+
+.strips-shade {
+  top: calc(40px + 150px); // header + min map + addresses
+  height: calc(100% - (40px + 150px));
   position: fixed;
 	width: 100vw;
 	overflow: scroll;

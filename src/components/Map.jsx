@@ -174,7 +174,6 @@ export const Map = (props) => {
       });
 
     // setScrollAmount(0)
-    console.log('handleScroll called.')
   }
 
   // --------------------------------------------------------------------
