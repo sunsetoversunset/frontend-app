@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Viewer } from "react-iiif-viewer"
+import { Link } from "react-router-dom"
 import "../styles/PhotoViewerModal.scss"
 
 import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
@@ -14,11 +15,29 @@ export const PhotoViewerModal = (props) => {
   const [ isExpanded, setIsExpanded ] = useState(false)
   const baseIIIFUrl = "https://media.getty.edu/iiif/image/"
 
+
+  // ---------------------------------------------------------
+  const generateHash = (address) => {
+    let newHash = address.split('.').join("")
+    newHash = newHash.replace(/\s+/g, '-').toLowerCase()
+    console.log('newHash: ', newHash)
+    return newHash
+  }
+
   // ---------------------------------------------------------
   const renderNearbyAddresses = () => {
     return (props.nearbyAddresses.map((address, idx) => {
       // Ultimately these should be links that open in a new tab
-      return <li key={`nearby-address-${idx}`}>{ address }</li>
+      return (
+        <Link 
+          target="_blank"
+          rel="noopener noreferrer"
+          key={`nearby-address-${idx}`}
+          to={`/address/${generateHash(address)}`}
+        >
+          { address }
+        </Link>
+      )
     }))
   }
 

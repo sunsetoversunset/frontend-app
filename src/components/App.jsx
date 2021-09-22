@@ -7,6 +7,7 @@ import { MapView } from './MapView'
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
+import { AddressView } from './AddressView';
 
 import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
@@ -156,6 +157,9 @@ export const App = () => {
               />
             )}
           />
+          <Route path="/contact" component = { Contact } />
+          <Route path="/team" component={ Team } />
+          <Route exact path="/address/:address" component={ AddressView } />
           <Route 
             path="/" 
             render={() => {
@@ -164,8 +168,7 @@ export const App = () => {
               )
             }}
           />
-          <Route path="/contact" component = { Contact } />
-          <Route path="/team" component={ Team } />
+          
         </Switch>
       </BrowserRouter>
     </div>
