@@ -73,8 +73,11 @@ export const MapView = (props) => {
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
     if (modalImg === null) return
-    getNearbyAddresses(modalImg)
-    setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
+    const fetchNearbyAddresses = async () => {
+      const data = await getNearbyAddresses(modalImg)
+      setNearbyAddresses(data)
+    }
+    fetchNearbyAddresses()
   }, [modalImg])
   
 
@@ -95,11 +98,11 @@ export const MapView = (props) => {
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      for (let i = 0; i < 1; i++) {
-       //for (let i = 0; i < dataFields.length; i++) {
+      // for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
       }
-      //}
+      
       await Promise.all(photoRequests)
       setAllPhotoData(tempAllPhotoData)
 
@@ -221,9 +224,8 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   const getNearbyAddresses = async (imgObj) => {
     let coord = parseFloat(await getPhotoCoord(imgObj))
-    console.log('coord: ', coord)
     // eliminate addresses outside the nearbyAddressesRange
-    let nearbyAddresses = allAddresses.filter(address => {
+    let nearbyAddressObjs = allAddresses.filter(address => {
       let addMin = parseFloat(address.coord_min)
       let addMax = parseFloat(address.coord_max)
       return (
@@ -234,8 +236,11 @@ export const MapView = (props) => {
       )
     })
 
-    console.log('nearbyAddresses: ', nearbyAddresses)
-    return nearbyAddresses
+    console.log('nearbyAddressObjs', nearbyAddressObjs)
+
+    return nearbyAddressObjs.map((aObj) => {
+      return aObj.address
+    })
   }
 
 

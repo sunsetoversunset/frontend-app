@@ -20,14 +20,12 @@ export const PhotoViewerModal = (props) => {
   const generateHash = (address) => {
     let newHash = address.split('.').join("")
     newHash = newHash.replace(/\s+/g, '-').toLowerCase()
-    console.log('newHash: ', newHash)
     return newHash
   }
 
   // ---------------------------------------------------------
   const renderNearbyAddresses = () => {
     return (props.nearbyAddresses.map((address, idx) => {
-      // Ultimately these should be links that open in a new tab
       return (
         <li key={`nearby-address-${idx}`}>
           <Link
