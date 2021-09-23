@@ -29,14 +29,16 @@ export const PhotoViewerModal = (props) => {
     return (props.nearbyAddresses.map((address, idx) => {
       // Ultimately these should be links that open in a new tab
       return (
-        <Link 
-          target="_blank"
-          rel="noopener noreferrer"
-          key={`nearby-address-${idx}`}
-          to={`/address/${generateHash(address)}`}
-        >
-          { address }
-        </Link>
+        <li key={`nearby-address-${idx}`}>
+          <Link
+            className="nearby-address-link" 
+            target="_blank"
+            rel="noopener noreferrer"
+            to={`/address/${generateHash(address)}`}
+          >
+            { address }
+          </Link>
+        </li>
       )
     }))
   }
