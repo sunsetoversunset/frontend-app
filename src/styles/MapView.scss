@@ -250,6 +250,10 @@ text {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg g text{
+    cursor:pointer;
+  }
 }
 
 .strips-container.full,
