@@ -72,7 +72,7 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
-    if (!modalImg) return
+    if (modalImg === null) return
     getNearbyAddresses(modalImg)
     setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
   }, [modalImg])
@@ -219,12 +219,22 @@ export const MapView = (props) => {
 
 
   // --------------------------------------------------------------------
-  // Get a list of addresses within nearbyAddressesRange (N + S)
-  // 4 max, get 2 below and 2 above
   const getNearbyAddresses = async (imgObj) => {
-    let coord = await getPhotoCoord(imgObj)
+    let coord = parseFloat(await getPhotoCoord(imgObj))
     console.log('coord: ', coord)
-    let nearbyAddresses = []
+    // eliminate addresses outside the nearbyAddressesRange
+    let nearbyAddresses = allAddresses.filter(address => {
+      let addMin = parseFloat(address.coord_min)
+      let addMax = parseFloat(address.coord_max)
+      return (
+        // address min has to be between coord - 2.5 and coord 
+        (addMin >= coord - nearbyAddressesRange[0] && addMin <= coord) ||
+        // address max has to be between coord and coord + 2.5
+        (addMax >= coord && addMax <= coord + nearbyAddressesRange[1])
+      )
+    })
+
+    console.log('nearbyAddresses: ', nearbyAddresses)
     return nearbyAddresses
   }
 
@@ -243,7 +253,7 @@ export const MapView = (props) => {
         .then((res) => {
           if (res.status === 200) {
             if (res.data.results.length === 1) {
-              // console.log('result: ', res.data.results[0])
+              console.log('result: ', res.data.results[0])
               return res.data.results[0][dataFields[idx].coordRow]
             }
             // We shouldn't hit this case 
