@@ -7,6 +7,10 @@ import { AddressBar } from "./AddressBar"
 import { Footer } from "./Footer"
 import "../styles/MapView.scss"
 
+import { dataFields } from "../assets/data/dataFields"
+import Config from "../config.json"
+import axios from "axios"
+
 import iconClose from "../assets/icons/icon-close.svg"
 import iconCheck from "../assets/icons/icon-check.svg"
 import iconMinimize from "../assets/icons/icon-minimize.svg"
@@ -14,6 +18,23 @@ import iconMaximize from "../assets/icons/icon-maximize.svg"
 
 export const MapView = (props) => {
 
+  // --------------------------------------------------------------------
+  // DATA
+  const [ addressesN, setAddressesN ]     = useState([])
+  const [ addressesS, setAddressesS ]     = useState([])
+  const [ allPhotoData, setAllPhotoData ] = useState([])
+
+  const addressBoundariesTableId = "27379"
+  const baseUrl = "https://api.baserow.io/api/database/rows/table/"
+  const opts = {
+    headers: {'Authorization': `Token ${Config.apiToken}`} 
+  }
+
+  let tempAllPhotoData = []
+  let tempAddressesN   = []
+  let tempAddressesS   = []
+
+  // --------------------------------------------------------------------
   // CONTROLS
   const [ zoomRange, setZoomRange ]             = useState([])
   const [ mappedZoomRange, setMappedZoomRange ] = useState([])
@@ -36,11 +57,13 @@ export const MapView = (props) => {
     "fast"   : 0.6
   }
 
+  // --------------------------------------------------------------------
   // ADDRESSES
   const [ filteredAddressesN, setFilteredAddressesN ] = useState([])
   const [ filteredAddressesS, setFilteredAddressesS ] = useState([])
   const nearbyAddressesRange = [-2.5, 2.5]
 
+  // --------------------------------------------------------------------
   // MODAL
   const [ isModalShowing, setIsModalShowing ] = useState(false)
   const [ modalImgUrl, setModalImgUrl ] = useState(null)
@@ -49,29 +72,48 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
-    console.log('here')
+    if (!modalImgUrl) return
+    getNearbyAddresses(modalImgUrl)
     setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
   }, [modalImgUrl])
+  
 
   // --------------------------------------------------------------------
   useEffect(() => {
     // set all years to checked by default
     let years = {}
-    for (let i = 0; i < props.dataFields.length; i++) {
-      years[props.dataFields[i].year] = true
+    for (let i = 0; i < dataFields.length; i++) {
+      years[dataFields[i].year] = true
     }
     setYearsShowing(years)
   }, [])
+  
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    setAllAddresses(props.addressesNData.concat(props.addressesSData))
-  }, [props.addressesSData, props.addressesNData])
+    loadAddressData(baseUrl + addressBoundariesTableId)
+
+    const fetchAllPhotoData = async () => {
+      const photoRequests = []
+      for (let i = 0; i < 1; i++) {
+       //for (let i = 0; i < dataFields.length; i++) {
+        photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
+      }
+      //}
+      await Promise.all(photoRequests)
+      setAllPhotoData(tempAllPhotoData)
+
+    }
+    // get all photo data
+    fetchAllPhotoData()
+  }, [])
+
 
   // --------------------------------------------------------------------
-  const mapRange = (value, low1, high1, low2, high2) => {
-    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-  }
+  useEffect(() => {
+    setAllAddresses(addressesN.concat(addressesS))
+  }, [addressesN, addressesS])
+
 
   // --------------------------------------------------------------------
   useEffect(() => {
@@ -84,17 +126,137 @@ export const MapView = (props) => {
     filterAddressesByRange([lBounds, rBounds])
   }, [zoomRange])
 
+
+  // --------------------------------------------------------------------
+  const loadAddressData = (url) => {
+    axios.get(url, opts)
+    .then((res) => {  
+      if (res.status === 200) {
+        // handle data
+        res.data.results.forEach(row => {
+
+          let processedRow = {
+            "address": row.field_144140,
+            "coord_min": row.field_144142,
+            "coord_max": row.field_144143
+          }
+          
+          if (row.field_144141 === "n" || row.field_144141 === "N") {
+            tempAddressesN.push(processedRow)
+          } else if (row.field_144141 === "s" || row.field_144141 === "S") {
+            tempAddressesS.push(processedRow)
+          }
+        })
+        
+        // handle loading next page if url exists
+        if (res.data.next) {
+          let nextUrl = res.data.next.replace("http", "https")
+          loadAddressData(nextUrl)
+        } else {
+          // no more next, store in state
+          console.log('[loadAddressData] done getting addresses.')
+          setAddressesN(tempAddressesN)
+          setAddressesS(tempAddressesS)
+        }
+      } else {
+        // Handle case where baserow throws an error
+        console.error('Got baserow error status: ', res.status)
+        if (res.statusText !== "") {
+          console.log('Got baserow statusText: ', res.statusText)
+        }
+      }
+    })
+    .catch((err) => {
+      console.log('err: ', err)
+    })
+  }
+
+
+  // --------------------------------------------------------------------
+  const loadPhotoData = (url, dataFieldObj, nPhotosArr, sPhotosArr) => {
+    let tempPhotosN = nPhotosArr || []
+    let tempPhotosS = sPhotosArr || []
   
+    return axios.get(url, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          // handle data
+          res.data.results.forEach(row => {
+
+            let processedRow = {
+              "identifier": row[dataFieldObj.idRow],
+              "coordinate": row[dataFieldObj.coordRow],
+            }
+
+            if (row[dataFieldObj.ssRow] === "n" || row[dataFieldObj.ssRow] === "N") {
+              tempPhotosN.push(processedRow)
+            } else if (row[dataFieldObj.ssRow] === "s" || row[dataFieldObj.ssRow] === "S") {
+              tempPhotosS.push(processedRow)
+            }
+          })
+
+          // handle loading next page if url exists
+          if (res.data.next) {
+            let nextUrl = res.data.next.replace("http", "https")
+            return loadPhotoData(nextUrl, dataFieldObj, tempPhotosN, tempPhotosS)
+          } else {
+            console.log(`finished for year ${dataFieldObj.year}`)
+            
+            let photoDataObj = {
+              nPhotos: tempPhotosN,
+              sPhotos: tempPhotosS
+            }            
+
+            tempAllPhotoData[dataFieldObj.year] = photoDataObj
+            return photoDataObj
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('[loadPhotoData] error: ', err)
+      })
+  }
+
+
+  // --------------------------------------------------------------------
+  const getPhotoCoord = (photoId) => {
+    // Clicking a photo on any strip assumes it has a direction
+    // wondering if we should just make an API call for this, 
+    // but for now let's just lookup in the data we already have
+    if (directionFacing === 'n') {
+      
+    }
+    console.log('[getPhotoCoord] photoId:', photoId)
+  }
+
+
+  // --------------------------------------------------------------------
+  // Get a list of addresses within nearbyAddressesRange (N + S)
+  // 4 max, get 2 below and 2 above
+  const getNearbyAddresses = (photoId) => {
+    getPhotoCoord(photoId)
+    
+    let nearbyAddresses = []
+    return nearbyAddresses
+  }
+
+
+  // --------------------------------------------------------------------
+  const mapRange = (value, low1, high1, low2, high2) => {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+  }
+
+
   // --------------------------------------------------------------------
   const filterAddressesByRange = (zRange) => {
     // let's filter both N & S
-    let filteredN = props.addressesNData.filter(address => {
+    let filteredN = addressesN.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
     })
 
-    let filteredS = props.addressesSData.filter(address => {
+    let filteredS = addressesS.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
@@ -103,6 +265,7 @@ export const MapView = (props) => {
     setFilteredAddressesN(filteredN)
     setFilteredAddressesS(filteredS)
   }
+
 
   // --------------------------------------------------------------------
   // Filter photo data whenever we brush the map
@@ -193,7 +356,7 @@ export const MapView = (props) => {
     return (
       <div className="years-control">
         <label className="control-label">Display years</label>
-        { props.dataFields.map(dataField => {
+        { dataFields.map(dataField => {
           return (
             <div
               key={`check-${dataField.year}`} 
@@ -272,7 +435,7 @@ export const MapView = (props) => {
 
   // --------------------------------------------------------------------
   const renderStripViews = (direction) => {
-    return props.dataFields.map((dataFieldObj) => {
+    return dataFields.map((dataFieldObj) => {
       return (
         <PhotoStrip
           isVisible={yearsShowing[dataFieldObj.year]}
@@ -281,8 +444,8 @@ export const MapView = (props) => {
           }}
           handleShowModal={ () => setIsModalShowing(true) }
           photoData={ 
-            props.allPhotoData[dataFieldObj.year] ? 
-            props.allPhotoData[dataFieldObj.year] : null 
+            allPhotoData[dataFieldObj.year] ? 
+            allPhotoData[dataFieldObj.year] : null 
           }
           key={`year-${dataFieldObj.year}`} 
           direction={ direction }
@@ -308,8 +471,8 @@ export const MapView = (props) => {
         <AddressBar
           scrollAmount={ scrollAmount } 
           directionFacing={ directionFacing }
-          addressesNData={ props.addressesNData }
-          addressesSData={ props.addressesSData }
+          addressesNData={ addressesN }
+          addressesSData={ addressesS }
         />
       </div>
       <div
