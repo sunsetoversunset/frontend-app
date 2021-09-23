@@ -66,16 +66,16 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   // MODAL
   const [ isModalShowing, setIsModalShowing ] = useState(false)
-  const [ modalImgUrl, setModalImgUrl ] = useState(null)
+  const [ modalImg, setModalImg ] = useState(null)
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
   
   // --------------------------------------------------------------------
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
-    if (!modalImgUrl) return
-    getNearbyAddresses(modalImgUrl)
+    if (!modalImg) return
+    getNearbyAddresses(modalImg)
     setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
-  }, [modalImgUrl])
+  }, [modalImg])
   
 
   // --------------------------------------------------------------------
@@ -219,25 +219,41 @@ export const MapView = (props) => {
 
 
   // --------------------------------------------------------------------
-  const getPhotoCoord = (photoId) => {
-    // Clicking a photo on any strip assumes it has a direction
-    // wondering if we should just make an API call for this, 
-    // but for now let's just lookup in the data we already have
-    if (directionFacing === 'n') {
-      
-    }
-    console.log('[getPhotoCoord] photoId:', photoId)
+  // Get a list of addresses within nearbyAddressesRange (N + S)
+  // 4 max, get 2 below and 2 above
+  const getNearbyAddresses = async (imgObj) => {
+    let coord = await getPhotoCoord(imgObj)
+    console.log('coord: ', coord)
+    let nearbyAddresses = []
+    return nearbyAddresses
   }
 
 
   // --------------------------------------------------------------------
-  // Get a list of addresses within nearbyAddressesRange (N + S)
-  // 4 max, get 2 below and 2 above
-  const getNearbyAddresses = (photoId) => {
-    getPhotoCoord(photoId)
-    
-    let nearbyAddresses = []
-    return nearbyAddresses
+  const getPhotoCoord = async (imgObj) => {
+    // We do already have this data, but making an API call seems easier
+    // than looping through it? Not sure yet...
+    let idx = dataFields.findIndex(df => {
+      return df.year === imgObj.year
+    })
+
+    if (directionFacing === 'n') {
+      const queryURL = `${baseUrl}${dataFields[idx].tableId}/?filter__${dataFields[idx].idRow}__equal=${imgObj.id}`
+      return axios.get(queryURL, opts)
+        .then((res) => {
+          if (res.status === 200) {
+            if (res.data.results.length === 1) {
+              // console.log('result: ', res.data.results[0])
+              return res.data.results[0][dataFields[idx].coordRow]
+            }
+            // We shouldn't hit this case 
+            return null
+          }
+        }).catch((err) => {
+          console.log('err: ', err)
+          return null
+        })
+    }
   }
 
 
@@ -439,8 +455,8 @@ export const MapView = (props) => {
       return (
         <PhotoStrip
           isVisible={yearsShowing[dataFieldObj.year]}
-          handleSetModalImg={ (img) => {
-            setModalImgUrl(img) 
+          handleSetModalImg={ (imgObj) => {
+            setModalImg(imgObj) 
           }}
           handleShowModal={ () => setIsModalShowing(true) }
           photoData={ 
@@ -461,7 +477,7 @@ export const MapView = (props) => {
     <div className="app-page">
       <PhotoViewerModal
         nearbyAddresses={ nearbyAddresses } 
-        imgUrl={ modalImgUrl }
+        imgObj={ modalImg }
         handleHideModal={ () => setIsModalShowing(false) }
         isVisible={ isModalShowing }
       />

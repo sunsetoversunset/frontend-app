@@ -57,8 +57,8 @@ export const PhotoViewerModal = (props) => {
         </div>
       </div>
       { 
-        props.imgUrl !== null ?
-          <Viewer iiifUrl={`${baseIIIFUrl}${props.imgUrl}/info.json`}/> : null
+        props.imgObj !== null ?
+          <Viewer iiifUrl={`${baseIIIFUrl}${props.imgObj.id}/info.json`}/> : null
       }
       <div
         onMouseEnter={() => setIsHoveringExpand(true)}
