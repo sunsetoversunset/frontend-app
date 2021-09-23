@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
-
+ 
 export const AddressBar = (props) => {
   const [bbox, setBbox]  = useState({});
   const addressContainer = useRef(null)
@@ -39,6 +39,9 @@ export const AddressBar = (props) => {
         return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
 			})
 			.attr("y", "45")
+      .on('click', function(d){
+        window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+      })
 			.attr("text-anchor", "middle")
 			.text(function(d) { 
 				return d.address 

@@ -1,4 +1,4 @@
-export const dataFields = [
+export const dataFields = [ 
   { 
     year     : "1966",
     tableId  : "24448",

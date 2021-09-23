@@ -7,7 +7,7 @@ import { MapView } from './MapView'
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
-import { AddressView } from './AddressView';
+import { AddressView } from './AddressView'
 
 import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
@@ -32,19 +32,21 @@ export const App = () => {
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    // get all address data
+    
     loadAddressData(baseUrl + addressBoundariesTableId)
+
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
       for (let i = 0; i < 1; i++) {
-      // for (let i = 0; i < dataFields.length; i++) {
+       //for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
       }
+      //}
       await Promise.all(photoRequests)
       setAllPhotoData(tempAllPhotoData)
+
     }
-    
     // get all photo data
     fetchAllPhotoData()
   }, [])
@@ -146,6 +148,7 @@ export const App = () => {
         <Switch>
           <Route path="/about" component={ About }/>
           <Route path="/stories" component={ StoriesView }/>
+          
           <Route 
             path="/panorama" 
             render={() => (
