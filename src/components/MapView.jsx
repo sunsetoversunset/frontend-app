@@ -1,7 +1,6 @@
 import { NavHeader } from "./NavHeader"
 import { useEffect, useState } from "react"
 import { PhotoStrip } from "./PhotoStrip"
-import { RoundedButton } from "./Buttons"
 import { Map } from "./Map"
 import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { AddressBar } from "./AddressBar"
@@ -24,6 +23,12 @@ export const MapView = (props) => {
   const [ directionFacing, setDirectionFacing ] = useState("n")
   const [ yearsShowing, setYearsShowing ]       = useState({})
   const [ searchInput, setSearchInput ]         = useState("")
+  const [ searchResults, setSearchResults ]     = useState([])
+  const [ allAddresses, setAllAddresses ]       = useState([])
+  const [ nearbyAddresses, setNearbyAddresses ] = useState([])
+
+  // hard-coding this for now but coords will change
+  const coordRange = [-118.56112, -118.2249107]
   
   const moveSpeedOpts = {
     "slow"   : 0.2,
@@ -42,6 +47,13 @@ export const MapView = (props) => {
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
   
   // --------------------------------------------------------------------
+  // Get new addresses anytime we click a photo in a strip
+  useEffect(() => {
+    console.log('here')
+    setNearbyAddresses(['123 Sunset Blvd.', '1234 Sunset Blvd.', '12345 Sunset Blvd.'])
+  }, [modalImgUrl])
+
+  // --------------------------------------------------------------------
   useEffect(() => {
     // set all years to checked by default
     let years = {}
@@ -52,54 +64,92 @@ export const MapView = (props) => {
   }, [])
 
   // --------------------------------------------------------------------
+  useEffect(() => {
+    setAllAddresses(props.addressesNData.concat(props.addressesSData))
+  }, [props.addressesSData, props.addressesNData])
+
+  // --------------------------------------------------------------------
   const mapRange = (value, low1, high1, low2, high2) => {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
   }
 
   // --------------------------------------------------------------------
   useEffect(() => {
-    // hard-coding this for now but coords will change
-    let coordRange = [-118.56112, -118.2249107]
     let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
     let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
-    filterAddressesByRange(mappedZoomRange)
     setMappedZoomRange([lBounds, rBounds])
+    console.log('zoomRange: ', zoomRange)
+    console.log('mappedZoomRange: ', [lBounds, rBounds])
+
+    filterAddressesByRange([lBounds, rBounds])
   }, [zoomRange])
 
-  // --------------------------------------------------------------------
-  useEffect(() => {
-    console.log('mapped range: ', mappedZoomRange)
-  }, [mappedZoomRange])
-
-
+  
   // --------------------------------------------------------------------
   const filterAddressesByRange = (zRange) => {
     // let's filter both N & S
-    let filteredAddressesN = props.addressesNData.filter(address => {
+    let filteredN = props.addressesNData.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
     })
 
-    let filteredAddressesS = props.addressesSData.filter(address => {
+    let filteredS = props.addressesSData.filter(address => {
       let parsedMin = parseFloat(address.coord_min)
       let parsedMax = parseFloat(address.coord_max)
       return parsedMin >= zRange[0] && parsedMax <= zRange[1]
     })
 
-    setFilteredAddressesN(filteredAddressesN)
-    setFilteredAddressesS(filteredAddressesS)
+    setFilteredAddressesN(filteredN)
+    setFilteredAddressesS(filteredS)
   }
 
   // --------------------------------------------------------------------
   // Filter photo data whenever we brush the map
   useEffect(() => {
-
+    if (directionFacing === 'n') {
+      console.log('filtered addresses N:', filteredAddressesN.length)
+    } else {
+      console.log('filtered addresses S: ', filteredAddressesS.length)
+    }
   }, [filteredAddressesN, filteredAddressesS])
 
 
   // --------------------------------------------------------------------
   // TODO: move to its own component
+  // --------------------------------------------------------------------
+  const handleSearch = (searchTerm) => {
+    setSearchInput(searchTerm)
+    let results = allAddresses.filter((addressObj) => {
+      return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
+    })
+
+    // Return the first 8
+    setSearchResults(results.slice(0, 7))
+  }
+
+  // --------------------------------------------------------------------
+  const renderSearchResults = () => {
+    return (
+      <ul className='search-results-list'>
+        {
+          searchResults.map((result, idx) => {
+            return (
+              <li key={`result-${idx}`}>
+                <div 
+                  className="result-list-item"
+                  onClick={() => console.log('handle setting address', result.address)}
+                >
+                  {result.address} Sunset Blvd.
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  }
+
   // --------------------------------------------------------------------
   const renderSearchAndFilter = () => {
     return (
@@ -121,11 +171,16 @@ export const MapView = (props) => {
           <input
             type="text"
             value={ searchInput }
-            onChange={ (e) => setSearchInput(e.target.value) } 
+            onChange={ (e) => handleSearch(e.target.value) } 
             placeholder="9041 Sunset Blvd."
             id="search-control-input"
           >
           </input>
+        </div>
+        <div className='search-results-outer'>
+          <div className={`search-results-inner ${ searchInput.length === 0 || searchResults.length === 0 ? 'hidden' : 'visible'}`}>
+            { renderSearchResults() }
+          </div>
         </div>
         <div className="divider"></div>
         { renderYearsControls() }
@@ -184,66 +239,6 @@ export const MapView = (props) => {
   }
 
   // --------------------------------------------------------------------
-  const handleScroll = (direction) => {
-    console.log(`Going ${direction}`)
-    setScrollAmount(0)
-  }
-
-  // --------------------------------------------------------------------
-  const renderMapControls = () => {
-    return (
-      <div className="map-controls">
-        <div className="map-controls-inner">
-          <div className="map-controls-left">
-            <RoundedButton
-              icon="icon-arrow-left" 
-              label={'Head West'}
-              handleOnClicked={() => handleScroll('west')}
-            />
-            <RoundedButton 
-              label={`Direction: ${directionFacing.toUpperCase()}`}
-              handleOnClicked={() => {
-                if (directionFacing === 'n') {
-                  setDirectionFacing('s')
-                } else {
-                  setDirectionFacing('n')
-                }
-              }}
-            />
-          </div>
-          <div className="map-controls-right">
-            <RoundedButton
-              icon="icon-search-filter" 
-              label={'Search & Filter'}
-              handleOnClicked={() => {
-                setIsSearchAndFilterShowing(true)
-              }}
-            />
-            <RoundedButton
-              icon="icon-arrow-right"  
-              label={'Head East'}
-              handleOnClicked={() => handleScroll('east')}
-            />
-
-            {/* TODO - don't put this in two places */}
-            <div
-              role="button" 
-              className={`minimize-map-ctrl ${isMapMinimized ? 'visible' : 'hidden'}`}
-              onClick={ () => setIsMapMinimized(!isMapMinimized) }
-            >
-              {isMapMinimized ? 
-                <img src={iconMaximize} alt="icon-maximize"/> : 
-                <img src={iconMinimize} alt="icon-minimize"/>
-              }
-            </div>
-          </div>
-        </div>
-        { renderSearchAndFilter() }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
   const renderMap = () => {
     return (
       <div 
@@ -251,10 +246,15 @@ export const MapView = (props) => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
-            moveSpeed={ moveSpeed }
-            setMoveSpeed={ setMoveSpeed }
+            isMapMinimized={ isMapMinimized }
+            setIsMapMinimized={ setIsMapMinimized }
+            directionFacing={ directionFacing }
+            setDirectionFacing={ setDirectionFacing }
             zoomRange={ zoomRange }
-            setZoomRange={ setZoomRange } 
+            moveSpeed={ moveSpeed }
+            setZoomRange={ setZoomRange }
+            renderSearchAndFilter={renderSearchAndFilter}
+            setIsSearchAndFilterShowing={setIsSearchAndFilterShowing}
           />
         <div
           role="button" 
@@ -296,15 +296,15 @@ export const MapView = (props) => {
   // --------------------------------------------------------------------
   return (
     <div className="app-page">
-      <PhotoViewerModal 
+      <PhotoViewerModal
+        nearbyAddresses={ nearbyAddresses } 
         imgUrl={ modalImgUrl }
-        handleShowModal={ () => setIsModalShowing(!isModalShowing) }
+        handleHideModal={ () => setIsModalShowing(false) }
         isVisible={ isModalShowing }
       />
       <NavHeader />
       <div className="map-and-controls-container">
         { renderMap() }
-        { renderMapControls() }
         <AddressBar
           scrollAmount={ scrollAmount } 
           directionFacing={ directionFacing }

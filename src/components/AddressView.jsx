@@ -179,7 +179,7 @@ export const AddressView = (props) => {
  //  } 
 
   const handleScroll = (dir) => {
-  	useHistory().push(`/${dir}`)
+  	
   }
   
 
@@ -245,6 +245,5 @@ export const AddressView = (props) => {
       <Footer />
     </div>
   	)
-
 
 }

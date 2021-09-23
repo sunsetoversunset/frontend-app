@@ -160,6 +160,9 @@ export const App = () => {
               />
             )}
           />
+          <Route path="/contact" component = { Contact } />
+          <Route path="/team" component={ Team } />
+          <Route exact path="/address/:address" component={ AddressView } />
           <Route 
             path="/" 
             render={() => {
@@ -168,8 +171,7 @@ export const App = () => {
               )
             }}
           />
-          <Route path="/contact" component = { Contact } />
-          <Route path="/team" component={ Team } />
+          
         </Switch>
       </BrowserRouter>
     </div>

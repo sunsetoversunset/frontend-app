@@ -15,6 +15,7 @@ export const PhotoStrip = (props) => {
     );
   }
 
+  // ---------------------------------------------------------------
   useEffect(() => {
     set()
     window.addEventListener('resize', set);
