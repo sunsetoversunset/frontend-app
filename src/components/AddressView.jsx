@@ -61,88 +61,88 @@ export const AddressView = (props) => {
 	// 	}
 	// })
 
-	useEffect(() => {
-		props.fullAddresses.forEach( (row, key) => {
-			if(row.address === address){
-				setMyKey(key)
-				setAddressMin(row.coord_min)
-				setAddressMax(row.coord_max)
-				setDirection(row.street_side)
-			}
-		})
+	// useEffect(() => {
+	// 	props.fullAddresses.forEach( (row, key) => {
+	// 		if(row.address === address){
+	// 			setMyKey(key)
+	// 			setAddressMin(row.coord_min)
+	// 			setAddressMax(row.coord_max)
+	// 			setDirection(row.street_side)
+	// 		}
+	// 	})
 		
-	}, [props.fullAddresses])
+	// }, [props.fullAddresses])
 
 	// ---------------------------------------------------------------
-	  useEffect(() => {
-	  if(props.allPhotoData){
-	  	if(direction === 'n' || direction === 'N'){
-	  		if(props.allPhotoData._1973){
-			  		props.allPhotoData._1973.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}else if(props.allPhotoData._1985){
-		 			props.allPhotoData._1973.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}else if(props.allPhotoData._1966){
-		 				props.allPhotoData._1966.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}
-	  	}
+	  // useEffect(() => {
+	  // if(props.allPhotoData){
+	  // 	if(direction === 'n' || direction === 'N'){
+	  // 		if(props.allPhotoData._1973){
+			//   		props.allPhotoData._1973.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}else if(props.allPhotoData._1985){
+		 // 			props.allPhotoData._1973.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}else if(props.allPhotoData._1966){
+		 // 				props.allPhotoData._1966.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}
+	  // 	}
 
-	  	if(direction === 's' || direction === 'S'){
-	  		if(props.allPhotoData._1973){
-			  		props.allPhotoData._1973.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}else if(props.allPhotoData._1985){
-		 				props.allPhotoData._1985.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}else if(props.allPhotoData._1966){
-		 				props.allPhotoData._1966.nPhotos.forEach( row => {
-				     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-				       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-				     }
-				   })
-		 		}
-	  	}
-	  }
-	  }, [props.allPhotoData, direction, addressMax, addressMin])
-
-	// ---------------------------------------------------------------
-		useEffect(() => {
-			setHeaderPhoto( addressPhotoData[Math.round((addressPhotoData.length - 1) / 2)] )
-		}, [addressPhotoData, headerPhoto])
+	  // 	if(direction === 's' || direction === 'S'){
+	  // 		if(props.allPhotoData._1973){
+			//   		props.allPhotoData._1973.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}else if(props.allPhotoData._1985){
+		 // 				props.allPhotoData._1985.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}else if(props.allPhotoData._1966){
+		 // 				props.allPhotoData._1966.nPhotos.forEach( row => {
+			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
+			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
+			// 	     }
+			// 	   })
+		 // 		}
+	  // 	}
+	  // }
+	  // }, [props.allPhotoData, direction, addressMax, addressMin])
 
 	// ---------------------------------------------------------------
-		useEffect(() => {
-			if(props.fullAddresses[myKey-1]){
-				setPrevAddress(
-					props.fullAddresses[myKey-1].address
-					)
-			}
-		}, [props.fullAddresses, myKey])
+		// useEffect(() => {
+		// 	setHeaderPhoto( addressPhotoData[Math.round((addressPhotoData.length - 1) / 2)] )
+		// }, [addressPhotoData, headerPhoto])
 
-		useEffect(() => {
-			if(props.fullAddresses[myKey-1]){
-				setNextAddress(
-					props.fullAddresses[myKey+1].address
-					)
-			}
-		}, [props.fullAddresses, myKey])
+	// ---------------------------------------------------------------
+		// useEffect(() => {
+		// 	if(props.fullAddresses[myKey-1]){
+		// 		setPrevAddress(
+		// 			props.fullAddresses[myKey-1].address
+		// 			)
+		// 	}
+		// }, [props.fullAddresses, myKey])
+
+		// useEffect(() => {
+		// 	if(props.fullAddresses[myKey-1]){
+		// 		setNextAddress(
+		// 			props.fullAddresses[myKey+1].address
+		// 			)
+		// 	}
+		// }, [props.fullAddresses, myKey])
 
 
 	// const loadAddressData = (url) => {
@@ -197,7 +197,7 @@ export const AddressView = (props) => {
       		<p className="hero-address">{address} Sunset Boulevard</p>
       	</div>
       {/* mid navn */}
-      	<nav className="address-lower-nav">
+      	{/*<nav className="address-lower-nav">
       		<RoundedButton
               icon="icon-arrow-left" 
               label={`${prevAddress} Sunset Blvd.`}
@@ -209,13 +209,13 @@ export const AddressView = (props) => {
               label={`${nextAddress} Sunset Blvd.`}
               handleOnClicked={() => handleScroll(nextAddress)}
             />
-      	</nav>
+      	</nav>*/}
 
       	{/* photo srtip section */}
       	<div id="Photographs" className="strip-container-wrap">
       		<h1>Photographs</h1>
       		<div className="photo-strip">
-	      		{props.dataFields.map((dataFieldObj) => {
+	      		{/*{props.dataFields.map((dataFieldObj) => {
       			return (
 			        <PhotoStripAddress
 			          isVisible={true}
@@ -233,7 +233,7 @@ export const AddressView = (props) => {
 			          year={ dataFieldObj.year }
 			        />
       )
-    })}
+    })}*/}
       		</div>
       	</div>
 

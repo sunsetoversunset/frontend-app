@@ -148,7 +148,6 @@ export const App = () => {
         <Switch>
           <Route path="/about" component={ About }/>
           <Route path="/stories" component={ StoriesView }/>
-          
           <Route 
             path="/panorama" 
             render={() => (
