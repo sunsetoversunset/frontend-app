@@ -34,7 +34,7 @@ export const PhotoViewerModal = (props) => {
             rel="noopener noreferrer"
             to={`/address/${generateHash(address)}`}
           >
-            { address }
+            { `${address} Sunset Blvd.`}
           </Link>
         </li>
       )
@@ -48,7 +48,10 @@ export const PhotoViewerModal = (props) => {
     >
       <div className="modal-header">
         <div
-          onClick={() => props.handleHideModal()}
+          onClick={() => {
+            setIsExpanded(false)
+            props.handleHideModal()
+          }}
           className='modal-close-icon'
         >
           <img src={iconCloseWhite} alt="icon-close-modal" />
@@ -108,7 +111,6 @@ export const PhotoViewerModal = (props) => {
         }
 
       </div>
-      
     </div>
   )
 }

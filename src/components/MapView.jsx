@@ -75,6 +75,7 @@ export const MapView = (props) => {
     if (modalImg === null) return
     const fetchNearbyAddresses = async () => {
       const data = await getNearbyAddresses(modalImg)
+      console.log('nearby addresses: ', data)
       setNearbyAddresses(data)
     }
     fetchNearbyAddresses()
@@ -98,8 +99,8 @@ export const MapView = (props) => {
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      // for (let i = 0; i < 1; i++) {
-      for (let i = 0; i < dataFields.length; i++) {
+      for (let i = 0; i < 1; i++) {
+      // for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
       }
       
@@ -236,7 +237,14 @@ export const MapView = (props) => {
       )
     })
 
-    console.log('nearbyAddressObjs', nearbyAddressObjs)
+    // sort by closest to furthest + return first 4
+    nearbyAddressObjs.sort((aObjA, aObjB) => {
+      return aObjA.address - aObjB.address
+    })
+
+    if (nearbyAddressObjs.length > 4) {
+      nearbyAddressObjs = nearbyAddressObjs.slice(0, 4)
+    }
 
     return nearbyAddressObjs.map((aObj) => {
       return aObj.address
@@ -258,7 +266,6 @@ export const MapView = (props) => {
         .then((res) => {
           if (res.status === 200) {
             if (res.data.results.length === 1) {
-              console.log('result: ', res.data.results[0])
               return res.data.results[0][dataFields[idx].coordRow]
             }
             // We shouldn't hit this case 
