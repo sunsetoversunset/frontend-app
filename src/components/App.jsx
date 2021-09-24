@@ -51,6 +51,17 @@ export const App = () => {
     fetchAllPhotoData()
   }, [])
 
+const findDuplicates = arr => [...new Set(arr.filter(v => arr.indexOf(v) !== arr.lastIndexOf(v)))];
+
+  useEffect( ()=> {
+    let arr3 = addressesN.concat(addressesS)
+    let tempfight = []
+    arr3.forEach( el => {
+      tempfight.push(el.address)
+    })
+     //console.log(`dont work ${findDuplicates(tempfight)}`);
+  },[addressesN, addressesS])
+
   
   // --------------------------------------------------------------------
   const loadAddressData = (url) => {

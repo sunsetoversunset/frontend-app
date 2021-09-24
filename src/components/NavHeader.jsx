@@ -7,17 +7,17 @@ export const NavHeader = () => {
   
   let lastScrollTop = 0
   let lowerNav = document.querySelector('.address-lower-nav')
-  window.onscroll = (e) =>{
-      let st = window.pageYOffset
-      if (st > lastScrollTop){
-        navHeader.current.style.top = "-40px"
-        lowerNav.style.top = "0px"
-     } else {
-        navHeader.current.style.top = "0px"
-        lowerNav.style.top = "40px"
-     }
-     lastScrollTop = st <= 0 ? 0 : st;
-  }
+  // window.onscroll = (e) =>{
+  //     let st = window.pageYOffset
+  //     if (st > lastScrollTop){
+  //       navHeader.current.style.top = "-40px"
+  //       lowerNav.style.top = "0px"
+  //    } else {
+  //       navHeader.current.style.top = "0px"
+  //       lowerNav.style.top = "40px"
+  //    }
+  //    lastScrollTop = st <= 0 ? 0 : st;
+  // }
 
 
   return (

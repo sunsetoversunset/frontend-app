@@ -1,11 +1,9 @@
 import { useState, useEffect, React } from 'react'
-import {useHistory} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import '../styles/App.scss'
 import { NavHeader } from "./NavHeader"
-import { RoundedButton } from "./Buttons"
 import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { NavAddress } from "./NavAddress"
-import { MapView } from './MapView'
 import { PhotoStripAddress } from "./PhotoStripAddress"
 import { Footer } from "./Footer"
 import "../styles/AddressView.scss"
@@ -14,174 +12,145 @@ import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
 import axios from "axios"
 
-const address = window.location.pathname.replace("/address/", "").replace("/", "")
-let addressss = []
-let addressMax = ''
-
 export const AddressView = (props) => {
-
-	const [fullAddress, setFullAddress] = useState('')
-	const [addressMin, setAddressMin] = useState('')
+	//address bounds states
+	const [addressMin	, setAddressMin] = useState('')
 	const [addressMax, setAddressMax] = useState('')
 	const [direction, setDirection] = useState('')
 	const [myKey, setMyKey] = useState('')
-	const [prevAddress, setPrevAddress] = useState('')
-	const [nextAddress, setNextAddress] = useState('')
+
+	//all photo data
+	const [allPhotoData, setAllPhotoData] = useState([])
 	const [headerPhoto, setHeaderPhoto] = useState('')
-	const [addressPhotoData, setAddressPhotoData] = useState([])
+	const [organisedPhotoData, SetOrganisedPhotoData] = useState([])
 
 	//modal
-  	const [ modalImgUrl, setModalImgUrl ] = useState(null)
-  	const [ isModalShowing, setIsModalShowing ] = useState(false)
+	const [ modalImgUrl, setModalImgUrl ] = useState(null)
+	const [ isModalShowing, setIsModalShowing ] = useState(false)
 
-  	//uri
-	const baseUrl = "https://api.baserow.io/api/database/rows/table/27759"
-  	const opts = {
-    headers: {'Authorization': `Token ${Config.apiToken}`} 
-  	}
+	//getting the address boundires
+	const boundUrl = `https://api.baserow.io/api/database/rows/table/`
+	const opts = {
+  headers: {'Authorization': `Token ${Config.apiToken}`} 
+	}
 
-	// useEffect(() => {
- //    // get all address data
- //    loadAddressData(baseUrl)
+	let tempAllPhotoData = []
+	let params = useParams();
+	const address = params.address
 
- //  }, [])
-
-	// useEffect(() => {
-	// 	if(dataSoFar.length > 1){
-	// 	dataSoFar.map( (setting, key) => {
-	// 		//console.log(setting.field_146422)
-	// 	})
-	// 	}
-	// }, [dataSoFar])
-	// useEffect(() => {
-	// 	if(window.localStorage.getItem(fullAddress)){
-	// 		setFullAddress(window.localStorage.getItem(fullAddress))
-	// 	}else{
-	// 		setFullAddress(props.fullAddresses)
-	// 	}
-	// })
-
-	// useEffect(() => {
-	// 	props.fullAddresses.forEach( (row, key) => {
-	// 		if(row.address === address){
-	// 			setMyKey(key)
-	// 			setAddressMin(row.coord_min)
-	// 			setAddressMax(row.coord_max)
-	// 			setDirection(row.street_side)
-	// 		}
-	// 	})
-		
-	// }, [props.fullAddresses])
 
 	// ---------------------------------------------------------------
-	  // useEffect(() => {
-	  // if(props.allPhotoData){
-	  // 	if(direction === 'n' || direction === 'N'){
-	  // 		if(props.allPhotoData._1973){
-			//   		props.allPhotoData._1973.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}else if(props.allPhotoData._1985){
-		 // 			props.allPhotoData._1973.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}else if(props.allPhotoData._1966){
-		 // 				props.allPhotoData._1966.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}
-	  // 	}
+	useEffect(() => {
+    // get the bounding address data and street side
+    loadAddressData(boundUrl + `27379/?user_field_names=true&filter__field_144140__equal=${address}`)
+    
+  // ---------------------------------------------------------------
+    const fetchAllPhotoData = async () => {
+      const photoRequests = []
+      for (let i = 0; i < 1; i++) {
+       //for (let i = 0; i < dataFields.length; i++) {
+        photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}?user_field_names=true`, dataFields[i]))
+      }
+      await Promise.all(photoRequests)
+      setAllPhotoData(tempAllPhotoData)
 
-	  // 	if(direction === 's' || direction === 'S'){
-	  // 		if(props.allPhotoData._1973){
-			//   		props.allPhotoData._1973.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}else if(props.allPhotoData._1985){
-		 // 				props.allPhotoData._1985.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}else if(props.allPhotoData._1966){
-		 // 				props.allPhotoData._1966.nPhotos.forEach( row => {
-			// 	     if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin)){
-			// 	       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-			// 	     }
-			// 	   })
-		 // 		}
-	  // 	}
-	  // }
-	  // }, [props.allPhotoData, direction, addressMax, addressMin])
+    }
+    //get all the photo data
+    fetchAllPhotoData()
+
+  }, [])
 
 	// ---------------------------------------------------------------
-		// useEffect(() => {
-		// 	setHeaderPhoto( addressPhotoData[Math.round((addressPhotoData.length - 1) / 2)] )
-		// }, [addressPhotoData, headerPhoto])
-
-	// ---------------------------------------------------------------
-		// useEffect(() => {
-		// 	if(props.fullAddresses[myKey-1]){
-		// 		setPrevAddress(
-		// 			props.fullAddresses[myKey-1].address
-		// 			)
-		// 	}
-		// }, [props.fullAddresses, myKey])
-
-		// useEffect(() => {
-		// 	if(props.fullAddresses[myKey-1]){
-		// 		setNextAddress(
-		// 			props.fullAddresses[myKey+1].address
-		// 			)
-		// 	}
-		// }, [props.fullAddresses, myKey])
-
-
-	// const loadAddressData = (url) => {
- //    axios.get(url, opts)
- //    .then((res) => {  
- //      if (res.status === 200) {
- //        // handle data
- //       	res.data.results.map( (table, key) => {
- //       		addressss.push(table)
- //       	})
-
- //       	// handle loading next page if url exists
- //        if (res.data.next) {
- //          let nextUrl = res.data.next.replace("http", "https")
- //          loadAddressData(nextUrl)
- //        } else {
- //          // no more next, store in state
- //          console.log('We have reached the end of the line')
- //          setDataSoFar(addressss)
- //        }
-        
-        
- //      } else {
- //        // Handle case where baserow throws an error
- //        console.error('Got baserow error status: ', res.status)
- //        if (res.statusText !== "") {
- //          console.log('Got baserow statusText: ', res.statusText)
- //        }
- //      }
- //    })
- //    .catch((err) => {
- //      console.log('err: ', err)
- //    })
- //  } 
-
-  const handleScroll = (dir) => {
-  	
+  const loadAddressData = (url) => {
+    axios.get(url, opts)
+    .then((res) => {  
+      if (res.status === 200) {
+        // handle data
+        res.data.results.map( res => {
+	        setAddressMin(res.coordinate_min)
+	       	setAddressMax(res.coordinate_max)
+	       	setDirection(res.street_side)
+	       	setMyKey(res.id)
+        })
+      } else {
+        // Handle case where baserow throws an error
+        console.error('Got baserow error status: ', res.status)
+        if (res.statusText !== "") {
+          console.log('Got baserow statusText: ', res.statusText)
+        }
+      }
+    })
+    .catch((err) => {
+      console.log('err: ', err)
+    })
   }
+
+  // --------------------------------------------------------------------
+  const loadPhotoData = (url, dataFieldObj, tempPhotosArr) => {
+    let tempPhotos = tempPhotosArr || []
   
+    return axios.get(url, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          // handle data
+          res.data.results.forEach(row => {
+
+            let processedRow = {
+              "identifier": row.identifier,
+              "coordinate": row.coordinate,
+              "street_side": row.street_side
+            }
+            tempPhotos.push(processedRow)
+          })
+
+          //handle loading next page if url exists
+          if (res.data.next) {
+            let nextUrl = res.data.next.replace("http", "https")
+            return loadPhotoData(nextUrl, dataFieldObj, tempPhotos)
+          } else {
+            console.log(`finished for year ${dataFieldObj.year}`)  
+
+            let photoDataObj = {
+              year: dataFieldObj.year,
+              photos: tempPhotos
+            }                      
+
+            tempAllPhotoData.push( photoDataObj)
+            return photoDataObj
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('[loadPhotoData] error: ', err)
+      })
+  }
+
+
+	// ---------------------------------------------------------------
+	  useEffect(() => {
+	  	let organisedPhotoData = []
+	  		if(allPhotoData){
+	  			allPhotoData.forEach( first => {
+	  				first.photos.forEach( row => {
+	  					if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin) && row.street_side === direction){
+	  						organisedPhotoData.push({
+	  							year: first.year,
+	  							photoID: row.identifier
+	  							})
+	  					}
+	  				})
+	  			})
+	  		}
+			SetOrganisedPhotoData(organisedPhotoData)
+	   }, [allPhotoData, direction, addressMax, addressMin])
+
+	// ---------------------------------------------------------------
+		useEffect(() => {
+			if(organisedPhotoData.length >= 1){
+				setHeaderPhoto( organisedPhotoData[Math.round((organisedPhotoData.length - 1) / 2)].photoID )
+				}
+		}, [organisedPhotoData, headerPhoto])
+
 
   // ---------------------------------------------------------------
   return(
@@ -189,51 +158,35 @@ export const AddressView = (props) => {
       <NavHeader />
       <PhotoViewerModal 
         imgUrl={ modalImgUrl }
-        handleShowModal={ () => setIsModalShowing(!isModalShowing) }
         isVisible={ isModalShowing }
+        handleHideModal={ () => setIsModalShowing(false) }
       />
   		{/* header image */}
       	<div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/${headerPhoto}/full/,1000/0/default.jpg')`}}>
       		<p className="hero-address">{address} Sunset Boulevard</p>
       	</div>
       {/* mid navn */}
-      	{/*<nav className="address-lower-nav">
-      		<RoundedButton
-              icon="icon-arrow-left" 
-              label={`${prevAddress} Sunset Blvd.`}
-              handleOnClicked={() => handleScroll(prevAddress)}
-            />
-      			<NavAddress />
-      		<RoundedButton
-              icon="icon-arrow-right" 
-              label={`${nextAddress} Sunset Blvd.`}
-              handleOnClicked={() => handleScroll(nextAddress)}
-            />
-      	</nav>*/}
+      	<nav className="address-lower-nav">
+      			<NavAddress currentKey={myKey}/>
+      	</nav>
 
       	{/* photo srtip section */}
       	<div id="Photographs" className="strip-container-wrap">
       		<h1>Photographs</h1>
       		<div className="photo-strip">
-	      		{/*{props.dataFields.map((dataFieldObj) => {
-      			return (
+	      		{dataFields.map((dataFieldObj, key) => {
+      			return ( 
 			        <PhotoStripAddress
-			          isVisible={true}
 			          handleSetModalImg={ (img) => {
 			            setModalImgUrl(img) 
 			          }}
 			          handleShowModal={ () => setIsModalShowing(true) }
-			          photoData={ 
-            			props.allPhotoData[`_${dataFieldObj.year}`] ? 
-            			props.allPhotoData[`_${dataFieldObj.year}`] : null  
-			          }
 			          key={`year-${dataFieldObj.year}`} 
-			          min={addressMin}
-			          max={addressMax}
 			          year={ dataFieldObj.year }
+			          photoData={organisedPhotoData}
 			        />
       )
-    })}*/}
+    })}
       		</div>
       	</div>
 

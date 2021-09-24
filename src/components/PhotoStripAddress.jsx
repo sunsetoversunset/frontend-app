@@ -1,22 +1,23 @@
 import { useRef, useEffect, useState } from "react"
-import * as d3 from 'd3'
 import "../styles/PhotoStrip.scss"
 
 export const PhotoStripAddress = (props) => {
   const [isVisible, setIsVisible] = useState(true)
   const stripContainer  = useRef(null)
   const intImages  = useRef(null)
-  const [addressPhotoData, setAddressPhotoData] = useState([])
+  const [filteredPhotoData, setFilteredPhotoData] = useState([])
+
 
   // ---------------------------------------------------------------
   useEffect(() => {
-  if(props.photoData){
-   props.photoData.nPhotos.forEach( row => {
-     if(parseFloat(row.coordinate) < parseFloat(props.max) && parseFloat(row.coordinate) > parseFloat(props.min)){
-       setAddressPhotoData(oldArray => [...oldArray, row.identifier])
-     }
-   })
-  }
+    if(props.photoData){
+      props.photoData.forEach( el => {
+        if(el.year === props.year){
+          setFilteredPhotoData(oldArray => [...oldArray, el.photoID])
+        }
+      })
+    }
+
   }, [props.photoData, props.min, props.max])
 
   // ---------------------------------------------------------------
@@ -47,10 +48,9 @@ export const PhotoStripAddress = (props) => {
           leftEnd.append( spans.cloneNode() )
           stripContainer.current.prepend(leftEnd)
         }
-      console.log("imgwidth:"+fullImgWidth+" window: "+window.innerWidth)
       });
     }
-  },[addressPhotoData, setAddressPhotoData] )
+  },[filteredPhotoData, setFilteredPhotoData] )
 
  
        const scrollBoy = (scrollOffset) => {
@@ -62,8 +62,8 @@ export const PhotoStripAddress = (props) => {
     <>
       <div ref={stripContainer} className={`strip-container ${isVisible ? '' : 'hidden'}`}>
         <div className={`strip-photos-container-address year-${props.year}`}>
-          {addressPhotoData.length >= 1 ? 
-            addressPhotoData.map( (row, key) => (
+          {filteredPhotoData.length >= 1 ? 
+            filteredPhotoData.map( (row, key) => (
               <img ref={intImages} onClick={() => {props.handleShowModal(); props.handleSetModalImg(row) }} 
               src={`https://media.getty.edu/iiif/image/${row}/full/,250/0/default.jpg`} key={key} />
               
