@@ -11,18 +11,15 @@ import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
 import axios from "axios"
 
-import iconClose from "../assets/icons/icon-close.svg"
-import iconCheck from "../assets/icons/icon-check.svg"
 import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
 
 export const MapView = (props) => {
 
-  // --------------------------------------------------------------------
-  // DATA
   const [ addressesN, setAddressesN ]     = useState([])
   const [ addressesS, setAddressesS ]     = useState([])
   const [ allPhotoData, setAllPhotoData ] = useState([])
+  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
 
   const addressBoundariesTableId = "27379"
   const baseUrl = "https://api.baserow.io/api/database/rows/table/"
@@ -43,8 +40,6 @@ export const MapView = (props) => {
   const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
   const [ directionFacing, setDirectionFacing ] = useState("n")
   const [ yearsShowing, setYearsShowing ]       = useState({})
-  const [ searchInput, setSearchInput ]         = useState("")
-  const [ searchResults, setSearchResults ]     = useState([])
   const [ allAddresses, setAllAddresses ]       = useState([])
   const [ nearbyAddresses, setNearbyAddresses ] = useState([])
 
@@ -67,8 +62,7 @@ export const MapView = (props) => {
   // MODAL
   const [ isModalShowing, setIsModalShowing ] = useState(false)
   const [ modalImg, setModalImg ] = useState(null)
-  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
-  
+ 
   // --------------------------------------------------------------------
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
@@ -317,129 +311,6 @@ export const MapView = (props) => {
 
 
   // --------------------------------------------------------------------
-  // TODO: move to its own component
-  // --------------------------------------------------------------------
-  const handleSearch = (searchTerm) => {
-    setSearchInput(searchTerm)
-    let results = allAddresses.filter((addressObj) => {
-      return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
-    })
-
-    // Return the first 8
-    setSearchResults(results.slice(0, 7))
-  }
-
-  // --------------------------------------------------------------------
-  const renderSearchResults = () => {
-    return (
-      <ul className='search-results-list'>
-        {
-          searchResults.map((result, idx) => {
-            return (
-              <li key={`result-${idx}`}>
-                <div 
-                  className="result-list-item"
-                  onClick={() => console.log('handle setting address', result.address)}
-                >
-                  {result.address} Sunset Blvd.
-                </div>
-              </li>
-            )
-          })
-        }
-      </ul>
-    )
-  }
-
-  // --------------------------------------------------------------------
-  const renderSearchAndFilter = () => {
-    return (
-      <div className={`search-and-filter-opts 
-        ${isSearchAndFilterShowing ? "visible" : ""}
-      `}>
-        <div 
-          className="icon-close-search-container"
-          onClick={() => setIsSearchAndFilterShowing(false)}
-        >
-          <img src={iconClose} alt="icon-close-search" />
-        </div>
-        <div className='search-control'>
-          <label 
-            className="control-label" 
-            htmlFor="search-control-input">
-              Search an address
-            </label>
-          <input
-            type="text"
-            value={ searchInput }
-            onChange={ (e) => handleSearch(e.target.value) } 
-            placeholder="9041 Sunset Blvd."
-            id="search-control-input"
-          >
-          </input>
-        </div>
-        <div className='search-results-outer'>
-          <div className={`search-results-inner ${ searchInput.length === 0 || searchResults.length === 0 ? 'hidden' : 'visible'}`}>
-            { renderSearchResults() }
-          </div>
-        </div>
-        <div className="divider"></div>
-        { renderYearsControls() }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
-  const renderYearsControls = () => {
-    return (
-      <div className="years-control">
-        <label className="control-label">Display years</label>
-        { dataFields.map(dataField => {
-          return (
-            <div
-              key={`check-${dataField.year}`} 
-              className={`year-control ${yearsShowing[dataField.year] ? 'checked' : ''}`}
-              onClick={() => {
-                let currentYearsShowing = {...yearsShowing}
-                currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                setYearsShowing(currentYearsShowing)
-              }}
-            >
-              <input 
-                checked={yearsShowing[dataField.year]}
-                id={`year-${dataField.year}`}
-                className="year-checkbox"
-                name={`year-${dataField.year}`}
-                type="checkbox" 
-              />
-              {
-                yearsShowing[dataField.year] === true ?
-                <img 
-                  className='icon-year-checked'
-                  src={iconCheck} 
-                  alt="icon-year-checked" 
-                /> : null
-              }
-              <label
-                onClick={(e) => {
-                  e.preventDefault()
-                  let currentYearsShowing = {...yearsShowing}
-                  currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                  setYearsShowing(currentYearsShowing)
-                }} 
-                className="year-label" 
-                htmlFor={`year-${dataField.year}`}
-              >
-                {dataField.year}
-              </label>
-            </div>
-          )
-        }) }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
   const renderMap = () => {
     return (
       <div 
@@ -447,6 +318,7 @@ export const MapView = (props) => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
+            allAddresses={ allAddresses }
             isMapMinimized={ isMapMinimized }
             setIsMapMinimized={ setIsMapMinimized }
             directionFacing={ directionFacing }
@@ -454,8 +326,10 @@ export const MapView = (props) => {
             zoomRange={ zoomRange }
             moveSpeed={ moveSpeed }
             setZoomRange={ setZoomRange }
-            renderSearchAndFilter={renderSearchAndFilter}
-            setIsSearchAndFilterShowing={setIsSearchAndFilterShowing}
+            isSearchAndFilterShowing={ isSearchAndFilterShowing }
+            setIsSearchAndFilterShowing={ setIsSearchAndFilterShowing }
+            yearsShowing={ yearsShowing }
+            setYearsShowing={ setYearsShowing }
           />
         <div
           role="button" 
@@ -470,6 +344,7 @@ export const MapView = (props) => {
       </div>
     )
   }
+
 
   // --------------------------------------------------------------------
   const renderStripViews = (direction) => {
@@ -493,6 +368,7 @@ export const MapView = (props) => {
       )
     })
   }
+
 
   // --------------------------------------------------------------------
   return (
