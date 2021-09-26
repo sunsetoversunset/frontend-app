@@ -92,8 +92,8 @@ export const MapView = () => {
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      // for (let i = 0; i < 1; i++) {
-      for (let i = 0; i < tf.photoData.length; i++) {
+      for (let i = 0; i < 1; i++) {
+      // for (let i = 0; i < tf.photoData.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${tf.photoData[i].tableId}`, tf.photoData[i]))
       }
       
@@ -148,7 +148,7 @@ export const MapView = () => {
           console.log('[loadAddressData] done getting addresses.')
           setAddressesN(tempAddressesN)
           setAddressesS(tempAddressesS)
-          setAllAddresses(addressesN.concat(addressesS))
+          setAllAddresses(tempAddressesN.concat(tempAddressesS))
         }
       } else {
         // Handle case where baserow throws an error
@@ -162,7 +162,7 @@ export const MapView = () => {
       console.log('err: ', err)
     })
   }
-
+  
 
   // ---------------------------------------------------------------
   const loadPhotoData = (url, dataFieldObj, nPhotosArr, sPhotosArr) => {
@@ -207,6 +207,13 @@ export const MapView = () => {
       .catch((err) => {
         console.error('[loadPhotoData] error: ', err)
       })
+  }
+
+  // ---------------------------------------------------------------
+  // When you select an address from the search results
+  const handleCenterAddress = (address) => {
+    console.log('[handleCenterAddress] address: ', address)
+    setIsSearchAndFilterShowing(false)
   }
 
 
@@ -324,6 +331,7 @@ export const MapView = () => {
             setIsSearchAndFilterShowing={ setIsSearchAndFilterShowing }
             yearsShowing={ yearsShowing }
             setYearsShowing={ setYearsShowing }
+            handleCenterAddress={ handleCenterAddress }
           />
         <div
           role="button" 
@@ -345,6 +353,7 @@ export const MapView = () => {
     return tf.photoData.map((dataFieldObj) => {
       return (
         <PhotoStrip
+          directionFacing={ directionFacing }
           stripDirection={ direction }
           isVisible={yearsShowing[dataFieldObj.year] && direction === directionFacing}
           handleSetModalImg={ (imgObj) => {
@@ -389,8 +398,7 @@ export const MapView = () => {
       <div
         onClick={() => setIsSearchAndFilterShowing(false)} 
         className={
-          `strips-shade ${isMapMinimized ? "full" : "minimized"} ${isSearchAndFilterShowing === true ? "visible" : "hidden"}
-      `}>
+          `strips-shade ${isMapMinimized ? "full" : "minimized"} ${isSearchAndFilterShowing === true ? "visible" : "hidden"}`}>
       </div>
       <div className={`strips-container ${isSearchAndFilterShowing === true ? "noscroll" : "scroll"} ${isMapMinimized ? "full" : "minimized"} is-showing-${directionFacing}`}>
         { renderStripViews('n') }

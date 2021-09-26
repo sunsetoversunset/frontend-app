@@ -22,35 +22,48 @@ export const AddressBar = (props) => {
   // ---------------------------------------------------------------
   useEffect(() => {
     const svg = d3.select(addressRef.current)
+
+    if (props.directionFacing === 'n') {
+      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n visible');
+      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s hidden');
+    } else {
+      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s visible');
+      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n hidden');
+    }
+
+  }, [props.directionFacing])
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    const svg = d3.select(addressRef.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
 
     // clear out before we draw
     svg.selectAll("*").remove();
 
-    if (props.directionFacing === 'n') {
-      // N addresses
-      svg.append('g')
-      .attr('class', 'addresses-text-n')
-      .selectAll('text')
-      .data(props.addressesNData)
-      .enter()
-      .append('text')
-      .attr("x", function(d) {
-        return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
-      })
-      .attr("y", "45")
-      .on('click', function(d){
-        window.open(`${window.location.origin}/address/${this.innerHTML}/`)
-      })
-      .attr("text-anchor", "middle")
-      .text(function(d) { 
-        return d.address 
-      })
-    } else {
-      // S addresses
-      svg.append('g')
-      .attr('class', 'addresses-text-s hidden-strip')
+    // N addresses
+    // svg.append('g')
+    //   .attr('class', 'addresses-text-n')
+    //   .selectAll('text')
+    //   .data(props.addressesNData)
+    //   .enter()
+    //   .append('text')
+    //   .attr("x", function(d) {
+    //     return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
+    //   })
+    //   .attr("y", "45")
+    //   .on('click', function(d){
+    //     window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+    //   })
+    //   .attr("text-anchor", "middle")
+    //   .text(function(d) { 
+    //     return d.address 
+    //   })
+
+    // S addresses
+    svg.append('g')
+      .attr('class', 'addresses-text-s')
       .selectAll('text')
       .data(props.addressesSData)
       .enter()
@@ -66,12 +79,10 @@ export const AddressBar = (props) => {
       .text(function(d) { 
         return d.address 
       })
-    }
 
   }, [
     props.addressesNData, 
-    props.addressesSData, 
-    props.directionFacing, 
+    props.addressesSData,  
     bbox
   ])
 

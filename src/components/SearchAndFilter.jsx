@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import iconClose from "../assets/icons/icon-close.svg"
 import iconCheck from "../assets/icons/icon-check.svg"
 import { dataFields } from "../assets/data/dataFields"
@@ -8,16 +8,27 @@ export const SearchAndFilter = (props) => {
   const [ searchInput, setSearchInput ] = useState("")
   const [ searchResults, setSearchResults ] = useState([])
 
+
   // ---------------------------------------------------------
   const handleSearch = (searchTerm) => {
-    setSearchInput(searchTerm)
-    let results = props.allAddresses.filter((addressObj) => {
-      return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
-    })
+    if (props.allAddresses) {
+      setSearchInput(searchTerm)
+      let results = props.allAddresses.filter((addressObj) => {
+        return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
+      })
 
-    // Return the first 8
-    setSearchResults(results.slice(0, 7))
+      // Return the first 8
+      setSearchResults(results.slice(0, 7))
+    } else {
+      console.log('no addresses')
+    }
   }  
+
+  // ---------------------------------------------------------
+  const handleSelectAddress = (address) => {
+    setSearchInput('')
+    props.handleCenterAddress(address)
+  }
 
   // ---------------------------------------------------------
   const renderSearchResults = () => {
@@ -29,7 +40,7 @@ export const SearchAndFilter = (props) => {
               <li key={`result-${idx}`}>
                 <div 
                   className="result-list-item"
-                  onClick={() => console.log('handle setting address', result.address)}
+                  onClick={() => handleSelectAddress(result.address)}
                 >
                   {result.address} Sunset Blvd.
                 </div>

@@ -231,6 +231,7 @@ export const Map = (props) => {
           </div>
         </div>
         <SearchAndFilter 
+          handleCenterAddress= { props.handleCenterAddress }
           allAddresses={ props.allAddresses }
           yearsShowing={ props.yearsShowing }
           setYearsShowing={ props.setYearsShowing }
