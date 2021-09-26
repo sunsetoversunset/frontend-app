@@ -80,7 +80,6 @@ export const Map = (props) => {
   // Renders svg map and brush controls
   // ---------------------------------------------------------
   useEffect(() => {
-    console.log('bbox.width: ', bbox.width)
     const svg = d3.select(d3Container.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)

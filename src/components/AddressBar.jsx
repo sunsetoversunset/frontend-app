@@ -28,8 +28,9 @@ export const AddressBar = (props) => {
     // clear out before we draw
     svg.selectAll("*").remove();
 
-    // N addresses
-    svg.append('g')
+    if (props.directionFacing === 'n') {
+      // N addresses
+      svg.append('g')
       .attr('class', 'addresses-text-n')
       .selectAll('text')
       .data(props.addressesNData)
@@ -37,33 +38,42 @@ export const AddressBar = (props) => {
       .append('text')
       .attr("x", function(d) {
         return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
-			})
-			.attr("y", "45")
+      })
+      .attr("y", "45")
       .on('click', function(d){
         window.open(`${window.location.origin}/address/${this.innerHTML}/`)
       })
-			.attr("text-anchor", "middle")
-			.text(function(d) { 
-				return d.address 
-			})
-    
-    // S addresses
-    svg.append('g')
+      .attr("text-anchor", "middle")
+      .text(function(d) { 
+        return d.address 
+      })
+    } else {
+      // S addresses
+      svg.append('g')
       .attr('class', 'addresses-text-s hidden-strip')
       .selectAll('text')
-			.data(props.addressesSData)
-			.enter()
-			.append('text')
-			.attr("x", function(d) { 
+      .data(props.addressesSData)
+      .enter()
+      .append('text')
+      .attr("x", function(d) { 
         return -((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
-			})
-			.attr("y", "45")
-			.attr("text-anchor", "middle")
-			.text(function(d) { 
-				return d.address 
-			})
+      })
+      .attr("y", "45")
+      .on('click', function(d){
+        window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+      })
+      .attr("text-anchor", "middle")
+      .text(function(d) { 
+        return d.address 
+      })
+    }
 
-  }, [props.addressesNData, props.addressesSData, bbox])
+  }, [
+    props.addressesNData, 
+    props.addressesSData, 
+    props.directionFacing, 
+    bbox
+  ])
 
   // ---------------------------------------------------------------
   return (

@@ -91,7 +91,7 @@ export const SearchAndFilter = (props) => {
       </div>
     )
   }
-
+  
 
   // ---------------------------------------------------------
   return (
@@ -128,7 +128,4 @@ export const SearchAndFilter = (props) => {
       { renderYearsControls() }
     </div>
   )
-
 }
-
-

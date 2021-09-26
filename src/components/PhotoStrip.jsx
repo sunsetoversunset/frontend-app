@@ -30,20 +30,23 @@ export const PhotoStrip = (props) => {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.photoData, props.direction, bbox])
+  }, [props.photoData, bbox])
 
 
   // ---------------------------------------------------------------
   const renderWireframes = () => {
-    let data = props.direction === "n" ? props.photoData.nPhotos : props.photoData.sPhotos
+    let data = props.photoData
 
     const svg = d3.select(d3Container.current)
       .attr("width", stripContainer.current.getBoundingClientRect().width)
       
+    // clear out before we draw
+    svg.selectAll("*").remove();
+
     // bind d3 data
     const g = svg.append('g')
       .attr("class", () => { 
-        return `strip-g strip-g-${props.direction}` 
+        return `strip-g strip-g-${props.stripDirection}` 
       });
 
     g.selectAll("rect")
@@ -57,7 +60,7 @@ export const PhotoStrip = (props) => {
       .attr("width", "380")
       .attr("height", "250")
       .attr("class", () => { 
-        return `image-frame image-frame-${ props.direction }` 
+        return `image-frame image-frame-${ props.stripDirection }` 
       });
   }
 
@@ -67,22 +70,27 @@ export const PhotoStrip = (props) => {
     let left 
     let right
 
-    if (props.direction === 'n') {
+    if (props.stripDirection === 'n') {
+      console.log('rendering n')
       m     = 1;
       left  = props.scrollAmount - 200;
       right = props.scrollAmount + stripContainer.current.getBoundingClientRect().width + 200;
     } else {
+      console.log('rendering s')
       m     = -1;
       right = props.scrollAmount + 200;
       left  = props.scrollAmount - stripContainer.current.getBoundingClientRect().width - 200;
     }
+    
 
     // leaving as non-arrow because of 'this'
-    d3.selectAll('.image-frame-' + props.direction)
+    d3.selectAll('.image-frame-' + props.stripDirection)
       .each(function(d) {
+        console.log('here')
         var x = d3.select(this).attr("x")
         if (m * x >= left && m * x <= right) {
           if (d.ld !== true) {
+            // console.log('here')
             var g = d3.select(this.parentNode);
             var f = "https://media.getty.edu/iiif/image/" + d.identifier;
 
@@ -101,6 +109,8 @@ export const PhotoStrip = (props) => {
                 props.handleShowModal()
               });
             d.ld = true;
+          } else {
+            // console.log('there')
           }
         };
       });
@@ -109,7 +119,7 @@ export const PhotoStrip = (props) => {
   // ---------------------------------------------------------------
   return (
     <>
-      <div ref={stripContainer} className={`strip-container ${props.isVisible ? '' : 'hidden'}`}>
+      <div ref={stripContainer} className={`strip-container ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className={`strip-photos-container year-${props.year}`}>
           {
             props.photoData ? 
@@ -122,17 +132,12 @@ export const PhotoStrip = (props) => {
           }
         </div>
       </div>
-      <div className={`strip-year-label-outer-container 
-        ${props.isVisible ? '' : 'hidden'}
-      `}>
+      <div className={`strip-year-label-outer-container ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className="strip-year-label-inner-container">
           <span className="strip-year-label">{props.year}</span>
         </div>
       </div>
-      <div className={`strip-divider 
-        ${props.isVisible ? '' : 'hidden'}
-        year-${props.year}
-      `}></div>
+      <div className={`strip-divider ${props.isVisible ? 'visible' : 'hidden'} year-${props.year}`}></div>
     </>
   )
 }
