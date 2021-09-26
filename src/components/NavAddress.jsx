@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { RoundedButton } from "./Buttons"
 import '../styles/NavHeader.scss';
 
@@ -73,6 +73,10 @@ export const NavAddress = (props) => {
     window.location.href = `/address/${dir}/`
   }
 
+  const anchorScroll = (hash) => {
+    document.getElementById(hash).scrollIntoView({behavior: "smooth", block: "start"});
+  }
+
   // ---------------------------------------------------------------
   return (
     <nav className='nav-header'>
@@ -84,36 +88,32 @@ export const NavAddress = (props) => {
       <div className='nav-links-container'>
         <ul>
           <li>
-            <NavLink to={{pathname: location.pathname,
-                      hash: '#Photographs'}}>
+            <span onClick={ () => anchorScroll("photographs")}>
               <div className='nav-link'>
                 Photographs
               </div>
-            </NavLink>
+            </span>
           </li>
           <li>
-            <NavLink to={{pathname: location.pathname,
-                      hash: '#Stories'}}>
+            <span onClick={ () => anchorScroll("stories")}>
               <div className='nav-link'>
                 Stories
               </div>
-            </NavLink>
+            </span>
           </li>
           <li>
-            <NavLink to={{pathname: location.pathname,
-                      hash: '#Tags'}}>
+            <span onClick={ () => anchorScroll("tags")} >
               <div className='nav-link'>
                 Tags
               </div>
-            </NavLink>
+            </span>
           </li>
           <li>
-            <NavLink to={{pathname: location.pathname,
-                      hash: '#HistoricalProfile'}}>
+            <span onClick={ () => anchorScroll("historicalProfile")}>
               <div className='nav-link'>
                 Historical Profile
               </div>
-            </NavLink>
+            </span>
           </li>
         </ul>
       </div>

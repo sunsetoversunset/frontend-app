@@ -8,6 +8,8 @@ import { PhotoStripAddress } from "./PhotoStripAddress"
 import { Footer } from "./Footer"
 import "../styles/AddressView.scss"
 
+import {CensusTable} from "./AddressDataTables/CensusTable"
+
 import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
 import axios from "axios"
@@ -19,21 +21,22 @@ export const AddressView = (props) => {
 	const [direction, setDirection] = useState('')
 	const [myKey, setMyKey] = useState('')
 
-	//all photo data
+	//all photo data states
 	const [allPhotoData, setAllPhotoData] = useState([])
 	const [headerPhoto, setHeaderPhoto] = useState('')
 	const [organisedPhotoData, SetOrganisedPhotoData] = useState([])
 
-	//modal
+	//modal states
 	const [ modalImgUrl, setModalImgUrl ] = useState(null)
 	const [ isModalShowing, setIsModalShowing ] = useState(false)
 
-	//getting the address boundires
+	//API call consts
 	const boundUrl = `https://api.baserow.io/api/database/rows/table/`
 	const opts = {
   headers: {'Authorization': `Token ${Config.apiToken}`} 
 	}
 
+	// global varribales
 	let tempAllPhotoData = []
 	let params = useParams();
 	const address = params.address
@@ -49,7 +52,7 @@ export const AddressView = (props) => {
       const photoRequests = []
       for (let i = 0; i < 1; i++) {
        //for (let i = 0; i < dataFields.length; i++) {
-        photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}?user_field_names=true`, dataFields[i]))
+        photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}/?user_field_names=true&order_by=coordinate,-identifier`, dataFields[i]))
       }
       await Promise.all(photoRequests)
       setAllPhotoData(tempAllPhotoData)
@@ -128,12 +131,12 @@ export const AddressView = (props) => {
 
 	// ---------------------------------------------------------------
 	  useEffect(() => {
-	  	let organisedPhotoData = []
+	  	let organisedPhotoDataa = []
 	  		if(allPhotoData){
 	  			allPhotoData.forEach( first => {
 	  				first.photos.forEach( row => {
 	  					if(parseFloat(row.coordinate) < parseFloat(addressMax) && parseFloat(row.coordinate) > parseFloat(addressMin) && row.street_side === direction){
-	  						organisedPhotoData.push({
+	  						organisedPhotoDataa.push({
 	  							year: first.year,
 	  							photoID: row.identifier
 	  							})
@@ -141,7 +144,7 @@ export const AddressView = (props) => {
 	  				})
 	  			})
 	  		}
-			SetOrganisedPhotoData(organisedPhotoData)
+			SetOrganisedPhotoData(organisedPhotoDataa)
 	   }, [allPhotoData, direction, addressMax, addressMin])
 
 	// ---------------------------------------------------------------
@@ -171,7 +174,7 @@ export const AddressView = (props) => {
       	</nav>
 
       	{/* photo srtip section */}
-      	<div id="Photographs" className="strip-container-wrap">
+      	<div id="photographs" className="strip-container-wrap">
       		<h1>Photographs</h1>
       		<div className="photo-strip">
 	      		{dataFields.map((dataFieldObj, key) => {
@@ -190,9 +193,22 @@ export const AddressView = (props) => {
       		</div>
       	</div>
 
+      {/*  Sotries section */}
+      	<div id="stories" className="historical-profile-container ">
+      		<h1>Stories</h1>
+      	</div>
+
+    	{/*  Tags section */}
+    	<div id="tags" className="historical-profile-container ">
+    		<h1>Tags</h1>
+    	</div>
+
 	    {/*  ALLL THE DATA section */}
-      	<div id="HistoricalProfile" className="historical-profile-container ">
-      		Historical Profiles
+      	<div id="historicalProfile" className="historical-profile-container ">
+      		<h1>Historical Profiles</h1>
+      		<div className="census">
+      			<CensusTable address={address}/>
+      		</div>
       	</div>
     
       <Footer />
