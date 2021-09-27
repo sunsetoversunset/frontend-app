@@ -27,6 +27,24 @@
   }
 }
 
+.map {
+  .d3-component.loaded-false{
+    display: none!important;
+  }
+
+  .d3-component.loaded-true{
+    display: block;
+  }
+
+  .map-loading-text.loaded-false {
+    display: block;
+  }
+
+  .map-loading-text.loaded-true {
+    display: none;
+  }
+}
+
 .map-container {
   border-top: $outline-border;
   border-bottom: $outline-border;

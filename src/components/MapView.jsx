@@ -92,8 +92,7 @@ export const MapView = () => {
 
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      for (let i = 0; i < 1; i++) {
-      // for (let i = 0; i < tf.photoData.length; i++) {
+      for (let i = 0; i < tf.photoData.length; i++) {
         photoRequests.push(loadPhotoData(baseUrl + `${tf.photoData[i].tableId}`, tf.photoData[i]))
       }
       
@@ -111,9 +110,6 @@ export const MapView = () => {
     let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
     let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
     setMappedZoomRange([lBounds, rBounds])
-    console.log('zoomRange: ', zoomRange)
-    console.log('mappedZoomRange: ', [lBounds, rBounds])
-
     filterAddressesByRange([lBounds, rBounds])
   }, [zoomRange])
 
@@ -299,18 +295,6 @@ export const MapView = () => {
     setFilteredAddressesS(filteredS)
   }
 
-
-  // ---------------------------------------------------------------
-  // Filter photo data whenever we brush the map
-  useEffect(() => {
-    if (directionFacing === 'n') {
-      console.log('filtered addresses N:', filteredAddressesN.length)
-    } else {
-      console.log('filtered addresses S: ', filteredAddressesS.length)
-    }
-  }, [filteredAddressesN, filteredAddressesS])
-
-
   // ---------------------------------------------------------------
   const renderMap = () => {
     return (
@@ -319,6 +303,9 @@ export const MapView = () => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
+            scrollAmount={ scrollAmount }
+            setScrollAmount={ setScrollAmount }
+            isReady={ allPhotoData.length !== 0 ? true : false }
             allAddresses={ allAddresses }
             isMapMinimized={ isMapMinimized }
             setIsMapMinimized={ setIsMapMinimized }
@@ -353,6 +340,7 @@ export const MapView = () => {
     return tf.photoData.map((dataFieldObj) => {
       return (
         <PhotoStrip
+          mappedZoomRange={ mappedZoomRange }
           directionFacing={ directionFacing }
           stripDirection={ direction }
           isVisible={yearsShowing[dataFieldObj.year] && direction === directionFacing}

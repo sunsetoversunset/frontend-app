@@ -23,8 +23,7 @@ export const Map = (props) => {
   const set = () => {
     setBbox(mapContainer && mapContainer.current ? mapContainer.current.getBoundingClientRect() : {});
   }
-
-    
+   
   // ---------------------------------------------------------
   const calcExtents = () => {
     let coords = sunsetJson.features[0].geometry.coordinates
@@ -38,11 +37,13 @@ export const Map = (props) => {
     setYDomain(d3.extent(yCoords))
   }
 
-
   // ---------------------------------------------------------
   useEffect(() => {
-    console.log('xDomain: ', xDomain)
-  }, [xDomain])
+    if (props.isReady === true) {
+      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.isReady])
 
 
   // ---------------------------------------------------------
@@ -178,7 +179,13 @@ export const Map = (props) => {
           .datum({type: "selection"})
       });
 
-    // setScrollAmount(0)
+    let dist = 0;
+    if (direction === 'east') {
+      dist = props.scrollAmount + (1 * bbox.width)
+    } else {
+      dist = props.scrollAmount - (1 * bbox.width);
+    } 
+    props.setScrollAmount(dist)
   }
 
   // ---------------------------------------------------------
@@ -245,11 +252,14 @@ export const Map = (props) => {
   // ---------------------------------------------------------
   return (
     <div className="map-inner">
-      <div className="map" ref={mapContainer}>  
+      <div className="map" ref={mapContainer}>
         <svg
-          className="d3-component"
+          className={`d3-component loaded-${props.isReady}`}
           ref={d3Container}
         />
+        <span className={`map-loading-text loaded-${props.isReady}`}>
+          Loading...
+        </span>
       </div>
       { renderMapControls() }
     </div>
