@@ -6,8 +6,6 @@ import { dataRows } from "../../assets/data/dataRows"
 import Config from "../../config.json"
 import axios from "axios"
 
-
-						let barfpoop = []
 export const CensusTable = (props) => {
 	const [allCensusData, setAllCensusData] = useState(null)
 
@@ -78,7 +76,7 @@ export const CensusTable = (props) => {
 				<tbody>
 				{dataRows.map( (ent, key) => {
 					return(
-						<tr key={key}>
+						<tr key={key} className={ent.shortname}>
 						<td>{ent.goodname}</td>
 							{renderColumns(ent, key)}
 						</tr>
@@ -139,60 +137,9 @@ export const CensusTable = (props) => {
 
 
 	return(
-		<div className="censusTable">
-			{/*console.log(allCensusData)*/}
+		<div className="censusTable dataTable">
 			<h1>Census</h1> <span className="see-notes">See Notes ></span>
 			<span>{	renderRows()}</span>
-			<table>
-				<tbody>
-
-					{/*dataRows.map( (ent, key) => {
-						let entz = ent
-						let keyz = key
-						return(
-							<tr key={key}>
-								<td>{ent.goodname}</td>
-								{allCensusData && allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1) &&
-									allCensusData.map( (year, keytwo) => {
-										let yearz = year
-										let keytwoz = keytwo
-
-										year.data.map( (data, keythree) => {
-											
-											if(entz.shortname === data.variable){
-												barfpoop.push(entz.shortname)
-												return(
-													<h1>sporn</h1>
-													)
-											}
-										})
-
-
-										if(entz.shortname === 'tract'){
-										return(
-											<td key={keytwoz}>
-												{year.data[key].tract}
-											</td>
-											)
-										}else if(entz.shortname === 'year'){
-										return(
-											<td key={keytwoz}>
-												{year.year}
-											</td>
-											)
-										}
-										
-									})
-								}
-
-							</tr>
-							)
-						 })
-					*/}
-
-				</tbody>
-			</table>
-			{console.log(barfpoop)}
 		</div>
 		)
 }

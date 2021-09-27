@@ -78,10 +78,6 @@ export const PhotoStripAddress = (props) => {
           <span className="strip-year-label">{props.year}</span>
         </div>
       </div>
-      <div className={`strip-divider 
-        ${isVisible ? '' : 'hidden'}
-        year-${props.year}
-      `}></div>
     </>
   )
 }

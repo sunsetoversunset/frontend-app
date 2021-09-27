@@ -157,7 +157,7 @@ export const AddressView = (props) => {
 
   // ---------------------------------------------------------------
   return(
-  	<div className="app-page" id="contact">
+  	<div className="app-page" id="address-page">
       <NavHeader />
       <PhotoViewerModal 
         imgUrl={ modalImgUrl }
@@ -194,17 +194,17 @@ export const AddressView = (props) => {
       	</div>
 
       {/*  Sotries section */}
-      	<div id="stories" className="historical-profile-container ">
+      	<div id="stories" className="historical-profile-container container">
       		<h1>Stories</h1>
       	</div>
 
     	{/*  Tags section */}
-    	<div id="tags" className="historical-profile-container ">
+    	<div id="tags" className="historical-profile-container container">
     		<h1>Tags</h1>
     	</div>
 
 	    {/*  ALLL THE DATA section */}
-      	<div id="historicalProfile" className="historical-profile-container ">
+      	<div id="historicalProfile" className="historical-profile-container container">
       		<h1>Historical Profiles</h1>
       		<div className="census">
       			<CensusTable address={address}/>
