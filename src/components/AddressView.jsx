@@ -52,8 +52,8 @@ export const AddressView = (props) => {
   // ---------------------------------------------------------------
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      for (let i = 0; i < 1; i++) {
-       //for (let i = 0; i < dataFields.length; i++) {
+      // for (let i = 0; i < 1; i++) {
+       for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}/?user_field_names=true&order_by=coordinate,-identifier`, dataFields[i]))
       }
       await Promise.all(photoRequests)
@@ -161,11 +161,11 @@ export const AddressView = (props) => {
   return(
   	<div className="app-page" id="address-page">
       <NavHeader />
-      <PhotoViewerModal 
+      {/* <PhotoViewerModal 
         imgUrl={ modalImgUrl }
         isVisible={ isModalShowing }
         handleHideModal={ () => setIsModalShowing(false) }
-      />
+      /> */}
   		{/* header image */}
       	<div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/${headerPhoto}/full/,1000/0/default.jpg')`}}>
       		<p className="hero-address">{address} Sunset Boulevard</p>

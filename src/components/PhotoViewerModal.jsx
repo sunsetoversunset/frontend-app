@@ -20,23 +20,23 @@ export const PhotoViewerModal = (props) => {
   const generateHash = (address) => {
     let newHash = address.split('.').join("")
     newHash = newHash.replace(/\s+/g, '-').toLowerCase()
-    console.log('newHash: ', newHash)
     return newHash
   }
 
   // ---------------------------------------------------------
   const renderNearbyAddresses = () => {
     return (props.nearbyAddresses.map((address, idx) => {
-      // Ultimately these should be links that open in a new tab
       return (
-        <Link 
-          target="_blank"
-          rel="noopener noreferrer"
-          key={`nearby-address-${idx}`}
-          to={`/address/${generateHash(address)}`}
-        >
-          { address }
-        </Link>
+        <li key={`nearby-address-${idx}`}>
+          <Link
+            className="nearby-address-link" 
+            target="_blank"
+            rel="noopener noreferrer"
+            to={`/address/${generateHash(address)}`}
+          >
+            { `${address} Sunset Blvd.`}
+          </Link>
+        </li>
       )
     }))
   }
@@ -48,15 +48,18 @@ export const PhotoViewerModal = (props) => {
     >
       <div className="modal-header">
         <div
-          onClick={() => props.handleHideModal()}
+          onClick={() => {
+            setIsExpanded(false)
+            props.handleHideModal()
+          }}
           className='modal-close-icon'
         >
           <img src={iconCloseWhite} alt="icon-close-modal" />
         </div>
       </div>
       { 
-        props.imgUrl !== null ?
-          <Viewer iiifUrl={`${baseIIIFUrl}${props.imgUrl}/info.json`}/> : null
+        props.imgObj !== null ?
+          <Viewer iiifUrl={`${baseIIIFUrl}${props.imgObj.id}/info.json`}/> : null
       }
       <div
         onMouseEnter={() => setIsHoveringExpand(true)}
@@ -108,7 +111,6 @@ export const PhotoViewerModal = (props) => {
         }
 
       </div>
-      
     </div>
   )
 }

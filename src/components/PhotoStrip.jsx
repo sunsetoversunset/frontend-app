@@ -94,7 +94,10 @@ export const PhotoStrip = (props) => {
               .attr("xlink:href", f + "/full/,250/0/default.jpg")
               .attr("class", "single-image")
               .on("click", function() {
-                props.handleSetModalImg(d.identifier)
+                props.handleSetModalImg({
+                  id: d.identifier, 
+                  year: props.year
+                })
                 props.handleShowModal()
               });
             d.ld = true;
