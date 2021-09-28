@@ -106,9 +106,7 @@ export const SearchAndFilter = (props) => {
 
   // ---------------------------------------------------------
   return (
-    <div className={`search-and-filter-opts 
-      ${props.isSearchAndFilterShowing ? "visible" : ""}
-    `}>
+    <div className={`search-and-filter-opts ${props.isSearchAndFilterShowing ? "visible" : ""}`}>
       <div 
         className="icon-close-search-container"
         onClick={() => props.setIsSearchAndFilterShowing(false)}
