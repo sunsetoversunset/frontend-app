@@ -125,8 +125,8 @@ export const CensusTable = (props) => {
 			{year && year.data.map( (data, keythree) => {
 				if(ent.shortname === data.variable && data.value){
 					return(
-						<p>
-							{data.value}
+						<p key={keythree}>
+							{`${data.value}${ent.units}`}
 						</p>
 						)
 				}
