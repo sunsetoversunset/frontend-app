@@ -13,11 +13,38 @@ export const AddressBar = (props) => {
   }
 
   // ---------------------------------------------------------------
+  /*
+    TODO: handle on scroll
+     // let addressesN = d3.selectAll('.addresses-text-n')
+    // let addressesS = d3.selectAll('.addresses-text-s')
+
+    // addressesN.transition()
+    //   .attr("transform", "translate(" + -props.scrollAmount + ",0)");
+
+    // addressesS.transition()
+    //   .attr("transform", "translate(" + props.scrollAmount + ",0)");
+  */
+
+  // ---------------------------------------------------------------
   useEffect(() => {
     set()
     window.addEventListener('resize', set);
     return () => window.removeEventListener('resize', set);
   }, [])
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    const svg = d3.select(addressRef.current)
+
+    if (props.directionFacing === 'n') {
+      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n visible');
+      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s hidden');
+    } else {
+      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s visible');
+      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n hidden');
+    }
+
+  }, [props.directionFacing])
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -29,41 +56,51 @@ export const AddressBar = (props) => {
     svg.selectAll("*").remove();
 
     // N addresses
-    svg.append('g')
-      .attr('class', 'addresses-text-n')
-      .selectAll('text')
-      .data(props.addressesNData)
-      .enter()
-      .append('text')
-      .attr("x", function(d) {
-        return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
-			})
-			.attr("y", "45")
-      .on('click', function(d){
-        window.open(`${window.location.origin}/address/${this.innerHTML}/`)
-      })
-			.attr("text-anchor", "middle")
-			.text(function(d) { 
-				return d.address 
-			})
-    
-    // S addresses
-    svg.append('g')
-      .attr('class', 'addresses-text-s hidden-strip')
-      .selectAll('text')
-			.data(props.addressesSData)
-			.enter()
-			.append('text')
-			.attr("x", function(d) { 
-        return -((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
-			})
-			.attr("y", "45")
-			.attr("text-anchor", "middle")
-			.text(function(d) { 
-				return d.address 
-			})
-
-  }, [props.addressesNData, props.addressesSData, bbox])
+    if (props.directionFacing === 'n') {
+      svg.append('g')
+        .attr('class', 'addresses-text-n')
+        .selectAll('text')
+        .data(props.addressesNData)
+        .enter()
+        .append('text')
+        .attr("x", function(d) {
+          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
+        })
+        .attr("y", "45")
+        .on('click', function(d){
+          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+        })
+        .attr("text-anchor", "middle")
+        .text(function(d) { 
+          return d.address 
+        })
+    } else {
+      // S addresses
+      svg.append('g')
+        .attr('class', 'addresses-text-s')
+        .selectAll('text')
+        .data(props.addressesSData)
+        .enter()
+        .append('text')
+        .attr("x", function(d) { 
+          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
+        })
+        .attr("y", "45")
+        .on('click', function(d){
+          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+        })
+        .attr("text-anchor", "middle")
+        .text(function(d) { 
+          return d.address 
+        })
+    }
+  
+  }, [
+    props.addressesNData, 
+    props.addressesSData, 
+    props.directionFacing,
+    bbox
+  ])
 
   // ---------------------------------------------------------------
   return (

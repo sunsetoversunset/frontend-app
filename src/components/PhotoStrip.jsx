@@ -7,6 +7,8 @@ export const PhotoStrip = (props) => {
   const mult            = 200
   const stripContainer  = useRef(null)
   const d3Container     = useRef(null)
+  const [ visiblePhotos, setVisiblePhotos ] = useState([])
+  
 
   // ---------------------------------------------------------------
   const set = () => {
@@ -23,27 +25,55 @@ export const PhotoStrip = (props) => {
   }, [])
 
   // ---------------------------------------------------------------
+  // Whenever we select a new portion in the map (either by brush or
+  // by heading east / west)
   useEffect(() => {
+    const filterPhotoData = () => {    
+      return props.photoData.filter(photoObj => {
+        let photoCoord = parseFloat(photoObj.coordinate)
+        return (photoCoord >= props.mappedZoomRange[0] && photoCoord <= props.mappedZoomRange[1])
+      })
+    }
+
+    if (props.photoData && props.stripDirection === props.directionFacing) {
+      setVisiblePhotos(filterPhotoData())   
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.mappedZoomRange])
+
+  // ---------------------------------------------------------------
+  useEffect(() => {  
     if (props.photoData && d3Container.current) {
       renderWireframes()
-      loadImages()
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.photoData, props.direction, bbox])
+  }, [bbox, props.photoData])
 
 
   // ---------------------------------------------------------------
+  useEffect(() => {
+    if (visiblePhotos.length > 0) {
+      console.log('visiblePhotos: ', visiblePhotos)
+      loadImages()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visiblePhotos])
+
+  // ---------------------------------------------------------------
   const renderWireframes = () => {
-    let data = props.direction === "n" ? props.photoData.nPhotos : props.photoData.sPhotos
+    let data = props.photoData
 
     const svg = d3.select(d3Container.current)
       .attr("width", stripContainer.current.getBoundingClientRect().width)
       
+    // clear out before we draw
+    svg.selectAll("*").remove();
+
     // bind d3 data
     const g = svg.append('g')
       .attr("class", () => { 
-        return `strip-g strip-g-${props.direction}` 
+        return `strip-g strip-g-${props.stripDirection}` 
       });
 
     g.selectAll("rect")
@@ -51,34 +81,51 @@ export const PhotoStrip = (props) => {
       .enter()
       .append("rect")
       .attr("x", (d) => { 
-        return (1 * (mult * parseFloat(d.coordinate))) - 184; 
+        if (props.stripDirection === 'n') {
+          return (1 * (mult * parseFloat(d.coordinate))) - 184; 
+        }
+        return (-1 * (mult * parseFloat(d.coordinate))) - 184; 
       })
       .attr("y", "0")
       .attr("width", "380")
       .attr("height", "250")
       .attr("class", () => { 
-        return `image-frame image-frame-${ props.direction }` 
+        return `image-frame image-frame-${ props.stripDirection }` 
       });
   }
 
   // ---------------------------------------------------------------
+  useEffect(() => {
+    // Scroll photo strip
+    d3.selectAll('.strip-g-n')
+      .transition()
+      .attr("transform", "translate(" + -props.scrollAmount + ",0)");
+
+    d3.selectAll('.strip-g-s')
+      .transition()
+      .attr("transform", "translate(" + props.scrollAmount + ",0)");
+  }, [props.scrollAmount])
+
+
+  // ---------------------------------------------------------------
   const loadImages = () => {  
+    console.log('[loadImages] called.')
     let m 
     let left 
     let right
 
-    if (props.direction === 'n') {
+    if (props.stripDirection === 'n') {
       m     = 1;
       left  = props.scrollAmount - 200;
       right = props.scrollAmount + stripContainer.current.getBoundingClientRect().width + 200;
     } else {
-      m     = -1;
+      m     = 1;
       right = props.scrollAmount + 200;
       left  = props.scrollAmount - stripContainer.current.getBoundingClientRect().width - 200;
     }
 
     // leaving as non-arrow because of 'this'
-    d3.selectAll('.image-frame-' + props.direction)
+    d3.selectAll('.image-frame-' + props.stripDirection)
       .each(function(d) {
         var x = d3.select(this).attr("x")
         if (m * x >= left && m * x <= right) {
@@ -101,15 +148,15 @@ export const PhotoStrip = (props) => {
                 props.handleShowModal()
               });
             d.ld = true;
-          }
-        };
+          } 
+        }
       });
   }
 
   // ---------------------------------------------------------------
   return (
     <>
-      <div ref={stripContainer} className={`strip-container ${props.isVisible ? '' : 'hidden'}`}>
+      <div ref={stripContainer} className={`strip-container strip-${props.year}-${props.stripDirection} ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className={`strip-photos-container year-${props.year}`}>
           {
             props.photoData ? 
@@ -122,17 +169,12 @@ export const PhotoStrip = (props) => {
           }
         </div>
       </div>
-      <div className={`strip-year-label-outer-container 
-        ${props.isVisible ? '' : 'hidden'}
-      `}>
+      <div className={`strip-year-label-outer-container ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className="strip-year-label-inner-container">
           <span className="strip-year-label">{props.year}</span>
         </div>
       </div>
-      <div className={`strip-divider 
-        ${props.isVisible ? '' : 'hidden'}
-        year-${props.year}
-      `}></div>
+      <div className={`strip-divider ${props.isVisible ? 'visible' : 'hidden'} year-${props.year}`}></div>
     </>
   )
 }

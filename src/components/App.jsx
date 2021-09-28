@@ -35,7 +35,6 @@ export const App = () => {
               )
             }}
           />
-          
         </Switch>
       </BrowserRouter>
     </div>

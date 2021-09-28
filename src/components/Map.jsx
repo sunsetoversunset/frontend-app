@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react"
+import { SearchAndFilter } from "./SearchAndFilter"
 import { RoundedButton } from "./Buttons"
 import * as d3 from 'd3'
 import "../styles/Map.scss"
@@ -6,10 +7,10 @@ import sunsetJson from '../assets/data/sunset.json'
 import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
 
-/* ---------------------------------------------------------------
-  In case it's useful later - handling responsiveness:  
-  https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
-  --------------------------------------------------------------- */ 
+// ---------------------------------------------------------
+// In case it's useful later - handling responsiveness:  
+// https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
+// ---------------------------------------------------------
 export const Map = (props) => {
   const mapContainer              = useRef(null)
   const d3Container               = useRef(null)
@@ -18,12 +19,12 @@ export const Map = (props) => {
   const [bbox, setBbox]           = useState({});
   const defaultZoomRange = [-118.40142058250001, -118.37170226875]
 
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   const set = () => {
     setBbox(mapContainer && mapContainer.current ? mapContainer.current.getBoundingClientRect() : {});
   }
-    
-  // ---------------------------------------------------------------
+   
+  // ---------------------------------------------------------
   const calcExtents = () => {
     let coords = sunsetJson.features[0].geometry.coordinates
     let xCoords = []
@@ -36,12 +37,16 @@ export const Map = (props) => {
     setYDomain(d3.extent(yCoords))
   }
 
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   useEffect(() => {
-    console.log('xDomain: ', xDomain)
-  }, [xDomain])
+    if (props.isReady === true) {
+      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.isReady])
 
-  // ---------------------------------------------------------------
+
+  // ---------------------------------------------------------
   useEffect(() => {
     if (sunsetJson !== null) {
       calcExtents()
@@ -51,7 +56,8 @@ export const Map = (props) => {
     return () => window.removeEventListener('resize', set);
   }, [])
 
-  // ---------------------------------------------------------------
+
+  // ---------------------------------------------------------
   // Domain: lower and upper bounds of coord X data
   // Range: 0 to screen width (need to calculate width and handle resize)
   const xScale = d3.scaleLinear()
@@ -70,11 +76,11 @@ export const Map = (props) => {
     .y(d => yScale(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
 
-  // ---------------------------------------------------------------
+
+  // ---------------------------------------------------------
   // Renders svg map and brush controls
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   useEffect(() => {
-    console.log('bbox.width: ', bbox.width)
     const svg = d3.select(d3Container.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
@@ -101,9 +107,9 @@ export const Map = (props) => {
   }, [xDomain, yDomain, bbox])
   
 
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   // Brush controls
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   const handleBrushEnd = (event) => {
     if (event.selection === null) return
     const [x0, x1] = event.selection.map(x.invert);
@@ -125,7 +131,7 @@ export const Map = (props) => {
     .on("end", handleBrushEnd);
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------
   const handleScroll = (direction) => {
     let rangeDiff = props.zoomRange[1] - props.zoomRange[0]   
     let lBounds, rBounds
@@ -173,10 +179,16 @@ export const Map = (props) => {
           .datum({type: "selection"})
       });
 
-    // setScrollAmount(0)
+    let dist = 0;
+    if (direction === 'east') {
+      dist = props.scrollAmount + (1 * bbox.width)
+    } else {
+      dist = props.scrollAmount - (1 * bbox.width);
+    } 
+    props.setScrollAmount(dist)
   }
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------
   const renderMapControls = () => {
     return (
       <div className="map-controls">
@@ -225,19 +237,29 @@ export const Map = (props) => {
             </div>
           </div>
         </div>
-        { props.renderSearchAndFilter() }
+        <SearchAndFilter 
+          handleCenterAddress= { props.handleCenterAddress }
+          allAddresses={ props.allAddresses }
+          yearsShowing={ props.yearsShowing }
+          setYearsShowing={ props.setYearsShowing }
+          isSearchAndFilterShowing={ props.isSearchAndFilterShowing }
+          setIsSearchAndFilterShowing={ props.setIsSearchAndFilterShowing }
+        />
       </div>
     )
   }
 
-  // ---------------------------------------------------------------
+  // ---------------------------------------------------------
   return (
     <div className="map-inner">
-      <div className="map" ref={mapContainer}>  
+      <div className="map" ref={mapContainer}>
         <svg
-          className="d3-component"
+          className={`d3-component loaded-${props.isReady}`}
           ref={d3Container}
         />
+        <span className={`map-loading-text loaded-${props.isReady}`}>
+          Loading...
+        </span>
       </div>
       { renderMapControls() }
     </div>
