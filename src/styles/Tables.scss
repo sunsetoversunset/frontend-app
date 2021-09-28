@@ -1,0 +1,64 @@
+@import './global/index.scss';
+.dataTable{
+	border: 1px solid #000;
+	border-radius: 16px;
+	background-color: #FEFBF5;
+	width: 80%;
+	margin: 0 auto 50px auto;
+
+	h1{
+		font-size: 22px;
+		font-weight: 400;
+		line-height: 30.8px;
+		margin: 14px 20px 10px;
+		display: inline-block;
+	}
+	.see-notes{
+		color: #737373;
+		font-weight: 600;
+		font-size: 13px;
+		line-height: 19px;
+	}
+
+	table{
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 19px;
+
+		tr{
+			border-top: 1px solid #dedede;
+			border-bottom: 1px solid #dedede;
+		}
+
+		tr.year{
+			background-color: #fff;
+			font-weight: 600;
+			line-height: 20px;
+		}
+
+		tr:last-of-type{
+			border-bottom: 0px;
+		}
+		tr.total_pop, tr.race_span_hisp, tr.educ_bach, tr.jobs_pers_entmt, tr.rented_housing, tr.med_fam_income{
+			border-bottom: 4px solid #dedede;
+		}
+		
+		td{
+			border-left: 1px solid #dedede;
+			border-right: 1px solid #dedede;
+			padding: 12px 15px 13px 20px;
+			text-align: right;
+		}
+		td:first-of-type{
+			border-left: 0px;
+			text-align: left;
+			font-weight: 600;
+			line-height: 19px;
+		}
+		td:last-of-type{
+			border-right: 0px;
+		}
+	}
+}
