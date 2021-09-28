@@ -15,19 +15,20 @@ import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
 
 export const MapView = () => {
+  const [ isReady, setIsReady ] = useState(false)
+  const [ yearsLoaded, setYearsLoaded ] = useState(0)
+  const numYears = 5
 
   // ---------------------------------------------------------------
   // DATA
   const [ addressesN, setAddressesN ]     = useState([])
   const [ addressesS, setAddressesS ]     = useState([])
-  const [ allPhotoData, setAllPhotoData ] = useState([])
 
   const baseUrl = "https://api.baserow.io/api/database/rows/table/"
   const opts = {
     headers: {'Authorization': `Token ${Config.apiToken}`} 
   }
 
-  let tempAllPhotoData = []
   let tempAddressesN   = []
   let tempAddressesS   = []
 
@@ -89,19 +90,6 @@ export const MapView = () => {
   // ---------------------------------------------------------------
   useEffect(() => {
     loadAddressData(baseUrl + tf.addressBoundaries.tableId)
-
-    const fetchAllPhotoData = async () => {
-      const photoRequests = []
-      for (let i = 0; i < tf.photoData.length; i++) {
-        photoRequests.push(loadPhotoData(baseUrl + `${tf.photoData[i].tableId}`, tf.photoData[i]))
-      }
-      
-      await Promise.all(photoRequests)
-      setAllPhotoData(tempAllPhotoData)
-
-    }
-    // get all photo data
-    fetchAllPhotoData()
   }, [])
 
 
@@ -159,52 +147,6 @@ export const MapView = () => {
     })
   }
   
-
-  // ---------------------------------------------------------------
-  const loadPhotoData = (url, dataFieldObj, nPhotosArr, sPhotosArr) => {
-    let tempPhotosN = nPhotosArr || []
-    let tempPhotosS = sPhotosArr || []
-  
-    return axios.get(url, opts)
-      .then((res) => {
-        if (res.status === 200) {
-          // handle data
-          res.data.results.forEach(row => {
-
-            let processedRow = {
-              "identifier": row[dataFieldObj.idRow],
-              "coordinate": row[dataFieldObj.coordRow],
-            }
-
-            if (row[dataFieldObj.ssRow] === "n" || row[dataFieldObj.ssRow] === "N") {
-              tempPhotosN.push(processedRow)
-            } else if (row[dataFieldObj.ssRow] === "s" || row[dataFieldObj.ssRow] === "S") {
-              tempPhotosS.push(processedRow)
-            }
-          })
-
-          // handle loading next page if url exists
-          if (res.data.next) {
-            let nextUrl = res.data.next.replace("http", "https")
-            return loadPhotoData(nextUrl, dataFieldObj, tempPhotosN, tempPhotosS)
-          } else {
-            console.log(`finished for year ${dataFieldObj.year}`)
-            
-            let photoDataObj = {
-              nPhotos: tempPhotosN,
-              sPhotos: tempPhotosS
-            }            
-
-            tempAllPhotoData[dataFieldObj.year] = photoDataObj
-            return photoDataObj
-          }
-        }
-      })
-      .catch((err) => {
-        console.error('[loadPhotoData] error: ', err)
-      })
-  }
-
   // ---------------------------------------------------------------
   // When you select an address from the search results
   const handleCenterAddress = (address) => {
@@ -305,7 +247,6 @@ export const MapView = () => {
           <Map
             scrollAmount={ scrollAmount }
             setScrollAmount={ setScrollAmount }
-            isReady={ allPhotoData.length !== 0 ? true : false }
             allAddresses={ allAddresses }
             isMapMinimized={ isMapMinimized }
             setIsMapMinimized={ setIsMapMinimized }
@@ -340,21 +281,16 @@ export const MapView = () => {
     return tf.photoData.map((dataFieldObj) => {
       return (
         <PhotoStrip
+          meta={dataFieldObj}
           mappedZoomRange={ mappedZoomRange }
           directionFacing={ directionFacing }
           stripDirection={ direction }
-          isVisible={yearsShowing[dataFieldObj.year] && direction === directionFacing}
-          handleSetModalImg={ (imgObj) => {
-            setModalImg(imgObj) 
-          }}
-          handleShowModal={ () => setIsModalShowing(true) }
-          photoData={ 
-            allPhotoData[dataFieldObj.year] ? 
-            direction === 'n' ? 
-              allPhotoData[dataFieldObj.year].nPhotos :
-              allPhotoData[dataFieldObj.year].sPhotos
-            : null 
+          isVisible={
+            yearsShowing[dataFieldObj.year] && 
+            direction === directionFacing
           }
+          handleSetModalImg={ (imgObj) => { setModalImg(imgObj) }}
+          handleShowModal={ () => setIsModalShowing(true) }
           key={`year-${dataFieldObj.year}`} 
           year={ dataFieldObj.year }
           scrollAmount={scrollAmount}

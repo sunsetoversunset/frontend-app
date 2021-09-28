@@ -1,14 +1,63 @@
 import { useRef, useEffect, useState } from "react"
 import * as d3 from 'd3'
+import Config from "../config.json"
+import axios from "axios"
 import "../styles/PhotoStrip.scss"
+import { tableFields as tf } from "../assets/data/tableFields"
 
 export const PhotoStrip = (props) => {
-  const [bbox, setBbox] = useState({});
-  const mult            = 200
-  const stripContainer  = useRef(null)
-  const d3Container     = useRef(null)
+  const [ bbox, setBbox ]                    = useState({});
+  const mult                                = 200
+  const stripContainer                      = useRef(null)
+  const d3Container                         = useRef(null)
   const [ visiblePhotos, setVisiblePhotos ] = useState([])
-  
+  const [ photoData, setPhotoData ]         = useState([])
+  const tempPhotoData = []
+
+  const baseUrl = "https://api.baserow.io/api/database/rows/table/"
+  const opts = {
+    headers: {'Authorization': `Token ${Config.apiToken}`} 
+  }
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    getPhotoData(`${baseUrl}${props.meta.tableId}/?filter__${props.meta.ssRow}__equal=${props.stripDirection}`)
+    set()
+    window.addEventListener('resize', set);
+    return () => window.removeEventListener('resize', set);
+  }, [])
+
+
+  // ---------------------------------------------------------------
+  const getPhotoData = (url) => {
+    const queryUrl = `${url}`
+    axios.get(queryUrl, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          // handle data
+          res.data.results.forEach(row => {
+            let processedRow = {
+              "identifier": row[props.meta.idRow],
+              "coordinate": row[props.meta.coordRow],
+              "facing": row[props.meta.ssRow]
+            }
+            tempPhotoData.push(processedRow)
+          })
+          // handle next if url exists
+          if (res.data.next) {
+            let nextUrl = res.data.next.replace("http", "https")
+            return getPhotoData(nextUrl)
+          } else {
+            // finished loading data
+            setPhotoData(tempPhotoData)
+          }
+        }
+      }).catch((err) => {
+        console.error('error: ', err)
+        setPhotoData(tempPhotoData)
+      })
+  }
+
 
   // ---------------------------------------------------------------
   const set = () => {
@@ -18,43 +67,38 @@ export const PhotoStrip = (props) => {
   }
 
   // ---------------------------------------------------------------
-  useEffect(() => {
-    set()
-    window.addEventListener('resize', set);
-    return () => window.removeEventListener('resize', set);
-  }, [])
-
-  // ---------------------------------------------------------------
   // Whenever we select a new portion in the map (either by brush or
   // by heading east / west)
   useEffect(() => {
     const filterPhotoData = () => {    
-      return props.photoData.filter(photoObj => {
+      return photoData.filter(photoObj => {
         let photoCoord = parseFloat(photoObj.coordinate)
         return (photoCoord >= props.mappedZoomRange[0] && photoCoord <= props.mappedZoomRange[1])
       })
     }
 
-    if (props.photoData && props.stripDirection === props.directionFacing) {
+    if (photoData && props.stripDirection === props.directionFacing) {
       setVisiblePhotos(filterPhotoData())   
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.mappedZoomRange])
 
+
   // ---------------------------------------------------------------
   useEffect(() => {  
-    if (props.photoData && d3Container.current) {
+    if (photoData.length > 0 && d3Container.current) {
       renderWireframes()
+      loadImages()
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bbox, props.photoData])
+  }, [bbox, photoData])
 
 
   // ---------------------------------------------------------------
   useEffect(() => {
     if (visiblePhotos.length > 0) {
-      console.log('visiblePhotos: ', visiblePhotos)
+      // console.log('visiblePhotos: ', visiblePhotos)
       loadImages()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,8 +106,6 @@ export const PhotoStrip = (props) => {
 
   // ---------------------------------------------------------------
   const renderWireframes = () => {
-    let data = props.photoData
-
     const svg = d3.select(d3Container.current)
       .attr("width", stripContainer.current.getBoundingClientRect().width)
       
@@ -77,7 +119,7 @@ export const PhotoStrip = (props) => {
       });
 
     g.selectAll("rect")
-      .data(data)
+      .data(photoData)
       .enter()
       .append("rect")
       .attr("x", (d) => { 
@@ -159,7 +201,7 @@ export const PhotoStrip = (props) => {
       <div ref={stripContainer} className={`strip-container strip-${props.year}-${props.stripDirection} ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className={`strip-photos-container year-${props.year}`}>
           {
-            props.photoData ? 
+            photoData.length > 0 ? 
             <svg
               className="d3-component"
               width={400}

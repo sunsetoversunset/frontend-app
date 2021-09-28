@@ -39,15 +39,7 @@ export const Map = (props) => {
 
   // ---------------------------------------------------------
   useEffect(() => {
-    if (props.isReady === true) {
-      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.isReady])
-
-
-  // ---------------------------------------------------------
-  useEffect(() => {
+    props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
     if (sunsetJson !== null) {
       calcExtents()
     } 
@@ -254,12 +246,9 @@ export const Map = (props) => {
     <div className="map-inner">
       <div className="map" ref={mapContainer}>
         <svg
-          className={`d3-component loaded-${props.isReady}`}
+          className={`d3-component loaded-${true}`}
           ref={d3Container}
         />
-        <span className={`map-loading-text loaded-${props.isReady}`}>
-          Loading...
-        </span>
       </div>
       { renderMapControls() }
     </div>
