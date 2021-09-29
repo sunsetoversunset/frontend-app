@@ -189,23 +189,23 @@ export const MapView = () => {
     let idx = tf.photoData.findIndex(df => {
       return df.year === imgObj.year
     })
+    
+    const queryURL = `${baseUrl}${tf.photoData[idx].tableId}/?filter__${tf.photoData[idx].idRow}__equal=${imgObj.id}`
+    console.log('queryUrl: ', queryURL)
 
-    if (directionFacing === 'n') {
-      const queryURL = `${baseUrl}${tf.photoData[idx].tableId}/?filter__${tf.photoData[idx].idRow}__equal=${imgObj.id}`
-      return axios.get(queryURL, opts)
-        .then((res) => {
-          if (res.status === 200) {
-            if (res.data.results.length === 1) {
-              return res.data.results[0][tf.photoData[idx].coordRow]
-            }
-            // We shouldn't hit this case 
-            return null
+    return axios.get(queryURL, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.results.length === 1) {
+            return res.data.results[0][tf.photoData[idx].coordRow]
           }
-        }).catch((err) => {
-          console.log('err: ', err)
+          // We shouldn't hit this case 
           return null
-        })
-    }
+        }
+      }).catch((err) => {
+        console.log('err: ', err)
+        return null
+      })
   }
 
 
