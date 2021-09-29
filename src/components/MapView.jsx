@@ -84,14 +84,9 @@ export const MapView = () => {
       years[tf.photoData[i].year] = true
     }
     setYearsShowing(years)
-  }, [])
-  
-
-  // ---------------------------------------------------------------
-  useEffect(() => {
     loadAddressData(baseUrl + tf.addressBoundaries.tableId)
   }, [])
-
+  
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -157,7 +152,9 @@ export const MapView = () => {
 
   // ---------------------------------------------------------------
   const getNearbyAddresses = async (imgObj) => {
+    
     let coord = parseFloat(await getPhotoCoord(imgObj))
+
     // eliminate addresses outside the nearbyAddressesRange
     let nearbyAddressObjs = allAddresses.filter(address => {
       let addMin = parseFloat(address.coord_min)
@@ -292,7 +289,6 @@ export const MapView = () => {
           handleSetModalImg={ (imgObj) => { setModalImg(imgObj) }}
           handleShowModal={ () => setIsModalShowing(true) }
           key={`year-${dataFieldObj.year}`} 
-          year={ dataFieldObj.year }
           scrollAmount={scrollAmount}
         />
       )

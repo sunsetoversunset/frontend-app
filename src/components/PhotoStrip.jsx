@@ -29,6 +29,12 @@ export const PhotoStrip = (props) => {
 
 
   // ---------------------------------------------------------------
+  useEffect(() => {
+    console.log('[PhotoStrip] props.directionFacing: ', props.directionFacing)
+  }, [props.directionFacing])
+
+
+  // ---------------------------------------------------------------
   const getPhotoData = (url) => {
     const queryUrl = `${url}`
     axios.get(queryUrl, opts)
@@ -39,7 +45,8 @@ export const PhotoStrip = (props) => {
             let processedRow = {
               "identifier": row[props.meta.idRow],
               "coordinate": row[props.meta.coordRow],
-              "facing": row[props.meta.ssRow]
+              "facing": row[props.meta.ssRow],
+              "year": props.meta.year
             }
             tempPhotoData.push(processedRow)
           })
@@ -92,17 +99,17 @@ export const PhotoStrip = (props) => {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bbox, photoData])
+  }, [bbox, photoData, props.directionFacing])
 
 
   // ---------------------------------------------------------------
-  useEffect(() => {
-    if (visiblePhotos.length > 0) {
-      // console.log('visiblePhotos: ', visiblePhotos)
-      loadImages()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visiblePhotos])
+  // useEffect(() => {
+  //   if (visiblePhotos.length > 0) {
+  //     // console.log('visiblePhotos: ', visiblePhotos)
+  //     // loadImages()
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [visiblePhotos])
 
   // ---------------------------------------------------------------
   const renderWireframes = () => {
@@ -110,7 +117,7 @@ export const PhotoStrip = (props) => {
       .attr("width", stripContainer.current.getBoundingClientRect().width)
       
     // clear out before we draw
-    svg.selectAll("*").remove();
+    // svg.selectAll("*").remove();
 
     // bind d3 data
     const g = svg.append('g')
@@ -146,12 +153,13 @@ export const PhotoStrip = (props) => {
     d3.selectAll('.strip-g-s')
       .transition()
       .attr("transform", "translate(" + props.scrollAmount + ",0)");
+
+    loadImages()
   }, [props.scrollAmount])
 
 
   // ---------------------------------------------------------------
   const loadImages = () => {  
-    console.log('[loadImages] called.')
     let m 
     let left 
     let right
@@ -161,7 +169,7 @@ export const PhotoStrip = (props) => {
       left  = props.scrollAmount - 200;
       right = props.scrollAmount + stripContainer.current.getBoundingClientRect().width + 200;
     } else {
-      m     = 1;
+      m     = -1;
       right = props.scrollAmount + 200;
       left  = props.scrollAmount - stripContainer.current.getBoundingClientRect().width - 200;
     }
@@ -174,7 +182,6 @@ export const PhotoStrip = (props) => {
           if (d.ld !== true) {
             var g = d3.select(this.parentNode);
             var f = "https://media.getty.edu/iiif/image/" + d.identifier;
-
             g.append("svg:image")
               .attr("x", x)
               .attr("y", "0")
@@ -185,7 +192,7 @@ export const PhotoStrip = (props) => {
               .on("click", function() {
                 props.handleSetModalImg({
                   id: d.identifier, 
-                  year: props.year
+                  year: d.year
                 })
                 props.handleShowModal()
               });
@@ -198,8 +205,8 @@ export const PhotoStrip = (props) => {
   // ---------------------------------------------------------------
   return (
     <>
-      <div ref={stripContainer} className={`strip-container strip-${props.year}-${props.stripDirection} ${props.isVisible ? 'visible' : 'hidden'}`}>
-        <div className={`strip-photos-container year-${props.year}`}>
+      <div ref={stripContainer} className={`strip-container strip-${props.meta.year}-${props.stripDirection} ${props.isVisible ? 'visible' : 'hidden'}`}>
+        <div className={`strip-photos-container year-${props.meta.year}`}>
           {
             photoData.length > 0 ? 
             <svg
@@ -213,10 +220,10 @@ export const PhotoStrip = (props) => {
       </div>
       <div className={`strip-year-label-outer-container ${props.isVisible ? 'visible' : 'hidden'}`}>
         <div className="strip-year-label-inner-container">
-          <span className="strip-year-label">{props.year}</span>
+          <span className="strip-year-label">{props.meta.year}</span>
         </div>
       </div>
-      <div className={`strip-divider ${props.isVisible ? 'visible' : 'hidden'} year-${props.year}`}></div>
+      <div className={`strip-divider ${props.isVisible ? 'visible' : 'hidden'} year-${props.meta.year}`}></div>
     </>
   )
 }
