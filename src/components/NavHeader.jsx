@@ -9,12 +9,16 @@ export const NavHeader = () => {
   let lowerNav = document.querySelector('.address-lower-nav')
   window.onscroll = (e) =>{
       let st = window.pageYOffset
-      if (st > lastScrollTop && lowerNav){
+      if (st > lastScrollTop && st >= 40){
         navHeader.current.style.top = "-40px"
-        lowerNav.style.top = "0px"
-     } else {
+        if(lowerNav){
+          lowerNav.style.top = "0px"
+        }
+     } else if(st < lastScrollTop){
         navHeader.current.style.top = "0px"
+        if(lowerNav){
         lowerNav.style.top = "40px"
+        }
      }
      lastScrollTop = st <= 0 ? 0 : st;
   }
