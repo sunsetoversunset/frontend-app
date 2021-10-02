@@ -7,131 +7,97 @@ import { AddressBar } from "./AddressBar"
 import { Footer } from "./Footer"
 import "../styles/MapView.scss"
 
-import { dataFields } from "../assets/data/dataFields"
+import { tableFields as tf } from "../assets/data/tableFields"
 import Config from "../config.json"
 import axios from "axios"
 
-import iconClose from "../assets/icons/icon-close.svg"
-import iconCheck from "../assets/icons/icon-check.svg"
 import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
 
-export const MapView = (props) => {
+export const MapView = () => {
+  const [ isReady, setIsReady ] = useState(false)
+  const [ yearsLoaded, setYearsLoaded ] = useState(0)
+  const numYears = 5
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   // DATA
   const [ addressesN, setAddressesN ]     = useState([])
   const [ addressesS, setAddressesS ]     = useState([])
-  const [ allPhotoData, setAllPhotoData ] = useState([])
 
-  const addressBoundariesTableId = "27379"
   const baseUrl = "https://api.baserow.io/api/database/rows/table/"
   const opts = {
     headers: {'Authorization': `Token ${Config.apiToken}`} 
   }
 
-  let tempAllPhotoData = []
   let tempAddressesN   = []
   let tempAddressesS   = []
 
-  // --------------------------------------------------------------------
-  // CONTROLS
-  const [ zoomRange, setZoomRange ]             = useState([])
-  const [ mappedZoomRange, setMappedZoomRange ] = useState([])
-  const [ moveSpeed, setMoveSpeed ]             = useState("medium")
-  const [ scrollAmount, setScrollAmount ]       = useState(0)
-  const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
-  const [ directionFacing, setDirectionFacing ] = useState("n")
-  const [ yearsShowing, setYearsShowing ]       = useState({})
-  const [ searchInput, setSearchInput ]         = useState("")
-  const [ searchResults, setSearchResults ]     = useState([])
-  const [ allAddresses, setAllAddresses ]       = useState([])
-  const [ nearbyAddresses, setNearbyAddresses ] = useState([])
-
-  // hard-coding this for now but coords will change
-  const coordRange = [-118.56112, -118.2249107]
-  
   const moveSpeedOpts = {
     "slow"   : 0.2,
     "medium" : 0.8,
     "fast"   : 0.6
   }
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
+  // CONTROLS
+  const [ zoomRange, setZoomRange ]             = useState([])
+  const [ mappedZoomRange, setMappedZoomRange ] = useState([])
+  const [ moveSpeed, setMoveSpeed ]             = useState(moveSpeedOpts.medium)
+  const [ scrollAmount, setScrollAmount ]       = useState(0)
+  const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
+  const [ directionFacing, setDirectionFacing ] = useState("n")
+  const [ yearsShowing, setYearsShowing ]       = useState({})
+  const [ allAddresses, setAllAddresses ]       = useState([])
+  const [ nearbyAddresses, setNearbyAddresses ] = useState([])
+  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
+
+  // hard-coding this for now but coords will change
+  const coordRange = [-118.56112, -118.2249107]
+    
+  // ---------------------------------------------------------------
   // ADDRESSES
   const [ filteredAddressesN, setFilteredAddressesN ] = useState([])
   const [ filteredAddressesS, setFilteredAddressesS ] = useState([])
   const nearbyAddressesRange = [-2.5, 2.5]
 
-  // --------------------------------------------------------------------
   // MODAL
   const [ isModalShowing, setIsModalShowing ] = useState(false)
   const [ modalImg, setModalImg ] = useState(null)
-  const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
-  
-  // --------------------------------------------------------------------
+ 
+  // ---------------------------------------------------------------
   // Get new addresses anytime we click a photo in a strip
   useEffect(() => {
     if (modalImg === null) return
     const fetchNearbyAddresses = async () => {
       const data = await getNearbyAddresses(modalImg)
-      console.log('nearby addresses: ', data)
       setNearbyAddresses(data)
     }
     fetchNearbyAddresses()
   }, [modalImg])
   
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   useEffect(() => {
     // set all years to checked by default
     let years = {}
-    for (let i = 0; i < dataFields.length; i++) {
-      years[dataFields[i].year] = true
+    for (let i = 0; i < tf.photoData.length; i++) {
+      years[tf.photoData[i].year] = true
     }
     setYearsShowing(years)
+    loadAddressData(baseUrl + tf.addressBoundaries.tableId)
   }, [])
   
 
-  // --------------------------------------------------------------------
-  useEffect(() => {
-    loadAddressData(baseUrl + addressBoundariesTableId)
-
-    const fetchAllPhotoData = async () => {
-      const photoRequests = []
-      for (let i = 0; i < 1; i++) {
-      // for (let i = 0; i < dataFields.length; i++) {
-        photoRequests.push(loadPhotoData(baseUrl + `${dataFields[i].tableId}`, dataFields[i]))
-      }
-      
-      await Promise.all(photoRequests)
-      setAllPhotoData(tempAllPhotoData)
-
-    }
-    // get all photo data
-    fetchAllPhotoData()
-  }, [])
-
-
-  // --------------------------------------------------------------------
-  useEffect(() => {
-    setAllAddresses(addressesN.concat(addressesS))
-  }, [addressesN, addressesS])
-
-
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   useEffect(() => {
     let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
     let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
     setMappedZoomRange([lBounds, rBounds])
-    console.log('zoomRange: ', zoomRange)
-    console.log('mappedZoomRange: ', [lBounds, rBounds])
-
     filterAddressesByRange([lBounds, rBounds])
   }, [zoomRange])
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const loadAddressData = (url) => {
     axios.get(url, opts)
     .then((res) => {  
@@ -140,9 +106,9 @@ export const MapView = (props) => {
         res.data.results.forEach(row => {
 
           let processedRow = {
-            "address": row.field_144140,
-            "coord_min": row.field_144142,
-            "coord_max": row.field_144143
+            "address": row[tf.addressBoundaries.address],
+            "coord_min": row[tf.addressBoundaries.coordMin],
+            "coord_max": row[tf.addressBoundaries.coordMax]
           }
           
           if (row.field_144141 === "n" || row.field_144141 === "N") {
@@ -161,6 +127,7 @@ export const MapView = (props) => {
           console.log('[loadAddressData] done getting addresses.')
           setAddressesN(tempAddressesN)
           setAddressesS(tempAddressesS)
+          setAllAddresses(tempAddressesN.concat(tempAddressesS))
         }
       } else {
         // Handle case where baserow throws an error
@@ -174,57 +141,20 @@ export const MapView = (props) => {
       console.log('err: ', err)
     })
   }
-
-
-  // --------------------------------------------------------------------
-  const loadPhotoData = (url, dataFieldObj, nPhotosArr, sPhotosArr) => {
-    let tempPhotosN = nPhotosArr || []
-    let tempPhotosS = sPhotosArr || []
   
-    return axios.get(url, opts)
-      .then((res) => {
-        if (res.status === 200) {
-          // handle data
-          res.data.results.forEach(row => {
-
-            let processedRow = {
-              "identifier": row[dataFieldObj.idRow],
-              "coordinate": row[dataFieldObj.coordRow],
-            }
-
-            if (row[dataFieldObj.ssRow] === "n" || row[dataFieldObj.ssRow] === "N") {
-              tempPhotosN.push(processedRow)
-            } else if (row[dataFieldObj.ssRow] === "s" || row[dataFieldObj.ssRow] === "S") {
-              tempPhotosS.push(processedRow)
-            }
-          })
-
-          // handle loading next page if url exists
-          if (res.data.next) {
-            let nextUrl = res.data.next.replace("http", "https")
-            return loadPhotoData(nextUrl, dataFieldObj, tempPhotosN, tempPhotosS)
-          } else {
-            console.log(`finished for year ${dataFieldObj.year}`)
-            
-            let photoDataObj = {
-              nPhotos: tempPhotosN,
-              sPhotos: tempPhotosS
-            }            
-
-            tempAllPhotoData[dataFieldObj.year] = photoDataObj
-            return photoDataObj
-          }
-        }
-      })
-      .catch((err) => {
-        console.error('[loadPhotoData] error: ', err)
-      })
+  // ---------------------------------------------------------------
+  // When you select an address from the search results
+  const handleCenterAddress = (address) => {
+    console.log('[handleCenterAddress] address: ', address)
+    setIsSearchAndFilterShowing(false)
   }
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const getNearbyAddresses = async (imgObj) => {
+    
     let coord = parseFloat(await getPhotoCoord(imgObj))
+
     // eliminate addresses outside the nearbyAddressesRange
     let nearbyAddressObjs = allAddresses.filter(address => {
       let addMin = parseFloat(address.coord_min)
@@ -252,40 +182,40 @@ export const MapView = (props) => {
   }
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const getPhotoCoord = async (imgObj) => {
     // We do already have this data, but making an API call seems easier
     // than looping through it? Not sure yet...
-    let idx = dataFields.findIndex(df => {
+    let idx = tf.photoData.findIndex(df => {
       return df.year === imgObj.year
     })
+    
+    const queryURL = `${baseUrl}${tf.photoData[idx].tableId}/?filter__${tf.photoData[idx].idRow}__equal=${imgObj.id}`
+    console.log('queryUrl: ', queryURL)
 
-    if (directionFacing === 'n') {
-      const queryURL = `${baseUrl}${dataFields[idx].tableId}/?filter__${dataFields[idx].idRow}__equal=${imgObj.id}`
-      return axios.get(queryURL, opts)
-        .then((res) => {
-          if (res.status === 200) {
-            if (res.data.results.length === 1) {
-              return res.data.results[0][dataFields[idx].coordRow]
-            }
-            // We shouldn't hit this case 
-            return null
+    return axios.get(queryURL, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.results.length === 1) {
+            return res.data.results[0][tf.photoData[idx].coordRow]
           }
-        }).catch((err) => {
-          console.log('err: ', err)
+          // We shouldn't hit this case 
           return null
-        })
-    }
+        }
+      }).catch((err) => {
+        console.log('err: ', err)
+        return null
+      })
   }
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const mapRange = (value, low1, high1, low2, high2) => {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
   }
 
 
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const filterAddressesByRange = (zRange) => {
     // let's filter both N & S
     let filteredN = addressesN.filter(address => {
@@ -304,142 +234,7 @@ export const MapView = (props) => {
     setFilteredAddressesS(filteredS)
   }
 
-
-  // --------------------------------------------------------------------
-  // Filter photo data whenever we brush the map
-  useEffect(() => {
-    if (directionFacing === 'n') {
-      console.log('filtered addresses N:', filteredAddressesN.length)
-    } else {
-      console.log('filtered addresses S: ', filteredAddressesS.length)
-    }
-  }, [filteredAddressesN, filteredAddressesS])
-
-
-  // --------------------------------------------------------------------
-  // TODO: move to its own component
-  // --------------------------------------------------------------------
-  const handleSearch = (searchTerm) => {
-    setSearchInput(searchTerm)
-    let results = allAddresses.filter((addressObj) => {
-      return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
-    })
-
-    // Return the first 8
-    setSearchResults(results.slice(0, 7))
-  }
-
-  // --------------------------------------------------------------------
-  const renderSearchResults = () => {
-    return (
-      <ul className='search-results-list'>
-        {
-          searchResults.map((result, idx) => {
-            return (
-              <li key={`result-${idx}`}>
-                <div 
-                  className="result-list-item"
-                  onClick={() => console.log('handle setting address', result.address)}
-                >
-                  {result.address} Sunset Blvd.
-                </div>
-              </li>
-            )
-          })
-        }
-      </ul>
-    )
-  }
-
-  // --------------------------------------------------------------------
-  const renderSearchAndFilter = () => {
-    return (
-      <div className={`search-and-filter-opts 
-        ${isSearchAndFilterShowing ? "visible" : ""}
-      `}>
-        <div 
-          className="icon-close-search-container"
-          onClick={() => setIsSearchAndFilterShowing(false)}
-        >
-          <img src={iconClose} alt="icon-close-search" />
-        </div>
-        <div className='search-control'>
-          <label 
-            className="control-label" 
-            htmlFor="search-control-input">
-              Search an address
-            </label>
-          <input
-            type="text"
-            value={ searchInput }
-            onChange={ (e) => handleSearch(e.target.value) } 
-            placeholder="9041 Sunset Blvd."
-            id="search-control-input"
-          >
-          </input>
-        </div>
-        <div className='search-results-outer'>
-          <div className={`search-results-inner ${ searchInput.length === 0 || searchResults.length === 0 ? 'hidden' : 'visible'}`}>
-            { renderSearchResults() }
-          </div>
-        </div>
-        <div className="divider"></div>
-        { renderYearsControls() }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
-  const renderYearsControls = () => {
-    return (
-      <div className="years-control">
-        <label className="control-label">Display years</label>
-        { dataFields.map(dataField => {
-          return (
-            <div
-              key={`check-${dataField.year}`} 
-              className={`year-control ${yearsShowing[dataField.year] ? 'checked' : ''}`}
-              onClick={() => {
-                let currentYearsShowing = {...yearsShowing}
-                currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                setYearsShowing(currentYearsShowing)
-              }}
-            >
-              <input 
-                checked={yearsShowing[dataField.year]}
-                id={`year-${dataField.year}`}
-                className="year-checkbox"
-                name={`year-${dataField.year}`}
-                type="checkbox" 
-              />
-              {
-                yearsShowing[dataField.year] === true ?
-                <img 
-                  className='icon-year-checked'
-                  src={iconCheck} 
-                  alt="icon-year-checked" 
-                /> : null
-              }
-              <label
-                onClick={(e) => {
-                  e.preventDefault()
-                  let currentYearsShowing = {...yearsShowing}
-                  currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                  setYearsShowing(currentYearsShowing)
-                }} 
-                className="year-label" 
-                htmlFor={`year-${dataField.year}`}
-              >
-                {dataField.year}
-              </label>
-            </div>
-          )
-        }) }
-      </div>
-    )
-  }
-
-  // --------------------------------------------------------------------
+  // ---------------------------------------------------------------
   const renderMap = () => {
     return (
       <div 
@@ -447,6 +242,9 @@ export const MapView = (props) => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
+            scrollAmount={ scrollAmount }
+            setScrollAmount={ setScrollAmount }
+            allAddresses={ allAddresses }
             isMapMinimized={ isMapMinimized }
             setIsMapMinimized={ setIsMapMinimized }
             directionFacing={ directionFacing }
@@ -454,8 +252,11 @@ export const MapView = (props) => {
             zoomRange={ zoomRange }
             moveSpeed={ moveSpeed }
             setZoomRange={ setZoomRange }
-            renderSearchAndFilter={renderSearchAndFilter}
-            setIsSearchAndFilterShowing={setIsSearchAndFilterShowing}
+            isSearchAndFilterShowing={ isSearchAndFilterShowing }
+            setIsSearchAndFilterShowing={ setIsSearchAndFilterShowing }
+            yearsShowing={ yearsShowing }
+            setYearsShowing={ setYearsShowing }
+            handleCenterAddress={ handleCenterAddress }
           />
         <div
           role="button" 
@@ -471,30 +272,31 @@ export const MapView = (props) => {
     )
   }
 
-  // --------------------------------------------------------------------
+
+  // ---------------------------------------------------------------
   const renderStripViews = (direction) => {
-    return dataFields.map((dataFieldObj) => {
+    return tf.photoData.map((dataFieldObj) => {
       return (
         <PhotoStrip
-          isVisible={yearsShowing[dataFieldObj.year]}
-          handleSetModalImg={ (imgObj) => {
-            setModalImg(imgObj) 
-          }}
-          handleShowModal={ () => setIsModalShowing(true) }
-          photoData={ 
-            allPhotoData[dataFieldObj.year] ? 
-            allPhotoData[dataFieldObj.year] : null 
+          meta={dataFieldObj}
+          mappedZoomRange={ mappedZoomRange }
+          directionFacing={ directionFacing }
+          stripDirection={ direction }
+          isVisible={
+            yearsShowing[dataFieldObj.year] && 
+            direction === directionFacing
           }
+          handleSetModalImg={ (imgObj) => { setModalImg(imgObj) }}
+          handleShowModal={ () => setIsModalShowing(true) }
           key={`year-${dataFieldObj.year}`} 
-          direction={ direction }
-          year={ dataFieldObj.year }
           scrollAmount={scrollAmount}
         />
       )
     })
   }
 
-  // --------------------------------------------------------------------
+
+  // ---------------------------------------------------------------
   return (
     <div className="app-page">
       <PhotoViewerModal
@@ -515,14 +317,12 @@ export const MapView = (props) => {
       </div>
       <div
         onClick={() => setIsSearchAndFilterShowing(false)} 
-        className={`strips-shade ${isMapMinimized ? "full" : ""} ${isSearchAndFilterShowing === true ? "visible" : ""}
-      `}></div>
-      <div className={`strips-container ${isSearchAndFilterShowing === true ? "noscroll" : ""} ${isMapMinimized ? "full" : ""} is-showing-${directionFacing}
-      `}>
-        { 
-          directionFacing === "n" ? 
-          renderStripViews('n') : renderStripViews('s')
-        }
+        className={
+          `strips-shade ${isMapMinimized ? "full" : "minimized"} ${isSearchAndFilterShowing === true ? "visible" : "hidden"}`}>
+      </div>
+      <div className={`strips-container ${isSearchAndFilterShowing === true ? "noscroll" : "scroll"} ${isMapMinimized ? "full" : "minimized"} is-showing-${directionFacing}`}>
+        { renderStripViews('n') }
+        { renderStripViews('s') }
         <Footer />
       </div>
     </div>
