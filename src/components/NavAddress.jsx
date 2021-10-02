@@ -1,9 +1,7 @@
 import { useState, useEffect} from 'react'
-import { useLocation, useHistory } from 'react-router-dom';
 import { RoundedButton } from "./Buttons"
 import '../styles/NavHeader.scss';
 
-import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
 import axios from "axios"
 
@@ -13,9 +11,6 @@ export const NavAddress = (props) => {
   const boundUrl = `https://api.baserow.io/api/database/rows/table/`
   const opts = {headers: {'Authorization': `Token ${Config.apiToken}`} }
 
-  let location = useLocation();
-  let history = useHistory();
-
   // ---------------------------------------------------------------
   useEffect( () => {
     if(props.currentKey+1 === 1863){
@@ -24,7 +19,7 @@ export const NavAddress = (props) => {
       loadNextAddess(boundUrl + `27379/${props.currentKey+1}/?user_field_names=true`)
     }
     loadPrevAddess(boundUrl + `27379/${props.currentKey-1}/?user_field_names=true`)
-  }, [props.currentKey])
+  }, [props.currentKey, boundUrl])
 
   // ---------------------------------------------------------------
   const loadNextAddess = (url) => {
@@ -94,7 +89,7 @@ export const NavAddress = (props) => {
               </div>
             </span>
           </li>
-          <li>
+          {/*<li>
             <span onClick={ () => anchorScroll("stories")}>
               <div className='nav-link'>
                 Stories
@@ -107,7 +102,7 @@ export const NavAddress = (props) => {
                 Tags
               </div>
             </span>
-          </li>
+          </li>*/}
           <li>
             <span onClick={ () => anchorScroll("historicalProfile")}>
               <div className='nav-link'>

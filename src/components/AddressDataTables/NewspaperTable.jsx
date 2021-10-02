@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from 'react'
+import { useState, useEffect, React, useRef } from 'react'
 import '../../styles/App.scss'
 import '../../styles/Tables.scss'
 import { dataFields } from "../../assets/data/dataFields"
@@ -8,6 +8,8 @@ import axios from "axios"
 
 export const NewspaperTable = (props) => {
 	const [allNewspaperData, setAllNewspaperData] = useState(null)
+	const [isVisible, setIsVisible] = useState(true)
+	const articleEntry = useRef(null)
 
 
 	//API call consts
@@ -19,6 +21,22 @@ export const NewspaperTable = (props) => {
 	useEffect( () => {
     	loadNewspaper(boundUrl + `20025/?user_field_names=true&filter__field_105100__equal=${props.address}`)
   	}, [props.address])
+
+  	useEffect( () => {
+    	let allEntries = document.querySelectorAll('.article .entry')
+    	allEntries.forEach( entry => {
+    		if(entry.clientHeight > 97){
+    			entry.parentNode.classList.add('overflow')
+    			entry.addEventListener('click', e => { 
+    				if(entry.parentNode.classList.contains('overflow') && !entry.parentNode.classList.contains('overflow-open')){
+    					entry.parentNode.classList.add('overflow-open')
+    				}else if(entry.parentNode.classList.contains('overflow') && entry.parentNode.classList.contains('overflow-open')){
+    					entry.parentNode.classList.remove('overflow-open')
+    				}
+    			})
+    		}
+    	})
+  	}, [allNewspaperData])
 
 
 	const loadNewspaper = (url) => {	
@@ -32,6 +50,9 @@ export const NewspaperTable = (props) => {
 	      	tempNews.push(e)
 	      })
 	      setAllNewspaperData(tempNews)
+	      if(res.data.results.length <= 1){
+	      	setIsVisible(false)
+	      }
 	  	
 	  } else {
 	    // Handle case where baserow throws an error
@@ -62,14 +83,13 @@ export const NewspaperTable = (props) => {
 							<tr key={key}>
 								<td>{`${entry.month}/${entry.day}/${entry.year}`}</td>
 								<td>{entry.source}</td>
-								<td>
+								<td className="article">
 								{entry.url ? 
-									(<a href={entry.url} target="_blank" > 
-									<p className="title">{entry.title}</p>
-									<p>{entry.entry}</p>
-									</a>) : 
+									(<><a href={entry.url} target="_blank" > 
+									<p className="title">{entry.title}</p></a>
+									<p className="entry" ref={articleEntry}>{entry.entry}</p></>) : 
 									(<><p className="title">{entry.title}</p>
-									<p>{entry.entry}</p></>)
+									<p className="entry" ref={articleEntry}>{entry.entry}</p></>)
 								}
 								</td>
 							</tr>
@@ -83,7 +103,7 @@ export const NewspaperTable = (props) => {
 
 
 	return(
-		<div className="censusTable dataTable">
+		<div className={"newspaperTable dataTable "+ (isVisible ? "active" : "inactive")}>
 			<h1>Newspapers</h1> <span className="see-notes">See Notes ></span>
 			<span>{	renderRows()}</span>
 		</div>

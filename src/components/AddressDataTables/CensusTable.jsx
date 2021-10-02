@@ -8,6 +8,7 @@ import axios from "axios"
 
 export const CensusTable = (props) => {
 	const [allCensusData, setAllCensusData] = useState(null)
+	const [isVisible, setIsVisible] = useState(true)
 
 	//API call consts
 	const boundUrl = `https://api.baserow.io/api/database/rows/table/`
@@ -54,7 +55,7 @@ export const CensusTable = (props) => {
                 let queryURL = `https://api.baserow.io/api/database/rows/table/25442/?user_field_names=true&filter__field_133865__equal=${thisYearsTract}&filter__field_133866__equal=${d}`
                 axios.get(queryURL, opts)
                     .then(variableData => {
-
+                    	if(variableData.length <= 1){setIsVisible(false)}
                        organisedData = {
                        	year: d,
                        data: variableData.data.results
@@ -137,7 +138,7 @@ export const CensusTable = (props) => {
 
 
 	return(
-		<div className="censusTable dataTable">
+		<div className={"censusTable dataTable "+ (isVisible ? "active" : "inactive")} >
 			<h1>Census</h1> <span className="see-notes">See Notes ></span>
 			<span>{	renderRows()}</span>
 		</div>

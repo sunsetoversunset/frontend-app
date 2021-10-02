@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react"
 import "../styles/PhotoStrip.scss"
 
 export const PhotoStripAddress = (props) => {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible] = useState(true)
   const stripContainer  = useRef(null)
   const intImages  = useRef(null)
   const [filteredPhotoData, setFilteredPhotoData] = useState([])
@@ -18,7 +18,7 @@ export const PhotoStripAddress = (props) => {
       })
     }
 
-  }, [props.photoData, props.min, props.max])
+  }, [props.photoData, props.year, props.min, props.max])
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -64,10 +64,10 @@ export const PhotoStripAddress = (props) => {
         <div className={`strip-photos-container-address year-${props.year}`}>
           {filteredPhotoData.length >= 1 ? 
             filteredPhotoData.map( (row, key) => (
-              <img ref={intImages} onClick={() => {props.handleShowModal(); props.handleSetModalImg(row) }} 
+              <img alt='' ref={intImages} onClick={() => {props.handleShowModal(); props.handleSetModalImg({id:row,year:props.year}); }} 
               src={`https://media.getty.edu/iiif/image/${row}/full/,250/0/default.jpg`} key={key} />
               
-            )) : <span> Now Loading </span>
+            )) : <span> No images for this year </span>
           }
         </div>
       </div>

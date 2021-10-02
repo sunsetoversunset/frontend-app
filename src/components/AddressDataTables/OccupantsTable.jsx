@@ -8,6 +8,7 @@ import axios from "axios"
 
 export const OccupantsTable = (props) => {
 	const [allOccupantData, setAllOccupantData] = useState(null)
+	const [isVisible, setIsVisible] = useState(true)
 
 
 	//API call consts
@@ -20,6 +21,14 @@ export const OccupantsTable = (props) => {
     	loadOccupants(boundUrl + `20022/?user_field_names=true&filter__field_105086__equal=${props.address}`)
   	}, [props.address])
 
+	useEffect( () => {
+  		if(!allOccupantData){
+  			setIsVisible(false)
+  		}else{
+  			setIsVisible(true)
+  		}
+  	}, [allOccupantData])
+
 
 	const loadOccupants = (url, tempOccpData) => {	
 	let tempData = tempOccpData || []
@@ -31,6 +40,7 @@ export const OccupantsTable = (props) => {
 	      res.data.results.forEach( e => {
 	      	tempData.push(e)
 	      })
+	      if(res.data.results.length <= 1){setIsVisible(false)}
 	      //handle loading next page if url exists
           if (res.data.next) {
             let nextUrl = res.data.next.replace("http", "https")
@@ -81,7 +91,7 @@ export const OccupantsTable = (props) => {
 
 
 	return(
-		<div className="censusTable dataTable">
+		<div className={"occupantTable dataTable "+ (isVisible ? "active" : "inactive")}>
 			<h1>Occupants</h1> <span className="see-notes">See Notes ></span>
 			<span>{	renderRows()}</span>
 		</div>
