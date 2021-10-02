@@ -32,11 +32,17 @@ export const MapView = () => {
   let tempAddressesN   = []
   let tempAddressesS   = []
 
+  const moveSpeedOpts = {
+    "slow"   : 0.2,
+    "medium" : 0.8,
+    "fast"   : 0.6
+  }
+
   // ---------------------------------------------------------------
   // CONTROLS
   const [ zoomRange, setZoomRange ]             = useState([])
   const [ mappedZoomRange, setMappedZoomRange ] = useState([])
-  const [ moveSpeed, setMoveSpeed ]             = useState("medium")
+  const [ moveSpeed, setMoveSpeed ]             = useState(moveSpeedOpts.medium)
   const [ scrollAmount, setScrollAmount ]       = useState(0)
   const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
   const [ directionFacing, setDirectionFacing ] = useState("n")
@@ -47,13 +53,7 @@ export const MapView = () => {
 
   // hard-coding this for now but coords will change
   const coordRange = [-118.56112, -118.2249107]
-  
-  const moveSpeedOpts = {
-    "slow"   : 0.2,
-    "medium" : 0.8,
-    "fast"   : 0.6
-  }
-  
+    
   // ---------------------------------------------------------------
   // ADDRESSES
   const [ filteredAddressesN, setFilteredAddressesN ] = useState([])
