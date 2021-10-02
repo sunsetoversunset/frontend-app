@@ -173,7 +173,7 @@ export const AddressView = (props) => {
       	</div>
       {/* mid navn */}
       	<nav className="address-lower-nav">
-      			<NavAddress currentKey={myKey}/>
+      			<NavAddress currentKey={myKey} address={address}/>
       	</nav>
 
       	{/* photo srtip section */}

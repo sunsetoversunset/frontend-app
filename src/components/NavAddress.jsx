@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useRef} from 'react'
 import { RoundedButton } from "./Buttons"
 import '../styles/NavHeader.scss';
 
@@ -8,6 +8,7 @@ import axios from "axios"
 export const NavAddress = (props) => {
   const [nextAddress, setNextAddress] = useState('')
   const [prevAddress, setPrevAddress] = useState('')
+  const navRef = useRef(null)
   const boundUrl = `https://api.baserow.io/api/database/rows/table/`
   const opts = {headers: {'Authorization': `Token ${Config.apiToken}`} }
 
@@ -20,6 +21,17 @@ export const NavAddress = (props) => {
     }
     loadPrevAddess(boundUrl + `27379/${props.currentKey-1}/?user_field_names=true`)
   }, [props.currentKey, boundUrl])
+
+
+  // ---------------------------------------------------------------
+    window.onscroll = (e) =>{
+        let st = window.pageYOffset
+        if (st > 419){
+         navRef.current.classList.add('stuck')
+       }else{
+        navRef.current.classList.remove('stuck')
+       }
+    }
 
   // ---------------------------------------------------------------
   const loadNextAddess = (url) => {
@@ -74,7 +86,7 @@ export const NavAddress = (props) => {
 
   // ---------------------------------------------------------------
   return (
-    <nav className='nav-header'>
+    <nav className='nav-header' ref={navRef}>
     <RoundedButton
               icon="icon-arrow-left" 
               label={`${prevAddress} Sunset Blvd.`}
@@ -83,8 +95,13 @@ export const NavAddress = (props) => {
       <div className='nav-links-container'>
         <ul>
           <li>
-            <span onClick={ () => anchorScroll("photographs")}>
-              <div className='nav-link'>
+            <div className="currentAddress">
+            {props.address} Sunset Blvd.
+            </div>
+          </li>
+          <li>
+            <span  onClick={ () => anchorScroll("photographs")}>
+              <div tabindex="0" className='nav-link'>
                 Photographs
               </div>
             </span>
@@ -104,8 +121,8 @@ export const NavAddress = (props) => {
             </span>
           </li>*/}
           <li>
-            <span onClick={ () => anchorScroll("historicalProfile")}>
-              <div className='nav-link'>
+            <span  onClick={ () => anchorScroll("historicalProfile")}>
+              <div tabindex="0" className='nav-link'>
                 Historical Profile
               </div>
             </span>
