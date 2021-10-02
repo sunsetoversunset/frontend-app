@@ -32,11 +32,17 @@ export const MapView = () => {
   let tempAddressesN   = []
   let tempAddressesS   = []
 
+  const moveSpeedOpts = {
+    "slow"   : 0.2,
+    "medium" : 0.8,
+    "fast"   : 0.6
+  }
+
   // ---------------------------------------------------------------
   // CONTROLS
   const [ zoomRange, setZoomRange ]             = useState([])
   const [ mappedZoomRange, setMappedZoomRange ] = useState([])
-  const [ moveSpeed, setMoveSpeed ]             = useState("medium")
+  const [ moveSpeed, setMoveSpeed ]             = useState(moveSpeedOpts.medium)
   const [ scrollAmount, setScrollAmount ]       = useState(0)
   const [ isMapMinimized, setIsMapMinimized ]   = useState(false)
   const [ directionFacing, setDirectionFacing ] = useState("n")
@@ -47,13 +53,7 @@ export const MapView = () => {
 
   // hard-coding this for now but coords will change
   const coordRange = [-118.56112, -118.2249107]
-  
-  const moveSpeedOpts = {
-    "slow"   : 0.2,
-    "medium" : 0.8,
-    "fast"   : 0.6
-  }
-  
+    
   // ---------------------------------------------------------------
   // ADDRESSES
   const [ filteredAddressesN, setFilteredAddressesN ] = useState([])
@@ -189,23 +189,23 @@ export const MapView = () => {
     let idx = tf.photoData.findIndex(df => {
       return df.year === imgObj.year
     })
+    
+    const queryURL = `${baseUrl}${tf.photoData[idx].tableId}/?filter__${tf.photoData[idx].idRow}__equal=${imgObj.id}`
+    console.log('queryUrl: ', queryURL)
 
-    if (directionFacing === 'n') {
-      const queryURL = `${baseUrl}${tf.photoData[idx].tableId}/?filter__${tf.photoData[idx].idRow}__equal=${imgObj.id}`
-      return axios.get(queryURL, opts)
-        .then((res) => {
-          if (res.status === 200) {
-            if (res.data.results.length === 1) {
-              return res.data.results[0][tf.photoData[idx].coordRow]
-            }
-            // We shouldn't hit this case 
-            return null
+    return axios.get(queryURL, opts)
+      .then((res) => {
+        if (res.status === 200) {
+          if (res.data.results.length === 1) {
+            return res.data.results[0][tf.photoData[idx].coordRow]
           }
-        }).catch((err) => {
-          console.log('err: ', err)
+          // We shouldn't hit this case 
           return null
-        })
-    }
+        }
+      }).catch((err) => {
+        console.log('err: ', err)
+        return null
+      })
   }
 
 

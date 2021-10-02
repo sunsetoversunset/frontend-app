@@ -12,12 +12,12 @@ import iconMaximize from "../assets/icons/icon-maximize.svg"
 // https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
 // ---------------------------------------------------------
 export const Map = (props) => {
-  const mapContainer              = useRef(null)
-  const d3Container               = useRef(null)
-  const [xDomain, setXDomain]     = useState([])
-  const [yDomain, setYDomain]     = useState([])
-  const [bbox, setBbox]           = useState({});
-  const defaultZoomRange = [-118.40142058250001, -118.37170226875]
+  const mapContainer          = useRef(null)
+  const d3Container           = useRef(null)
+  const [xDomain, setXDomain] = useState([])
+  const [yDomain, setYDomain] = useState([])
+  const [bbox, setBbox]       = useState({});
+  const defaultZoomRange      = [-118.37975, -118.37827]
 
   // ---------------------------------------------------------
   const set = () => {
@@ -105,7 +105,7 @@ export const Map = (props) => {
   const handleBrushEnd = (event) => {
     if (event.selection === null) return
     const [x0, x1] = event.selection.map(x.invert);
-    // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
+    console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
     props.setZoomRange([x0, x1])
   }
 
