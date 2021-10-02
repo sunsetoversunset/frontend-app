@@ -13,17 +13,17 @@ export const AddressBar = (props) => {
   }
 
   // ---------------------------------------------------------------
-  /*
-    TODO: handle on scroll
-     // let addressesN = d3.selectAll('.addresses-text-n')
-    // let addressesS = d3.selectAll('.addresses-text-s')
+  useEffect(() => {
+    console.log('[props.scrollAmount]: ', props.scrollAmount)
+    let addressesN = d3.selectAll('.addresses-text-n')
+    let addressesS = d3.selectAll('.addresses-text-s')
 
-    // addressesN.transition()
-    //   .attr("transform", "translate(" + -props.scrollAmount + ",0)");
+    addressesN.transition()
+      .attr("transform", "translate(" + -props.scrollAmount + ",0)");
 
-    // addressesS.transition()
-    //   .attr("transform", "translate(" + props.scrollAmount + ",0)");
-  */
+    addressesS.transition()
+      .attr("transform", "translate(" + props.scrollAmount + ",0)");
+  }, [props.scrollAmount])
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -48,6 +48,7 @@ export const AddressBar = (props) => {
 
   // ---------------------------------------------------------------
   useEffect(() => {
+    console.log('here', props.filteredAddressesN)
     const svg = d3.select(addressRef.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
@@ -60,6 +61,7 @@ export const AddressBar = (props) => {
       svg.append('g')
         .attr('class', 'addresses-text-n')
         .selectAll('text')
+        // .data(props.filteredAddressesN)
         .data(props.addressesNData)
         .enter()
         .append('text')
@@ -79,11 +81,12 @@ export const AddressBar = (props) => {
       svg.append('g')
         .attr('class', 'addresses-text-s')
         .selectAll('text')
+        // .data(props.filteredAddressesS)
         .data(props.addressesSData)
         .enter()
         .append('text')
         .attr("x", function(d) { 
-          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
+          return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -98,6 +101,8 @@ export const AddressBar = (props) => {
   }, [
     props.addressesNData, 
     props.addressesSData, 
+    // props.filteredAddressesN,
+    // props.filteredAddressesS,
     props.directionFacing,
     bbox
   ])

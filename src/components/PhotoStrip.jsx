@@ -103,13 +103,13 @@ export const PhotoStrip = (props) => {
 
 
   // ---------------------------------------------------------------
-  // useEffect(() => {
-  //   if (visiblePhotos.length > 0) {
-  //     // console.log('visiblePhotos: ', visiblePhotos)
-  //     // loadImages()
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [visiblePhotos])
+  useEffect(() => {
+    if (visiblePhotos.length > 0) {
+      // console.log(`[visiblePhotos] ${props.meta.year}: `, visiblePhotos)
+      loadImages()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visiblePhotos])
 
   // ---------------------------------------------------------------
   const renderWireframes = () => {

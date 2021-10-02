@@ -52,7 +52,7 @@ export const MapView = () => {
   const [ isSearchAndFilterShowing, setIsSearchAndFilterShowing ] = useState(false)
 
   // hard-coding this for now but coords will change
-  const coordRange = [-118.56112, -118.2249107]
+  const coordRange = [-118.39253, -118.36673]
     
   // ---------------------------------------------------------------
   // ADDRESSES
@@ -90,11 +90,26 @@ export const MapView = () => {
 
   // ---------------------------------------------------------------
   useEffect(() => {
-    let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
-    let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
-    setMappedZoomRange([lBounds, rBounds])
-    filterAddressesByRange([lBounds, rBounds])
+    if (zoomRange.length > 0) {
+      console.log('got new zoomRange: ', zoomRange)
+      let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
+      let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
+      setMappedZoomRange([lBounds, rBounds])
+      console.log('L: ', lBounds, 'R: ', rBounds)
+      filterAddressesByRange([lBounds, rBounds])
+    }
   }, [zoomRange])
+
+
+  // ---------------------------------------------------------------
+  useEffect(() => {
+    // if (directionFacing === 'n') {
+      console.log('[filteredAddressesN]:', filteredAddressesN)
+    // } else {
+      console.log('[filteredAddressesS]:', filteredAddressesS)
+    // }
+
+  }, [filteredAddressesN, filteredAddressesS])
 
 
   // ---------------------------------------------------------------
@@ -311,6 +326,8 @@ export const MapView = () => {
         <AddressBar
           scrollAmount={ scrollAmount } 
           directionFacing={ directionFacing }
+          filteredAddressesN={ filteredAddressesN }
+          filteredAddressesS={ filteredAddressesS }
           addressesNData={ addressesN }
           addressesSData={ addressesS }
         />

@@ -39,7 +39,6 @@ export const Map = (props) => {
 
   // ---------------------------------------------------------
   useEffect(() => {
-    props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
     if (sunsetJson !== null) {
       calcExtents()
     } 
@@ -47,6 +46,14 @@ export const Map = (props) => {
     window.addEventListener('resize', set);
     return () => window.removeEventListener('resize', set);
   }, [])
+
+
+  // ---------------------------------------------------------
+  useEffect(() => {
+    if (props.allAddresses.length > 0) {
+      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
+    }
+  }, [props.allAddresses])
 
 
   // ---------------------------------------------------------
