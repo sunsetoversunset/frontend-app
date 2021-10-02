@@ -52,8 +52,8 @@ export const AddressView = (props) => {
   // ---------------------------------------------------------------
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-      // for (let i = 0; i < 1; i++) {
-       for (let i = 0; i < dataFields.length; i++) {
+       for (let i = 0; i < 1; i++) {
+       //for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}/?user_field_names=true&order_by=coordinate,-identifier`, dataFields[i]))
       }
       await Promise.all(photoRequests)
@@ -126,7 +126,7 @@ export const AddressView = (props) => {
         }
       })
       .catch((err) => {
-        console.error('[loadPhotoData] error: ', err)
+        console.error(`[loadPhotoData for ${dataFieldObj.year}] error: `, err)
       })
   }
 
@@ -161,13 +161,14 @@ export const AddressView = (props) => {
   return(
   	<div className="app-page" id="address-page">
       <NavHeader />
-      {/* <PhotoViewerModal 
-        imgUrl={ modalImgUrl }
-        isVisible={ isModalShowing }
+       <PhotoViewerModal 
+        nearbyAddresses={ [] } 
+        imgObj={ modalImgUrl }
         handleHideModal={ () => setIsModalShowing(false) }
-      /> */}
+        isVisible={ isModalShowing } 
+      /> 
   		{/* header image */}
-      	<div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/${headerPhoto}/full/,1000/0/default.jpg')`}}>
+      	<div className="header-image" style={ headerPhoto ? {background: `url('https://media.getty.edu/iiif/image/${headerPhoto}/full/,1000/0/default.jpg')`} : {background: "white"}}>
       		<p className="hero-address">{address} Sunset Boulevard</p>
       	</div>
       {/* mid navn */}
@@ -195,15 +196,15 @@ export const AddressView = (props) => {
       		</div>
       	</div>
 
-      {/*  Sotries section */}
+      {/*  Sotries section 
       	<div id="stories" className="historical-profile-container container">
       		<h1>Stories</h1>
-      	</div>
+      	</div>*/}
 
-    	{/*  Tags section */}
+    	{/*  Tags section 
     	<div id="tags" className="historical-profile-container container">
     		<h1>Tags</h1>
-    	</div>
+    	</div>*/}
 
 	    {/*  ALLL THE DATA section */}
       	<div id="historicalProfile" className="historical-profile-container container">

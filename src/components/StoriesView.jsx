@@ -1,15 +1,26 @@
 import { useState } from 'react'
 import { NavHeader } from './NavHeader';
+import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { Footer } from './Footer'
-import axios from "axios"
+import img from '../assets/images/5025-5007.jpg'
 
 import '../styles/App.scss'
 import '../styles/Stories.scss'
 
 export const StoriesView = () => {
+  //modal states
+  const [ modalImgUrl, setModalImgUrl ] = useState(null)
+  const [ isModalShowing, setIsModalShowing ] = useState(false)
 
   return (
+
     <div className="app-page stories-view">
+    <PhotoViewerModal 
+        nearbyAddresses={ [] } 
+        imgObj={ modalImgUrl }
+        handleHideModal={ () => setIsModalShowing(false) }
+        isVisible={ isModalShowing } 
+      /> 
       <NavHeader />
       <div className='stories-view-container'>
         <div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,1400/0/default.jpg`}}>
@@ -26,7 +37,8 @@ export const StoriesView = () => {
         </div>
 
         <div className="single-image">
-          <img src="https://media.getty.edu/iiif/image/22f24418-8d7e-4b99-bfc9-d887a081cfe0/full/,1000/0/default.jpg" />
+          <img alt="" src="https://media.getty.edu/iiif/image/22f24418-8d7e-4b99-bfc9-d887a081cfe0/full/,1000/0/default.jpg" 
+          onClick={() => {setModalImgUrl({id:'22f24418-8d7e-4b99-bfc9-d887a081cfe0',year:'1966'}); setIsModalShowing(true);} }/>
           <p className="caption">
             <b>8543 Sunset Boulevard.</b> 1966.
           </p>
@@ -38,9 +50,18 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/57797332-eb53-4483-b31c-95ec1f47ced3/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/9c0f8a45-41ba-4832-b9a0-e1e79bca457c/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,400/0/default.jpg"
+            onClick={() => {setModalImgUrl({id:'5deb7e9f-cc95-4cbd-9e94-29d154d01da2',year:'1966'}); setIsModalShowing(true);}} />
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/57797332-eb53-4483-b31c-95ec1f47ced3/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'57797332-eb53-4483-b31c-95ec1f47ced3',year:'1985'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/9c0f8a45-41ba-4832-b9a0-e1e79bca457c/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'9c0f8a45-41ba-4832-b9a0-e1e79bca457c',year:'2007'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>8101 Sunset Boulevard.</b> From left: 1966, 1985, 2007.
             </p>
@@ -55,9 +76,18 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/81a2bbf2-3025-4421-a093-19c4ababe842/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/14615978-5192-45de-bf6b-2168fa21f2f5/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/895e5226-4954-48a9-8827-87e2b0e803cf/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/81a2bbf2-3025-4421-a093-19c4ababe842/full/,400/0/default.jpg" 
+              onClick={() => {setModalImgUrl({id:'81a2bbf2-3025-4421-a093-19c4ababe842',year:'1973'}); setIsModalShowing(true);}}/>
+            </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/14615978-5192-45de-bf6b-2168fa21f2f5/full/,400/0/default.jpg" 
+              onClick={() => {setModalImgUrl({id:'14615978-5192-45de-bf6b-2168fa21f2f5',year:'1995'}); setIsModalShowing(true);}}/>
+            </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/895e5226-4954-48a9-8827-87e2b0e803cf/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'895e5226-4954-48a9-8827-87e2b0e803cf',year:'2008'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>7979 Sunset Boulevard.</b> From left: 1973, 1995, 2008.
             </p>
@@ -68,7 +98,7 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images long">
-          long image goes here
+          <span className="image"><img alt="" src={img} /></span>
           <p className="caption">
               <b>Arco/Gulf at 5025 and Shell at 5007 Sunset Boulevard.</b> From left: 1973, 2007.
             </p>
@@ -80,8 +110,14 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images two">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/e46542b5-4661-4d4c-bd27-73257f7371e2/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/cd57c021-81e7-45ea-9e71-84f1d4e476d4/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/e46542b5-4661-4d4c-bd27-73257f7371e2/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'e46542b5-4661-4d4c-bd27-73257f7371e2',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/cd57c021-81e7-45ea-9e71-84f1d4e476d4/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'cd57c021-81e7-45ea-9e71-84f1d4e476d4',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>6767 Sunset Boulevard.</b> From left: 1973, 1995.
             </p>
@@ -93,9 +129,18 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/586030fb-05d1-4338-80ee-6e2709a52f97/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/b5ec8cb8-0a95-48ec-a0bd-cee195583463/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/f68e494a-2d0c-4a4b-8416-711120ecdb12/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/586030fb-05d1-4338-80ee-6e2709a52f97/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'586030fb-05d1-4338-80ee-6e2709a52f97',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/b5ec8cb8-0a95-48ec-a0bd-cee195583463/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'b5ec8cb8-0a95-48ec-a0bd-cee195583463',year:'1985'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/f68e494a-2d0c-4a4b-8416-711120ecdb12/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'f68e494a-2d0c-4a4b-8416-711120ecdb12',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>7980 Sunset Boulevard.</b> From left: 1973, 1985, 1995.
             </p>
@@ -110,9 +155,18 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/303f7698-4152-4668-8a85-a7be24315a49/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/990a6a19-24ec-480c-b88c-e2df7f01e09b/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/bdcb1054-3292-43e2-9eaa-62b367bd63fc/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/303f7698-4152-4668-8a85-a7be24315a49/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'303f7698-4152-4668-8a85-a7be24315a49',year:'1966'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/990a6a19-24ec-480c-b88c-e2df7f01e09b/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'990a6a19-24ec-480c-b88c-e2df7f01e09b',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/bdcb1054-3292-43e2-9eaa-62b367bd63fc/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'bdcb1054-3292-43e2-9eaa-62b367bd63fc',year:'2007'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>8873 Sunset Boulevard.</b> From left: 1966, 1995, 2007.
             </p>
@@ -123,9 +177,18 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/b3e82d56-c9a2-4109-b6bb-ebba90d8ad6e/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/7d73317b-de9f-400e-bd37-880c31b40039/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/73075226-6ea7-44e1-a529-c1fb4ea4229f/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/b3e82d56-c9a2-4109-b6bb-ebba90d8ad6e/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'b3e82d56-c9a2-4109-b6bb-ebba90d8ad6e',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/7d73317b-de9f-400e-bd37-880c31b40039/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'7d73317b-de9f-400e-bd37-880c31b40039',year:'1985'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/73075226-6ea7-44e1-a529-c1fb4ea4229f/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'73075226-6ea7-44e1-a529-c1fb4ea4229f',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>6407 Sunset Boulevard.</b> From left: 1973, 1985, 1995.
             </p>
@@ -136,25 +199,46 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images two">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/37079f8d-3628-4e23-ab54-d7ff3006a71d/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/cc93753c-c01d-4752-86c7-72e791d2fe05/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/37079f8d-3628-4e23-ab54-d7ff3006a71d/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'37079f8d-3628-4e23-ab54-d7ff3006a71d',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/cc93753c-c01d-4752-86c7-72e791d2fe05/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'cc93753c-c01d-4752-86c7-72e791d2fe05',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>7077 Sunset Boulevard.</b> From left: 1973, 1995.
             </p>
         </div>
 
         <div className="fullwidth-images three">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/d566a28e-db75-4961-9108-3c791cbd7366/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/882e49e2-7079-4725-bb2f-846470045c0f/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/ac038cee-c8f4-4ad8-9a4f-4ad0ae7e25ed/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/d566a28e-db75-4961-9108-3c791cbd7366/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'d566a28e-db75-4961-9108-3c791cbd7366',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/882e49e2-7079-4725-bb2f-846470045c0f/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'882e49e2-7079-4725-bb2f-846470045c0f',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/ac038cee-c8f4-4ad8-9a4f-4ad0ae7e25ed/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'ac038cee-c8f4-4ad8-9a4f-4ad0ae7e25ed',year:'2007'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>6750 Sunset Boulevard.</b> From left: 1973, 1995, 2007.
             </p>
         </div>
 
         <div className="fullwidth-images two">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/5c264134-3fc0-41c0-b629-db4806e3af85/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/72962895-164f-4c82-8562-f5c3a79e2957/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/5c264134-3fc0-41c0-b629-db4806e3af85/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'5c264134-3fc0-41c0-b629-db4806e3af85',year:'1973'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/72962895-164f-4c82-8562-f5c3a79e2957/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'72962895-164f-4c82-8562-f5c3a79e2957',year:'1985'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption">
               <b>5757 Sunset Boulevard.</b> From left: 1973, 1985.
             </p>
@@ -166,8 +250,14 @@ export const StoriesView = () => {
         </div>
 
         <div className="fullwidth-images two">
-          <span className="image"><img src="https://media.getty.edu/iiif/image/2e30f26a-0d8d-4d37-997e-e5af1bd9a41f/full/,400/0/default.jpg" /></span>
-          <span className="image"><img src="https://media.getty.edu/iiif/image/1e531efe-d457-49d7-9aab-644b186cc85c/full/,400/0/default.jpg" /></span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/2e30f26a-0d8d-4d37-997e-e5af1bd9a41f/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'2e30f26a-0d8d-4d37-997e-e5af1bd9a41f',year:'1985'}); setIsModalShowing(true);}}/>
+          </span>
+          <span className="image">
+            <img alt="" src="https://media.getty.edu/iiif/image/1e531efe-d457-49d7-9aab-644b186cc85c/full/,400/0/default.jpg" 
+            onClick={() => {setModalImgUrl({id:'1e531efe-d457-49d7-9aab-644b186cc85c',year:'1995'}); setIsModalShowing(true);}}/>
+          </span>
           <p className="caption"> 
               <b>5278 Sunset Boulevard.</b> From left: 1985, 1995.
             </p>
