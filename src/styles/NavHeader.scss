@@ -13,12 +13,23 @@
   top:0;
   transition: all 0.2s linear;
 
-  h1 {
-    font-size: 16px;
+  a.home-link {
+    border-radius: 50px;
+    padding: 1px 12px;
     margin-left: 24px;
-    font-weight: 500;
-    margin: 0px 0px 0px 28px;
+
+    h1 {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0px;
+    }
   }
+
+  a.home-link:focus {
+    outline: 2px solid $rust;
+    outline-offset: 2px;
+  }
+
 
   h1:hover {
     color: $rust;
@@ -27,10 +38,6 @@
   a, a:active, a:visited {
     font-weight: 400;
     text-decoration: none;
-  }
-
-  a:active {
-    color: black;
   }
 
   a, a:visited {
@@ -49,7 +56,23 @@
       list-style-type: none;
       padding: 0;
       column-gap: 24px;
+
+      a {
+        border-radius: 50px;
+      }
+      
+      a:focus {
+        outline: 2px solid $rust;
+        outline-offset: 2px;
+      }
   
+      a:active {
+        .nav-link {
+          color: $min-gray-text;
+          border: 1px solid $min-gray-text;
+        }
+      }
+
       li {
         display: inline-flex;
         font-size: 16px;
@@ -57,13 +80,14 @@
 
       .nav-link {
         border: 1px solid $main-bg;
-        padding: 2px 12px;
+        padding: 0px 12px;
         border-radius: 50px;
       }
 
       .nav-link:hover {
         border: 1px solid black;
       }
+      
     }  
   }
 }
