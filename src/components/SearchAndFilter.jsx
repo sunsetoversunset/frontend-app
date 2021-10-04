@@ -91,11 +91,15 @@ export const SearchAndFilter = (props) => {
                   currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
                   props.setYearsShowing(currentYearsShowing)
                 }} 
-                className="year-label" 
+                className="hidden" 
                 htmlFor={`year-${dataField.year}`}
               >
-                {dataField.year}
+                {
+                  props.yearsShowing[dataField.year] ? 
+                  `Hide ${dataField.year}` : `Show ${dataField.year}`
+                }
               </label>
+              <span className="year-label">{dataField.year}</span>
             </div>
           )
         }) }

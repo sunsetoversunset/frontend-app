@@ -58,7 +58,7 @@ export const Map = (props) => {
 
   // ---------------------------------------------------------
   useEffect(() => {
-    const handleArrowScroll = (e) => {
+    const handleArrowKeyScroll = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         if (e.key === 'ArrowRight') {
           handleScroll('east')
@@ -68,8 +68,8 @@ export const Map = (props) => {
       }
     }
 
-    document.addEventListener('keydown', handleArrowScroll)
-    return () => document.removeEventListener("keydown", handleArrowScroll);
+    document.addEventListener('keydown', handleArrowKeyScroll)
+    return () => document.removeEventListener("keydown", handleArrowKeyScroll);
   })
 
 
@@ -241,7 +241,9 @@ export const Map = (props) => {
             />
 
             {/* TODO - don't put this in two places */}
-            <label className="hidden" for="minimize-map">Minimize map</label>
+            <label className="hidden" for="minimize-map">
+              { props.isMapMinimized === false ? "Hide Map" : "Show Map" }
+            </label>
             <button
               id='minimize-map' 
               className={`minimize-map-ctrl ${props.isMapMinimized ? 'visible' : 'hidden'}`}

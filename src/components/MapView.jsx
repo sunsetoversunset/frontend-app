@@ -286,10 +286,12 @@ export const MapView = () => {
             setYearsShowing={ setYearsShowing }
             handleCenterAddress={ handleCenterAddress }
           />
-        <label className="hidden" for="minimize-map">Minimize map</label>
+        <label className="hidden" for="minimize-map">
+          { isMapMinimized === false ? "Hide Map" : "Show Map" }
+        </label>
         <button
           id='minimize-map'
-          className={`minimize-map-ctrl ${isMapMinimized === false ? 'visible' : 'hidden'}`}
+          className={`minimize-map-ctrl ${ isMapMinimized === false ? 'visible' : 'hidden' }`}
           onClick={ () => setIsMapMinimized(!isMapMinimized) }
         >
           {isMapMinimized ? 
