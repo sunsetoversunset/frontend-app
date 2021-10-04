@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import iconClose from "../assets/icons/icon-close.svg"
+import iconCloseRust from "../assets/icons/icon-close-rust.svg"
 import iconCheck from "../assets/icons/icon-check.svg"
 import { dataFields } from "../assets/data/dataFields"
 import "../styles/SearchAndFilter.scss"
@@ -7,6 +8,7 @@ import "../styles/SearchAndFilter.scss"
 export const SearchAndFilter = (props) => {
   const [ searchInput, setSearchInput ] = useState("")
   const [ searchResults, setSearchResults ] = useState([])
+  const [ isCloseHovering, setIsCloseHovering ] = useState(false)
 
 
   // ---------------------------------------------------------
@@ -111,12 +113,22 @@ export const SearchAndFilter = (props) => {
   // ---------------------------------------------------------
   return (
     <div className={`search-and-filter-opts ${props.isSearchAndFilterShowing ? "visible" : ""}`}>
-      <div 
+      <label htmlFor="search-and-filter-control" className="hidden">
+        Close search and filter control
+      </label>
+      <button
+        onMouseEnter={() => setIsCloseHovering(true)}
+        onMouseLeave={() => setIsCloseHovering(false)}
+        id="search-and-filter-control" 
         className="icon-close-search-container"
         onClick={() => props.setIsSearchAndFilterShowing(false)}
       >
-        <img src={iconClose} alt="icon-close-search" />
-      </div>
+        {
+          isCloseHovering? 
+          <img src={iconCloseRust} alt="icon-close-search" /> :
+          <img src={iconClose} alt="icon-close-search" />
+        }
+      </button>
       <div className='search-control'>
         <label 
           className="control-label" 
