@@ -228,6 +228,7 @@ export const Map = (props) => {
           </div>
           <div className="map-controls-right">
             <RoundedButton
+              isActive={ props.isSearchAndFilterShowing }
               icon="icon-search-filter" 
               label={'Search & Filter'}
               handleOnClicked={() => {
