@@ -57,6 +57,23 @@ export const Map = (props) => {
 
 
   // ---------------------------------------------------------
+  useEffect(() => {
+    const handleArrowScroll = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        if (e.key === 'ArrowRight') {
+          handleScroll('east')
+        } else if (e.key === 'ArrowLeft') {
+          handleScroll('west')
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleArrowScroll)
+    return () => document.removeEventListener("keydown", handleArrowScroll);
+  })
+
+
+  // ---------------------------------------------------------
   // Domain: lower and upper bounds of coord X data
   // Range: 0 to screen width (need to calculate width and handle resize)
   const xScale = d3.scaleLinear()
@@ -224,8 +241,9 @@ export const Map = (props) => {
             />
 
             {/* TODO - don't put this in two places */}
-            <div
-              role="button" 
+            <label className="hidden" for="minimize-map">Minimize map</label>
+            <button
+              id='minimize-map' 
               className={`minimize-map-ctrl ${props.isMapMinimized ? 'visible' : 'hidden'}`}
               onClick={ () => props.setIsMapMinimized(!props.isMapMinimized) }
             >
@@ -233,7 +251,7 @@ export const Map = (props) => {
                 <img src={iconMaximize} alt="icon-maximize"/> : 
                 <img src={iconMinimize} alt="icon-minimize"/>
               }
-            </div>
+            </button>
           </div>
         </div>
         <SearchAndFilter 

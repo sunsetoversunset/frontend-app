@@ -6,8 +6,7 @@ import "../styles/PhotoStrip.scss"
 import { tableFields as tf } from "../assets/data/tableFields"
 
 export const PhotoStrip = (props) => {
-  const [ bbox, setBbox ]                    = useState({});
-  const mult                                = 200
+  const [ bbox, setBbox ]                   = useState({});
   const stripContainer                      = useRef(null)
   const d3Container                         = useRef(null)
   const [ visiblePhotos, setVisiblePhotos ] = useState([])
@@ -131,9 +130,9 @@ export const PhotoStrip = (props) => {
       .append("rect")
       .attr("x", (d) => { 
         if (props.stripDirection === 'n') {
-          return (1 * (mult * parseFloat(d.coordinate))) - 184; 
+          return (1 * (props.mult * parseFloat(d.coordinate))) - 184; 
         }
-        return (-1 * (mult * parseFloat(d.coordinate))) - 184; 
+        return (-1 * (props.mult * parseFloat(d.coordinate))) - 184; 
       })
       .attr("y", "0")
       .attr("width", "380")

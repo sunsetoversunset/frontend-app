@@ -5,7 +5,6 @@ export const AddressBar = (props) => {
   const [bbox, setBbox]  = useState({});
   const addressContainer = useRef(null)
   const addressRef       = useRef(null)
-  const mult             = 200
 
   // ---------------------------------------------------------------
   const set = () => {
@@ -48,7 +47,6 @@ export const AddressBar = (props) => {
 
   // ---------------------------------------------------------------
   useEffect(() => {
-    console.log('here', props.filteredAddressesN)
     const svg = d3.select(addressRef.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
@@ -66,7 +64,7 @@ export const AddressBar = (props) => {
         .enter()
         .append('text')
         .attr("x", function(d) {
-          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
+          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult 
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -86,7 +84,7 @@ export const AddressBar = (props) => {
         .enter()
         .append('text')
         .attr("x", function(d) { 
-          return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
+          return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -99,6 +97,7 @@ export const AddressBar = (props) => {
     }
   
   }, [
+    props.mult,
     props.addressesNData, 
     props.addressesSData, 
     // props.filteredAddressesN,
