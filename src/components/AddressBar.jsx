@@ -5,7 +5,6 @@ export const AddressBar = (props) => {
   const [bbox, setBbox]  = useState({});
   const addressContainer = useRef(null)
   const addressRef       = useRef(null)
-  const mult             = 200
 
   // ---------------------------------------------------------------
   const set = () => {
@@ -13,17 +12,17 @@ export const AddressBar = (props) => {
   }
 
   // ---------------------------------------------------------------
-  /*
-    TODO: handle on scroll
-     // let addressesN = d3.selectAll('.addresses-text-n')
-    // let addressesS = d3.selectAll('.addresses-text-s')
+  useEffect(() => {
+    console.log('[props.scrollAmount]: ', props.scrollAmount)
+    let addressesN = d3.selectAll('.addresses-text-n')
+    let addressesS = d3.selectAll('.addresses-text-s')
 
-    // addressesN.transition()
-    //   .attr("transform", "translate(" + -props.scrollAmount + ",0)");
+    addressesN.transition()
+      .attr("transform", "translate(" + -props.scrollAmount + ",0)");
 
-    // addressesS.transition()
-    //   .attr("transform", "translate(" + props.scrollAmount + ",0)");
-  */
+    addressesS.transition()
+      .attr("transform", "translate(" + props.scrollAmount + ",0)");
+  }, [props.scrollAmount])
 
   // ---------------------------------------------------------------
   useEffect(() => {
@@ -60,11 +59,12 @@ export const AddressBar = (props) => {
       svg.append('g')
         .attr('class', 'addresses-text-n')
         .selectAll('text')
+        // .data(props.filteredAddressesN)
         .data(props.addressesNData)
         .enter()
         .append('text')
         .attr("x", function(d) {
-          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult 
+          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult 
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -79,11 +79,12 @@ export const AddressBar = (props) => {
       svg.append('g')
         .attr('class', 'addresses-text-s')
         .selectAll('text')
+        // .data(props.filteredAddressesS)
         .data(props.addressesSData)
         .enter()
         .append('text')
         .attr("x", function(d) { 
-          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * mult
+          return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -96,8 +97,11 @@ export const AddressBar = (props) => {
     }
   
   }, [
+    props.mult,
     props.addressesNData, 
     props.addressesSData, 
+    // props.filteredAddressesN,
+    // props.filteredAddressesS,
     props.directionFacing,
     bbox
   ])

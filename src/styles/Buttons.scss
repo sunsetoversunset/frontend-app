@@ -14,7 +14,8 @@ button.btn-rounded {
   font-weight: 500;
 }
 
-button.btn-rounded:active {
+button.btn-rounded:active,
+button.btn-rounded.active {
   background: $light-orange;
 }
 
