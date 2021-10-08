@@ -101,28 +101,28 @@ export const NavAddress = (props) => {
           </li>
           <li>
             <span  onClick={ () => anchorScroll("photographs")}>
-              <div tabindex="0" className='nav-link'>
+              <div tabIndex="0" className='nav-link'>
                 Photographs
               </div>
             </span>
           </li>
           {/*<li>
             <span onClick={ () => anchorScroll("stories")}>
-              <div className='nav-link'>
+              <div tabIndex="0" className='nav-link'>
                 Stories
               </div>
             </span>
           </li>
           <li>
             <span onClick={ () => anchorScroll("tags")} >
-              <div className='nav-link'>
+              <div tabIndex="0" className='nav-link'>
                 Tags
               </div>
             </span>
           </li>*/}
           <li>
             <span  onClick={ () => anchorScroll("historicalProfile")}>
-              <div tabindex="0" className='nav-link'>
+              <div tabIndex="0" className='nav-link'>
                 Historical Profile
               </div>
             </span>

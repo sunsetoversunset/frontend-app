@@ -45,7 +45,7 @@
 			border-bottom: 4px solid #dedede;
 		}
 		
-		td{
+		td, th{
 			border-left: 1px solid #dedede;
 			border-right: 1px solid #dedede;
 			padding: 12px 15px 13px 20px;
@@ -57,8 +57,11 @@
 			font-weight: 600;
 			line-height: 19px;
 		}
-		td:last-of-type{
+		td:last-of-type, th:last-of-type{
 			border-right: 0px;
+		}
+		span{
+		display: inline-block
 		}
 	}
 }
@@ -71,7 +74,7 @@
 .newspaperTable, .occupantTable{
 	table{
 
-		td{
+		td, th{
 			text-align: left;
 
 			a{
