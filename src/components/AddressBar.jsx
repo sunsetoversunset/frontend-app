@@ -87,7 +87,7 @@ export const AddressBar = (props) => {
           return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult
         })
         .attr("y", "45")
-        .on('click', function(d){
+        .on('click', function(d) {
           window.open(`${window.location.origin}/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
@@ -115,4 +115,3 @@ export const AddressBar = (props) => {
     </div>
   )
 }
-
