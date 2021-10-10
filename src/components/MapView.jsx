@@ -99,16 +99,6 @@ export const MapView = () => {
 
 
   // ---------------------------------------------------------------
-  // useEffect(() => {
-  //   if (directionFacing === 'n') {
-  //     console.log('[filteredAddressesN]:', filteredAddressesN)
-  //   } else {
-  //     console.log('[filteredAddressesS]:', filteredAddressesS)
-  //   }
-  // }, [filteredAddressesN, filteredAddressesS])
-
-
-  // ---------------------------------------------------------------
   useEffect(() => {
     const handleSetMoveSpeed = (e) => {
       if (e.key === 1 || e.key === 2 || e.key === 3) {
@@ -176,6 +166,10 @@ export const MapView = () => {
   // When you select an address from the search results
   const handleCenterAddress = (address) => {
     console.log('[handleCenterAddress] address: ', address)
+    // We should be centering the photostrips and map around
+    // the selected address, but for now we are just opening
+    // the address in a new tab
+    window.open(`${window.location.origin}/address/${address}/`)
     setIsSearchAndFilterShowing(false)
   }
 
@@ -286,7 +280,7 @@ export const MapView = () => {
             setYearsShowing={ setYearsShowing }
             handleCenterAddress={ handleCenterAddress }
           />
-        <label className="hidden" for="minimize-map">
+        <label className="hidden" htmlFor="minimize-map">
           { isMapMinimized === false ? "Hide Map" : "Show Map" }
         </label>
         <button

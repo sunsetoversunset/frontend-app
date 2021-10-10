@@ -242,7 +242,7 @@ export const Map = (props) => {
             />
 
             {/* TODO - don't put this in two places */}
-            <label className="hidden" for="minimize-map">
+            <label className="hidden" htmlFor="minimize-map">
               { props.isMapMinimized === false ? "Hide Map" : "Show Map" }
             </label>
             <button
