@@ -1,5 +1,5 @@
 @import './global/index.scss';
-
+ 
 .nav-header {
   position: fixed;
 	display: flex;
@@ -11,30 +11,44 @@
   font-family: "Sunset-Gothic", sans-serif;
   z-index: 9999;
   top:0;
+  border-bottom: 1px solid #000;
   transition: all 0.2s linear;
 
-  h1 {
-    font-size: 16px;
+  a.home-link {
+    border-radius: 50px;
+    padding: 1px 12px;
     margin-left: 24px;
-    font-weight: 500;
-    margin: 0px 0px 0px 28px;
+
+    h1 {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0px;
+    }
   }
+
+  // a.home-link:focus {
+  //   outline: 2px solid $rust;
+  //   outline-offset: 2px;
+  // }
+
 
   h1:hover {
     color: $rust;
   }
 
-  a, a:active, a:visited {
+  a, a:active, a:visited{
     font-weight: 400;
     text-decoration: none;
-  }
-
-  a:active {
-    color: black;
+    border: 1px solid $main-bg;
   }
 
   a, a:visited {
     color: black;
+  }
+  a:focus{
+    outline: none;
+    border:1px solid $rust;
+    border-radius: 50px;
   }
 
   .nav-links-container {
@@ -49,7 +63,28 @@
       list-style-type: none;
       padding: 0;
       column-gap: 24px;
+
+      a {
+        border-radius: 50px;
+      }
+      
+      a:focus {
+        // outline: 2px solid $rust;
+        // outline-offset: 2px;
+        // .nav-link {
+        //   border: 1px solid $rust;
+        // }
+      }
   
+      a:active {
+        outline: none;
+        .nav-link {
+          color: $min-gray-text;
+          border: 1px solid $min-gray-text;
+        }
+      }
+      
+
       li {
         display: inline-flex;
         font-size: 16px;
@@ -57,13 +92,111 @@
 
       .nav-link {
         border: 1px solid $main-bg;
-        padding: 2px 12px;
+        padding: 0px 12px;
         border-radius: 50px;
       }
 
       .nav-link:hover {
-        border: 1px solid black;
+        border-color: #000;
+        color: #000;
       }
+      
     }  
+  }
+}
+
+.address-lower-nav{
+  position: sticky;
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  top: 40px;
+  z-index: 9998;
+  transition: all .3s linear;
+
+    .nav-header{
+      position: relative;
+      width: 100%;
+      background-color: #fff;
+
+        .nav-links-container{
+          width: 100%;
+          margin: 0;
+          justify-content: center;
+
+            .nav-link{
+              border: 1px solid #fff;
+              font-weight: 300;
+              font-size: 15px;
+              line-height: 21px;
+              border: 1px solid white;
+              cursor: pointer;
+            }
+            .nav-link:focus{
+              outline: none;
+              border:1px solid $rust;
+              border-radius: 50px;
+            }
+            .nav-link:hover{
+              border-color: black;
+              color: #000;
+            }
+            .nav-link:active{
+              border-color: #737373;
+              color: #737373;
+            }
+            .currentAddress{
+              display: block;
+              opacity: 0;
+              overflow: hidden;
+              transition: opacity .3s ease-in-out;
+            }
+        }
+
+        button.btn-rounded{
+              background-color: #fff;
+              border: 1px solid #fff;
+              font-size: 15px;
+              line-height: 21px;
+              font-weight: 300;
+              flex: 0 0 auto;
+
+              .button-label{
+                opacity: 1;
+                transition: opacity .3s ease-in-out;
+              }
+            }
+        button.btn-rounded:focus{
+          outline: none;
+          border:1px solid $rust;
+          border-radius: 50px;
+        }
+        button.btn-rounded:hover{
+          text-decoration: underline;
+        }
+    } 
+}
+.address-lower-nav{
+
+  .nav-header.stuck{
+
+    .currentAddress{
+      display: block;
+      width: auto;
+      height:  auto;
+      opacity: 1;
+      transition: opacity .3s ease-in-out;
+    }
+    button.btn-rounded{
+      
+      .button-label{
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+      }
+      .button-label:hover{
+        opacity: 1;
+        transition: opacity .3s ease-in-out;
+      }
+    }
   }
 }

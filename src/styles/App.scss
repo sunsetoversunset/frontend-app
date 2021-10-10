@@ -6,6 +6,10 @@ html, body {
   font-family: "Degular", sans-serif;
 }
 
+label.hidden {
+  display: none!important;
+}
+
 .app-page {
   color: black;
 	height: 100%;

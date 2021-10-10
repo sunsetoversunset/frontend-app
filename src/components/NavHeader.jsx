@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/NavHeader.scss';
 
@@ -26,7 +26,7 @@ export const NavHeader = () => {
 
   return (
     <nav className='nav-header' ref={navHeader}>
-      <Link to="/">
+      <Link className="home-link"to="/">
         <h1>Sunset over Sunset</h1>
       </Link>
       <div className='nav-links-container'>

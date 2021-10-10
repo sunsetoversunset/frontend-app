@@ -39,7 +39,6 @@ export const Map = (props) => {
 
   // ---------------------------------------------------------
   useEffect(() => {
-    props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
     if (sunsetJson !== null) {
       calcExtents()
     } 
@@ -47,6 +46,31 @@ export const Map = (props) => {
     window.addEventListener('resize', set);
     return () => window.removeEventListener('resize', set);
   }, [])
+
+
+  // ---------------------------------------------------------
+  useEffect(() => {
+    if (props.allAddresses.length > 0) {
+      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
+    }
+  }, [props.allAddresses])
+
+
+  // ---------------------------------------------------------
+  useEffect(() => {
+    const handleArrowKeyScroll = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        if (e.key === 'ArrowRight') {
+          handleScroll('east')
+        } else if (e.key === 'ArrowLeft') {
+          handleScroll('west')
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleArrowKeyScroll)
+    return () => document.removeEventListener("keydown", handleArrowKeyScroll);
+  })
 
 
   // ---------------------------------------------------------
@@ -204,6 +228,7 @@ export const Map = (props) => {
           </div>
           <div className="map-controls-right">
             <RoundedButton
+              isActive={ props.isSearchAndFilterShowing }
               icon="icon-search-filter" 
               label={'Search & Filter'}
               handleOnClicked={() => {
@@ -217,8 +242,11 @@ export const Map = (props) => {
             />
 
             {/* TODO - don't put this in two places */}
-            <div
-              role="button" 
+            <label className="hidden" for="minimize-map">
+              { props.isMapMinimized === false ? "Hide Map" : "Show Map" }
+            </label>
+            <button
+              id='minimize-map' 
               className={`minimize-map-ctrl ${props.isMapMinimized ? 'visible' : 'hidden'}`}
               onClick={ () => props.setIsMapMinimized(!props.isMapMinimized) }
             >
@@ -226,7 +254,7 @@ export const Map = (props) => {
                 <img src={iconMaximize} alt="icon-maximize"/> : 
                 <img src={iconMinimize} alt="icon-minimize"/>
               }
-            </div>
+            </button>
           </div>
         </div>
         <SearchAndFilter 

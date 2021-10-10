@@ -14,9 +14,19 @@ button.btn-rounded {
   font-weight: 500;
 }
 
-button.btn-rounded:active {
+button.btn-rounded:active,
+button.btn-rounded.active {
   background: $light-orange;
 }
+
+button.btn-rounded:focus {
+  outline: 2px solid $rust;
+  outline-offset: 2px;
+}
+
+// button.btn-rounded.inactive {
+//   outline: none;
+// }
 
 button:hover {
   cursor: pointer;

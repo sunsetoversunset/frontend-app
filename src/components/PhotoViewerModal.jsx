@@ -40,6 +40,57 @@ export const PhotoViewerModal = (props) => {
       )
     }))
   }
+  
+  // ---------------------------------------------------------
+  const renderNearbyAddressesControl = () => {
+    return (
+      <div
+        onMouseEnter={() => setIsHoveringExpand(true)}
+        onMouseLeave={() => setIsHoveringExpand(false)}
+        className={
+          `nearby-addresses ${isExpanded ? 'expanded' : 'collapsed'}`
+        }
+      >
+        <div 
+          className="nearby-addresses-label-container"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <span className="nearby-addresses-label">
+            Learn more about nearby addresses
+          </span>
+          {
+            isExpanded === false ? 
+              isHoveringExpand === true ? 
+                <img src={iconRightRust} alt="icon-right-rust" /> :
+                <img src={iconRightWhite} alt="icon-right-white" />
+             : null
+          } 
+        </div>
+        {
+          isExpanded ? 
+          <ul className="nearby-addresses-list">
+            { renderNearbyAddresses() } 
+          </ul> : null
+        }
+        {
+          isExpanded ?
+          <div 
+            className="icon-collapse-nearby"
+            onClick={() => setIsExpanded(false)}
+            onMouseEnter={() => setIsHoveringCollapse(true)}
+            onMouseLeave={() => setIsHoveringCollapse(false)}
+          >
+            {
+              isHoveringCollapse === false ? 
+              <img src={iconLeftWhite} alt="icon-left-white" /> :
+              <img src={iconLeftRust} alt="icon-left-rust" />
+            }
+            
+          </div> : null
+        }
+      </div>
+    )
+  }
 
   // ---------------------------------------------------------
   return (
@@ -61,56 +112,10 @@ export const PhotoViewerModal = (props) => {
         props.imgObj !== null ?
           <Viewer iiifUrl={`${baseIIIFUrl}${props.imgObj.id}/info.json`}/> : null
       }
-      <div
-        onMouseEnter={() => setIsHoveringExpand(true)}
-        onMouseLeave={() => setIsHoveringExpand(false)}
-        className={
-          `nearby-addresses ${isExpanded ? 'expanded' : 'collapsed'}`
-        }
-      >
-
-        <div 
-          className="nearby-addresses-label-container"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          <span className="nearby-addresses-label">
-            Learn more about nearby addresses
-          </span>
-          {
-            isExpanded === false ? 
-              isHoveringExpand === true ? 
-                <img src={iconRightRust} alt="icon-right-rust" /> :
-                <img src={iconRightWhite} alt="icon-right-white" />
-             : null
-          } 
-          
-        </div>
-        
-        {
-          isExpanded ? 
-          <ul className="nearby-addresses-list">
-            { renderNearbyAddresses() } 
-          </ul> : null
-        }
-
-        {
-          isExpanded ?
-          <div 
-            className="icon-collapse-nearby"
-            onClick={() => setIsExpanded(false)}
-            onMouseEnter={() => setIsHoveringCollapse(true)}
-            onMouseLeave={() => setIsHoveringCollapse(false)}
-          >
-            {
-              isHoveringCollapse === false ? 
-              <img src={iconLeftWhite} alt="icon-left-white" /> :
-              <img src={iconLeftRust} alt="icon-left-rust" />
-            }
-            
-          </div> : null
-        }
-
-      </div>
+      {
+        props.nearbyAddresses.length > 0 ? 
+        renderNearbyAddressesControl() : null
+      }
     </div>
   )
 }
