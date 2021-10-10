@@ -105,6 +105,32 @@ ul.nearby-addresses-list {
 	}
 }
 
+.photo-credits {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 12px 20px;
+	font-size: 14px;
+
+	a, a:active, a:visited {
+		color: white;
+		text-decoration: none;
+		position: relative;
+	}
+
+	a::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background: white;
+	}
+
+}
+
 // Overrides for React IIIF Viewer
 .react-iiif-viewer.css-1lo3585 {
 	width: 100vw;
