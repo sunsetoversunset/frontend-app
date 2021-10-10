@@ -24,6 +24,10 @@ button.btn-rounded:focus {
   outline-offset: 2px;
 }
 
+// button.btn-rounded.inactive {
+//   outline: none;
+// }
+
 button:hover {
   cursor: pointer;
   background-color: $med-orange;

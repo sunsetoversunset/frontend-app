@@ -25,10 +25,10 @@
     }
   }
 
-  a.home-link:focus {
-    outline: 2px solid $rust;
-    outline-offset: 2px;
-  }
+  // a.home-link:focus {
+  //   outline: 2px solid $rust;
+  //   outline-offset: 2px;
+  // }
 
 
   h1:hover {
@@ -62,16 +62,21 @@
       }
       
       a:focus {
-        outline: 2px solid $rust;
-        outline-offset: 2px;
+        // outline: 2px solid $rust;
+        // outline-offset: 2px;
+        // .nav-link {
+        //   border: 1px solid $rust;
+        // }
       }
   
       a:active {
+        outline: none;
         .nav-link {
           color: $min-gray-text;
           border: 1px solid $min-gray-text;
         }
       }
+      
 
       li {
         display: inline-flex;
