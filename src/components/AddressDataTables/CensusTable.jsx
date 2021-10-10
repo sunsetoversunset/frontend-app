@@ -1,7 +1,6 @@
 import { useState, useEffect, React } from 'react'
 import '../../styles/App.scss'
 import '../../styles/Tables.scss'
-import { dataFields } from "../../assets/data/dataFields"
 import { dataRows } from "../../assets/data/dataRows"
 import Config from "../../config.json"
 import axios from "axios"
@@ -38,6 +37,7 @@ export const CensusTable = (props) => {
 	})
 	.catch((err) => {
 	  console.log('err: ', err)
+	  setIsVisible(false)
 	})
 	}
 
@@ -102,9 +102,9 @@ export const CensusTable = (props) => {
 						)
 					}else if(ent.shortname === 'year'){
 					return(
-						<td key={keytwo}>
+						<th key={keytwo}>
 							{year.year}
-						</td>
+						</th>
 						)
 					}else{
 					return(

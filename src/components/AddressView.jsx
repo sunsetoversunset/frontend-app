@@ -52,8 +52,8 @@ export const AddressView = (props) => {
   // ---------------------------------------------------------------
     const fetchAllPhotoData = async () => {
       const photoRequests = []
-       for (let i = 0; i < 1; i++) {
-       //for (let i = 0; i < dataFields.length; i++) {
+       //for (let i = 0; i < 1; i++) {
+       for (let i = 0; i < dataFields.length; i++) {
         photoRequests.push(loadPhotoData(boundUrl + `${dataFields[i].tableId}/?user_field_names=true&order_by=coordinate,-identifier`, dataFields[i]))
       }
       await Promise.all(photoRequests)
@@ -173,7 +173,7 @@ export const AddressView = (props) => {
       	</div>
       {/* mid navn */}
       	<nav className="address-lower-nav">
-      			<NavAddress currentKey={myKey}/>
+      			<NavAddress currentKey={myKey} address={address}/>
       	</nav>
 
       	{/* photo srtip section */}

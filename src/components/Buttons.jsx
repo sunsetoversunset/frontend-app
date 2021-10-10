@@ -28,7 +28,7 @@ export const RoundedButton = (props) => {
       onClick={ () => props.handleOnClicked() }
     >
       {props.icon && props.icon !== "icon-arrow-right" ? renderIcon() : null}
-      {props.label}
+      <span className="button-label">{props.label}</span>
       {props.icon && props.icon === "icon-arrow-right" ? renderIcon() : null}
     </button>
   )

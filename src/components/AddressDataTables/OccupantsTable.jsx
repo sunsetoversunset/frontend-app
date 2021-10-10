@@ -1,8 +1,6 @@
 import { useState, useEffect, React } from 'react'
 import '../../styles/App.scss'
 import '../../styles/Tables.scss'
-import { dataFields } from "../../assets/data/dataFields"
-import { dataRows } from "../../assets/data/dataRows"
 import Config from "../../config.json"
 import axios from "axios"
 
@@ -21,14 +19,6 @@ export const OccupantsTable = (props) => {
     	loadOccupants(boundUrl + `20022/?user_field_names=true&filter__field_105086__equal=${props.address}`)
   	}, [props.address])
 
-	useEffect( () => {
-  		if(!allOccupantData){
-  			setIsVisible(false)
-  		}else{
-  			setIsVisible(true)
-  		}
-  	}, [allOccupantData])
-
 
 	const loadOccupants = (url, tempOccpData) => {	
 	let tempData = tempOccpData || []
@@ -40,7 +30,7 @@ export const OccupantsTable = (props) => {
 	      res.data.results.forEach( e => {
 	      	tempData.push(e)
 	      })
-	      if(res.data.results.length <= 1){setIsVisible(false)}
+	      if(res.data.results.length < 1){setIsVisible(false)}
 	      //handle loading next page if url exists
           if (res.data.next) {
             let nextUrl = res.data.next.replace("http", "https")
@@ -60,6 +50,7 @@ export const OccupantsTable = (props) => {
 	})
 	.catch((err) => {
 	  console.log('err: ', err)
+	  setIsVisible(false)
 	})
 	}
 
@@ -69,17 +60,21 @@ export const OccupantsTable = (props) => {
 			<table>
 				<tbody>
 					<tr className="year">
-						<td>Year</td>
-						<td>Address</td>
-						<td>Occupants</td>
+						<th>Year</th>
+						<th>Unit</th>
+						<th>Occupants</th>
 					</tr>
 					{allOccupantData && allOccupantData.sort((a, b) => (a.year > b.year) ? 1 : -1) && 
 						allOccupantData.map( (entry, key) => {
 						return(
 							<tr key={key}>
-								<td>{entry.year}</td>
-								<td>{`${entry.address} Sunset Boulevard`}</td>
-								<td>{entry.entry}</td>
+							{entry.address_fragment || allOccupantData.length === 1 ?
+								(<>
+									<td>{entry.year}</td>
+									<td>{entry.address_fragment}</td>
+									<td>{entry.entry}</td>
+								</>) : null
+							}
 							</tr>
 							)
 					})

@@ -1,8 +1,6 @@
-import { useState, useEffect, React, useRef } from 'react'
+	import { useState, useEffect, React, useRef } from 'react'
 import '../../styles/App.scss'
 import '../../styles/Tables.scss'
-import { dataFields } from "../../assets/data/dataFields"
-import { dataRows } from "../../assets/data/dataRows"
 import Config from "../../config.json"
 import axios from "axios"
 
@@ -64,6 +62,7 @@ export const NewspaperTable = (props) => {
 	})
 	.catch((err) => {
 	  console.log('err: ', err)
+	  setIsVisible(false)
 	})
 	}
 
@@ -73,9 +72,9 @@ export const NewspaperTable = (props) => {
 			<table>
 				<tbody>
 					<tr className="year">
-						<td>Date</td>
-						<td>Publication</td>
-						<td>Article</td>
+						<th>Date</th>
+						<th>Publication</th>
+						<th>Article</th>
 					</tr>
 					{ allNewspaperData && allNewspaperData.sort((a, b) => (a.year > b.year) ? 1 : -1) && 
 						allNewspaperData.map( (entry, key) => {
@@ -85,7 +84,7 @@ export const NewspaperTable = (props) => {
 								<td>{entry.source}</td>
 								<td className="article">
 								{entry.url ? 
-									(<><a href={entry.url} target="_blank" > 
+									(<><a href={entry.url} target="_blank" rel="noreferrer"> 
 									<p className="title">{entry.title}</p></a>
 									<p className="entry" ref={articleEntry}>{entry.entry}</p></>) : 
 									(<><p className="title">{entry.title}</p>

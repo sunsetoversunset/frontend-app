@@ -84,43 +84,6 @@
 	}
 }
 
-.address-lower-nav{
-	position: sticky;
-	width: 100%;
-	display: flex;
-	background-color: #fff;
-	top: 40px;
-	z-index: 9998;
-	transition: all .3s linear;
-
-		.nav-header{
-			position: relative;
-			width: 100%;
-			background-color: #fff;
-
-				.nav-links-container{
-					width: 100%;
-					margin: 0;
-					justify-content: center;
-
-						.nav-link{
-							border: 1px solid #fff;
-							font-weight: 300;
-							font-size: 15px;
-							line-height: 21px;
-						}
-				}
-		}
-		button.btn-rounded{
-			background-color: #fff;
-			border: 1px solid #fff;
-			font-size: 15px;
-			line-height: 21px;
-			font-weight: 300;
-			flex: 0 0 auto;
-		}
-}
-
 .strip-container-wrap{
 
 	h1{
