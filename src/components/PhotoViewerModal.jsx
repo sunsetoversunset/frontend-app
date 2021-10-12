@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Viewer } from "react-iiif-viewer"
-import { Link } from "react-router-dom"
 import "../styles/PhotoViewerModal.scss"
 
 import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
@@ -28,15 +27,14 @@ export const PhotoViewerModal = (props) => {
     return (props.nearbyAddresses.map((address, idx) => {
       return (
         <li key={`nearby-address-${idx}`}>
-          {/* Note - needs revisiting for accessibility */}
-          <span
+          <a
             className="nearby-address-link" 
-            onClick={() => {
-              window.open(`${window.location.origin}/#/address/${generateHash(address)}/`)
-            }}
+            href={`${window.location.origin}/#/address/${generateHash(address)}/`}
+            target="_blank"
+            rel="noreferrer"
           >
             { `${address} Sunset Blvd.`}
-          </span>
+          </a>
         </li>
       )
     }))

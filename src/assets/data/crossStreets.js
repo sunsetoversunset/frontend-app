@@ -1,14 +1,18 @@
 export const crossStreets = [
+  {
+    street: "Doheny Rd.",
+    idx: 0.009967203722260173
+  },
   { 
-    street: "Doheny Drive", 
+    street: "N Doheny Dr.", 
     idx: 14.381000000000002 
   },
   { 
-    street: "La Cienega Boulevard", 
+    street: "La Cienega Blvd", 
     idx: 93.52745 
   },
   { 
-    street: "Fairfax Avenue", 
+    street: "Fairfax Ave.", 
     idx: 180.68232 
   },
   { 

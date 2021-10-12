@@ -13,7 +13,6 @@ export const AddressBar = (props) => {
 
   // ---------------------------------------------------------------
   useEffect(() => {
-    console.log('[props.scrollAmount]: ', props.scrollAmount)
     let addressesN = d3.selectAll('.addresses-text-n')
     let addressesS = d3.selectAll('.addresses-text-s')
 

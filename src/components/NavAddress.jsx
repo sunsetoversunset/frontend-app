@@ -20,6 +20,7 @@ export const NavAddress = (props) => {
       loadNextAddess(boundUrl + `27379/${props.currentKey+1}/?user_field_names=true`)
     }
     loadPrevAddess(boundUrl + `27379/${props.currentKey-1}/?user_field_names=true`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentKey, boundUrl])
 
 
@@ -77,7 +78,7 @@ export const NavAddress = (props) => {
 
    // ---------------------------------------------------------------
   const handleScroll = (dir) => { 
-    window.location.href = `/address/${dir}/`
+    window.location.href = `/#/address/${dir}/`
   }
 
   const anchorScroll = (hash) => {
