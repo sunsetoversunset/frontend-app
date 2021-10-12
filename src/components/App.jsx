@@ -1,6 +1,6 @@
 import { React } from 'react';
 import '../styles/App.scss';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Home } from './Home'
 import { StoriesView } from './StoriesView'
 import { MapView } from './MapView'
@@ -14,7 +14,7 @@ export const App = () => {
   // --------------------------------------------------------------------
   return (
     <div className="app">
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route path="/about" component={ About }/>
           <Route path="/stories" component={ StoriesView }/>
@@ -26,7 +26,7 @@ export const App = () => {
           />
           <Route path="/contact" component = { Contact } />
           <Route path="/team" component={ Team } />
-          <Route exact path="/address/:address" component={ AddressView } />
+          <Route path={["/address/:address", "/address"]} component={ AddressView } />
           <Route 
             path="/" 
             render={() => {
@@ -36,7 +36,7 @@ export const App = () => {
             }}
           />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

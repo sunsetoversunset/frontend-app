@@ -71,6 +71,7 @@ export const MapView = () => {
       setNearbyAddresses(data)
     }
     fetchNearbyAddresses()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalImg])
   
 
@@ -92,7 +93,6 @@ export const MapView = () => {
       let lBounds = mapRange(zoomRange[0], coordRange[0], coordRange[1], 0, 1000)
       let rBounds = mapRange(zoomRange[1], coordRange[0], coordRange[1], 0, 1000)
       setMappedZoomRange([lBounds, rBounds])
-      console.log('L: ', lBounds, 'R: ', rBounds)
       filterAddressesByRange([lBounds, rBounds])
     }
   }, [zoomRange])
@@ -165,11 +165,10 @@ export const MapView = () => {
   // ---------------------------------------------------------------
   // When you select an address from the search results
   const handleCenterAddress = (address) => {
-    console.log('[handleCenterAddress] address: ', address)
     // We should be centering the photostrips and map around
     // the selected address, but for now we are just opening
     // the address in a new tab
-    window.open(`${window.location.origin}/address/${address}/`)
+    window.open(`${window.location.origin}/#/address/${address}/`)
     setIsSearchAndFilterShowing(false)
   }
 
@@ -264,6 +263,7 @@ export const MapView = () => {
           ${isMapMinimized? 'minimized' : 'maximized'}
         `}>
           <Map
+            mult={ mult }
             scrollAmount={ scrollAmount }
             setScrollAmount={ setScrollAmount }
             allAddresses={ allAddresses }

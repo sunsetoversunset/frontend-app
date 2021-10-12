@@ -21,8 +21,6 @@ export const SearchAndFilter = (props) => {
 
       // Return the first 8
       setSearchResults(results.slice(0, 7))
-    } else {
-      console.log('no addresses')
     }
   }  
 

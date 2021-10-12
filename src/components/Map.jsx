@@ -76,47 +76,51 @@ export const Map = (props) => {
   // ---------------------------------------------------------
   const xScaleCoord = d3.scaleLinear()
     .domain([xDomain[0], xDomain[1]])
-    .range([0, bbox.width])
+    // .range([0, bbox.width])
+    .range([0, 1000])
 
   const yScaleCoord = d3.scaleLinear()
     .domain([yDomain[0], yDomain[1]])
     .range([bbox.height/4, 0])
 
   const line = d3.line()
-    .x(d => xScaleCoord(d[0]))
+    .x(d => {
+      return xScaleCoord(d[0]) * 200
+    })
     .y(d => yScaleCoord(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
-
-  const xScaleCrossStreets = d3.scaleLinear()
-    .domain([0, 1000])
-    .range([0, bbox.width])
 
   // ---------------------------------------------------------
   // Renders svg map and brush controls
   // ---------------------------------------------------------
-  useEffect(() => {
+  const drawMap = () => {
     const svg = d3.select(d3Container.current)
       .attr("width", bbox.width)
       .attr("height", bbox.height)
       
     // clear out before we draw
     svg.selectAll("*").remove();
-    
-    // draw cross street lines
-    svg.selectAll('cross-street')
+
+    const mapGroup = svg.append('g').attr('class', 'map-group')
+    mapGroup.selectAll('cross-street')
       .data(crossStreets)
       .enter()
       .append('line')
       .style("stroke", "#949494")
       .style("stroke-dasharray", ("6, 6"))
       .attr('class', 'cross-street')
-      .attr("x1", function(d) { return xScaleCrossStreets(d.idx) })
+      .attr("x1", function(d) { 
+        return (d.idx) * props.mult 
+      })
       .attr("y1",  function() { return 0 })
-      .attr('x2', function(d) { return xScaleCrossStreets(d.idx) })
+      .attr('x2', function(d) { 
+        return (d.idx) * props.mult 
+      })
       .attr("y2", function() { return bbox.height })
 
     // draw line map
-    svg.append('path')
+    mapGroup.append('path')
+      .attr('class', 'line-map')
       .datum(sunsetJson.features[0].geometry.coordinates)
       .attr('d', line)
       .attr("stroke", "black")
@@ -124,30 +128,35 @@ export const Map = (props) => {
       .attr("fill", "none")
   
     // draw street names
-    svg.selectAll('cross-street-name')
+    mapGroup.selectAll('cross-street-name')
       .data(crossStreets)
       .enter()
       .append("text")
       .attr("class", "cross-street-name")
       .attr("transform", "rotate(-90)")
       .attr("transform", function(d) {
-        return "translate(" + xScaleCrossStreets(d.idx) + "," + 0 + ") rotate(90)";
+        return "translate(" + (d.idx * props.mult) + "," + 0 + ") rotate(90)";
       })
       .attr("dx", "0.5em")
-      .attr("dy", "-0.5em") 
+      .attr("dy", "-0.8em") 
       .attr("font-size", "8px")
       .style("fill", "black")
       .style("text-anchor", "start")
       .text(function(d) { return d.street });
     
     // draw brush controls
-    svg.append("g")
-      .call(brush)
-      .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
-      .call(g => {
-        g.select(".overlay")
-          .datum({type: "selection"})
-      });
+    // svg.append("g")
+    //   .call(brush)
+    //   .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
+    //   .call(g => {
+    //     g.select(".overlay")
+    //       .datum({type: "selection"})
+    //   });
+  }
+
+  // ---------------------------------------------------------
+  useEffect(() => {
+    drawMap()
   }, [xDomain, yDomain, bbox])
   
 
@@ -157,7 +166,7 @@ export const Map = (props) => {
   const handleBrushEnd = (event) => {
     if (event.selection === null) return
     const [x0, x1] = event.selection.map(x.invert);
-    console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
+    // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
     props.setZoomRange([x0, x1])
   }
 
@@ -169,6 +178,7 @@ export const Map = (props) => {
   }
 
   const x = d3.scaleLinear([xDomain[0], xDomain[1]], [0, bbox.width])
+  
   const brush = d3.brushX()
     .extent([[0, 0], [bbox.width, bbox.height]])
     .on("start brush end", brushed)
@@ -201,34 +211,17 @@ export const Map = (props) => {
       }
     }
     
-    // TODO: Is this the best way...?
-    const svg = d3.select(d3Container.current)
-
-    // clear out before we draw
-    svg.selectAll("*").remove();
-
-    // draw line map
-    svg.append('path')
-      .datum(sunsetJson.features[0].geometry.coordinates)
-      .attr('d', line)
-      .attr("stroke", "black")
-      .attr("stroke-width", "6")
-      .attr("fill", "none")
-
-    svg.append("g")
-      .call(brush)
-      .call(brush.move, [lBounds, rBounds].map(x))
-      .call(g => {
-        g.select(".overlay")
-          .datum({type: "selection"})
-      });
-
     let dist = 0;
     if (direction === 'east') {
       dist = props.scrollAmount + (1 * bbox.width)
     } else {
       dist = props.scrollAmount - (1 * bbox.width);
     } 
+
+    // We could move these two lines into a useeffect so 
+    // it all updates at the same time
+    const mapGroupSelection = d3.selectAll('.map-group')
+    mapGroupSelection.attr("transform", "translate(" + -dist + ",0)");
     props.setScrollAmount(dist)
   }
 

@@ -12,7 +12,7 @@
   position: absolute;
   width: 315px;
   background: $light-1;
-  border: 1px solid black;
+  border: 1px solid $black;
   top: 28px;
   right: 12px;
   border-radius: 36px;
@@ -51,7 +51,7 @@
     #search-control-input {
       border-radius: 50px;
       height: 30px;
-      border: 1px solid black;
+      border: 1px solid $black;
       margin-top: 8px;
       padding-left: 12px;
       background: none;
@@ -144,7 +144,7 @@
       margin-top: 12px;
       width: 16px;
       height: 16px;
-      border: 1px solid black;
+      border: 1px solid $black;
       display: flex;
       align-items: center;
       position: relative;

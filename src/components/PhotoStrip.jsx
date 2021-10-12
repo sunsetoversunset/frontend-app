@@ -3,7 +3,6 @@ import * as d3 from 'd3'
 import Config from "../config.json"
 import axios from "axios"
 import "../styles/PhotoStrip.scss"
-import { tableFields as tf } from "../assets/data/tableFields"
 
 export const PhotoStrip = (props) => {
   const [ bbox, setBbox ]                   = useState({});
@@ -24,14 +23,8 @@ export const PhotoStrip = (props) => {
     set()
     window.addEventListener('resize', set);
     return () => window.removeEventListener('resize', set);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-
-  // ---------------------------------------------------------------
-  useEffect(() => {
-    console.log('[PhotoStrip] props.directionFacing: ', props.directionFacing)
-  }, [props.directionFacing])
-
 
   // ---------------------------------------------------------------
   const getPhotoData = (url) => {
@@ -154,6 +147,7 @@ export const PhotoStrip = (props) => {
       .attr("transform", "translate(" + props.scrollAmount + ",0)");
 
     loadImages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.scrollAmount])
 
 
