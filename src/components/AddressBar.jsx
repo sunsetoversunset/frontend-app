@@ -68,7 +68,7 @@ export const AddressBar = (props) => {
         })
         .attr("y", "45")
         .on('click', function(d){
-          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+          window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 
@@ -88,7 +88,7 @@ export const AddressBar = (props) => {
         })
         .attr("y", "45")
         .on('click', function(d) {
-          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+          window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 

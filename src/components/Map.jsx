@@ -134,20 +134,20 @@ export const Map = (props) => {
         return "translate(" + xScaleCrossStreets(d.idx) + "," + 0 + ") rotate(90)";
       })
       .attr("dx", "0.5em")
-      .attr("dy", "-0.5em") 
+      .attr("dy", "-0.8em") 
       .attr("font-size", "8px")
       .style("fill", "black")
       .style("text-anchor", "start")
       .text(function(d) { return d.street });
     
     // draw brush controls
-    svg.append("g")
-      .call(brush)
-      .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
-      .call(g => {
-        g.select(".overlay")
-          .datum({type: "selection"})
-      });
+    // svg.append("g")
+    //   .call(brush)
+    //   .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
+    //   .call(g => {
+    //     g.select(".overlay")
+    //       .datum({type: "selection"})
+    //   });
   }, [xDomain, yDomain, bbox])
   
 

@@ -169,7 +169,7 @@ export const MapView = () => {
     // We should be centering the photostrips and map around
     // the selected address, but for now we are just opening
     // the address in a new tab
-    window.open(`${window.location.origin}/address/${address}/`)
+    window.open(`${window.location.origin}/#/address/${address}/`)
     setIsSearchAndFilterShowing(false)
   }
 

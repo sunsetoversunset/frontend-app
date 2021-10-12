@@ -28,14 +28,15 @@ export const PhotoViewerModal = (props) => {
     return (props.nearbyAddresses.map((address, idx) => {
       return (
         <li key={`nearby-address-${idx}`}>
-          <Link
+          {/* Note - needs revisiting for accessibility */}
+          <span
             className="nearby-address-link" 
-            target="_blank"
-            rel="noopener noreferrer"
-            to={`/address/${generateHash(address)}`}
+            onClick={() => {
+              window.open(`${window.location.origin}/#/address/${generateHash(address)}/`)
+            }}
           >
             { `${address} Sunset Blvd.`}
-          </Link>
+          </span>
         </li>
       )
     }))
