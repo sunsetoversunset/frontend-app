@@ -3,6 +3,7 @@ import "../styles/PhotoStrip.scss"
 
 export const PhotoStripAddress = (props) => {
   const [isVisible] = useState(true)
+  const [isLoading, setIsLoading] = useState('Loading photos...')
   const stripContainer  = useRef(null)
   const intImages  = useRef(null)
   const [filteredPhotoData, setFilteredPhotoData] = useState([])
@@ -14,6 +15,8 @@ export const PhotoStripAddress = (props) => {
       props.photoData.forEach( el => {
         if(el.year === props.year){
           setFilteredPhotoData(oldArray => [...oldArray, el.photoID])
+        }else{
+          setIsLoading("No images for this year")
         }
       })
     }
@@ -67,7 +70,7 @@ export const PhotoStripAddress = (props) => {
               <img alt='' ref={intImages} onClick={() => {props.handleShowModal(); props.handleSetModalImg({id:row,year:props.year}); }} 
               src={`https://media.getty.edu/iiif/image/${row}/full/,250/0/default.jpg`} key={key} />
               
-            )) : <span> No images for this year </span>
+            )) : <span> {isLoading} </span>
           }
         </div>
       </div>

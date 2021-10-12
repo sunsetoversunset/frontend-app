@@ -208,7 +208,7 @@ export const AddressView = (props) => {
 
 	    {/*  ALLL THE DATA section */}
       	<div id="historicalProfile" className="historical-profile-container container">
-      		<h1>Historical Profiles</h1>
+      		<h1>Historical Profile</h1>
       		<div className="census">
       			<CensusTable address={address}/>
       			<OccupantsTable address={address}/>
