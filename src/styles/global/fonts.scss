@@ -325,3 +325,21 @@
     url('../../assets/fonts/Stymie/Stymie_Extra_Bold.woff') format('woff');
   font-weight: 800;
 }
+
+// ----------------------------
+// Superette
+// ----------------------------
+// Face
+@font-face {
+  font-family: 'Superette Face';
+  src: 
+    url('../../assets/fonts/Superette/Superette-Shaded-Face-Web.woff2') format('woff2'),
+    url('../../assets/fonts/Superette/Superette-Shaded-Face-Web.woff') format('woff');
+}
+// Normal
+@font-face {
+  font-family: 'Superette';
+  src: 
+    url('../../assets/fonts/Superette/Superette-Shaded-Web.woff2') format('woff2'),
+    url('../../assets/fonts/Superette/Superette-Shaded-Web.woff') format('woff');
+}

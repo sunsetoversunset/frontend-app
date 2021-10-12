@@ -93,6 +93,18 @@ export const PhotoViewerModal = (props) => {
   }
 
   // ---------------------------------------------------------
+  const renderCredits = () => {
+    return (
+      <div className='photo-credits'>
+        Year | © Ed Ruscha.{" "}
+        <a href={`https://www.getty.edu/research/collections/lookup/imageUUID?id=${props.imgObj.id}`} rel="noreferrer" target="_blank">
+          View record at Getty Research Institute</a>
+      </div>
+    )
+  }
+
+
+  // ---------------------------------------------------------
   return (
     <div 
       className={`modal-backdrop ${ props.isVisible ? "visible" : "hidden" }`}
@@ -116,6 +128,7 @@ export const PhotoViewerModal = (props) => {
         props.nearbyAddresses.length > 0 ? 
         renderNearbyAddressesControl() : null
       }
+      { props.imgObj !== null ? renderCredits() : null }
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { RoundedButton } from "./Buttons"
 import * as d3 from 'd3'
 import "../styles/Map.scss"
 import sunsetJson from '../assets/data/sunset.json'
+import { crossStreets } from '../assets/data/crossStreets'
 import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
 
@@ -17,7 +18,7 @@ export const Map = (props) => {
   const [xDomain, setXDomain] = useState([])
   const [yDomain, setYDomain] = useState([])
   const [bbox, setBbox]       = useState({});
-  const defaultZoomRange      = [-118.37975, -118.37827]
+  const defaultZoomRange      = [-118.37975, -118.37827] 
 
   // ---------------------------------------------------------
   const set = () => {
@@ -72,26 +73,23 @@ export const Map = (props) => {
     return () => document.removeEventListener("keydown", handleArrowKeyScroll);
   })
 
-
   // ---------------------------------------------------------
-  // Domain: lower and upper bounds of coord X data
-  // Range: 0 to screen width (need to calculate width and handle resize)
-  const xScale = d3.scaleLinear()
+  const xScaleCoord = d3.scaleLinear()
     .domain([xDomain[0], xDomain[1]])
     .range([0, bbox.width])
 
-  // Domain: lower and upper bounds of coord Y data
-  // Range: height of bounding rect to 0
-  const yScale = d3.scaleLinear()
+  const yScaleCoord = d3.scaleLinear()
     .domain([yDomain[0], yDomain[1]])
     .range([bbox.height/4, 0])
 
-  // Draws the line based on coordinate data
   const line = d3.line()
-    .x(d => xScale(d[0]))
-    .y(d => yScale(d[1]) + bbox.height/2)
+    .x(d => xScaleCoord(d[0]))
+    .y(d => yScaleCoord(d[1]) + bbox.height/2)
     .curve(d3.curveCatmullRom.alpha(1))
 
+  const xScaleCrossStreets = d3.scaleLinear()
+    .domain([0, 1000])
+    .range([0, bbox.width])
 
   // ---------------------------------------------------------
   // Renders svg map and brush controls
@@ -103,6 +101,19 @@ export const Map = (props) => {
       
     // clear out before we draw
     svg.selectAll("*").remove();
+    
+    // draw cross street lines
+    svg.selectAll('cross-street')
+      .data(crossStreets)
+      .enter()
+      .append('line')
+      .style("stroke", "#949494")
+      .style("stroke-dasharray", ("6, 6"))
+      .attr('class', 'cross-street')
+      .attr("x1", function(d) { return xScaleCrossStreets(d.idx) })
+      .attr("y1",  function() { return 0 })
+      .attr('x2', function(d) { return xScaleCrossStreets(d.idx) })
+      .attr("y2", function() { return bbox.height })
 
     // draw line map
     svg.append('path')
@@ -111,6 +122,23 @@ export const Map = (props) => {
       .attr("stroke", "black")
       .attr("stroke-width", "6")
       .attr("fill", "none")
+  
+    // draw street names
+    svg.selectAll('cross-street-name')
+      .data(crossStreets)
+      .enter()
+      .append("text")
+      .attr("class", "cross-street-name")
+      .attr("transform", "rotate(-90)")
+      .attr("transform", function(d) {
+        return "translate(" + xScaleCrossStreets(d.idx) + "," + 0 + ") rotate(90)";
+      })
+      .attr("dx", "0.5em")
+      .attr("dy", "-0.5em") 
+      .attr("font-size", "8px")
+      .style("fill", "black")
+      .style("text-anchor", "start")
+      .text(function(d) { return d.street });
     
     // draw brush controls
     svg.append("g")
@@ -242,7 +270,7 @@ export const Map = (props) => {
             />
 
             {/* TODO - don't put this in two places */}
-            <label className="hidden" for="minimize-map">
+            <label className="hidden" htmlFor="minimize-map">
               { props.isMapMinimized === false ? "Hide Map" : "Show Map" }
             </label>
             <button
