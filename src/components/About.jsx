@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { NavHeader } from './NavHeader';
-import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { Footer } from './Footer'
 
 import getty from '../assets/images/getty.png'
@@ -13,18 +12,9 @@ import '../styles/App.scss'
 import '../styles/Stories.scss' 
 
 export const About = () => {
-  //modal states
-  const [ modalImgUrl, setModalImgUrl ] = useState(null)
-  const [ isModalShowing, setIsModalShowing ] = useState(false)
 
   return (
     <div className="app-page about-view" id="about">
-    <PhotoViewerModal 
-        nearbyAddresses={ [] } 
-        imgObj={ modalImgUrl }
-        handleHideModal={ () => setIsModalShowing(false) }
-        isVisible={ isModalShowing } 
-      /> 
       <NavHeader />
       <div className='about-view-container'>
 
