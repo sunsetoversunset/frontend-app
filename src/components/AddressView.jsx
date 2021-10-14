@@ -43,13 +43,13 @@ export const AddressView = (props) => {
 	let params = useParams();
 	const address = params.address
 
+  useEffect( () => {
+    // get the bounding address data and street side
+    loadAddressData(boundUrl + `27379/?user_field_names=true&filter__field_144140__equal=${address}`)
+  }, [params])
 
 	// ---------------------------------------------------------------
 	useEffect(() => {
-    // get the bounding address data and street side
-    loadAddressData(boundUrl + `27379/?user_field_names=true&filter__field_144140__equal=${address}`)
-    
-  // ---------------------------------------------------------------
     const fetchAllPhotoData = async () => {
       const photoRequests = []
        //for (let i = 0; i < 1; i++) {

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef} from 'react'
+import { useHistory } from "react-router-dom";
 import { RoundedButton } from "./Buttons"
 import '../styles/NavHeader.scss';
 
@@ -11,6 +12,7 @@ export const NavAddress = (props) => {
   const navRef = useRef(null)
   const boundUrl = `https://api.baserow.io/api/database/rows/table/`
   const opts = {headers: {'Authorization': `Token ${Config.apiToken}`} }
+  const history = useHistory();
 
   // ---------------------------------------------------------------
   useEffect( () => {
@@ -25,14 +27,14 @@ export const NavAddress = (props) => {
 
 
   // ---------------------------------------------------------------
-    window.onscroll = (e) =>{
-        let st = window.pageYOffset
-        if (st > 419){
-         navRef.current.classList.add('stuck')
-       }else{
-        navRef.current.classList.remove('stuck')
-       }
-    }
+    // window.onscroll = (e) =>{
+    //     let st = window.pageYOffset
+    //     if (st > 419){
+    //      navRef.current.classList.add('stuck')
+    //    }else{
+    //     navRef.current.classList.remove('stuck')
+    //    }
+    // }
 
   // ---------------------------------------------------------------
   const loadNextAddess = (url) => {
@@ -78,7 +80,7 @@ export const NavAddress = (props) => {
 
    // ---------------------------------------------------------------
   const handleScroll = (dir) => { 
-    window.location.href = `/#/address/${dir}/`
+    history.push(`/address/${dir}/`)
   }
 
   const anchorScroll = (hash) => {

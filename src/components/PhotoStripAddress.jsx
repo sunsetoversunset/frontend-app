@@ -12,6 +12,7 @@ export const PhotoStripAddress = (props) => {
   // ---------------------------------------------------------------
   useEffect(() => {
     if(props.photoData){
+      setFilteredPhotoData([])
       props.photoData.forEach( el => {
         if(el.year === props.year){
           setFilteredPhotoData(oldArray => [...oldArray, el.photoID])
@@ -50,15 +51,23 @@ export const PhotoStripAddress = (props) => {
           leftEnd.append( spans.cloneNode() )
           leftEnd.append( spans.cloneNode() )
           stripContainer.current.prepend(leftEnd)
+        }else{
+          let right = document.querySelector('.right-arrow')
+          let left = document.querySelector('.left-arrow')
+          if(right && left){
+            right.remove()
+            left.remove()
+          }
         }
       });
     }
-  },[filteredPhotoData, setFilteredPhotoData] )
+  },[filteredPhotoData] )
 
  
        const scrollBoy = (scrollOffset) => {
         stripContainer.current.children[1].scrollLeft += scrollOffset;
 }
+
 
   // ---------------------------------------------------------------
   return (
