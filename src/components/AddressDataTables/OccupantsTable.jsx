@@ -36,7 +36,7 @@ export const OccupantsTable = (props) => {
             let nextUrl = res.data.next.replace("http", "https")
             return loadOccupants(nextUrl, tempData)
           } else {
-            console.log('finished getting all data') 
+            console.log('finished getting all Occupant data') 
             setAllOccupantData(tempData)
 	  	}
 	  	
@@ -87,7 +87,8 @@ export const OccupantsTable = (props) => {
 
 	return(
 		<div className={"occupantTable dataTable "+ (isVisible ? "active" : "inactive")}>
-			<h1>Occupants</h1> <span className="see-notes">See Notes ></span>
+			<h1>Occupants</h1> 
+			{/*<span className="see-notes">See Notes ></span>*/}
 			<span>{	renderRows()}</span>
 		</div>
 		)

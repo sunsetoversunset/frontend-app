@@ -92,8 +92,8 @@ export const CensusTable = (props) => {
 	const renderColumns = (ent, key) => {
 		return(
 			<>
-			{allCensusData && allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1)}
-				{allCensusData && allCensusData.map( (year, keytwo) => {
+			{allCensusData ? allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1): null}
+				{allCensusData ? allCensusData.map( (year, keytwo) => {
 					if(ent.shortname === 'tract'){
 					return(
 						<td key={keytwo}>
@@ -114,7 +114,7 @@ export const CensusTable = (props) => {
 						)
 						
 					}
-				})
+				}): null
 			}
 		</>
 		)
@@ -127,7 +127,7 @@ export const CensusTable = (props) => {
 				if(ent.shortname === data.variable && data.value){
 					return(
 						<p key={keythree}>
-							{`${data.value}${ent.units}`}
+							{`${data.value}`}
 						</p>
 						)
 				}
@@ -139,7 +139,8 @@ export const CensusTable = (props) => {
 
 	return(
 		<div className={"censusTable dataTable "+ (isVisible ? "active" : "inactive")} >
-			<h1>Census</h1> <span className="see-notes">See Notes ></span>
+			<h1>Census</h1> 
+		{/*<span className="see-notes">See Notes ></span>*/}
 			<span>{	renderRows()}</span>
 		</div>
 		)

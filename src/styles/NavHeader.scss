@@ -43,7 +43,7 @@
   }
 
   a, a:visited {
-    color: black;
+    color: $black;
   }
   a:focus{
     outline: none;
@@ -138,8 +138,8 @@
               border-radius: 50px;
             }
             .nav-link:hover{
-              border-color: black;
-              color: #000;
+              border-color: $black;
+              color: $black;
             }
             .nav-link:active{
               border-color: #737373;

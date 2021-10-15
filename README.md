@@ -1,12 +1,13 @@
 # Sunset Over Sunset
 
 **PI Team**
-Francesca Ammon, Brian Goldstein, Garrett Nelson
+Francesca Ammon, Brian Goldstein, Garrett Dash Nelson
 
 **Project Team**
 Design + UX: Livia Foldes, Rachel Ng
 Development: Rachel Rose Waterhouse, Andrew Lux
 
+# DOCUMENTATION FORTHCOMING #
 
 # Important
 You will need a config.json file with an app API token for baserow.

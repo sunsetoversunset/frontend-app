@@ -103,7 +103,8 @@ export const NewspaperTable = (props) => {
 
 	return(
 		<div className={"newspaperTable dataTable "+ (isVisible ? "active" : "inactive")}>
-			<h1>Newspapers</h1> <span className="see-notes">See Notes ></span>
+			<h1>Newspapers</h1> 
+			{/*<span className="see-notes">See Notes ></span>*/}
 			<span>{	renderRows()}</span>
 		</div>
 		)

@@ -5,23 +5,23 @@ import '../styles/NavHeader.scss';
 export const NavHeader = () => {
   const navHeader  = useRef(null)
   
-  let lastScrollTop = 0
-  let lowerNav = document.querySelector('.address-lower-nav')
-  window.onscroll = (e) =>{
-      let st = window.pageYOffset
-      if (st > lastScrollTop && st >= 40){
-        navHeader.current.style.top = "-40px"
-        if(lowerNav){
-          lowerNav.style.top = "0px"
-        }
-     } else if(st < lastScrollTop){
-        navHeader.current.style.top = "0px"
-        if(lowerNav){
-        lowerNav.style.top = "40px"
-        }
-     }
-     lastScrollTop = st <= 0 ? 0 : st;
-  }
+  // let lastScrollTop = 0
+  // let lowerNav = document.querySelector('.address-lower-nav')
+  // window.onscroll = (e) =>{
+  //     let st = window.pageYOffset
+  //     if (st > lastScrollTop && st >= 40){
+  //       navHeader.current.style.top = "-40px"
+  //       if(lowerNav){
+  //         lowerNav.style.top = "0px"
+  //       }
+  //    } else if(st < lastScrollTop){
+  //       navHeader.current.style.top = "0px"
+  //       if(lowerNav){
+  //       lowerNav.style.top = "40px"
+  //       }
+  //    }
+  //    lastScrollTop = st <= 0 ? 0 : st;
+  // }
 
 
   return (

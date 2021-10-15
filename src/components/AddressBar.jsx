@@ -13,7 +13,6 @@ export const AddressBar = (props) => {
 
   // ---------------------------------------------------------------
   useEffect(() => {
-    console.log('[props.scrollAmount]: ', props.scrollAmount)
     let addressesN = d3.selectAll('.addresses-text-n')
     let addressesS = d3.selectAll('.addresses-text-s')
 
@@ -68,7 +67,7 @@ export const AddressBar = (props) => {
         })
         .attr("y", "45")
         .on('click', function(d){
-          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+          window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 
@@ -88,7 +87,7 @@ export const AddressBar = (props) => {
         })
         .attr("y", "45")
         .on('click', function(d) {
-          window.open(`${window.location.origin}/address/${this.innerHTML}/`)
+          window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 
