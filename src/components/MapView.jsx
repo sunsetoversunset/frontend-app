@@ -119,6 +119,7 @@ export const MapView = () => {
 
   // ---------------------------------------------------------------
   const loadAddressData = (url) => {
+    console.log('[MapView] loadAddressData called.')
     axios.get(url, opts)
     .then((res) => {  
       if (res.status === 200) {
