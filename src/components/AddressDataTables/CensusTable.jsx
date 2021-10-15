@@ -79,15 +79,15 @@ export const CensusTable = (props) => {
 		return (
 			<table>
 				<tbody>
-				{
+				{dataRows ?
 					dataRows.map( (ent, key) => {
 						return (
 							<tr key={key} className={ent.shortname}>
 								<td>{ent.goodname}</td>
-								{/* { renderColumns(ent, key) } */}
+								{ allCensusData ?  renderColumns(ent, key) : null }
 							</tr>
 						)
-					})
+					}) : null
 				}
 				</tbody>
 			</table>
@@ -96,12 +96,9 @@ export const CensusTable = (props) => {
 
 	// ---------------------------------------------------------
 	const renderColumns = (ent, key) => {
+		if(allCensusData){ allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1) }  
 		return (
 			<>
-				{ 
-					allCensusData ? 
-					allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1) : null 
-				}
 				{ 
 					allCensusData ? 
 					allCensusData.map((year, keytwo) => {
@@ -155,7 +152,7 @@ export const CensusTable = (props) => {
 		>
 			<h1>Census</h1> 
 			<span className="see-notes">See Notes ></span>
-			<span>{	renderRows() }</span>
+			<span>{ renderRows() }</span>
 		</div>
 	)
 }
