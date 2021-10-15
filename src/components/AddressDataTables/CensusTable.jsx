@@ -63,14 +63,16 @@ export const CensusTable = (props) => {
 		const promises = []
 
 		decennials.forEach(d => {
-			let thisYearsTract = lookups[0][`tract_${d}`];
-			let queryURL = `https://api.baserow.io/api/database/rows/table/25442/?user_field_names=true&filter__field_133865__equal=${thisYearsTract}&filter__field_133866__equal=${d}`
-			
-			promises.push(getTractData(queryURL, d))
+			if(lookups.length >= 1){
+				let thisYearsTract = lookups[0][`tract_${d}`];
+				let queryURL = `https://api.baserow.io/api/database/rows/table/25442/?user_field_names=true&filter__field_133865__equal=${thisYearsTract}&filter__field_133866__equal=${d}`
+				
+				promises.push(getTractData(queryURL, d))
+			}
 		})
 
 		await Promise.all(promises)
-		console.log('[loadCensus] done, tempData: ', tempData)
+		//console.log('[loadCensus] done, tempData: ', tempData)
 		setAllCensusData(tempData)
 	}
 
@@ -99,8 +101,7 @@ export const CensusTable = (props) => {
 		if(allCensusData){ allCensusData.sort((a, b) => (a.year > b.year) ? 1 : -1) }  
 		return (
 			<>
-				{ 
-					allCensusData ? 
+				{ allCensusData ? 
 					allCensusData.map((year, keytwo) => {
 						if (ent.shortname === 'tract') {
 							return (
@@ -151,7 +152,7 @@ export const CensusTable = (props) => {
 			className={"censusTable dataTable " + (isVisible ? "active" : "inactive")}
 		>
 			<h1>Census</h1> 
-			<span className="see-notes">See Notes ></span>
+			{/*<span className="see-notes">See Notes ></span>*/}
 			<span>{ renderRows() }</span>
 		</div>
 	)

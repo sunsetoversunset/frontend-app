@@ -27,14 +27,19 @@ export const NavAddress = (props) => {
 
 
   // ---------------------------------------------------------------
-    // window.onscroll = (e) =>{
-    //     let st = window.pageYOffset
-    //     if (st > 419){
-    //      navRef.current.classList.add('stuck')
-    //    }else{
-    //     navRef.current.classList.remove('stuck')
-    //    }
-    // }
+  useEffect( () => {
+    window.onscroll = (e) =>{
+        let st = window.pageYOffset
+        if (st > 419 && navRef.current){
+         navRef.current.classList.add('stuck')
+       }else if(st < 419 && navRef.current){
+        navRef.current.classList.remove('stuck')
+       }
+    }
+    return function cleanup(){
+      window.onscroll = (e) =>{}
+    }
+  }, [] )
 
   // ---------------------------------------------------------------
   const loadNextAddess = (url) => {
