@@ -63,6 +63,19 @@
 		span{
 		display: inline-block
 		}
+		a{
+		color:#000;
+		}
+		.arrow{
+		content: " ";
+		background: url('../assets/icons/link-out.png');
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 7px;
+		height: 7px;
+		display: inline-block;
+		margin-left: 7px;
+		}
 	}
 }
 .dataTable.active{

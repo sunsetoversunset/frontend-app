@@ -11,6 +11,7 @@ import "../styles/AddressView.scss"
 import { CensusTable } from "./AddressDataTables/CensusTable"
 import { OccupantsTable } from "./AddressDataTables/OccupantsTable"
 import { NewspaperTable } from "./AddressDataTables/NewspaperTable"
+import { OnlineBuildingRecords } from "./AddressDataTables/OnlineBuildingRecords"
 
 import { dataFields } from "../assets/data/dataFields"
 import Config from "../config.json"
@@ -234,6 +235,7 @@ export const AddressView = (props) => {
 					<CensusTable address={address}/>
 					<OccupantsTable address={address}/>
 					<NewspaperTable address={address} />
+					<OnlineBuildingRecords />
 				</div>
 			</div>
 		)
