@@ -56,8 +56,7 @@ export const About = () => {
           <div className="section">
             <p className="header">Design & Development</p>
             <p><a target="_blank" rel="noreferrer" href="https://livia-foldes.com/">Livia Foldes</a>, Project lead & visual design</p>
-            <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/rachel-s-ng">Rachel Ng</a>, Development lead</p>
-            <p><a target="_blank" rel="noreferrer" href="https://www.rachelrosewater.com/">Rachel Rose Waterhouse</a>, Development lead</p>
+            <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/rachel-s-ng">Rachel Ng</a>, UX Design</p>
             <p><a target="_blank" rel="noreferrer" href="https://andrewlux.com/">Andrew Lux</a>, Development</p>
             <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/walei">Walei Sabry</a>, Accessibility consultant</p>
           </div>
