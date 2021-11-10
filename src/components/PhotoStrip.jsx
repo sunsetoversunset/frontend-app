@@ -28,33 +28,53 @@ export const PhotoStrip = (props) => {
 
   // ---------------------------------------------------------------
   const getPhotoData = (url) => {
-    const queryUrl = `${url}`
-    axios.get(queryUrl, opts)
-      .then((res) => {
-        if (res.status === 200) {
-          // handle data
-          res.data.results.forEach(row => {
-            let processedRow = {
-              "identifier": row[props.meta.idRow],
-              "coordinate": row[props.meta.coordRow],
-              "facing": row[props.meta.ssRow],
-              "year": props.meta.year
-            }
-            tempPhotoData.push(processedRow)
-          })
-          // handle next if url exists
-          if (res.data.next) {
-            let nextUrl = res.data.next.replace("http", "https")
-            return getPhotoData(nextUrl)
-          } else {
-            // finished loading data
-            setPhotoData(tempPhotoData)
-          }
-        }
-      }).catch((err) => {
-        console.error('error: ', err)
-        setPhotoData(tempPhotoData)
-      })
+
+    console.log('‼️')
+    console.log(props)
+
+    d3.csv(`https://s3.us-east-2.wasabisys.com/lmec-public-files/temp/sos/photographs_${props.meta.year}_${props.stripDirection}.csv`)
+      .then(d=> {
+        d.forEach(row => {
+          let processedRow = {
+                      "identifier": row['identifier'],
+                      "coordinate": row['coordinate'],
+                      "facing": props.stripDirection,
+                      "year": props.meta.year
+                    }
+                    tempPhotoData.push(processedRow)
+        
+        })
+        setPhotoData(tempPhotoData);
+
+      });
+
+    // const queryUrl = `${url}`
+    // axios.get(queryUrl, opts)
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       // handle data
+    //       res.data.results.forEach(row => {
+    //         let processedRow = {
+    //           "identifier": row[props.meta.idRow],
+    //           "coordinate": row[props.meta.coordRow],
+    //           "facing": row[props.meta.ssRow],
+    //           "year": props.meta.year
+    //         }
+    //         tempPhotoData.push(processedRow)
+    //       })
+    //       // handle next if url exists
+    //       if (res.data.next) {
+    //         let nextUrl = res.data.next.replace("http", "https")
+    //         return getPhotoData(nextUrl)
+    //       } else {
+    //         // finished loading data
+    //         setPhotoData(tempPhotoData)
+    //       }
+    //     }
+    //   }).catch((err) => {
+    //     console.error('error: ', err)
+    //     setPhotoData(tempPhotoData)
+    //   })
   }
 
 
