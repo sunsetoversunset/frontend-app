@@ -6,6 +6,7 @@ export const AddressBar = (props) => {
   const addressContainer = useRef(null)
   const addressRef       = useRef(null)
 
+
   // ---------------------------------------------------------------
   const set = () => {
     setBbox(addressContainer && addressContainer.current ? addressContainer.current.getBoundingClientRect() : {});
@@ -35,11 +36,11 @@ export const AddressBar = (props) => {
     const svg = d3.select(addressRef.current)
 
     if (props.directionFacing === 'n') {
-      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n visible');
-      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s hidden');
+      svg.selectAll('.addresses-text-n').attr("class", 'addresses-text-n visible');
+      svg.selectAll('.addresses-text-s').attr("class", 'addresses-text-s hidden');
     } else {
-      svg.selectAll(`.addresses-text-s`).attr("class", 'addresses-text-s visible');
-      svg.selectAll(`.addresses-text-n`).attr("class", 'addresses-text-n hidden');
+      svg.selectAll('.addresses-text-s').attr("class", 'addresses-text-s visible');
+      svg.selectAll('.addresses-text-n').attr("class", 'addresses-text-n hidden');
     }
 
   }, [props.directionFacing])
@@ -53,17 +54,18 @@ export const AddressBar = (props) => {
     // clear out before we draw
     svg.selectAll("*").remove();
 
-    // N addresses
-    if (props.directionFacing === 'n') {
-      svg.append('g')
-        .attr('class', 'addresses-text-n')
+    // window.alert("fetching strip label")
+    d3.csv(process.env.PUBLIC_URL + '/strip_labels.csv')
+      .then(stripLabels => {
+
+        svg.append('g')
+        .attr('class', 'addresses-text-n hidden')
         .selectAll('text')
-        // .data(props.filteredAddressesN)
-        .data(props.addressesNData)
+        .data(stripLabels.filter(f=>f.street_side==='n'))
         .enter()
         .append('text')
         .attr("x", function(d) {
-          return ((parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult 
+          return (+d.coordinate * props.mult )
         })
         .attr("y", "45")
         .on('click', function(d){
@@ -71,39 +73,62 @@ export const AddressBar = (props) => {
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 
-          return d.address 
+          return d.label 
         })
-    } else {
-      // S addresses
-      svg.append('g')
-        .attr('class', 'addresses-text-s')
+
+        svg.append('g')
+        .attr('class', 'addresses-text-s hidden')
         .selectAll('text')
-        // .data(props.filteredAddressesS)
-        .data(props.addressesSData)
+        .data(stripLabels.filter(f=>f.street_side==='s'))
         .enter()
         .append('text')
-        .attr("x", function(d) { 
-          return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult
+        .attr("x", function(d) {
+          return (+d.coordinate * props.mult )
         })
         .attr("y", "45")
-        .on('click', function(d) {
+        .on('click', function(d){
           window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
         })
         .attr("text-anchor", "middle")
         .text(function(d) { 
-          return d.address 
+          return d.label 
         })
-    }
+
+        // hacky and bad
+        if(props.directionFacing === 'n') { 
+          d3.selectAll('.addresses-text-n').attr("class", "addresses-text-n visible")
+        } else {
+          d3.selectAll('.addresses-text-s').attr("class", "addresses-text-s visible")
+        }
+
+      });
+
+    
+
+    
+    // else {
+    //   // S addresses
+    //   svg.append('g')
+    //     .attr('class', 'addresses-text-s')
+    //     .selectAll('text')
+    //     // .data(props.filteredAddressesS)
+    //     .data(props.addressesSData)
+    //     .enter()
+    //     .append('text')
+    //     .attr("x", function(d) { 
+    //       return (-(parseFloat(d.coord_max) + parseFloat(d.coord_min)) / 2) * props.mult
+    //     })
+    //     .attr("y", "45")
+    //     .on('click', function(d) {
+    //       window.open(`${window.location.origin}/#/address/${this.innerHTML}/`)
+    //     })
+    //     .attr("text-anchor", "middle")
+    //     .text(function(d) { 
+    //       return d.address 
+    //     })
+    // }
   
-  }, [
-    props.mult,
-    props.addressesNData, 
-    props.addressesSData, 
-    // props.filteredAddressesN,
-    // props.filteredAddressesS,
-    props.directionFacing,
-    bbox
-  ])
+  }, [props.mult])
 
   // ---------------------------------------------------------------
   return (

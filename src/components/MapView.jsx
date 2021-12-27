@@ -10,6 +10,8 @@ import "../styles/MapView.scss"
 import { tableFields as tf } from "../assets/data/tableFields"
 import Config from "../config.json"
 import axios from "axios"
+import * as d3 from 'd3'
+
 
 import iconMinimize from "../assets/icons/icon-minimize.svg"
 import iconMaximize from "../assets/icons/icon-maximize.svg"
@@ -22,6 +24,8 @@ export const MapView = () => {
   const [ addressesS, setAddressesS ] = useState([])
   let   tempAddressesN                = []
   let   tempAddressesS                = []
+
+  let stripLabels;
 
   const baseUrl = "https://api.baserow.io/api/database/rows/table/"
   const opts = {
@@ -120,46 +124,49 @@ export const MapView = () => {
   // ---------------------------------------------------------------
   const loadAddressData = (url) => {
     console.log('[MapView] loadAddressData called.')
-    axios.get(url, opts)
-    .then((res) => {  
-      if (res.status === 200) {
-        // handle data
-        res.data.results.forEach(row => {
-          let processedRow = {
-            "address": row[tf.addressBoundaries.address],
-            "coord_min": row[tf.addressBoundaries.coordMin],
-            "coord_max": row[tf.addressBoundaries.coordMax]
-          }
+
+    // d3.csv(process.env.PUBLIC_URL + '/strip_labels.csv')
+    //   .then(d=>stripLabels = d)
+    // axios.get(url, opts)
+    // .then((res) => {  
+    //   if (res.status === 200) {
+    //     // handle data
+    //     res.data.results.forEach(row => {
+    //       let processedRow = {
+    //         "address": row[tf.addressBoundaries.address],
+    //         "coord_min": row[tf.addressBoundaries.coordMin],
+    //         "coord_max": row[tf.addressBoundaries.coordMax]
+    //       }
           
-          if (row.field_144141 === "n" || row.field_144141 === "N") {
-            tempAddressesN.push(processedRow)
-          } else if (row.field_144141 === "s" || row.field_144141 === "S") {
-            tempAddressesS.push(processedRow)
-          }
-        })
+    //       if (row.field_144141 === "n" || row.field_144141 === "N") {
+    //         tempAddressesN.push(processedRow)
+    //       } else if (row.field_144141 === "s" || row.field_144141 === "S") {
+    //         tempAddressesS.push(processedRow)
+    //       }
+    //     })
         
-        // handle loading next page if url exists
-        if (res.data.next) {
-          let nextUrl = res.data.next.replace("http", "https")
-          loadAddressData(nextUrl)
-        } else {
-          // no more next, store in state
-          console.log('[loadAddressData] done getting addresses.')
-          setAddressesN(tempAddressesN)
-          setAddressesS(tempAddressesS)
-          setAllAddresses(tempAddressesN.concat(tempAddressesS))
-        }
-      } else {
-        // Handle case where baserow throws an error
-        console.error('Got baserow error status: ', res.status)
-        if (res.statusText !== "") {
-          console.log('Got baserow statusText: ', res.statusText)
-        }
-      }
-    })
-    .catch((err) => {
-      console.log('err: ', err)
-    })
+    //     // handle loading next page if url exists
+    //     if (res.data.next) {
+    //       let nextUrl = res.data.next.replace("http", "https")
+    //       loadAddressData(nextUrl)
+    //     } else {
+    //       // no more next, store in state
+    //       console.log('[loadAddressData] done getting addresses.')
+    //       setAddressesN(tempAddressesN)
+    //       setAddressesS(tempAddressesS)
+    //       setAllAddresses(tempAddressesN.concat(tempAddressesS))
+    //     }
+    //   } else {
+    //     // Handle case where baserow throws an error
+    //     console.error('Got baserow error status: ', res.status)
+    //     if (res.statusText !== "") {
+    //       console.log('Got baserow statusText: ', res.statusText)
+    //     }
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log('err: ', err)
+    // })
   }
   
 
@@ -339,10 +346,6 @@ export const MapView = () => {
           mult={ mult }
           scrollAmount={ scrollAmount } 
           directionFacing={ directionFacing }
-          filteredAddressesN={ filteredAddressesN }
-          filteredAddressesS={ filteredAddressesS }
-          addressesNData={ addressesN }
-          addressesSData={ addressesS }
         />
       </div>
       <div
@@ -351,8 +354,8 @@ export const MapView = () => {
           `strips-shade ${isMapMinimized ? "full" : "minimized"} ${isSearchAndFilterShowing === true ? "visible" : "hidden"}`}>
       </div>
       <div className={`strips-container ${isSearchAndFilterShowing === true ? "noscroll" : "scroll"} ${isMapMinimized ? "full" : "minimized"} is-showing-${directionFacing}`}>
-        { renderStripViews('n') }
-        { renderStripViews('s') }
+          { renderStripViews('n') }
+          { renderStripViews('s') }
         <Footer />
       </div>
     </div>
