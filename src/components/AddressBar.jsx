@@ -83,7 +83,7 @@ export const AddressBar = (props) => {
         .enter()
         .append('text')
         .attr("x", function(d) {
-          return (+d.coordinate * props.mult )
+          return (-1 * +d.coordinate * props.mult )
         })
         .attr("y", "45")
         .on('click', function(d){

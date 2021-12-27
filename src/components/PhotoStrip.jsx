@@ -28,10 +28,6 @@ export const PhotoStrip = (props) => {
 
   // ---------------------------------------------------------------
   const getPhotoData = (url) => {
-
-    console.log('‼️')
-    console.log(props)
-
     d3.csv(`https://s3.us-east-2.wasabisys.com/lmec-public-files/temp/sos/photographs_${props.meta.year}_${props.stripDirection}.csv`)
       .then(d=> {
         d.forEach(row => {
@@ -144,8 +140,9 @@ export const PhotoStrip = (props) => {
       .attr("x", (d) => { 
         if (props.stripDirection === 'n') {
           return (1 * (props.mult * parseFloat(d.coordinate))) - 184; 
-        }
+        } else {
         return (-1 * (props.mult * parseFloat(d.coordinate))) - 184; 
+        }
       })
       .attr("y", "0")
       .attr("width", "380")
