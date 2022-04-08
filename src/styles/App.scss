@@ -1,0 +1,37 @@
+@import './global/index.scss';
+
+html, body {
+  margin: 0;
+  background-color: $main-bg;
+  font-family: "Degular", sans-serif;
+}
+
+label.hidden {
+  display: none!important;
+}
+
+.app-page {
+  color: $black;
+	height: 100%;
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .app-page-inner.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .app-links {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

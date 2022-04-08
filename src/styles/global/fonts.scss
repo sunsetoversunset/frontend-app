@@ -1,0 +1,345 @@
+/*
+  100 – Thin.
+  200 – Extra Light (Ultra Light)
+  300 – Light.
+  400 – Normal.
+  500 – Medium.
+  600 – Semi Bold (Demi Bold)
+  700 – Bold.
+  800 – Extra Bold (Ultra Bold)
+*/
+
+// ----------------------------
+// Degular
+// ----------------------------
+
+// Degular-Thin
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Thin.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Thin.woff') format('woff');
+  font-weight: 100;
+}
+
+// Degular-Thin_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Thin_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Thin_Italic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+
+// Degular-Light
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Light.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Light.woff') format('woff');
+  font-weight: 300;
+}
+
+// Degular-Light_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Light_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Light_Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+// Degular-Regular
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Regular.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+// Degular-Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+// Degular-Medium
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Medium.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Medium.woff') format('woff');
+  font-weight: 500;
+}
+
+// Degular-Medium_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Medium_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Medium_Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+// Degular-Semibold
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Semibold.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Semibold.woff') format('woff');
+  font-weight: 600;
+}
+
+// Degular-Semibold_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Semibold_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Semibold_Italic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+// Degular-Bold 
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Bold.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Bold.woff') format('woff');
+  font-weight: 700;
+}
+
+// Degular-Bold_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Bold_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Bold_Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+// Degular-Black
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Black.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Black.woff') format('woff');
+  font-weight: 800
+}
+
+// Degular-Black_Italic
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../../assets/fonts/Degular/Web/Degular-Black_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular/Web/Degular-Black_Italic.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+}
+
+// ----------------------------
+// Degular Text
+// ----------------------------
+
+// Degular-Thin
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Thin.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Thin.woff') format('woff');
+  font-weight: 100;
+}
+
+// Degular-Thin_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src:
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Thin_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Thin_Italic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+
+// Degular-Light
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Light.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Light.woff') format('woff');
+  font-weight: 300;
+}
+
+// Degular-Light_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Light_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Light_Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+// Degular-Regular
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Regular.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+// Degular-Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+// Degular-Medium
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Medium.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Medium.woff') format('woff');
+  font-weight: 500;
+}
+
+// Degular-Medium_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Medium_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Medium_Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+// Degular-Semibold
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Semibold.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Semibold.woff') format('woff');
+  font-weight: 600;
+}
+
+// Degular-Semibold_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Semibold_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Semibold_Italic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+// Degular-Bold 
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Bold.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Bold.woff') format('woff');
+  font-weight: 700;
+}
+
+// Degular-Bold_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Bold_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Bold_Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+// Degular-Black
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Black.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Black.woff') format('woff');
+  font-weight: 800
+}
+
+// Degular-Black_Italic
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Black_Italic.woff2') format('woff2'),
+    url('../../assets/fonts/Degular_Text/Web/Degular_Text-Black_Italic.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+}
+
+// ----------------------------
+// Sunset Gothic
+// ----------------------------
+
+// Light
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-light-pro-web/web/sunset-gothic-light-pro.woff2') format('woff2'),
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-light-pro-web/web/sunset-gothic-light-pro.woff') format('woff');
+  font-weight: 300;
+}
+
+// Regular
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-regular-pro-web/web/sunset-gothic-regular-pro.woff2') format('woff2'),
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-regular-pro-web/web/sunset-gothic-regular-pro.woff') format('woff');
+  font-weight: 400;
+}
+
+// Medium
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-medium-pro-web/web/sunset-gothic-medium-pro.woff2') format('woff2'),
+    url('../../assets/fonts/Sunset_Gothic/sunset-gothic-medium-pro-web/web/sunset-gothic-medium-pro.woff') format('woff');
+  font-weight: 500;
+}
+
+// ----------------------------
+// Stymie
+// ----------------------------
+// Bold
+@font-face {
+  font-family: 'Stymie';
+  src: 
+    url('../../assets/fonts/Stymie/Stymie_Extra_Bold.woff2') format('woff2'),
+    url('../../assets/fonts/Stymie/Stymie_Extra_Bold.woff') format('woff');
+  font-weight: 800;
+}
+
+// ----------------------------
+// Superette
+// ----------------------------
+// Face
+@font-face {
+  font-family: 'Superette Face';
+  src: 
+    url('../../assets/fonts/Superette/Superette-Shaded-Face-Web.woff2') format('woff2'),
+    url('../../assets/fonts/Superette/Superette-Shaded-Face-Web.woff') format('woff');
+}
+// Normal
+@font-face {
+  font-family: 'Superette';
+  src: 
+    url('../../assets/fonts/Superette/Superette-Shaded-Web.woff2') format('woff2'),
+    url('../../assets/fonts/Superette/Superette-Shaded-Web.woff') format('woff');
+}

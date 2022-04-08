@@ -1,0 +1,34 @@
+@import './global/index.scss';
+
+footer {
+  height: 325px;
+  display: flex;
+	flex-direction: column;
+	border-top: 1px solid;
+
+  .footer-graphic {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/textures/noise-gradient-footer.png');
+    background-size: cover;
+  }
+
+  img.footer-hero {
+    mix-blend-mode: multiply;
+  }
+
+  .ruscha-credit {
+    height: 30px;
+    background: $black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      color: $main-bg!important;
+      font-size: 12px;
+    }
+  }
+}
