@@ -14,8 +14,8 @@ tables = [
 def pull_table(t):
 
     if(t["tablename"] == "strip_labels"):
-        north_side_file = open('../src/assets/data/strip_labels_n.csv', 'w+')
-        south_side_file = open('../src/assets/data/strip_labels_s.csv', 'w+')
+        north_side_file = open('./src/assets/data/strip_labels_n.csv', 'w+')
+        south_side_file = open('./src/assets/data/strip_labels_s.csv', 'w+')
 
         north_side_file.write('label,coordinate')
         south_side_file.write('label,coordinate')
@@ -44,8 +44,8 @@ def pull_table(t):
 
     elif(t["tablename"].split("_")[0] == "photographs"):
 
-        north_side_file = open('../src/assets/data/{}_n.csv'.format(t['tablename']),'w+')
-        south_side_file = open('../src/assets/data/{}_s.csv'.format(t['tablename']),'w+')
+        north_side_file = open('./src/assets/data/{}_n.csv'.format(t['tablename']),'w+')
+        south_side_file = open('./src/assets/data/{}_s.csv'.format(t['tablename']),'w+')
 
         north_side_file.write('identifier,coordinate')
         south_side_file.write('identifier,coordinate')
