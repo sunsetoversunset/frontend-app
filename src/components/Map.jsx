@@ -103,18 +103,6 @@ const Map = (props) => {
               </Link>
             </g>
           ))}
-          <circle
-            cx={-118.28074729774512}
-            cy={-34.09277589797542}
-            r={0.001}
-            fill='green'
-          />
-          <circle
-            cx={lng}
-            cy={lat * -1}
-            r={0.001}
-            fill='blue'
-          />
           <g transform={`rotate(${((direction === 'n') ? rotation + 90 + 3 : rotation - 90 + 3)} ${viewPosition[0]} -${viewPosition[1]}) scale(${1 / 5000} ${1 / 4000}) translate(${viewPosition[0] * 5000} ${viewPosition[1] * -1 * 4000})`}>
             <circle
               cx={0}
@@ -133,15 +121,15 @@ const Map = (props) => {
               strokeDasharray="25 75"
               strokeDashoffset="90"
             />
-            <line
+           {/* <line
               x1={-100}
               x2={100}
               y1={0}
               y2={0}
               strokeWidth={1}
               stroke='black'
-            />
-          </g>
+          /> */}
+          </g> 
         </g>
         <text
           x={65}
