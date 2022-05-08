@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef} from 'react'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RoundedButton } from "./Buttons"
 import '../styles/NavHeader.scss';
 
@@ -12,7 +12,7 @@ export const NavAddress = (props) => {
   const navRef = useRef(null)
   const boundUrl = `https://api.baserow.io/api/database/rows/table/`
   const opts = {headers: {'Authorization': `Token ${Config.apiToken}`} }
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // ---------------------------------------------------------------
   useEffect( () => {
@@ -85,7 +85,7 @@ export const NavAddress = (props) => {
 
    // ---------------------------------------------------------------
   const handleScroll = (dir) => { 
-    history.push(`/address/${dir}/`)
+    navigate(`/address/${dir}/`);
   }
 
   const anchorScroll = (hash) => {

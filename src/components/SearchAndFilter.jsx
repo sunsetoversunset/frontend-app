@@ -1,154 +1,148 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import Select from 'react-select';
+import { useNavigate, useParams } from 'react-router-dom';
 import iconClose from "../assets/icons/icon-close.svg"
 import iconCloseRust from "../assets/icons/icon-close-rust.svg"
 import iconCheck from "../assets/icons/icon-check.svg"
 import { dataFields } from "../assets/data/dataFields"
+import strip_labels from '../assets/data/strip_labels.json';
 import "../styles/SearchAndFilter.scss"
 
 export const SearchAndFilter = (props) => {
-  const [ searchInput, setSearchInput ] = useState("")
-  const [ searchResults, setSearchResults ] = useState([])
-  const [ isCloseHovering, setIsCloseHovering ] = useState(false)
+  const { years: yearsStr } = useParams();
+  const years = yearsStr.split(',').map(y => parseInt(y));
+  const [isCloseHovering, setIsCloseHovering] = useState(false);
 
+  const navigate = useNavigate();
 
-  // ---------------------------------------------------------
-  const handleSearch = (searchTerm) => {
-    if (props.allAddresses) {
-      setSearchInput(searchTerm)
-      let results = props.allAddresses.filter((addressObj) => {
-        return searchTerm.includes(addressObj.address) || addressObj.address.includes(searchTerm)
-      })
-
-      // Return the first 8
-      setSearchResults(results.slice(0, 7))
-    }
-  }  
-
-  // ---------------------------------------------------------
-  const handleSelectAddress = (address) => {
-    setSearchInput('')
-    props.handleCenterAddress(address)
-  }
-
-  // ---------------------------------------------------------
-  const renderSearchResults = () => {
-    return (
-      <ul className='search-results-list'>
-        {
-          searchResults.map((result, idx) => {
-            return (
-              <li key={`result-${idx}`}>
-                <div 
-                  className="result-list-item"
-                  onClick={() => handleSelectAddress(result.address)}
-                >
-                  {result.address} Sunset Blvd.
-                </div>
-              </li>
-            )
-          })
+  const customStyles = {
+    control: (provided, state) => {
+      const border = (state.isFocused) ? '1px solid #FBA92C' : '1px solid black';
+      return {
+        ...provided,
+        border,
+        borderRadius: 20,
+        backgroundColor: 'white',
+        '&:hover': {
+          borderColor: '#FBA92C',
         }
-      </ul>
-    )
-  }
+      };
+    },
+    menu: (provided, state) => {
+      return {
+        ...provided,
+        backgroundColor: '#eee',
+        border: '1px solid black',
+        borderRadius: 10,
+        boxShadow: 'none',
+        padding: '0 0px',
+        //transform: `translateX(-${(dataViewerWidth - 300) / 2}px)`,
+      }
+    },
+    menuList: (provided, state) => {
+      return {
+        ...provided,
+        padding: '0, auto',
+      }
+    },
+  };
 
+  const searchOptions = strip_labels
+    .filter(label => label.l)
+    .map(label => {
+      const displayLabel = (typeof label.l === 'number') ? `${label.l} Sunset Blvd.` : label.l;
+      return {
+        value: `../../../${label.s}/${label.l.toString().replace(/\s+/g, '')}/${years}`,
+        label: displayLabel,
+      };
+    })
+    .sort((a, b) => {
+      if (!isNaN(a.label.charAt(0)) && isNaN(b.label.charAt(0))) {
+        return 1;
+      } else if (isNaN(a.label.charAt(0)) && !isNaN(b.label.charAt(0))) {
+        return -1;
+      }
+      return (a.label > b.label) ? 1 : -1
+    });
 
-  // ---------------------------------------------------------
-  const renderYearsControls = () => {
-    return (
-      <div className="years-control">
-        <label className="control-label">Display years</label>
-        { dataFields.map(dataField => {
-          return (
-            <div
-              key={`check-${dataField.year}`} 
-              className={`year-control ${props.yearsShowing[dataField.year] ? 'checked' : ''}`}
-              onClick={() => {
-                let currentYearsShowing = {...props.yearsShowing}
-                currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                props.setYearsShowing(currentYearsShowing)
-              }}
-            >
-              <input 
-                checked={props.yearsShowing[dataField.year]}
-                id={`year-${dataField.year}`}
-                className="year-checkbox"
-                name={`year-${dataField.year}`}
-                type="checkbox" 
-              />
-              {
-                props.yearsShowing[dataField.year] === true ?
-                <img 
-                  className='icon-year-checked'
-                  src={iconCheck} 
-                  alt="icon-year-checked" 
-                /> : null
-              }
-              <label
-                onClick={(e) => {
-                  e.preventDefault()
-                  let currentYearsShowing = {...props.yearsShowing}
-                  currentYearsShowing[dataField.year] = !currentYearsShowing[dataField.year]
-                  props.setYearsShowing(currentYearsShowing)
-                }} 
-                className="hidden" 
-                htmlFor={`year-${dataField.year}`}
-              >
-                {
-                  props.yearsShowing[dataField.year] ? 
-                  `Hide ${dataField.year}` : `Show ${dataField.year}`
-                }
-              </label>
-              <span className="year-label">{dataField.year}</span>
-            </div>
-          )
-        }) }
-      </div>
-    )
-  }
-  
 
   // ---------------------------------------------------------
   return (
-    <div className={`search-and-filter-opts ${props.isSearchAndFilterShowing ? "visible" : ""}`}>
+    <div className={`search-and-filter-opts`}>
       <label htmlFor="search-and-filter-control" className="hidden">
         Close search and filter control
       </label>
       <button
         onMouseEnter={() => setIsCloseHovering(true)}
         onMouseLeave={() => setIsCloseHovering(false)}
-        id="search-and-filter-control" 
+        id="search-and-filter-control"
         className="icon-close-search-container"
-        onClick={() => props.setIsSearchAndFilterShowing(false)}
+        onClick={() => props.setSearchOpen(false)}
       >
         {
-          isCloseHovering? 
-          <img src={iconCloseRust} alt="icon-close-search" /> :
-          <img src={iconClose} alt="icon-close-search" />
+          isCloseHovering ?
+            <img src={iconCloseRust} alt="icon-close-search" /> :
+            <img src={iconClose} alt="icon-close-search" />
         }
       </button>
+
       <div className='search-control'>
-        <label 
-          className="control-label" 
-          htmlFor="search-control-input">
-            Search an address
-          </label>
-        <input
-          type="text"
-          value={ searchInput }
-          onChange={ (e) => handleSearch(e.target.value) } 
-          placeholder="9041 Sunset Blvd."
-          id="search-control-input"
-        >
-        </input>
+        <Select
+          options={searchOptions}
+          placeholder='search'
+          styles={customStyles}
+          onChange={(selected) => {
+            navigate(selected.value)
+            props.setSearchOpen(false);
+          }}
+        />
       </div>
-      <div className='search-results-outer'>
-        <div className={`search-results-inner ${ searchInput.length === 0 || searchResults.length === 0 ? 'hidden' : 'visible'}`}>
-          { renderSearchResults() }
-        </div>
+      <div className="years-control">
+        <label className="control-label">Display years</label>
+        {dataFields.map(dataField => {
+          return (
+            <div
+              key={`check-${dataField.year}`}
+              className={`year-control ${years.includes(parseInt(dataField.year)) ? 'checked' : ''}`}
+              onClick={(e) => {
+                // remove it from years if it's currently checked; add it if it's not
+                const updatedYears = (years.includes(parseInt(dataField.year)))
+                  ? years.filter(y => y !== parseInt(dataField.year))
+                  : [...years, parseInt(dataField.year)].sort();
+                navigate(`../${updatedYears.sort().join(',')}`);
+              }}
+            >
+              <input
+                checked={years.includes(parseInt(dataField.year))}
+                id={`year-${dataField.year}`}
+                className="year-checkbox"
+                name={`year-${dataField.year}`}
+                type="checkbox"
+              />
+              {
+                years.includes(parseInt(dataField.year) === true) ?
+                  <img
+                    className='icon-year-checked'
+                    src={iconCheck}
+                    alt="icon-year-checked"
+                  /> : null
+              }
+              <label
+                className="hidden"
+                htmlFor={`year-${dataField.year}`}
+              >
+                {
+                  props.yearsShowing[dataField.year] ?
+                    `Hide ${dataField.year}` : `Show ${dataField.year}`
+                }
+              </label>
+              <span className="year-label"
+
+              >{dataField.year}</span>
+            </div>
+          )
+        })}
       </div>
-      <div className="divider"></div>
-      { renderYearsControls() }
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { NavHeader } from './NavHeader';
 import { PhotoViewerModal } from "./PhotoViewerModal" 
-import { Footer } from './Footer'
 import img from '../assets/images/5025-5007.jpg'
 
 import '../styles/App.scss'
@@ -21,7 +19,6 @@ export const StoriesView = () => {
         handleHideModal={ () => setIsModalShowing(false) }
         isVisible={ isModalShowing } 
       /> 
-      <NavHeader />
       <div className='stories-view-container'>
         <div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,1400/0/default.jpg`}}>
           <span className="background-texture"></span>
@@ -273,7 +270,6 @@ export const StoriesView = () => {
 
 
       </div>
-      <Footer />
     </div>
   )
 }

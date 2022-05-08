@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/NavHeader.scss';
 
-export const NavHeader = () => {
+const NavHeader = () => {
   const navHeader  = useRef(null)
 
 
@@ -39,3 +39,5 @@ export const NavHeader = () => {
     </nav>
   )
 }
+
+export default NavHeader;

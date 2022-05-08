@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as d3 from 'd3'
 import "../styles/PhotoStrip.scss";
 import { DimensionsContext } from '../Contexts';
-import { addressToCoordinate, getOppositeX, mult } from '../utiliities.ts';
+import { addressToCoordinate, getOppositeX, mult, addrOffsetToCoordinate } from '../utiliities.ts';
 
 /* 
 type Direction = 'n' | 's';
@@ -13,13 +13,11 @@ type Props = {
 } 
 */
 
-export const PhotoStrip = ({ year }) => {
+const PhotoStrip = ({ year }) => {
   const { width } = (useContext(DimensionsContext));
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  const { addr } = useParams();
-  const direction = useParams().direction || 'n';
-  const offset = parseFloat(useParams().offset) || 0;
-  const newCenter = (addr) ? addressToCoordinate(addr) + offset : width / 2;
+  const { addrOffset, direction } = useParams();
+  const newCenter = addrOffsetToCoordinate(addrOffset);
   const stripContainer = useRef(null)
   const imageWidth = 299;
   const [center, setCenter] = useState(newCenter);
@@ -131,3 +129,5 @@ export const PhotoStrip = ({ year }) => {
     </>
   )
 }
+
+export default PhotoStrip;

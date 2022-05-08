@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import '../styles/App.scss';
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from './Home'
 import { StoriesView } from './StoriesView'
-import { MapView } from './MapView'
+import Panorama from './Panorama';
+import NavHeader from './NavHeader';
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
-import { AddressView } from './AddressView'
+import { AddressView } from './AddressView';
+import Footer from './Footer';
 import { DimensionsContext } from '../Contexts.ts';
 
 export const App = () => {
@@ -43,29 +45,50 @@ export const App = () => {
   return (
     <DimensionsContext.Provider value={dimensions}>
       <div className="app">
-        <HashRouter>
-          <Switch>
-            <Route path="/about" component={About} />
-            <Route path="/stories" component={StoriesView} />
+        <Router basename={'/'}>
+          <NavHeader />
+          <Routes>
+            <Route path="/about" element={About} />
+            <Route path="/stories" element={StoriesView} />
+            <Route path="/contact" element={Contact} />
+            <Route path="/team" element={Team} />
+            <Route path="/address/:address" element={AddressView} />
             <Route
-              path={['/panorama/direction/:direction/addr/:addr/offset/:offset', '/panorama/direction/:direction/addr/:addr', '/panorama/direction/:direction', '/panorama']}
-              render={() => (
-                <MapView />
-              )}
-            />
-            <Route path="/contact" component={Contact} />
-            <Route path="/team" component={Team} />
-            <Route path={["/address/:address", "/address"]} component={AddressView} />
-            <Route
-              path="/"
-              render={() => {
-                return (
-                  <Redirect to="/panorama" />
-                )
-              }}
-            />
-          </Switch>
-        </HashRouter>
+              path='/panorama'
+            >
+              <Route
+                index
+                element={<Navigate replace to='n/DohenyRoad/1966,1973,1985,1995,2007' />}
+              />
+              <Route
+                path='n'
+                element={<Navigate replace to='DohenyRoad/1966,1973,1985,1995,2007' />}
+              />
+              <Route
+                path='s'
+                element={<Navigate replace to='9176/1966,1973,1985,1995,2007' />}
+              />
+              <Route
+                path=':direction'
+              >
+                <Route
+                  path=':addrOffset'
+                >
+                  <Route
+                    index
+                    element={<Navigate replace to='1966,1973,1985,1995,2007' />}
+                  />
+                  <Route
+                    path=':years'
+                    element={<Panorama />}
+                  />
+                </Route>
+              </Route>
+            </Route>
+
+          </Routes>
+          <Footer />
+        </Router>
       </div>
     </DimensionsContext.Provider>
   );

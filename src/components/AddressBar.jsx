@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import { DimensionsContext } from '../Contexts';
-import stripLabels from '../assets/data/strip_labels.json';
-import { maxX, addressToCoordinate, labels } from '../utiliities.ts';
+import { addrOffsetToCoordinate, labels } from '../utiliities.ts';
+import '../styles/AddressBar.scss';
 
-export const AddressBar = (props) => {
+const AddressBar = (props) => {
   const { width } = (useContext(DimensionsContext));
   // `scrollAmount` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  const { addr } = useParams();
-  const direction = useParams().direction || 'n';
-  const offset = parseFloat(useParams().offset) || 0;
-  const scrollAmount = (addr) ? addressToCoordinate(addr) + offset : width / 2;
+  const { addrOffset, direction } = useParams();
+  const scrollAmount = addrOffsetToCoordinate(addrOffset);
   const [center, setCenter] = useState(scrollAmount);
   const [scrolling, setScrolling] = useState(false);
   const ref = useRef();
@@ -33,7 +31,7 @@ export const AddressBar = (props) => {
     if (scrollAmount !== center && currentDirection.current === direction) {
       const left = (scrollAmount < center) ? scrollAmount - width / 2 : center - width / 2;
       const right = (scrollAmount < center) ? center + width / 2 : scrollAmount + width / 2;
-      
+
       // get the photoset that will be visible after scrolling
       const addressesForScroll = getVisibleAddresses(left, right);
       setVisibleAddressess(addressesForScroll);
@@ -61,31 +59,35 @@ export const AddressBar = (props) => {
   });
 
   return (
-    <div
-      className="strip-addresses"
-      ref={ref}
-      style={{
-        position: 'relative',
-        transform: `translateX(-${center - width / 2}px)`
-      }}
-    >
-      {visibleAddresses.map(label => (
-        <Link
-          to={`/address/${label.label}`}
-          key={label.label}
-        >
-          <span
-            style={{
-              position: 'absolute',
-              left: label.x,
-            }}
+    <>
+      <div
+        id='addressBar'
+        ref={ref}
+        style={{
+          transform: `translateX(-${center - width / 2}px)`
+        }}
+      >
+        {visibleAddresses.map(label => (
+          <Link
+            to={`/address/${label.label}`}
+            key={label.label}
           >
-            {label.label}
-          </span>
-        </Link>
-      ))}
-    </div>
+            <span
+              style={{
+                position: 'absolute',
+                left: label.x,
+              }}
+            >
+              {label.label}
+            </span>
+          </Link>
+        ))}
+      </div>
+      <Outlet />
+    </>
   );
 
 
 }
+
+export default AddressBar;

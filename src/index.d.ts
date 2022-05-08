@@ -7,7 +7,15 @@ export interface Dimensions {
 export type Direction = 'n' | 's';
 
 export interface URLParams {
+  years?: string;
   direction?: Direction;
-  addr: string;
-  offset: string;
+  addrOffset?: string;
 }
+
+export type URLParamsPanorama = {
+  years: string;
+  direction: Direction;
+  addrOffset: string;
+}
+
+export type Point = [number, number];

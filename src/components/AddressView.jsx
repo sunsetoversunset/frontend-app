@@ -1,11 +1,10 @@
 import { useState, useEffect, React } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles/App.scss'
-import { NavHeader } from "./NavHeader"
+import NavHeader from "./NavHeader"
 import { PhotoViewerModal } from "./PhotoViewerModal" 
 import { NavAddress } from "./NavAddress"
 import { PhotoStripAddress } from "./PhotoStripAddress"
-import { Footer } from "./Footer"
 import "../styles/AddressView.scss"
 
 import { CensusTable } from "./AddressDataTables/CensusTable"
@@ -257,7 +256,6 @@ export const AddressView = (props) => {
       {/* renderStoriesSection() */}
     	{/* renderTagsSection() */}
 			{ renderHistoricalProfile() }
-      <Footer />
     </div>
 	)
 }

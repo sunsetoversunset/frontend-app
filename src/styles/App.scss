@@ -12,7 +12,8 @@ label.hidden {
 
 .app-page {
   color: $black;
-	height: 100%;
+	min-height: calc(100vw - 40px);
+  padding-top: 40px; /* height of the fixed header */
   
   ul {
     list-style-type: none;
