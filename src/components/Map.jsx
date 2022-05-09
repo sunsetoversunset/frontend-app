@@ -45,7 +45,7 @@ const Map = (props) => {
     const percentAlongPath = coordinate / maxCoordinate;
     const pointsBelow = strip_labels
       .filter(d => d.c * mult / maxCoordinate <= percentAlongPath);
-    const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : null;
+    const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : {c:0}; // GGDN tweaked for fallback
     const pointsAbove = strip_labels
       .filter(d => d.c * mult / maxCoordinate >= percentAlongPath);
     const pointAbove = pointsAbove[0];
