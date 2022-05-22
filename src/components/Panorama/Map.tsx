@@ -37,27 +37,27 @@ const Map = () => {
 
   const maxCoordinate = Math.max(...StripLabels.map(d => d.c * mult));
 
-  // const coordinateRotation = (coordinate: number) => {
-  //   // find the point it's on or points it's between
-  //   const percentAlongPath = coordinate / maxCoordinate;
-  //   const pointsBelow = strip_labels
-  //     .filter(d => d.c * mult / maxCoordinate <= percentAlongPath);
-  //   const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : null;
-  //   const pointsAbove = strip_labels
-  //     .filter(d => d.c * mult / maxCoordinate >= percentAlongPath);
-  //   const pointAbove = pointsAbove[0];
+  const coordinateRotation = (coordinate: number) => {
+    // find the point it's on or points it's between
+    const percentAlongPath = coordinate / maxCoordinate;
+    const pointsBelow = strip_labels
+      .filter(d => d.c * mult / maxCoordinate <= percentAlongPath);
+    const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : null;
+    const pointsAbove = strip_labels
+      .filter(d => d.c * mult / maxCoordinate >= percentAlongPath);
+    const pointAbove = pointsAbove[0];
 
-  //   if (pointBelow?.c === pointAbove.c) {
-  //     return pointAbove.r;
-  //   }
+    if (pointBelow?.c === pointAbove.c) {
+      return pointAbove.r;
+    }
 
-  //   // const percentAlongPathLowerPoint = pointBelow.c * mult / maxCoordinate;
-  //   // const percentAlongPathHigherPoint = pointAbove.c * mult / maxCoordinate;
+    // const percentAlongPathLowerPoint = pointBelow.c * mult / maxCoordinate;
+    // const percentAlongPathHigherPoint = pointAbove.c * mult / maxCoordinate;
 
-  //   // figure out how close the coordinate is to each of the points
-  //   const rotation = pointAbove.r; //pointBelow.rotation +  * (percentAlongPath - pointBelowPercent) * (percentAlongPath - pointAbovePercent);
-  //   return rotation + 90;
-  // }
+    // figure out how close the coordinate is to each of the points
+    const rotation = pointAbove.r; //pointBelow.rotation +  * (percentAlongPath - pointBelowPercent) * (percentAlongPath - pointAbovePercent);
+    return rotation + 90;
+  }
 
 
   const [x, y] = latLngToXY((coordinateToPoint(newCenter, maxCoordinate, strip_labels)).reverse() as [number, number]);

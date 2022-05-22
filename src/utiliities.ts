@@ -113,7 +113,7 @@ export const coordinateToPoint = (coordinate: number, maxCoordinate: number, str
     .filter((d: any) => d.c * mult / maxCoordinate <= percentAlongPath)
     .sort((a: any, b: any) => b.c - a.c);
   console.log(pointsBelow);
-  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : null;
+  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : {c:0}; // GGDN tweaked for fallback
   const pointsAbove = strip_labels
     .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
     .sort((a: any, b: any) => a.c - b.c);
