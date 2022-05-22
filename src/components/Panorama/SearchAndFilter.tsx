@@ -1,22 +1,23 @@
 import { useState } from 'react';
 import Select from 'react-select';
 import { useNavigate, useParams } from 'react-router-dom';
-import iconClose from "../assets/icons/icon-close.svg"
-import iconCloseRust from "../assets/icons/icon-close-rust.svg"
-import iconCheck from "../assets/icons/icon-check.svg"
-import { dataFields } from "../assets/data/dataFields"
-import strip_labels from '../assets/data/strip_labels.json';
-import "../styles/SearchAndFilter.scss"
+import iconClose from "../../assets/icons/icon-close.svg"
+import iconCloseRust from "../../assets/icons/icon-close-rust.svg"
+import iconCheck from "../../assets/icons/icon-check.svg"
+import { dataFields } from "../../assets/data/dataFields"
+import strip_labels from '../../assets/data/strip_labels.json';
+import type { URLParamsPanorama } from './index.d';
+import "../../styles/SearchAndFilter.scss"
 
-export const SearchAndFilter = (props) => {
-  const { years: yearsStr } = useParams();
-  const years = yearsStr.split(',').map(y => parseInt(y));
+export const SearchAndFilter = ({setSearchOpen}: { setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const { years: yearsStr } = useParams<URLParamsPanorama>();
+  const years = (yearsStr) ? yearsStr.split(',').map(y => parseInt(y)) : [1966, 1973, 1985, 1995, 2007];
   const [isCloseHovering, setIsCloseHovering] = useState(false);
 
   const navigate = useNavigate();
 
   const customStyles = {
-    control: (provided, state) => {
+    control: (provided: any, state: any) => {
       const border = (state.isFocused) ? '1px solid #FBA92C' : '1px solid black';
       return {
         ...provided,
@@ -28,7 +29,7 @@ export const SearchAndFilter = (props) => {
         }
       };
     },
-    menu: (provided, state) => {
+    menu: (provided: any, state: any) => {
       return {
         ...provided,
         backgroundColor: '#eee',
@@ -39,7 +40,7 @@ export const SearchAndFilter = (props) => {
         //transform: `translateX(-${(dataViewerWidth - 300) / 2}px)`,
       }
     },
-    menuList: (provided, state) => {
+    menuList: (provided: any, state: any) => {
       return {
         ...provided,
         padding: '0, auto',
@@ -57,9 +58,9 @@ export const SearchAndFilter = (props) => {
       };
     })
     .sort((a, b) => {
-      if (!isNaN(a.label.charAt(0)) && isNaN(b.label.charAt(0))) {
+      if (!Number.isNaN(a.label.charAt(0)) && Number.isNaN(b.label.charAt(0))) {
         return 1;
-      } else if (isNaN(a.label.charAt(0)) && !isNaN(b.label.charAt(0))) {
+      } else if (Number.isNaN(a.label.charAt(0)) && !Number.isNaN(b.label.charAt(0))) {
         return -1;
       }
       return (a.label > b.label) ? 1 : -1
@@ -77,7 +78,7 @@ export const SearchAndFilter = (props) => {
         onMouseLeave={() => setIsCloseHovering(false)}
         id="search-and-filter-control"
         className="icon-close-search-container"
-        onClick={() => props.setSearchOpen(false)}
+        onClick={() => setSearchOpen(false)}
       >
         {
           isCloseHovering ?
@@ -92,8 +93,10 @@ export const SearchAndFilter = (props) => {
           placeholder='search'
           styles={customStyles}
           onChange={(selected) => {
-            navigate(selected.value)
-            props.setSearchOpen(false);
+            if (selected?.value) {
+              navigate(selected.value)
+            }
+            setSearchOpen(false);
           }}
         />
       </div>
@@ -119,15 +122,14 @@ export const SearchAndFilter = (props) => {
                 name={`year-${dataField.year}`}
                 type="checkbox"
               />
-              {
-                years.includes(parseInt(dataField.year) === true) ?
+              {(years.includes(parseInt(dataField.year as string))) && (
                   <img
                     className='icon-year-checked'
                     src={iconCheck}
                     alt="icon-year-checked"
-                  /> : null
-              }
-              <label
+                  />
+              )}
+              {/*<label
                 className="hidden"
                 htmlFor={`year-${dataField.year}`}
               >
@@ -135,7 +137,7 @@ export const SearchAndFilter = (props) => {
                   props.yearsShowing[dataField.year] ?
                     `Hide ${dataField.year}` : `Show ${dataField.year}`
                 }
-              </label>
+              </label>*/}
               <span className="year-label"
 
               >{dataField.year}</span>

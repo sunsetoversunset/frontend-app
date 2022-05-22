@@ -1,34 +1,74 @@
 @import "./global/index.scss";
 
-@import './global/colors.scss';
+@import "./global/colors.scss";
 
 .map-controls {
   position: sticky;
   top: calc(40px + 150px);
   display: grid;
-  grid-template-columns: 150px 150px auto 175px 150px;
+  grid-template-columns: min-content auto min-content auto min-content;
   grid-template-rows: 38px 400px;
   column-gap: 10px;
   row-gap: 10px;
-  width: 100vw;
+  padding: 5px 20px;
+  width: calc(100vw - 40px);
   align-items: center;
   height: 40px;
   z-index: 10001;
   background-color: $main-bg;
   overflow: visible;
 
-  #searchAndFilter {
-    grid-column: 4 / span 1;
+  // #searchAndFilter {
+  //   grid-column: 7 / span 1;
+  // }
+
+  // #scrollRight {
+  //   grid-column: 8 / span 1;
+  // }
+
+  .search-and-filter-opts {
+    grid-column: 4 / span 2;
+    grid-row: 2 / span 1;
+    align-self: start;
+    justify-self: end;
   }
 
-  .search-and-filter-opts{
-      grid-column: 4 / span 2;
-      grid-row: 2 / span 1;
-      align-self: start;
+  a {
+    text-decoration: none;
+    &.disabled {
+      pointer-events: none;
+
+      button {
+        color: silver;
+        pointer-events: none;
+      }
+    }
+
+    &#west {
+      justify-self: end;
+    }
   }
 
-  #scrollRight {
-    grid-column: 5 / span 1;
+  div {
+    text-align: center;
+  }
+
+  #scroll_speed_control {
+    display: grid;
+    grid-template-columns: min-content min-content min-content;
+    column-gap: 10px;
+    align-items: center;
+
+    h6 {
+      grid-column: 1 / span 3;
+      align-self: center;
+      margin: 0;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    .slider {
+      width: 100px;
+    }
   }
 
   button {
@@ -42,6 +82,12 @@
     align-items: center;
     font-family: "Sunset-Gothic", sans-serif;
     font-weight: 500;
+    white-space: nowrap;
+
+    &.disabled {
+      color: silver;
+      pointer-events: none;
+    }
 
     &:hover {
       cursor: pointer;

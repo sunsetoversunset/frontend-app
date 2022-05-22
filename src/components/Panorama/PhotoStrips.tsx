@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import PhotoStrip from "./PhotoStrip"
-import "../styles/MapView.scss"
+import "../../styles/MapView.scss"
 
 export const PhotoStrips = () => {
   const state = useParams();

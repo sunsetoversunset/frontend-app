@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import '../styles/App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Home } from './Home'
+//import { Home } from './Home'
 import { StoriesView } from './StoriesView'
-import Panorama from './Panorama';
+import Panorama from './Panorama/Index.tsx';
 import NavHeader from './NavHeader';
 import { Contact } from './Contact'
 import { Team } from './Team'
