@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import MapMarker from './MapMarker';
 import { addressToCoordinateUnflipped, getOppositeX, mult, coordinateToPoint, parseAddrOffset, getRoadPath, latLngToXY } from '../../utiliities';
 import StripLabels from '../../assets/data/strip_labels.json';
+import Location from './Location';
 import { Point } from "../../index.d";
 import { URLParamsPanorama } from "./index.d";
 // import iconMinimize from "../../assets/icons/icon-minimize.svg"
@@ -89,26 +90,13 @@ const Map = () => {
             strokeWidth='5'
           />
           {strip_labels.filter(d => d.s === direction).map(d => (
-            <g key={`addr${d.l}`}>
-              <Link
-                to={`/panorama/${direction}/${d.l}/${years}`}
-              >
-                <circle
-                  cx={d.x}
-                  cy={d.y}
-                  r={2}
-                  fill='transparent'
-                />
-                <text
-                  x={d.x + 3000}
-                  y={d.y}
-                  fontSize={10}
-                  textAnchor='middle'
-                >
-                  {d.l}
-                </text>
-              </Link>
-            </g>
+            <Location 
+              to={`/panorama/${direction}/${d.l}/${years}`}
+              key={`addr${d.l}`}
+              x={d.x}
+              y={d.y}
+              label={d.l.toString()}
+            />
           ))}
           {/* rotate(${((direction === 'n') ? rotation + 90 + 3 : rotation - 90 + 3)}  */}
          <MapMarker
