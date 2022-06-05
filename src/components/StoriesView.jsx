@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PhotoViewerModal } from "./PhotoViewerModal" 
+import { PhotoViewerModal } from "./PhotoViewerModal.jsx" 
 import img from '../assets/images/5025-5007.jpg'
 
 import '../styles/App.scss'

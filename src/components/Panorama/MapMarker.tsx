@@ -5,7 +5,6 @@ import { PanoramaContextParams } from './index.d';
 import { Point } from '../../index.d';
 
 const MapMarker = (props: { viewPosition: Point; rotation: number }) => {
-  const { scrollSpeed } = useContext(PanoramaContext) as PanoramaContextParams;
   const [translate, setTranslate] = useState(`translate(${props.viewPosition[0]} ${props.viewPosition[1]})`);
   const [rotation, setRotation] = useState(props.rotation);
   const g = useRef(null);
@@ -14,14 +13,14 @@ const MapMarker = (props: { viewPosition: Point; rotation: number }) => {
   useEffect(() => {
     d3.select(g.current)
       .transition()
-      .duration(scrollSpeed)
+      .duration(1500)
       .attr('transform', `translate(${props.viewPosition[0]} ${props.viewPosition[1]})`)
       .on('end', () => {
         setTranslate(`translate(${props.viewPosition[0]} ${props.viewPosition[1]})`);
       });
     d3.select(halo.current)
       .transition()
-      .duration(scrollSpeed)
+      .duration(1500)
       .attr('transform', `rotate(${props.rotation})`)
       .on('end', () => {
         setRotation(props.rotation);
@@ -53,7 +52,7 @@ const MapMarker = (props: { viewPosition: Point; rotation: number }) => {
       />
       <circle
         cx={0}
-        cy={0}
+        cy={-5}
         r={15}
         fill="transparent"
         stroke="red"

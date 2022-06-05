@@ -14,8 +14,6 @@ const maxLng = Math.max(...stripLabels.map(d => d.lng));
 const midLat = maxLat - ((maxLat - minLat) / 2);
 const midLng = maxLng - ((maxLng - minLng) / 2);
 
-console.log([minLat, maxLng]);
-
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l))
@@ -112,26 +110,18 @@ export const coordinateToPoint = (coordinate: number, maxCoordinate: number, str
   const pointsBelow = strip_labels
     .filter((d: any) => d.c * mult / maxCoordinate <= percentAlongPath)
     .sort((a: any, b: any) => b.c - a.c);
-  console.log(pointsBelow);
-  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : {c:0}; // GGDN tweaked for fallback
+  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : { c:0};
   const pointsAbove = strip_labels
-    .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
-    .sort((a: any, b: any) => a.c - b.c);
-  const pointAbove = pointsAbove[0];
+  .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
+  .sort((a: any, b: any) => a.c - b.c);
+  const pointAbove = (pointsAbove.length > 0) ? pointsAbove[0] : { c: Math.max(strip_labels.map((strip_label: any) => strip_label.c)) };
 
   const pointBelowPercent = pointBelow.c * mult / maxCoordinate;
   const pointAbovePercent = pointAbove.c * mult / maxCoordinate;
   const percentBetween = (percentAlongPath - pointBelowPercent) / (pointAbovePercent - pointBelowPercent)
-  console.log(percentAlongPath, pointBelowPercent, pointAbovePercent, percentBetween);
 
   // figure out how close the coordinate is to each of the points
   const point = midPoint([pointBelow.lng, pointBelow.lat], [pointAbove.lng, pointAbove.lat], percentBetween);
-  console.log(point);
-  console.log(pointBelow);
-  console.log([pointBelow.lng, pointBelow.lat]);
-  console.log(pointAbove);
-  console.log([pointAbove.lng, pointAbove.lat]);
-  console.log(point);
   return point;
 }
 
@@ -139,7 +129,6 @@ export const coordinateToPoint = (coordinate: number, maxCoordinate: number, str
 export const getRoadPath = () => {
   const points = GeoJson.geometry.coordinates[0];
   const [firstX, firstY] = latLngToXY([points[0][1], points[0][0]]);
-  console.log(points[0], firstX, firstY);
   const lineSegments = points
     .slice(1)
     .map((point) => {
@@ -152,6 +141,6 @@ export const getRoadPath = () => {
 
 export const convertLngtoX = (lng: number): number => (lng - midLng) * 500 / (maxLng - midLng);
 
-export const convertLattoY = (lat: number): number => 37.5 - ((lat - midLat) * 75 / (maxLat - midLat));
+export const convertLattoY = (lat: number): number => 10 - ((lat - midLat) * 45 / (maxLat - midLat));
 
 export const latLngToXY = (latLng: Point): Point => [convertLngtoX(latLng[1]), convertLattoY(latLng[0])];

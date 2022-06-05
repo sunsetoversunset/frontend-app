@@ -9,7 +9,6 @@ import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
-  const { scrollSpeed } = useContext(PanoramaContext) as PanoramaContextParams;
   // `scrollAmount` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
   const scrollAmount = addrOffsetToCoordinate(addrOffset || '');
@@ -47,7 +46,7 @@ const AddressBar = () => {
       d3.select(ref.current)
         .transition()
         // TODO: should this be variable depending on the distance scrolled to?
-        .duration(scrollSpeed)
+        .duration(1500)
         .style('transform', `translateX(-${scrollAmount - width / 2}px)`)
         .on('end', () => {
           const left = scrollAmount - width / 2;

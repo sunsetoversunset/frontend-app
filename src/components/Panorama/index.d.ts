@@ -15,6 +15,6 @@ export type PhotoData = {
 };
 
 export type PanoramaContextParams = {
-  scrollSpeed: number;
-  setScrollSpeed: React.Dispatch<React.SetStateAction<number>>;
+  scrollDistance: number;
+  setScrollDistance: React.Dispatch<React.SetStateAction<number>>;
 };

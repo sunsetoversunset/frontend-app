@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { StoriesView } from './StoriesView'
 import Panorama from './Panorama/Index.tsx';
 import NavHeader from './NavHeader';
+import { PhotoViewerModal } from './PhotoViewerModal.jsx';
+import PhotoViewerModalTSX  from './PhotoViewerModal.tsx';
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
@@ -53,6 +55,13 @@ export const App = () => {
             <Route path="/contact" element={Contact} />
             <Route path="/team" element={Team} />
             <Route path="/address/:address" element={AddressView} />
+            <Route path='/imagereference' element={<PhotoViewerModal
+              nearbyAddresses={['707', '9156']}
+              imgObj={{ id: 'a77dc2a3-d5ee-4fa3-b188-6cfd5e65f507' }}
+              handleHideModal={() => false}
+              isVisible={true}
+            />} />
+            <Route path='/image/:id' element={<PhotoViewerModalTSX />} />
             <Route
               path='/panorama'
             >

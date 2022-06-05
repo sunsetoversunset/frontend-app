@@ -2,7 +2,7 @@ import { useState, useEffect, React } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles/App.scss'
 import NavHeader from "./NavHeader"
-import { PhotoViewerModal } from "./PhotoViewerModal" 
+import { PhotoViewerModal } from "./PhotoViewerModal.jsx" 
 import { NavAddress } from "./NavAddress"
 import { PhotoStripAddress } from "./PhotoStripAddress"
 import "../styles/AddressView.scss"

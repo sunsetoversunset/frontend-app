@@ -2,19 +2,20 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import * as d3 from 'd3'
 import "../../styles/PhotoStrip.scss";
-import { DimensionsContext, PanoramaContext } from '../../Contexts';
+import PhotoViewerModal from "../PhotoViewerModal";
+import { DimensionsContext } from '../../Contexts';
 import { Dimensions } from "../../index.d";
-import { URLParamsPanorama, PhotoData, PanoramaContextParams } from './index.d';
+import { URLParamsPanorama, PhotoData } from './index.d';
 import { getOppositeX, mult, addrOffsetToCoordinate } from '../../utiliities';
 
 type Photo = {
   src: string;
   x: number;
+  id: string;
 }
 
 const PhotoStrip = ({ year }: { year: number; }) => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
-  const { scrollSpeed } = useContext(PanoramaContext) as PanoramaContextParams;
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
   const newCenter = addrOffsetToCoordinate(addrOffset as string);
@@ -24,6 +25,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
   const [scrolling, setScrolling] = useState(false);
   const [photoData, setPhotoData] = useState<PhotoData[]>([]);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [modalId, setModalId] = useState<string>();
   const currentDirection = useRef(direction);
 
   const getVisiblePhotosInRange = (left: number, right: number) => {
@@ -31,11 +33,12 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       .filter(d => d.x >= left - imageWidth && d.x <= right + imageWidth)
       .map(d => ({
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
-        x: d.x
+        x: d.x,
+        id: d.identifier,
       }))
       .sort((a, b) => b.x - a.x);
-      //.sort((a, b) => Math.abs(center - b.x - imageWidth / 2) - Math.abs(center - a.x - imageWidth / 2));
-      //.sort((a, b) => Math.abs(center - a.x - imageWidth / 2) - Math.abs(center - b.x - imageWidth / 2));
+    //.sort((a, b) => Math.abs(center - b.x - imageWidth / 2) - Math.abs(center - a.x - imageWidth / 2));
+    //.sort((a, b) => Math.abs(center - a.x - imageWidth / 2) - Math.abs(center - b.x - imageWidth / 2));
   }
 
   /* retrive the photos coordinates on initial load */
@@ -48,7 +51,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
           currentDirection.current = direction;
           setCenter(newCenter)
         }
-        
+
         setPhotoData(_d
           .map((row: any) => ({
             ...row,
@@ -71,7 +74,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
     if (currentDirection.current === direction) {
       const left = (newCenter < center) ? newCenter - width / 2 : center - width / 2;
       const right = (newCenter < center) ? center + width / 2 : newCenter + width / 2;
-      
+
       // get the photoset that will be visible after scrolling 
       const photosForScroll = getVisiblePhotosInRange(left, right);
       setPhotos(photosForScroll);
@@ -87,7 +90,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       d3.select(stripContainer.current)
         .transition()
         // TODO: should this be variable depending on the distance scrolled to?
-        .duration(scrollSpeed)
+        .duration(1500)
         .style('transform', `translateX(-${newCenter - width / 2}px)`)
         .on('end', () => {
           setCenter(newCenter);
@@ -97,6 +100,28 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         });
     }
   });
+
+  const getNextId = (id: string) => {
+    const thePhoto = photoData.find(photo => photo.identifier === id);
+    if (thePhoto) {
+      const photosAbove = photoData
+        .filter(photo => photo.x > thePhoto.x)
+        .sort((a, b) => a.x - b.x)
+      return (photosAbove.length > 0) ? photosAbove[0].identifier : undefined
+    }
+    return undefined;
+  }
+
+  const getPreviousId = (id: string) => {
+    const thePhoto = photoData.find(photo => photo.identifier === id);
+    if (thePhoto) {
+      const photosBelow = photoData
+        .filter(photo => photo.x < thePhoto.x)
+        .sort((a, b) => b.x - a.x)
+      return (photosBelow.length > 0) ? photosBelow[0].identifier : undefined
+    }
+    return undefined;
+  }
 
   return (
     <>
@@ -116,6 +141,9 @@ const PhotoStrip = ({ year }: { year: number; }) => {
                 transform: `translateX(${photo.x}px)`,
               }}
               key={photo.src}
+              onClick={() => {
+                setModalId(photo.id);
+              }}
               // TODO: this alt tag is meaningless--is there something that can be added?
               alt={`${photo.src}`}
             />
@@ -123,11 +151,19 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         </div>
       </div>
       <div className={`strip-year-label-outer-container`}>
-        <div className="strip-year-label-inner-container">  
+        <div className="strip-year-label-inner-container">
           <span className="strip-year-label">{year}</span>
         </div>
       </div>
       <div className={`strip-divider  year-${year}`}></div>
+      {(modalId) && (
+        <PhotoViewerModal
+          id={modalId}
+          previousId={getPreviousId(modalId)}
+          nextId={getNextId(modalId)}
+          setModalId={setModalId}
+        />
+      )}
     </>
   )
 }

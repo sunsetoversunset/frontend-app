@@ -18,7 +18,7 @@ import "../../styles/MapControls.scss";
 // ---------------------------------------------------------
 const MapControls = () => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
-  const { scrollSpeed, setScrollSpeed } = useContext(PanoramaContext) as PanoramaContextParams;
+  const { scrollDistance, setScrollDistance } = useContext(PanoramaContext) as PanoramaContextParams;
 
   const { addrOffset, years, direction } = useParams() as URLParamsPanorama;
 
@@ -26,11 +26,12 @@ const MapControls = () => {
 
   const westernmostAddrOffset = `${getWesternmostLabel(direction).label.toString().replace(/\s+/g, '')}-0`;
 
-  console.log(scrollSpeed);
-
   return (
     <div className="map-controls">
-      <Link to={`../../../${(direction === 'n') ? 's' : 'n'}/${toggleDirectionAddrOffset(addrOffset, direction)}/${years}`}>
+      <Link
+        to={`../../../${(direction === 'n') ? 's' : 'n'}/${toggleDirectionAddrOffset(addrOffset, direction)}/${years}`}
+        replace={true}
+      >
         <button>
           {`Direction: ${direction.toUpperCase()}`}
         </button>
@@ -38,8 +39,9 @@ const MapControls = () => {
 
 
       <Link
-        to={`../../${calcAddrOffset(addrOffset, direction, width * -0.4)}/${years}`}
-        className={(calcAddrOffset(addrOffset, direction, width * -0.4) === westernmostAddrOffset) ? 'disabled' : ''}
+        to={`../../${calcAddrOffset(addrOffset, direction, width * scrollDistance * -1)}/${years}`}
+        className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
+        replace={true}
         id='west'
       >
         <button className={`btn-rounded inactive`} >
@@ -47,16 +49,14 @@ const MapControls = () => {
         </button>
       </Link>
       <div id="scroll_speed_control">
-        <h6>Scroll Speed</h6>
-        <label>Slower</label>
+        <h6>Scroll Distance</h6>
+        <label>Less</label>
         <Slider
-          min={500}
-          max={3000}
-          reverse={true}
-          defaultValue={scrollSpeed}
+          min={2}
+          max={10}
+          defaultValue={scrollDistance * 10}
           onChange={(value) => {
-            console.log(value);
-            setScrollSpeed(value as number)
+            setScrollDistance((value as number / 10))
           }}
           handleStyle={{
             borderColor: 'black',
@@ -72,7 +72,7 @@ const MapControls = () => {
           className="slider"
       
         />
-        <label>Faster</label>
+        <label>More</label>
       </div>
       {/* <button onClick={() => {
         setScrollSpeed(scrollSpeed + 250);
@@ -88,7 +88,8 @@ const MapControls = () => {
       >faster</button> */}
 
       <Link
-        to={`../../${calcAddrOffset(addrOffset, direction, width * 0.4)}/${years}`}
+        to={`../../${calcAddrOffset(addrOffset, direction, width * scrollDistance)}/${years}`}
+        replace={true}
         id='scrollRight'
       >
         <button>

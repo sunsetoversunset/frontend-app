@@ -7,10 +7,11 @@ import { PanoramaContext } from '../../Contexts';
 import "../../styles/Panorama.scss"
 
 export const Panorama = () => {
-  const [scrollSpeed, setScrollSpeed] = useState(1500);
+  const [scrollDistance, setScrollDistance] = useState(0.4);
+  
 
   return (
-    <PanoramaContext.Provider value={{ scrollSpeed: scrollSpeed, setScrollSpeed: setScrollSpeed }}>
+    <PanoramaContext.Provider value={{ scrollDistance: scrollDistance, setScrollDistance: setScrollDistance }}>
       <div id='panorama'>
         <Map />
         <MapControls />
