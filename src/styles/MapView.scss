@@ -1,7 +1,7 @@
 @import './global/index.scss';
 
 .map-and-controls-container {
-  position: fixed;
+  position: absolute;
   top: 40px;
   width: 100vw;
   z-index: 999;
@@ -82,40 +82,6 @@
   background-color: $light-orange;
 }
 
-.map-controls {
-  position: relative;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  height: 1px;
-  margin-bottom: -1px;
-  justify-content: space-between;
-  z-index: 999;
-
-  .map-controls-inner {
-    width: 100%;
-    padding: 0px 16px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .map-controls-right {
-    .minimize-map-ctrl.visible {
-      position: initial;
-    }
-    .minimize-map-ctrl.hidden {
-      display: none;
-    }
-  }
-
-  .map-controls-right,
-  .map-controls-left {
-    display: flex;
-    column-gap: 10px;
-    align-items: center;
-  }
-  
-}
 
 text {
 	font-family: 'Degular-Text';
@@ -123,32 +89,11 @@ text {
 	font-size: 13px;
 }
 
-.strip-addresses {
-  height: 56px;
-  background-color: white;
-  box-shadow: 0px 8px 8px 0px rgb(0 0 0 / 30%);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  svg {
-    width: 100%;
-    height: 100%;
-
-    & .hidden {
-      display: none;
-    }
-  }
-
-  svg g text{
-    cursor:pointer;
-  }
-}
 
 .strips-container.full {
-  top: calc(40px + 30px + 60px); // header + max map + addresses
-  height: calc(100% - (40px + 30px + 60px));
+  //top: calc(40px + 30px + 60px); // header + max map + addresses
+  //height: calc(100% - (40px + 30px + 60px));
 }
 
 .strips-shade.full {
@@ -157,11 +102,12 @@ text {
 }
 
 .strips-container {
-  top: calc(40px + 150px + 60px); // header + min map + addresses
-  height: calc(100% - (40px + 150px + 60px));
-  position: fixed;
+  /* top: calc(40px + 150px + 60px); // header + min map + addresses
+  
+  position: fixed; */
+  //height: calc(100vh - (40px + 150px + 56px + 100px));
 	width: 100vw;
-	overflow: scroll;
+	//overflow: scroll;
 }
 
 .strips-shade {

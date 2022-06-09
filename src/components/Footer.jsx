@@ -1,7 +1,7 @@
 import "../styles/Footer.scss"
 import iconFooter from "../assets/icons/icon-sos-footer.svg"
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-graphic">
@@ -13,3 +13,5 @@ export const Footer = () => {
     </footer>
   )
 }
+
+export default Footer;

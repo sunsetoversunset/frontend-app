@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { NavHeader } from './NavHeader';
-import { Footer } from './Footer'
+import React from 'react'
 
 import getty from '../assets/images/getty.png'
 import mapCenter from '../assets/images/logo-MapCenter.png'
@@ -15,7 +13,6 @@ export const About = () => {
 
   return (
     <div className="app-page about-view" id="about">
-      <NavHeader />
       <div className='about-view-container'>
 
         <div className="about-header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/de285f40-3405-4620-89af-27a0e24ef7c7/full/,1400/0/default.jpg`}}>
@@ -116,7 +113,6 @@ export const About = () => {
 
 
       </div>
-      <Footer />
     </div>
   )
 }

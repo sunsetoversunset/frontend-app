@@ -1,0 +1,3562 @@
+[
+  {
+    "label": "Doheny Road",
+    "coordinate": 0.00997
+  },
+  {
+    "label": 9201,
+    "coordinate": 0.76
+  },
+  {
+    "label": 9169,
+    "coordinate": 2.50931
+  },
+  {
+    "label": 9165,
+    "coordinate": 3.00442
+  },
+  {
+    "label": 9163,
+    "coordinate": 3.33714
+  },
+  {
+    "label": 9161,
+    "coordinate": 3.67778
+  },
+  {
+    "label": 9159,
+    "coordinate": 3.87187
+  },
+  {
+    "label": 9157,
+    "coordinate": 4.14121
+  },
+  {
+    "label": 9155,
+    "coordinate": 4.52
+  },
+  {
+    "label": "Cory Avenue",
+    "coordinate": 4.79332
+  },
+  {
+    "label": 9151,
+    "coordinate": 5.52753
+  },
+  {
+    "label": 9145,
+    "coordinate": 6.93683
+  },
+  {
+    "label": 9131,
+    "coordinate": 8.56081
+  },
+  {
+    "label": 9121,
+    "coordinate": 9.56108
+  },
+  {
+    "label": 9119,
+    "coordinate": 10.47209
+  },
+  {
+    "label": 9111,
+    "coordinate": 11.45044
+  },
+  {
+    "label": 9109,
+    "coordinate": 12.02293
+  },
+  {
+    "label": 9107,
+    "coordinate": 12.32
+  },
+  {
+    "label": 9105,
+    "coordinate": 12.91018
+  },
+  {
+    "label": 9101,
+    "coordinate": 13.71029
+  },
+  {
+    "label": "North Doheny Drive",
+    "coordinate": 14.381
+  },
+  {
+    "label": 9059,
+    "coordinate": 15.2334
+  },
+  {
+    "label": 9055,
+    "coordinate": 15.855
+  },
+  {
+    "label": 9051,
+    "coordinate": 16.17214
+  },
+  {
+    "label": 9047,
+    "coordinate": 16.88907
+  },
+  {
+    "label": 9043,
+    "coordinate": 17.56955
+  },
+  {
+    "label": 9041,
+    "coordinate": 18.14785
+  },
+  {
+    "label": 9039,
+    "coordinate": 18.8014
+  },
+  {
+    "label": "Wetherly Drive",
+    "coordinate": 20.86175
+  },
+  {
+    "label": 9021,
+    "coordinate": 21.79903
+  },
+  {
+    "label": 9015,
+    "coordinate": 22.76154
+  },
+  {
+    "label": 9009,
+    "coordinate": 24.42117
+  },
+  {
+    "label": 8981,
+    "coordinate": 25.92632
+  },
+  {
+    "label": 8969,
+    "coordinate": 28.11276
+  },
+  {
+    "label": 8967,
+    "coordinate": 28.5
+  },
+  {
+    "label": 8961,
+    "coordinate": 29.56246
+  },
+  {
+    "label": 8953,
+    "coordinate": 29.89
+  },
+  {
+    "label": 8951,
+    "coordinate": 30.34672
+  },
+  {
+    "label": 8949,
+    "coordinate": 30.78242
+  },
+  {
+    "label": 8947,
+    "coordinate": 31.13098
+  },
+  {
+    "label": "Hilldale Avenue",
+    "coordinate": 31.64143
+  },
+  {
+    "label": 8929,
+    "coordinate": 32.9134
+  },
+  {
+    "label": 8923,
+    "coordinate": 33.77688
+  },
+  {
+    "label": 8919,
+    "coordinate": 34.13337
+  },
+  {
+    "label": 8917,
+    "coordinate": 34.49777
+  },
+  {
+    "label": 8915,
+    "coordinate": 34.81861
+  },
+  {
+    "label": 8913,
+    "coordinate": 35.19886
+  },
+  {
+    "label": 8911,
+    "coordinate": 35.48801
+  },
+  {
+    "label": 8909,
+    "coordinate": 36.02273
+  },
+  {
+    "label": 8901,
+    "coordinate": 36.91394
+  },
+  {
+    "label": "North Clark Street",
+    "coordinate": 37.65678
+  },
+  {
+    "label": 8873,
+    "coordinate": 39.34781
+  },
+  {
+    "label": 8863,
+    "coordinate": 40.60553
+  },
+  {
+    "label": 8859,
+    "coordinate": 40.9224
+  },
+  {
+    "label": 8857,
+    "coordinate": 41.16402
+  },
+  {
+    "label": 8855,
+    "coordinate": 41.33434
+  },
+  {
+    "label": 8853,
+    "coordinate": 41.52446
+  },
+  {
+    "label": 8851,
+    "coordinate": 42.09484
+  },
+  {
+    "label": 8849,
+    "coordinate": 42.83732
+  },
+  {
+    "label": "Larrabee Street",
+    "coordinate": 43.6608
+  },
+  {
+    "label": 8833,
+    "coordinate": 44.62983
+  },
+  {
+    "label": 8831,
+    "coordinate": 45.95674
+  },
+  {
+    "label": 8801,
+    "coordinate": 48.55145
+  },
+  {
+    "label": "Horn Avenue",
+    "coordinate": 50.1839
+  },
+  {
+    "label": 8795,
+    "coordinate": 50.76927
+  },
+  {
+    "label": 8789,
+    "coordinate": 51.80308
+  },
+  {
+    "label": 8775,
+    "coordinate": 56.81365
+  },
+  {
+    "label": "Sherbourne Drive",
+    "coordinate": 58.295
+  },
+  {
+    "label": 8749,
+    "coordinate": 58.715
+  },
+  {
+    "label": 8747,
+    "coordinate": 58.97236
+  },
+  {
+    "label": 8743,
+    "coordinate": 59.63779
+  },
+  {
+    "label": 8739,
+    "coordinate": 60.09283
+  },
+  {
+    "label": 8733,
+    "coordinate": 60.97263
+  },
+  {
+    "label": 8721,
+    "coordinate": 62.33123
+  },
+  {
+    "label": 8711,
+    "coordinate": 63.9156
+  },
+  {
+    "label": 8673,
+    "coordinate": 64.78304
+  },
+  {
+    "label": 8671,
+    "coordinate": 65.06823
+  },
+  {
+    "label": 8669,
+    "coordinate": 65.29004
+  },
+  {
+    "label": 8667,
+    "coordinate": 65.82783
+  },
+  {
+    "label": 8663,
+    "coordinate": 66.20106
+  },
+  {
+    "label": 8661,
+    "coordinate": 66.75162
+  },
+  {
+    "label": 8657,
+    "coordinate": 67.29031
+  },
+  {
+    "label": 8653,
+    "coordinate": 67.51608
+  },
+  {
+    "label": 8649,
+    "coordinate": 67.97951
+  },
+  {
+    "label": 8645,
+    "coordinate": 68.3558
+  },
+  {
+    "label": 8641,
+    "coordinate": 69.19948
+  },
+  {
+    "label": 8635,
+    "coordinate": 69.81342
+  },
+  {
+    "label": 8631,
+    "coordinate": 70.48678
+  },
+  {
+    "label": 8627,
+    "coordinate": 71.31065
+  },
+  {
+    "label": 8625,
+    "coordinate": 71.91272
+  },
+  {
+    "label": "Sunset Plaza Drive",
+    "coordinate": 72.76316
+  },
+  {
+    "label": 8619,
+    "coordinate": 73.22775
+  },
+  {
+    "label": 8615,
+    "coordinate": 73.63968
+  },
+  {
+    "label": 8611,
+    "coordinate": 74.10707
+  },
+  {
+    "label": 8605,
+    "coordinate": 74.70913
+  },
+  {
+    "label": 8601,
+    "coordinate": 75.78651
+  },
+  {
+    "label": 8595,
+    "coordinate": 76.21546
+  },
+  {
+    "label": 8591,
+    "coordinate": 76.67889
+  },
+  {
+    "label": 8589,
+    "coordinate": 76.92051
+  },
+  {
+    "label": 8585,
+    "coordinate": 77.7127
+  },
+  {
+    "label": 8569,
+    "coordinate": 79.44758
+  },
+  {
+    "label": "Londonderry Place",
+    "coordinate": 80.93067
+  },
+  {
+    "label": 8555,
+    "coordinate": 81.99842
+  },
+  {
+    "label": 8553,
+    "coordinate": 82.88567
+  },
+  {
+    "label": 8547,
+    "coordinate": 84.18882
+  },
+  {
+    "label": 8543,
+    "coordinate": 85.84845
+  },
+  {
+    "label": 8539,
+    "coordinate": 86.12783
+  },
+  {
+    "label": 8537,
+    "coordinate": 86.87829
+  },
+  {
+    "label": 8535,
+    "coordinate": 87.40113
+  },
+  {
+    "label": 8533,
+    "coordinate": 88.26857
+  },
+  {
+    "label": 8527,
+    "coordinate": 88.83499
+  },
+  {
+    "label": 8525,
+    "coordinate": 89.29445
+  },
+  {
+    "label": 8523,
+    "coordinate": 89.44283
+  },
+  {
+    "label": 8521,
+    "coordinate": 89.76184
+  },
+  {
+    "label": 8517,
+    "coordinate": 90
+  },
+  {
+    "label": 8511,
+    "coordinate": 90.52283
+  },
+  {
+    "label": 8505,
+    "coordinate": 90.97
+  },
+  {
+    "label": 8501,
+    "coordinate": 91.72647
+  },
+  {
+    "label": "Miller Drive",
+    "coordinate": 93.196
+  },
+  {
+    "label": 8499,
+    "coordinate": 93.78615
+  },
+  {
+    "label": 8497,
+    "coordinate": 94.70508
+  },
+  {
+    "label": 8495,
+    "coordinate": 95.71908
+  },
+  {
+    "label": 8491,
+    "coordinate": 96.94697
+  },
+  {
+    "label": 8489,
+    "coordinate": 97.23612
+  },
+  {
+    "label": 8485,
+    "coordinate": 97.60052
+  },
+  {
+    "label": 8481,
+    "coordinate": 98.11941
+  },
+  {
+    "label": 8477,
+    "coordinate": 98.84822
+  },
+  {
+    "label": 8469,
+    "coordinate": 100.54746
+  },
+  {
+    "label": 8459,
+    "coordinate": 101.99716
+  },
+  {
+    "label": "Queens Road",
+    "coordinate": 103.01396
+  },
+  {
+    "label": 8439,
+    "coordinate": 104.99558
+  },
+  {
+    "label": 8433,
+    "coordinate": 107.69693
+  },
+  {
+    "label": 8425,
+    "coordinate": 110.025
+  },
+  {
+    "label": 8401,
+    "coordinate": 112.58472
+  },
+  {
+    "label": "North Kings Road",
+    "coordinate": 114.6043
+  },
+  {
+    "label": 8383,
+    "coordinate": 115.85
+  },
+  {
+    "label": 8373,
+    "coordinate": 117.06729
+  },
+  {
+    "label": 8371,
+    "coordinate": 117.77354
+  },
+  {
+    "label": 8363,
+    "coordinate": 119.13886
+  },
+  {
+    "label": 8351,
+    "coordinate": 120.81037
+  },
+  {
+    "label": 8349,
+    "coordinate": 122.235
+  },
+  {
+    "label": 8341,
+    "coordinate": 123.686
+  },
+  {
+    "label": 8335,
+    "coordinate": 124.5178
+  },
+  {
+    "label": 8301,
+    "coordinate": 128.98177
+  },
+  {
+    "label": "North Sweetzer Avenue",
+    "coordinate": 129.68073
+  },
+  {
+    "label": 8295,
+    "coordinate": 130.34037
+  },
+  {
+    "label": 8293,
+    "coordinate": 130.69685
+  },
+  {
+    "label": 8285,
+    "coordinate": 132.9625
+  },
+  {
+    "label": 8277,
+    "coordinate": 133.29
+  },
+  {
+    "label": 8275,
+    "coordinate": 133.87748
+  },
+  {
+    "label": 8265,
+    "coordinate": 134.74492
+  },
+  {
+    "label": 8255,
+    "coordinate": 136.66201
+  },
+  {
+    "label": "Roxbury Road",
+    "coordinate": 140.42006
+  },
+  {
+    "label": 8225,
+    "coordinate": 141.40324
+  },
+  {
+    "label": 8221,
+    "coordinate": 144.39304
+  },
+  {
+    "label": "Marmont Lane",
+    "coordinate": 145.19702
+  },
+  {
+    "label": 8205,
+    "coordinate": 145.905
+  },
+  {
+    "label": 8201,
+    "coordinate": 146.865
+  },
+  {
+    "label": 8171,
+    "coordinate": 148.135
+  },
+  {
+    "label": 8165,
+    "coordinate": 149.07556
+  },
+  {
+    "label": 8161,
+    "coordinate": 149.415
+  },
+  {
+    "label": 8157,
+    "coordinate": 150.78668
+  },
+  {
+    "label": "Selma Avenue",
+    "coordinate": 152.08194
+  },
+  {
+    "label": 8117,
+    "coordinate": 156.28446
+  },
+  {
+    "label": "Crescent Heights Boulevard",
+    "coordinate": 157.87342
+  },
+  {
+    "label": 8101,
+    "coordinate": 159.64332
+  },
+  {
+    "label": "Laurel Canyon Boulevard",
+    "coordinate": 161.445
+  },
+  {
+    "label": 8033,
+    "coordinate": 162.17436
+  },
+  {
+    "label": 8031,
+    "coordinate": 162.41201
+  },
+  {
+    "label": 8029,
+    "coordinate": 162.76454
+  },
+  {
+    "label": 8027,
+    "coordinate": 162.77642
+  },
+  {
+    "label": 8025,
+    "coordinate": 162.91901
+  },
+  {
+    "label": 8023,
+    "coordinate": 163.31907
+  },
+  {
+    "label": 8021,
+    "coordinate": 163.41
+  },
+  {
+    "label": 8017,
+    "coordinate": 163.41017
+  },
+  {
+    "label": 8005,
+    "coordinate": 163.72308
+  },
+  {
+    "label": 8001,
+    "coordinate": 164.18767
+  },
+  {
+    "label": "North Laurel Avenue",
+    "coordinate": 165.04648
+  },
+  {
+    "label": 7979,
+    "coordinate": 167.40278
+  },
+  {
+    "label": 7955,
+    "coordinate": 170.69432
+  },
+  {
+    "label": "North Hayworth Avenue",
+    "coordinate": 172.97354
+  },
+  {
+    "label": 7919,
+    "coordinate": 174.73843
+  },
+  {
+    "label": 7901,
+    "coordinate": 178.30722
+  },
+  {
+    "label": "North Fairfax Avenue",
+    "coordinate": 180.68232
+  },
+  {
+    "label": 7865,
+    "coordinate": 183.5
+  },
+  {
+    "label": 7855,
+    "coordinate": 184.57738
+  },
+  {
+    "label": 7851,
+    "coordinate": 185.93994
+  },
+  {
+    "label": "North Orange Grove Avenue",
+    "coordinate": 186.97175
+  },
+  {
+    "label": 7833,
+    "coordinate": 188.36402
+  },
+  {
+    "label": 7813,
+    "coordinate": 190.42767
+  },
+  {
+    "label": 7811,
+    "coordinate": 190.67
+  },
+  {
+    "label": 7809,
+    "coordinate": 190.79
+  },
+  {
+    "label": 7807,
+    "coordinate": 191.25946
+  },
+  {
+    "label": 7805,
+    "coordinate": 191.59218
+  },
+  {
+    "label": 7803,
+    "coordinate": 191.86945
+  },
+  {
+    "label": 7801,
+    "coordinate": 192.22989
+  },
+  {
+    "label": "North Ogden Drive",
+    "coordinate": 193.00056
+  },
+  {
+    "label": 7799,
+    "coordinate": 193.77
+  },
+  {
+    "label": 7785,
+    "coordinate": 194.2064
+  },
+  {
+    "label": 7777,
+    "coordinate": 194.32
+  },
+  {
+    "label": 7775,
+    "coordinate": 194.63418
+  },
+  {
+    "label": 7773,
+    "coordinate": 195.05404
+  },
+  {
+    "label": 7771,
+    "coordinate": 195.8581
+  },
+  {
+    "label": 7755,
+    "coordinate": 196.88398
+  },
+  {
+    "label": "North Genesee Avenue",
+    "coordinate": 199.2189
+  },
+  {
+    "label": 7715,
+    "coordinate": 200.89641
+  },
+  {
+    "label": 7707,
+    "coordinate": 203.72055
+  },
+  {
+    "label": "North Spaulding Avenue",
+    "coordinate": 205.12978
+  },
+  {
+    "label": 7677,
+    "coordinate": 206.37833
+  },
+  {
+    "label": 7655,
+    "coordinate": 209.28169
+  },
+  {
+    "label": "North Stanley Avenue",
+    "coordinate": 210.68572
+  },
+  {
+    "label": 7651,
+    "coordinate": 211.83493
+  },
+  {
+    "label": 7623,
+    "coordinate": 212.47263
+  },
+  {
+    "label": 7621,
+    "coordinate": 212.68256
+  },
+  {
+    "label": 7617,
+    "coordinate": 213.20145
+  },
+  {
+    "label": 7615,
+    "coordinate": 213.90253
+  },
+  {
+    "label": 7601,
+    "coordinate": 214.83335
+  },
+  {
+    "label": "North Curson Avenue",
+    "coordinate": 216.90419
+  },
+  {
+    "label": 7575,
+    "coordinate": 218.10112
+  },
+  {
+    "label": 7563,
+    "coordinate": 219.41218
+  },
+  {
+    "label": 7561,
+    "coordinate": 219.935
+  },
+  {
+    "label": 7557,
+    "coordinate": 220.19
+  },
+  {
+    "label": 7551,
+    "coordinate": 221.65803
+  },
+  {
+    "label": "North Sierra Bonita Avenue",
+    "coordinate": 223.00441
+  },
+  {
+    "label": 7533,
+    "coordinate": 223.71771
+  },
+  {
+    "label": 7531,
+    "coordinate": 224.11381
+  },
+  {
+    "label": 7529,
+    "coordinate": 224.29205
+  },
+  {
+    "label": 7527,
+    "coordinate": 224.53367
+  },
+  {
+    "label": 7525,
+    "coordinate": 224.34354
+  },
+  {
+    "label": 7523,
+    "coordinate": 225.11988
+  },
+  {
+    "label": 7519,
+    "coordinate": 225.36
+  },
+  {
+    "label": 7517,
+    "coordinate": 225.66
+  },
+  {
+    "label": 7515,
+    "coordinate": 225.9596
+  },
+  {
+    "label": 7513,
+    "coordinate": 226.06
+  },
+  {
+    "label": 7511,
+    "coordinate": 226.30816
+  },
+  {
+    "label": 7509,
+    "coordinate": 226.865
+  },
+  {
+    "label": 7507,
+    "coordinate": 226.99736
+  },
+  {
+    "label": 7505,
+    "coordinate": 227.7341
+  },
+  {
+    "label": 7501,
+    "coordinate": 228.56985
+  },
+  {
+    "label": "North Gardner Street",
+    "coordinate": 229.00946
+  },
+  {
+    "label": 7449,
+    "coordinate": 229.66307
+  },
+  {
+    "label": 7447,
+    "coordinate": 230.30078
+  },
+  {
+    "label": 7445,
+    "coordinate": 231.02563
+  },
+  {
+    "label": 7443,
+    "coordinate": 231.45737
+  },
+  {
+    "label": 7441,
+    "coordinate": 231.85346
+  },
+  {
+    "label": 7439,
+    "coordinate": 232.55851
+  },
+  {
+    "label": 7429,
+    "coordinate": 233.08135
+  },
+  {
+    "label": 7425,
+    "coordinate": 234.91922
+  },
+  {
+    "label": 7419,
+    "coordinate": 235.84608
+  },
+  {
+    "label": 7417,
+    "coordinate": 236.66995
+  },
+  {
+    "label": 7405,
+    "coordinate": 237.71168
+  },
+  {
+    "label": 7403,
+    "coordinate": 237.98102
+  },
+  {
+    "label": 7401,
+    "coordinate": 238.49198
+  },
+  {
+    "label": "North Vista Street",
+    "coordinate": 239.15229
+  },
+  {
+    "label": 7373,
+    "coordinate": 240.37342
+  },
+  {
+    "label": 7365,
+    "coordinate": 242.60739
+  },
+  {
+    "label": 7363,
+    "coordinate": 242.995
+  },
+  {
+    "label": 7359,
+    "coordinate": 243.24114
+  },
+  {
+    "label": 7357,
+    "coordinate": 243.49
+  },
+  {
+    "label": 7355,
+    "coordinate": 243.85
+  },
+  {
+    "label": 7351,
+    "coordinate": 243.89073
+  },
+  {
+    "label": 7349,
+    "coordinate": 244.03332
+  },
+  {
+    "label": "North Martel Avenue",
+    "coordinate": 244.5903
+  },
+  {
+    "label": 7323,
+    "coordinate": 246.50494
+  },
+  {
+    "label": "7305-7315",
+    "coordinate": 249.59051
+  },
+  {
+    "label": "North Fuller Avenue",
+    "coordinate": 250.52479
+  },
+  {
+    "label": 7257,
+    "coordinate": 254.16934
+  },
+  {
+    "label": "North Poinsettia Place",
+    "coordinate": 256.65253
+  },
+  {
+    "label": 7225,
+    "coordinate": 257.40146
+  },
+  {
+    "label": 7223,
+    "coordinate": 257.72626
+  },
+  {
+    "label": 7219,
+    "coordinate": 258.47883
+  },
+  {
+    "label": 7213,
+    "coordinate": 259.6988
+  },
+  {
+    "label": 7201,
+    "coordinate": 261.36635
+  },
+  {
+    "label": "North Formosa Avenue",
+    "coordinate": 262.68143
+  },
+  {
+    "label": 7181,
+    "coordinate": 263.59636
+  },
+  {
+    "label": 7175,
+    "coordinate": 264.34
+  },
+  {
+    "label": 7173,
+    "coordinate": 264.66581
+  },
+  {
+    "label": 7171,
+    "coordinate": 265.66396
+  },
+  {
+    "label": 7165,
+    "coordinate": 266.5116
+  },
+  {
+    "label": 7151,
+    "coordinate": 268.50791
+  },
+  {
+    "label": "North Detroit Street",
+    "coordinate": 269.39567
+  },
+  {
+    "label": 7135,
+    "coordinate": 270.72999
+  },
+  {
+    "label": 7127,
+    "coordinate": 272.02521
+  },
+  {
+    "label": "7107-7127",
+    "coordinate": 273.89477
+  },
+  {
+    "label": 7105,
+    "coordinate": 275.12
+  },
+  {
+    "label": 7101,
+    "coordinate": 276.14527
+  },
+  {
+    "label": "North La Brea Avenue",
+    "coordinate": 277.43444
+  },
+  {
+    "label": 7077,
+    "coordinate": 278.10989
+  },
+  {
+    "label": 7063,
+    "coordinate": 280.1372
+  },
+  {
+    "label": 7051,
+    "coordinate": 281.63443
+  },
+  {
+    "label": 7045,
+    "coordinate": 282.24441
+  },
+  {
+    "label": 7039,
+    "coordinate": 284.18
+  },
+  {
+    "label": 7033,
+    "coordinate": 284.95765
+  },
+  {
+    "label": 7023,
+    "coordinate": 287.21934
+  },
+  {
+    "label": 7015,
+    "coordinate": 289.865
+  },
+  {
+    "label": 7011,
+    "coordinate": 290.61782
+  },
+  {
+    "label": 7001,
+    "coordinate": 291.89324
+  },
+  {
+    "label": "North Orange Drive",
+    "coordinate": 292.71842
+  },
+  {
+    "label": "North Highland Avenue",
+    "coordinate": 307.66841
+  },
+  {
+    "label": 6767,
+    "coordinate": 309.46
+  },
+  {
+    "label": 6757,
+    "coordinate": 312.03456
+  },
+  {
+    "label": "North McCadden Place",
+    "coordinate": 313.8861
+  },
+  {
+    "label": 6727,
+    "coordinate": 314.71215
+  },
+  {
+    "label": 6725,
+    "coordinate": 315.46869
+  },
+  {
+    "label": 6715,
+    "coordinate": 317.33825
+  },
+  {
+    "label": 6707,
+    "coordinate": 319.18008
+  },
+  {
+    "label": 6705,
+    "coordinate": 319.7663
+  },
+  {
+    "label": 6701,
+    "coordinate": 320.14
+  },
+  {
+    "label": "North Las Palmas Avenue",
+    "coordinate": 320.80201
+  },
+  {
+    "label": 6693,
+    "coordinate": 321.44177
+  },
+  {
+    "label": 6689,
+    "coordinate": 321.74676
+  },
+  {
+    "label": 6687,
+    "coordinate": 322.11117
+  },
+  {
+    "label": 6685,
+    "coordinate": 322.36071
+  },
+  {
+    "label": 6683,
+    "coordinate": 322.62213
+  },
+  {
+    "label": 6679,
+    "coordinate": 322.8281
+  },
+  {
+    "label": 6677,
+    "coordinate": 323.125
+  },
+  {
+    "label": 6675,
+    "coordinate": 323.32718
+  },
+  {
+    "label": 6671,
+    "coordinate": 324.60259
+  },
+  {
+    "label": 6669,
+    "coordinate": 325.54926
+  },
+  {
+    "label": 6665,
+    "coordinate": 326.22658
+  },
+  {
+    "label": 6657,
+    "coordinate": 327.97731
+  },
+  {
+    "label": 6641,
+    "coordinate": 330.36575
+  },
+  {
+    "label": "Cassi Place",
+    "coordinate": 334.59951
+  },
+  {
+    "label": 6613,
+    "coordinate": 335.43574
+  },
+  {
+    "label": 6611,
+    "coordinate": 335.92293
+  },
+  {
+    "label": 6609,
+    "coordinate": 336.2
+  },
+  {
+    "label": 6607,
+    "coordinate": 336.41409
+  },
+  {
+    "label": 6605,
+    "coordinate": 336.78641
+  },
+  {
+    "label": 6603,
+    "coordinate": 337.02407
+  },
+  {
+    "label": 6601,
+    "coordinate": 337.3964
+  },
+  {
+    "label": 6565,
+    "coordinate": 338.80649
+  },
+  {
+    "label": 6553,
+    "coordinate": 340.135
+  },
+  {
+    "label": 6547,
+    "coordinate": 341.42862
+  },
+  {
+    "label": "Schrader Boulevard",
+    "coordinate": 342.10926
+  },
+  {
+    "label": 6525,
+    "coordinate": 343.84875
+  },
+  {
+    "label": 6515,
+    "coordinate": 346.76004
+  },
+  {
+    "label": 6507,
+    "coordinate": 347.7978
+  },
+  {
+    "label": 6505,
+    "coordinate": 348.49096
+  },
+  {
+    "label": 6503,
+    "coordinate": 348.85537
+  },
+  {
+    "label": 6501,
+    "coordinate": 349.55249
+  },
+  {
+    "label": "North Wilcox Avenue",
+    "coordinate": 350.0731
+  },
+  {
+    "label": 6465,
+    "coordinate": 351.30718
+  },
+  {
+    "label": 6461,
+    "coordinate": 352.31
+  },
+  {
+    "label": 6449,
+    "coordinate": 353.43816
+  },
+  {
+    "label": 6445,
+    "coordinate": 354.40067
+  },
+  {
+    "label": 6441,
+    "coordinate": 354.68
+  },
+  {
+    "label": 6437,
+    "coordinate": 354.905
+  },
+  {
+    "label": 6435,
+    "coordinate": 355.14928
+  },
+  {
+    "label": 6433,
+    "coordinate": 355.63252
+  },
+  {
+    "label": 6427,
+    "coordinate": 357.72785
+  },
+  {
+    "label": "North Cahuenga Boulevard",
+    "coordinate": 358.56117
+  },
+  {
+    "label": 6407,
+    "coordinate": 360.92828
+  },
+  {
+    "label": "Ivar Avenue",
+    "coordinate": 362.47325
+  },
+  {
+    "label": 6363,
+    "coordinate": 364.62383
+  },
+  {
+    "label": 6353,
+    "coordinate": 367.15882
+  },
+  {
+    "label": "Morningside Court",
+    "coordinate": 368.37648
+  },
+  {
+    "label": "6301-6333",
+    "coordinate": 371.65844
+  },
+  {
+    "label": "Vine Street",
+    "coordinate": 374.2796
+  },
+  {
+    "label": 6265,
+    "coordinate": 379.28
+  },
+  {
+    "label": 6255,
+    "coordinate": 380.0604
+  },
+  {
+    "label": "Argyle Avenue",
+    "coordinate": 382.62842
+  },
+  {
+    "label": 6229,
+    "coordinate": 385.34741
+  },
+  {
+    "label": 6227,
+    "coordinate": 385.72766
+  },
+  {
+    "label": 6225,
+    "coordinate": 386.095
+  },
+  {
+    "label": 6223,
+    "coordinate": 386.2307
+  },
+  {
+    "label": 6221,
+    "coordinate": 386.5753
+  },
+  {
+    "label": 6219,
+    "coordinate": 386.90802
+  },
+  {
+    "label": 6215,
+    "coordinate": 387.42294
+  },
+  {
+    "label": 6209,
+    "coordinate": 388.55577
+  },
+  {
+    "label": 6207,
+    "coordinate": 388.84095
+  },
+  {
+    "label": 6203,
+    "coordinate": 389.33211
+  },
+  {
+    "label": 6201,
+    "coordinate": 389.50639
+  },
+  {
+    "label": "El Centro Avenue",
+    "coordinate": 390.48712
+  },
+  {
+    "label": 6121,
+    "coordinate": 392.97616
+  },
+  {
+    "label": "Gower Street",
+    "coordinate": 398.48661
+  },
+  {
+    "label": 6095,
+    "coordinate": 399.35326
+  },
+  {
+    "label": 6093,
+    "coordinate": 399.74143
+  },
+  {
+    "label": 6091,
+    "coordinate": 400.66829
+  },
+  {
+    "label": 6087,
+    "coordinate": 401.30204
+  },
+  {
+    "label": 6081,
+    "coordinate": 402.51408
+  },
+  {
+    "label": 6069,
+    "coordinate": 404.50247
+  },
+  {
+    "label": 6063,
+    "coordinate": 405.57984
+  },
+  {
+    "label": 6055,
+    "coordinate": 407.57615
+  },
+  {
+    "label": "La Blaig Avenue",
+    "coordinate": 408.3368
+  },
+  {
+    "label": 6023,
+    "coordinate": 408.85553
+  },
+  {
+    "label": 6021,
+    "coordinate": 409.36222
+  },
+  {
+    "label": 6019,
+    "coordinate": 409.58403
+  },
+  {
+    "label": 6017,
+    "coordinate": 409.76623
+  },
+  {
+    "label": 6015,
+    "coordinate": 410.07518
+  },
+  {
+    "label": 6013,
+    "coordinate": 410.30492
+  },
+  {
+    "label": 6011,
+    "coordinate": 410.58218
+  },
+  {
+    "label": 6009,
+    "coordinate": 410.77231
+  },
+  {
+    "label": 6007,
+    "coordinate": 411.09
+  },
+  {
+    "label": 6005,
+    "coordinate": 411.79819
+  },
+  {
+    "label": 6003,
+    "coordinate": 412.02
+  },
+  {
+    "label": 6001,
+    "coordinate": 412.34084
+  },
+  {
+    "label": "Gordon Street",
+    "coordinate": 412.94779
+  },
+  {
+    "label": 5939,
+    "coordinate": 414.74116
+  },
+  {
+    "label": 5925,
+    "coordinate": 418.235
+  },
+  {
+    "label": 5907,
+    "coordinate": 420.49639
+  },
+  {
+    "label": 5905,
+    "coordinate": 420.97566
+  },
+  {
+    "label": 5901,
+    "coordinate": 421.25689
+  },
+  {
+    "label": "Bronson Avenue",
+    "coordinate": 422.65827
+  },
+  {
+    "label": 5857,
+    "coordinate": 424.19194
+  },
+  {
+    "label": 5851,
+    "coordinate": 425.42379
+  },
+  {
+    "label": 5849,
+    "coordinate": 425.91098
+  },
+  {
+    "label": 5831,
+    "coordinate": 428.26377
+  },
+  {
+    "label": 5825,
+    "coordinate": 431.17902
+  },
+  {
+    "label": 5817,
+    "coordinate": 432.03458
+  },
+  {
+    "label": 5801,
+    "coordinate": 433.29415
+  },
+  {
+    "label": "Van Ness Avenue",
+    "coordinate": 434.7792
+  },
+  {
+    "label": 5757,
+    "coordinate": 435.64298
+  },
+  {
+    "label": 5751,
+    "coordinate": 436.39952
+  },
+  {
+    "label": "Hollywood Freeway",
+    "coordinate": 442.04488
+  },
+  {
+    "label": "North Wilton Place",
+    "coordinate": 446.82995
+  },
+  {
+    "label": 5657,
+    "coordinate": 448.80515
+  },
+  {
+    "label": 5641,
+    "coordinate": 450.02908
+  },
+  {
+    "label": 5639,
+    "coordinate": 450.90049
+  },
+  {
+    "label": 5625,
+    "coordinate": 452.9879
+  },
+  {
+    "label": 5621,
+    "coordinate": 454.30689
+  },
+  {
+    "label": 5615,
+    "coordinate": 455.25751
+  },
+  {
+    "label": 5609,
+    "coordinate": 456.57254
+  },
+  {
+    "label": "North Saint Andrew's Place",
+    "coordinate": 458.70638
+  },
+  {
+    "label": 5565,
+    "coordinate": 459.39668
+  },
+  {
+    "label": 5555,
+    "coordinate": 459.505
+  },
+  {
+    "label": 5553,
+    "coordinate": 459.58
+  },
+  {
+    "label": 5551,
+    "coordinate": 459.6581
+  },
+  {
+    "label": 5549,
+    "coordinate": 459.89972
+  },
+  {
+    "label": 5547,
+    "coordinate": 460.55327
+  },
+  {
+    "label": 5545,
+    "coordinate": 461.785
+  },
+  {
+    "label": 5543,
+    "coordinate": 461.88018
+  },
+  {
+    "label": 5541,
+    "coordinate": 462.24855
+  },
+  {
+    "label": 5539,
+    "coordinate": 462.47036
+  },
+  {
+    "label": 5537,
+    "coordinate": 463.10411
+  },
+  {
+    "label": 5535,
+    "coordinate": 463.51209
+  },
+  {
+    "label": 5533,
+    "coordinate": 464.05473
+  },
+  {
+    "label": 5529,
+    "coordinate": 464.75978
+  },
+  {
+    "label": 5527,
+    "coordinate": 465.12815
+  },
+  {
+    "label": 5525,
+    "coordinate": 465.37768
+  },
+  {
+    "label": 5523,
+    "coordinate": 465.67872
+  },
+  {
+    "label": 5521,
+    "coordinate": 466.05896
+  },
+  {
+    "label": 5519,
+    "coordinate": 466.57389
+  },
+  {
+    "label": 5515,
+    "coordinate": 467.06504
+  },
+  {
+    "label": 5509,
+    "coordinate": 467.79385
+  },
+  {
+    "label": "Western Avenue",
+    "coordinate": 471.10667
+  },
+  {
+    "label": 5453,
+    "coordinate": 473.52136
+  },
+  {
+    "label": 5451,
+    "coordinate": 473.93725
+  },
+  {
+    "label": 5445,
+    "coordinate": 475.078
+  },
+  {
+    "label": 5435,
+    "coordinate": 476.09596
+  },
+  {
+    "label": 5419,
+    "coordinate": 478.15168
+  },
+  {
+    "label": 5409,
+    "coordinate": 480.44506
+  },
+  {
+    "label": 5405,
+    "coordinate": 481.25705
+  },
+  {
+    "label": 5401,
+    "coordinate": 482.21956
+  },
+  {
+    "label": "Serrano Avenue",
+    "coordinate": 482.94797
+  },
+  {
+    "label": 5357,
+    "coordinate": 484.15645
+  },
+  {
+    "label": 5351,
+    "coordinate": 484.60404
+  },
+  {
+    "label": 5343,
+    "coordinate": 485.36057
+  },
+  {
+    "label": 5341,
+    "coordinate": 485.70914
+  },
+  {
+    "label": 5325,
+    "coordinate": 486.39042
+  },
+  {
+    "label": 5319,
+    "coordinate": 486.49
+  },
+  {
+    "label": 5317,
+    "coordinate": 486.78255
+  },
+  {
+    "label": 5313,
+    "coordinate": 488.525
+  },
+  {
+    "label": 5301,
+    "coordinate": 489.63442
+  },
+  {
+    "label": "Hobart Boulevard",
+    "coordinate": 490.98186
+  },
+  {
+    "label": 5287,
+    "coordinate": 492.34369
+  },
+  {
+    "label": 5271,
+    "coordinate": 493.59535
+  },
+  {
+    "label": 5265,
+    "coordinate": 494.54993
+  },
+  {
+    "label": 5255,
+    "coordinate": 496.79578
+  },
+  {
+    "label": "North Harvard Boulevard",
+    "coordinate": 498.07282
+  },
+  {
+    "label": 5237,
+    "coordinate": 498.98221
+  },
+  {
+    "label": 5235,
+    "coordinate": 499.23571
+  },
+  {
+    "label": 5233,
+    "coordinate": 499.484
+  },
+  {
+    "label": 5231,
+    "coordinate": 499.75
+  },
+  {
+    "label": 5229,
+    "coordinate": 499.97
+  },
+  {
+    "label": 5225,
+    "coordinate": 500.14673
+  },
+  {
+    "label": 5213,
+    "coordinate": 500.82404
+  },
+  {
+    "label": 5211,
+    "coordinate": 501.43799
+  },
+  {
+    "label": 5209,
+    "coordinate": 501.74694
+  },
+  {
+    "label": 5207,
+    "coordinate": 502.21433
+  },
+  {
+    "label": 5205,
+    "coordinate": 502.70945
+  },
+  {
+    "label": 5203,
+    "coordinate": 503.32339
+  },
+  {
+    "label": 5201,
+    "coordinate": 503.67591
+  },
+  {
+    "label": "North Kingsley Drive",
+    "coordinate": 504.1156
+  },
+  {
+    "label": 5187,
+    "coordinate": 504.94737
+  },
+  {
+    "label": 5185,
+    "coordinate": 505.391
+  },
+  {
+    "label": 5183,
+    "coordinate": 505.73956
+  },
+  {
+    "label": 5167,
+    "coordinate": 506.3535
+  },
+  {
+    "label": 5161,
+    "coordinate": 507.94976
+  },
+  {
+    "label": 5153,
+    "coordinate": 508.70233
+  },
+  {
+    "label": "Winona Boulevard",
+    "coordinate": 510.33311
+  },
+  {
+    "label": 5143,
+    "coordinate": 511.01156
+  },
+  {
+    "label": "5125-5137",
+    "coordinate": 512.893
+  },
+  {
+    "label": 5125,
+    "coordinate": 514.24367
+  },
+  {
+    "label": 5121,
+    "coordinate": 514.77048
+  },
+  {
+    "label": 5115,
+    "coordinate": 516.03798
+  },
+  {
+    "label": 5107,
+    "coordinate": 517.34508
+  },
+  {
+    "label": 5105,
+    "coordinate": 517.63423
+  },
+  {
+    "label": 5103,
+    "coordinate": 518.01448
+  },
+  {
+    "label": 5101,
+    "coordinate": 518.44622
+  },
+  {
+    "label": "Normandie Avenue",
+    "coordinate": 519.44975
+  },
+  {
+    "label": 5067,
+    "coordinate": 520.93368
+  },
+  {
+    "label": 5065,
+    "coordinate": 521.19511
+  },
+  {
+    "label": 5063,
+    "coordinate": 521.45257
+  },
+  {
+    "label": 5061,
+    "coordinate": 521.9556
+  },
+  {
+    "label": 5057,
+    "coordinate": 522.88246
+  },
+  {
+    "label": 5055,
+    "coordinate": 523.38946
+  },
+  {
+    "label": 5053,
+    "coordinate": 523.4766
+  },
+  {
+    "label": 5051,
+    "coordinate": 524.27275
+  },
+  {
+    "label": "North Mariposa Avenue",
+    "coordinate": 525.45757
+  },
+  {
+    "label": 5025,
+    "coordinate": 527.35039
+  },
+  {
+    "label": 5007,
+    "coordinate": 529.83785
+  },
+  {
+    "label": "North Alexandria Avenue",
+    "coordinate": 531.60511
+  },
+  {
+    "label": 4975,
+    "coordinate": 532.69765
+  },
+  {
+    "label": 4971,
+    "coordinate": 533.56905
+  },
+  {
+    "label": 4969,
+    "coordinate": 534.15923
+  },
+  {
+    "label": 4965,
+    "coordinate": 534.285
+  },
+  {
+    "label": 4963,
+    "coordinate": 534.79298
+  },
+  {
+    "label": 4961,
+    "coordinate": 535.13758
+  },
+  {
+    "label": 4959,
+    "coordinate": 535.3277
+  },
+  {
+    "label": 4957,
+    "coordinate": 535.67627
+  },
+  {
+    "label": 4955,
+    "coordinate": 536.00898
+  },
+  {
+    "label": 4953,
+    "coordinate": 536.32586
+  },
+  {
+    "label": 4951,
+    "coordinate": 536.82097
+  },
+  {
+    "label": "Kenmore Avenue",
+    "coordinate": 537.64824
+  },
+  {
+    "label": 4929,
+    "coordinate": 538.79748
+  },
+  {
+    "label": "Edgemont Street",
+    "coordinate": 543.65612
+  },
+  {
+    "label": 4867,
+    "coordinate": 547.03621
+  },
+  {
+    "label": 4801,
+    "coordinate": 554.64912
+  },
+  {
+    "label": 4777,
+    "coordinate": 556.06
+  },
+  {
+    "label": 4747,
+    "coordinate": 556.63751
+  },
+  {
+    "label": 4733,
+    "coordinate": 559.14477
+  },
+  {
+    "label": 4711,
+    "coordinate": 564.83267
+  },
+  {
+    "label": 4705,
+    "coordinate": 566.49626
+  },
+  {
+    "label": "Vermont Avenue",
+    "coordinate": 567.89764
+  },
+  {
+    "label": 4661,
+    "coordinate": 570.36609
+  },
+  {
+    "label": 4635,
+    "coordinate": 573.99034
+  },
+  {
+    "label": 4629,
+    "coordinate": 574.84194
+  },
+  {
+    "label": 4625,
+    "coordinate": 575.90743
+  },
+  {
+    "label": 4621,
+    "coordinate": 576.48176
+  },
+  {
+    "label": 4619,
+    "coordinate": 576.90162
+  },
+  {
+    "label": 4611,
+    "coordinate": 577.655
+  },
+  {
+    "label": 4601,
+    "coordinate": 579.17123
+  },
+  {
+    "label": "Rodney Drive",
+    "coordinate": 580.05331
+  },
+  {
+    "label": 4551,
+    "coordinate": 581.61117
+  },
+  {
+    "label": 2427,
+    "coordinate": 743.03485
+  },
+  {
+    "label": 1459,
+    "coordinate": 832.64065
+  },
+  {
+    "label": 1555,
+    "coordinate": 814.19913
+  },
+  {
+    "label": 4301,
+    "coordinate": 624.1753
+  },
+  {
+    "label": 2911,
+    "coordinate": 708.74348
+  },
+  {
+    "label": 2901,
+    "coordinate": 710.12348
+  },
+  {
+    "label": 2905,
+    "coordinate": 709.33348
+  },
+  {
+    "label": 2903,
+    "coordinate": 709.54848
+  },
+  {
+    "label": 4329,
+    "coordinate": 619.95031
+  },
+  {
+    "label": 4325,
+    "coordinate": 620.4031
+  },
+  {
+    "label": 4327,
+    "coordinate": 620.18559
+  },
+  {
+    "label": 2919,
+    "coordinate": 707.91978
+  },
+  {
+    "label": 2925,
+    "coordinate": 706.66478
+  },
+  {
+    "label": 3141,
+    "coordinate": 693.98435
+  },
+  {
+    "label": 2429,
+    "coordinate": 742.78672
+  },
+  {
+    "label": 2435,
+    "coordinate": 742.02217
+  },
+  {
+    "label": 2431,
+    "coordinate": 742.63856
+  },
+  {
+    "label": 2147,
+    "coordinate": 767.03217
+  },
+  {
+    "label": 2145,
+    "coordinate": 767.79717
+  },
+  {
+    "label": 2149,
+    "coordinate": 766.72217
+  },
+  {
+    "label": 2815,
+    "coordinate": 719.01217
+  },
+  {
+    "label": 1727,
+    "coordinate": 799.93913
+  },
+  {
+    "label": 1291,
+    "coordinate": 863.81565
+  },
+  {
+    "label": 1529,
+    "coordinate": 819.32848
+  },
+  {
+    "label": 1467,
+    "coordinate": 830.78007
+  },
+  {
+    "label": 2155,
+    "coordinate": 766.04523
+  },
+  {
+    "label": 2133,
+    "coordinate": 769.12522
+  },
+  {
+    "label": 925,
+    "coordinate": 912.87565
+  },
+  {
+    "label": 4407,
+    "coordinate": 604.97229
+  },
+  {
+    "label": 4381,
+    "coordinate": 608.975
+  },
+  {
+    "label": 1029,
+    "coordinate": 903.53554
+  },
+  {
+    "label": 2607,
+    "coordinate": 734.98217
+  },
+  {
+    "label": 3333,
+    "coordinate": 682.52941
+  },
+  {
+    "label": 4367,
+    "coordinate": 611.185
+  },
+  {
+    "label": 4359,
+    "coordinate": 612.79148
+  },
+  {
+    "label": 2613,
+    "coordinate": 734.27217
+  },
+  {
+    "label": 2127,
+    "coordinate": 769.93217
+  },
+  {
+    "label": 4409,
+    "coordinate": 604.70106
+  },
+  {
+    "label": 1509,
+    "coordinate": 822.61978
+  },
+  {
+    "label": 3815,
+    "coordinate": 651.945
+  },
+  {
+    "label": 1561,
+    "coordinate": 813.46278
+  },
+  {
+    "label": 3131,
+    "coordinate": 695.73
+  },
+  {
+    "label": 4323,
+    "coordinate": 620.72106
+  },
+  {
+    "label": 1385,
+    "coordinate": 847.8863
+  },
+  {
+    "label": 1383,
+    "coordinate": 848.1713
+  },
+  {
+    "label": 1381,
+    "coordinate": 848.5713
+  },
+  {
+    "label": 1619,
+    "coordinate": 807.51913
+  },
+  {
+    "label": 2751,
+    "coordinate": 722.55217
+  },
+  {
+    "label": 3801,
+    "coordinate": 653.6687
+  },
+  {
+    "label": 1535,
+    "coordinate": 817.36775
+  },
+  {
+    "label": 3123,
+    "coordinate": 696.91435
+  },
+  {
+    "label": 4335,
+    "coordinate": 619.12548
+  },
+  {
+    "label": 3337,
+    "coordinate": 681.82152
+  },
+  {
+    "label": 1541,
+    "coordinate": 816.07848
+  },
+  {
+    "label": 1533,
+    "coordinate": 818.72913
+  },
+  {
+    "label": 3513,
+    "coordinate": 670.855
+  },
+  {
+    "label": 3339,
+    "coordinate": 681.50652
+  },
+  {
+    "label": 1721,
+    "coordinate": 800.60413
+  },
+  {
+    "label": 1391,
+    "coordinate": 846.88909
+  },
+  {
+    "label": 1477,
+    "coordinate": 828.44995
+  },
+  {
+    "label": 4427,
+    "coordinate": 601.69
+  },
+  {
+    "label": 1841,
+    "coordinate": 793.39022
+  },
+  {
+    "label": 1825,
+    "coordinate": 795.15543
+  },
+  {
+    "label": 2843,
+    "coordinate": 714.69674
+  },
+  {
+    "label": 1571,
+    "coordinate": 811.98913
+  },
+  {
+    "label": 2109,
+    "coordinate": 773.2837
+  },
+  {
+    "label": 1827,
+    "coordinate": 794.81543
+  },
+  {
+    "label": 2623,
+    "coordinate": 732.96717
+  },
+  {
+    "label": 2619,
+    "coordinate": 733.70174
+  },
+  {
+    "label": 2621,
+    "coordinate": 733.12217
+  },
+  {
+    "label": 4439,
+    "coordinate": 599.91447
+  },
+  {
+    "label": 1301,
+    "coordinate": 860.72565
+  },
+  {
+    "label": 2209,
+    "coordinate": 762.43217
+  },
+  {
+    "label": 4417,
+    "coordinate": 603.16085
+  },
+  {
+    "label": 1463,
+    "coordinate": 831.90913
+  },
+  {
+    "label": 3725,
+    "coordinate": 657.8337
+  },
+  {
+    "label": 2213,
+    "coordinate": 761.96217
+  },
+  {
+    "label": 1627,
+    "coordinate": 806.00802
+  },
+  {
+    "label": 2125,
+    "coordinate": 770.39717
+  },
+  {
+    "label": 2615,
+    "coordinate": 734.07717
+  },
+  {
+    "label": 2239,
+    "coordinate": 757.37217
+  },
+  {
+    "label": 4419,
+    "coordinate": 602.65118
+  },
+  {
+    "label": 4391,
+    "coordinate": 606.18
+  },
+  {
+    "label": 2701,
+    "coordinate": 730.98717
+  },
+  {
+    "label": 3921,
+    "coordinate": 644.80473
+  },
+  {
+    "label": 1271,
+    "coordinate": 867.50338
+  },
+  {
+    "label": 3329,
+    "coordinate": 683.37412
+  },
+  {
+    "label": 1293,
+    "coordinate": 863.57565
+  },
+  {
+    "label": 1501,
+    "coordinate": 823.58682
+  },
+  {
+    "label": 2813,
+    "coordinate": 719.74717
+  },
+  {
+    "label": 4413,
+    "coordinate": 604.34605
+  },
+  {
+    "label": 4445,
+    "coordinate": 598.21609
+  },
+  {
+    "label": 2845,
+    "coordinate": 714.54391
+  },
+  {
+    "label": 1461,
+    "coordinate": 832.34413
+  },
+  {
+    "label": 3303,
+    "coordinate": 686.81652
+  },
+  {
+    "label": 4517,
+    "coordinate": 588.73458
+  },
+  {
+    "label": 2227,
+    "coordinate": 759.13217
+  },
+  {
+    "label": 4011,
+    "coordinate": 640.72
+  },
+  {
+    "label": 1457,
+    "coordinate": 833.2963
+  },
+  {
+    "label": 3511,
+    "coordinate": 671.37565
+  },
+  {
+    "label": 4337,
+    "coordinate": 618.8902
+  },
+  {
+    "label": 3037,
+    "coordinate": 701.06435
+  },
+  {
+    "label": 2129,
+    "coordinate": 769.64717
+  },
+  {
+    "label": 1025,
+    "coordinate": 905.22065
+  },
+  {
+    "label": 2861,
+    "coordinate": 712.16891
+  },
+  {
+    "label": 1901,
+    "coordinate": 788.47522
+  },
+  {
+    "label": 1539,
+    "coordinate": 816.53848
+  },
+  {
+    "label": 3603,
+    "coordinate": 665.74978
+  },
+  {
+    "label": 1613,
+    "coordinate": 808.24248
+  },
+  {
+    "label": 2237,
+    "coordinate": 757.53717
+  },
+  {
+    "label": 2233,
+    "coordinate": 758.14717
+  },
+  {
+    "label": 2139,
+    "coordinate": 768.59022
+  },
+  {
+    "label": 3731,
+    "coordinate": 657.0587
+  },
+  {
+    "label": 1299,
+    "coordinate": 862.76565
+  },
+  {
+    "label": 1331,
+    "coordinate": 856.77565
+  },
+  {
+    "label": 4521,
+    "coordinate": 588.18093
+  },
+  {
+    "label": 1707,
+    "coordinate": 802.83913
+  },
+  {
+    "label": 2717,
+    "coordinate": 729.32217
+  },
+  {
+    "label": 4429,
+    "coordinate": 601.46377
+  },
+  {
+    "label": 2809,
+    "coordinate": 721.26217
+  },
+  {
+    "label": 2807,
+    "coordinate": 721.64217
+  },
+  {
+    "label": 2251,
+    "coordinate": 757.15197
+  },
+  {
+    "label": 3313,
+    "coordinate": 685.01
+  },
+  {
+    "label": 4441,
+    "coordinate": 599.18
+  },
+  {
+    "label": 1701,
+    "coordinate": 803.70913
+  },
+  {
+    "label": 2835,
+    "coordinate": 716.04326
+  },
+  {
+    "label": 2151,
+    "coordinate": 766.43012
+  },
+  {
+    "label": 1289,
+    "coordinate": 864.42565
+  },
+  {
+    "label": 1449,
+    "coordinate": 835.94565
+  },
+  {
+    "label": 1361,
+    "coordinate": 851.34893
+  },
+  {
+    "label": 4459,
+    "coordinate": 596.33
+  },
+  {
+    "label": 4451,
+    "coordinate": 596.96109
+  },
+  {
+    "label": 1925,
+    "coordinate": 785.93522
+  },
+  {
+    "label": 2035,
+    "coordinate": 778.18739
+  },
+  {
+    "label": 1273,
+    "coordinate": 867.34655
+  },
+  {
+    "label": 4385,
+    "coordinate": 607.36
+  },
+  {
+    "label": 2741,
+    "coordinate": 724.39217
+  },
+  {
+    "label": 3729,
+    "coordinate": 657.2587
+  },
+  {
+    "label": 2229,
+    "coordinate": 758.75217
+  },
+  {
+    "label": 1807,
+    "coordinate": 796.67022
+  },
+  {
+    "label": 1803,
+    "coordinate": 797.81522
+  },
+  {
+    "label": 2203,
+    "coordinate": 763.62217
+  },
+  {
+    "label": 2157,
+    "coordinate": 765.87216
+  },
+  {
+    "label": 3325,
+    "coordinate": 684.1
+  },
+  {
+    "label": 3529,
+    "coordinate": 669.145
+  },
+  {
+    "label": 4435,
+    "coordinate": 600.08
+  },
+  {
+    "label": 4437,
+    "coordinate": 600.03731
+  },
+  {
+    "label": 1487,
+    "coordinate": 826.65913
+  },
+  {
+    "label": 1453,
+    "coordinate": 833.69565
+  },
+  {
+    "label": 1809,
+    "coordinate": 796.33522
+  },
+  {
+    "label": 2421,
+    "coordinate": 743.65696
+  },
+  {
+    "label": 1537,
+    "coordinate": 817.09113
+  },
+  {
+    "label": 1717,
+    "coordinate": 801.11913
+  },
+  {
+    "label": 4527,
+    "coordinate": 587.90199
+  },
+  {
+    "label": 1557,
+    "coordinate": 813.93628
+  },
+  {
+    "label": 2205,
+    "coordinate": 763.37026
+  },
+  {
+    "label": 1069,
+    "coordinate": 897.57065
+  },
+  {
+    "label": 2423,
+    "coordinate": 743.43471
+  },
+  {
+    "label": 1275,
+    "coordinate": 866.85565
+  },
+  {
+    "label": 1519,
+    "coordinate": 820.60167
+  },
+  {
+    "label": 1323,
+    "coordinate": 857.76413
+  },
+  {
+    "label": 1321,
+    "coordinate": 858.01413
+  },
+  {
+    "label": 3823,
+    "coordinate": 651.1387
+  },
+  {
+    "label": 4319,
+    "coordinate": 621.14999
+  },
+  {
+    "label": 3817,
+    "coordinate": 651.7937
+  },
+  {
+    "label": 2837,
+    "coordinate": 715.41174
+  },
+  {
+    "label": 1061,
+    "coordinate": 898.29565
+  },
+  {
+    "label": 1261,
+    "coordinate": 868.04565
+  },
+  {
+    "label": 4443,
+    "coordinate": 598.52109
+  },
+  {
+    "label": 3319,
+    "coordinate": 684.82652
+  },
+  {
+    "label": 2517,
+    "coordinate": 735.53717
+  },
+  {
+    "label": 3735,
+    "coordinate": 656.0487
+  },
+  {
+    "label": 4339,
+    "coordinate": 617.51
+  },
+  {
+    "label": 1341,
+    "coordinate": 854.62796
+  },
+  {
+    "label": 3819,
+    "coordinate": 651.41
+  },
+  {
+    "label": 1525,
+    "coordinate": 819.91829
+  },
+  {
+    "label": 4531,
+    "coordinate": 586.84746
+  },
+  {
+    "label": 3233,
+    "coordinate": 688.165
+  },
+  {
+    "label": 3229,
+    "coordinate": 689.17435
+  },
+  {
+    "label": 3903,
+    "coordinate": 646.6837
+  },
+  {
+    "label": 1569,
+    "coordinate": 812.66851
+  },
+  {
+    "label": 1371,
+    "coordinate": 849.68891
+  },
+  {
+    "label": 1375,
+    "coordinate": 849.42891
+  },
+  {
+    "label": 4321,
+    "coordinate": 620.91492
+  },
+  {
+    "label": 2927,
+    "coordinate": 706.285
+  },
+  {
+    "label": 2839,
+    "coordinate": 715.14174
+  },
+  {
+    "label": 4421,
+    "coordinate": 602.4959
+  },
+  {
+    "label": 1531,
+    "coordinate": 818.89845
+  },
+  {
+    "label": 2943,
+    "coordinate": 704.81935
+  },
+  {
+    "label": 4535,
+    "coordinate": 586.40355
+  },
+  {
+    "label": 4313,
+    "coordinate": 614.63
+  },
+  {
+    "label": 4341,
+    "coordinate": 617.16
+  },
+  {
+    "label": 3705,
+    "coordinate": 660.0613
+  },
+  {
+    "label": 1611,
+    "coordinate": 808.51893
+  },
+  {
+    "label": 1829,
+    "coordinate": 794.52804
+  },
+  {
+    "label": 1623,
+    "coordinate": 806.67841
+  },
+  {
+    "label": 2235,
+    "coordinate": 757.90717
+  },
+  {
+    "label": 3331,
+    "coordinate": 683.07652
+  },
+  {
+    "label": 1185,
+    "coordinate": 881.76962
+  },
+  {
+    "label": 2827,
+    "coordinate": 716.65022
+  },
+  {
+    "label": 3925,
+    "coordinate": 643.285
+  },
+  {
+    "label": 3923,
+    "coordinate": 644.035
+  },
+  {
+    "label": 3235,
+    "coordinate": 688.02
+  },
+  {
+    "label": 1545,
+    "coordinate": 815.82913
+  },
+  {
+    "label": 1621,
+    "coordinate": 806.9262
+  },
+  {
+    "label": 3917,
+    "coordinate": 645.19761
+  },
+  {
+    "label": 2225,
+    "coordinate": 759.40217
+  },
+  {
+    "label": 1229,
+    "coordinate": 873.02565
+  },
+  {
+    "label": 3321,
+    "coordinate": 684.79
+  },
+  {
+    "label": 1801,
+    "coordinate": 798.07022
+  },
+  {
+    "label": 1295,
+    "coordinate": 863.14065
+  },
+  {
+    "label": 2207,
+    "coordinate": 762.92299
+  },
+  {
+    "label": 1631,
+    "coordinate": 805.76023
+  },
+  {
+    "label": 2847,
+    "coordinate": 714.34391
+  },
+  {
+    "label": 4003,
+    "coordinate": 640.94
+  },
+  {
+    "label": 1503,
+    "coordinate": 823.33885
+  },
+  {
+    "label": 4331,
+    "coordinate": 619.63661
+  },
+  {
+    "label": 3607,
+    "coordinate": 664.72478
+  },
+  {
+    "label": 4529,
+    "coordinate": 587.655
+  },
+  {
+    "label": 1479,
+    "coordinate": 828.10036
+  },
+  {
+    "label": 1439,
+    "coordinate": 836.8313
+  },
+  {
+    "label": 1427,
+    "coordinate": 839.2163
+  },
+  {
+    "label": 1731,
+    "coordinate": 799.57413
+  },
+  {
+    "label": 3517,
+    "coordinate": 670.245
+  },
+  {
+    "label": 1115,
+    "coordinate": 888.30145
+  },
+  {
+    "label": 4533,
+    "coordinate": 586.62551
+  },
+  {
+    "label": 3515,
+    "coordinate": 670.685
+  },
+  {
+    "label": 1509,
+    "coordinate": 822.61978
+  },
+  {
+    "label": 2011,
+    "coordinate": 781.38522
+  },
+  {
+    "label": 2131,
+    "coordinate": 769.46022
+  },
+  {
+    "label": 2609,
+    "coordinate": 734.64717
+  },
+  {
+    "label": 1243,
+    "coordinate": 871.88565
+  },
+  {
+    "label": 1489,
+    "coordinate": 825.86413
+  },
+  {
+    "label": 1283,
+    "coordinate": 865.14703
+  },
+  {
+    "label": 2719,
+    "coordinate": 728.10217
+  },
+  {
+    "label": 1397,
+    "coordinate": 845.2013
+  },
+  {
+    "label": 1357,
+    "coordinate": 852.2963
+  },
+  {
+    "label": 1549,
+    "coordinate": 815.20413
+  },
+  {
+    "label": 3719,
+    "coordinate": 658.435
+  },
+  {
+    "label": 2929,
+    "coordinate": 705.98348
+  },
+  {
+    "label": 2841,
+    "coordinate": 714.98478
+  },
+  {
+    "label": 2829,
+    "coordinate": 716.28022
+  },
+  {
+    "label": 1161,
+    "coordinate": 886.09565
+  },
+  {
+    "label": 2005,
+    "coordinate": 782.15043
+  },
+  {
+    "label": 1931,
+    "coordinate": 783.79522
+  },
+  {
+    "label": 1527,
+    "coordinate": 819.66348
+  },
+  {
+    "label": 2511,
+    "coordinate": 738.27512
+  },
+  {
+    "label": 3727,
+    "coordinate": 657.5087
+  },
+  {
+    "label": 4201,
+    "coordinate": 630.20457
+  },
+  {
+    "label": 2723,
+    "coordinate": 727.45217
+  },
+  {
+    "label": 4403,
+    "coordinate": 605.24937
+  },
+  {
+    "label": 3323,
+    "coordinate": 684.68
+  },
+  {
+    "label": 4415,
+    "coordinate": 603.87087
+  },
+  {
+    "label": 4013,
+    "coordinate": 640.25
+  },
+  {
+    "label": 3909,
+    "coordinate": 646.3937
+  },
+  {
+    "label": 3827,
+    "coordinate": 649.2537
+  },
+  {
+    "label": 2135,
+    "coordinate": 768.93522
+  },
+  {
+    "label": 3225,
+    "coordinate": 690.63935
+  },
+  {
+    "label": 1515,
+    "coordinate": 821.02426
+  },
+  {
+    "label": 4447,
+    "coordinate": 597.58109
+  },
+  {
+    "label": 2811,
+    "coordinate": 720.45717
+  },
+  {
+    "label": 3129,
+    "coordinate": 696.28935
+  },
+  {
+    "label": 1805,
+    "coordinate": 797.32022
+  },
+  {
+    "label": 1205,
+    "coordinate": 878.78529
+  },
+  {
+    "label": 3335,
+    "coordinate": 682.28134
+  },
+  {
+    "label": 2501,
+    "coordinate": 739.91217
+  },
+  {
+    "label": 2939,
+    "coordinate": 705.51435
+  },
+  {
+    "label": 2425,
+    "coordinate": 743.20889
+  },
+  {
+    "label": 3605,
+    "coordinate": 664.945
+  },
+  {
+    "label": 2115,
+    "coordinate": 771.85522
+  },
+  {
+    "label": 3501,
+    "coordinate": 671.9
+  },
+  {
+    "label": 1111,
+    "coordinate": 892.90065
+  },
+  {
+    "label": 4033,
+    "coordinate": 638.36564
+  },
+  {
+    "label": 1065,
+    "coordinate": 898.08761
+  },
+  {
+    "label": 1513,
+    "coordinate": 821.59992
+  },
+  {
+    "label": 4017,
+    "coordinate": 639.99
+  },
+  {
+    "label": 3707,
+    "coordinate": 659.405
+  },
+  {
+    "label": 1165,
+    "coordinate": 884.98565
+  },
+  {
+    "label": 1715,
+    "coordinate": 801.69913
+  },
+  {
+    "label": 1605,
+    "coordinate": 809.96457
+  },
+  {
+    "label": 4511,
+    "coordinate": 589.06657
+  },
+  {
+    "label": 1911,
+    "coordinate": 787.42522
+  },
+  {
+    "label": 3733,
+    "coordinate": 656.6487
+  },
+  {
+    "label": 4401,
+    "coordinate": 605.56801
+  },
+  {
+    "label": 2105,
+    "coordinate": 774.19837
+  },
+  {
+    "label": 4311,
+    "coordinate": 622.01
+  },
+  {
+    "label": 2737,
+    "coordinate": 725.22717
+  },
+  {
+    "label": 1625,
+    "coordinate": 806.37913
+  },
+  {
+    "label": 3701,
+    "coordinate": 660.4863
+  },
+  {
+    "label": 1053,
+    "coordinate": 900.80565
+  },
+  {
+    "label": 4111,
+    "coordinate": 635.24
+  },
+  {
+    "label": 2611,
+    "coordinate": 734.46217
+  },
+  {
+    "label": 3709,
+    "coordinate": 659.265
+  },
+  {
+    "label": 1547,
+    "coordinate": 815.61913
+  },
+  {
+    "label": 1511,
+    "coordinate": 821.81842
+  },
+  {
+    "label": 2153,
+    "coordinate": 766.2588
+  },
+  {
+    "label": 2141,
+    "coordinate": 768.10022
+  },
+  {
+    "label": 4519,
+    "coordinate": 588.40094
+  },
+  {
+    "label": 1563,
+    "coordinate": 813.00913
+  },
+  {
+    "label": 3915,
+    "coordinate": 645.625
+  },
+  {
+    "label": 4317,
+    "coordinate": 621.525
+  },
+  {
+    "label": 4001,
+    "coordinate": 641.9087
+  },
+  {
+    "label": 4029,
+    "coordinate": 638.84004
+  },
+  {
+    "label": 4041,
+    "coordinate": 637.525
+  },
+  {
+    "label": 4333,
+    "coordinate": 619.28233
+  },
+  {
+    "label": 2103,
+    "coordinate": 774.5387
+  },
+  {
+    "label": 2101,
+    "coordinate": 774.89522
+  },
+  {
+    "label": 1485,
+    "coordinate": 827.41413
+  },
+  {
+    "label": 1601,
+    "coordinate": 810.16957
+  },
+  {
+    "label": 4481,
+    "coordinate": 593.195
+  },
+  {
+    "label": 4483,
+    "coordinate": 593.015
+  },
+  {
+    "label": 4501,
+    "coordinate": 590.67
+  },
+  {
+    "label": 4477,
+    "coordinate": 593.54609
+  },
+  {
+    "label": 4473,
+    "coordinate": 594.135
+  },
+  {
+    "label": 4379,
+    "coordinate": 609.855
+  },
+  {
+    "label": 4375,
+    "coordinate": 610.645
+  },
+  {
+    "label": 3715,
+    "coordinate": 658.73
+  },
+  {
+    "label": 3535,
+    "coordinate": 667.97478
+  },
+  {
+    "label": 3237,
+    "coordinate": 687.80652
+  },
+  {
+    "label": 2917,
+    "coordinate": 708.27478
+  },
+  {
+    "label": 2823,
+    "coordinate": 717.17217
+  },
+  {
+    "label": 2711,
+    "coordinate": 729.74217
+  },
+  {
+    "label": 2433,
+    "coordinate": 742.46217
+  },
+  {
+    "label": 1429,
+    "coordinate": 837.90565
+  },
+  {
+    "label": 1411,
+    "coordinate": 842.7013
+  },
+  {
+    "label": 1359,
+    "coordinate": 851.5663
+  },
+  {
+    "label": 1277,
+    "coordinate": 866.52065
+  },
+  {
+    "label": 1195,
+    "coordinate": 880.04565
+  },
+  {
+    "label": 867,
+    "coordinate": 919.73565
+  },
+  {
+    "label": 863,
+    "coordinate": 920.33065
+  },
+  {
+    "label": 861,
+    "coordinate": 920.64304
+  },
+  {
+    "label": 859,
+    "coordinate": 920.94065
+  },
+  {
+    "label": 855,
+    "coordinate": 920.75804
+  },
+  {
+    "label": 849,
+    "coordinate": 921.62065
+  },
+  {
+    "label": 821,
+    "coordinate": 926.85065
+  },
+  {
+    "label": 815,
+    "coordinate": 927.92565
+  },
+  {
+    "label": 813,
+    "coordinate": 928.08543
+  },
+  {
+    "label": 811,
+    "coordinate": 928.27565
+  },
+  {
+    "label": 809,
+    "coordinate": 928.73043
+  },
+  {
+    "label": 807,
+    "coordinate": 928.91543
+  },
+  {
+    "label": 801,
+    "coordinate": 929.99565
+  },
+  {
+    "label": 701,
+    "coordinate": 933.03543
+  },
+  {
+    "label": 727,
+    "coordinate": 932.52565
+  },
+  {
+    "label": 611,
+    "coordinate": 942.48565
+  },
+  {
+    "label": 555,
+    "coordinate": 947.64043
+  },
+  {
+    "label": 307,
+    "coordinate": 961.82065
+  }
+]
