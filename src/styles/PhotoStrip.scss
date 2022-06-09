@@ -1,10 +1,16 @@
 @import './global/index.scss';
 
 .strip-container {
-  height: 250px;
+  height: 200px;
   border-top: $outline-border;
   box-sizing: border-box;
   position: relative;
+
+  img {
+    width: 293px;
+    object-fit: none;
+    position: absolute;
+  }
 }
 
 .strip-container.hidden {
@@ -63,6 +69,8 @@
     font-family: "Sunset-Gothic", sans-serif;
     font-weight: 500;
   }
+
+
 }
 
 rect.image-frame {

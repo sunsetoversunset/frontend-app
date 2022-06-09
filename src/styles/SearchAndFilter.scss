@@ -4,17 +4,11 @@
   font-weight: 300;
 }
 
-.search-and-filter-opts {
-  display: none;
-}
 
-.search-and-filter-opts.visible {
-  position: absolute;
+.search-and-filter-opts {
   width: 315px;
   background: $light-1;
   border: 1px solid $black;
-  top: 28px;
-  right: 12px;
   border-radius: 36px;
   display: flex;
   flex-direction: column;

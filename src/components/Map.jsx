@@ -1,305 +1,197 @@
-import { useRef, useEffect, useState } from "react"
-import { SearchAndFilter } from "./SearchAndFilter"
-import { RoundedButton } from "./Buttons"
+import { useRef, useEffect, useState, useContext } from "react";
+import { useParams, Link, Outlet } from 'react-router-dom';
+import { DimensionsContext } from '../Contexts';
+import { addressToCoordinateUnflipped, getOppositeX, mult, coordinateToPoint, calcAddrOffset, toggleDirectionAddrOffset, parseAddrOffset } from '../utiliities.ts';
 import * as d3 from 'd3'
-import "../styles/Map.scss"
-import sunsetJson from '../assets/data/sunset.json'
+import "../styles/Map.scss";
+import GeoJson from '../assets/data/sunset.json'
+import StripLabels from '../assets/data/strip_labels.json';
 import { crossStreets } from '../assets/data/crossStreets'
 import iconMinimize from "../assets/icons/icon-minimize.svg"
-import iconMaximize from "../assets/icons/icon-maximize.svg"
+import iconMaximize from "../assets/icons/icon-maximize.svg";
+import '../styles/Map.scss';
 
 // ---------------------------------------------------------
 // In case it's useful later - handling responsiveness:  
 // https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
 // ---------------------------------------------------------
-export const Map = (props) => {
-  const mapContainer          = useRef(null)
-  const d3Container           = useRef(null)
-  const [xDomain, setXDomain] = useState([])
-  const [yDomain, setYDomain] = useState([])
-  const [bbox, setBbox]       = useState({});
-  const defaultZoomRange      = [-118.37975, -118.37827] 
+const Map = (props) => {
+  const { width } = (useContext(DimensionsContext));
+  const state = useParams();
+  const { addrOffset, years, direction } = state;
+  const { addr, offset } = parseAddrOffset(addrOffset);
+  const newCenter = (addr) ? addressToCoordinateUnflipped(addr) + offset : width / 2;
 
-  // ---------------------------------------------------------
-  const set = () => {
-    setBbox(mapContainer && mapContainer.current ? mapContainer.current.getBoundingClientRect() : {});
-  }
-   
-  // ---------------------------------------------------------
-  const calcExtents = () => {
-    let coords = sunsetJson.features[0].geometry.coordinates
-    let xCoords = []
-    let yCoords = []
-    for (let i = 0; i < coords.length; i++) {
-      xCoords.push(coords[i][0])
-      yCoords.push(coords[i][1])
-    }
-    setXDomain(d3.extent(xCoords))
-    setYDomain(d3.extent(yCoords))
-  }
+  // filter the labels to only get those on the side of the street we're viewing
+  const strip_labels = StripLabels
+    .filter((d, idx) => StripLabels.findIndex(_d => _d.l === d.l) === idx)
+    .map(d => ({
+      ...d,
+      c: (d.s === 'n') ? d.c : getOppositeX(d.c * mult) / mult,
+    }))
+    .sort((a, b) => a.c - b.c);
 
-  // ---------------------------------------------------------
-  useEffect(() => {
-    if (sunsetJson !== null) {
-      calcExtents()
-    } 
-    set()
-    window.addEventListener('resize', set);
-    return () => window.removeEventListener('resize', set);
-  }, [])
+  // connect the address points to draw the road (as a path, not a line)
+  const points = GeoJson.geometry.coordinates[0];
+  const lineSegments = points
+    .slice(1)
+    .map((point) => `L ${point[0]} ${point[1] * -1}`);
+  const path = `M ${points[0][0]} ${points[0][1] * -1} ${lineSegments.join(" ")}`;
 
+  const maxCoordinate = Math.max(...StripLabels.map(d => d.c * mult));
 
-  // ---------------------------------------------------------
-  useEffect(() => {
-    if (props.allAddresses.length > 0) {
-      props.setZoomRange([defaultZoomRange[0], defaultZoomRange[1]])
-    }
-  }, [props.allAddresses])
+  const coordinateRotation = (coordinate) => {
+    // find the point it's on or points it's between
+    const percentAlongPath = coordinate / maxCoordinate;
+    const pointsBelow = strip_labels
+      .filter(d => d.c * mult / maxCoordinate <= percentAlongPath);
+    const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : {c:0}; // GGDN tweaked for fallback
+    const pointsAbove = strip_labels
+      .filter(d => d.c * mult / maxCoordinate >= percentAlongPath);
+    const pointAbove = pointsAbove[0];
 
-
-  // ---------------------------------------------------------
-  useEffect(() => {
-    const handleArrowKeyScroll = (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        if (e.key === 'ArrowRight') {
-          handleScroll('east')
-        } else if (e.key === 'ArrowLeft') {
-          handleScroll('west')
-        }
-      }
+    if (pointBelow.c === pointAbove.c) {
+      return pointAbove.r;
     }
 
-    document.addEventListener('keydown', handleArrowKeyScroll)
-    return () => document.removeEventListener("keydown", handleArrowKeyScroll);
-  })
+    const percentAlongPathLowerPoint = pointBelow.c * mult / maxCoordinate;
+    const percentAlongPathHigherPoint = pointAbove.c * mult / maxCoordinate;
 
-  // ---------------------------------------------------------
-  const xScaleCoord = d3.scaleLinear()
-    .domain([xDomain[0], xDomain[1]])
-    // .range([0, bbox.width])
-    .range([0, 1000])
-
-  const yScaleCoord = d3.scaleLinear()
-    .domain([yDomain[0], yDomain[1]])
-    .range([bbox.height/4, 0])
-
-  const line = d3.line()
-    .x(d => {
-      return xScaleCoord(d[0]) * 200
-    })
-    .y(d => yScaleCoord(d[1]) + bbox.height/2)
-    .curve(d3.curveCatmullRom.alpha(1))
-
-  // ---------------------------------------------------------
-  // Renders svg map and brush controls
-  // ---------------------------------------------------------
-  const drawMap = () => {
-    const svg = d3.select(d3Container.current)
-      .attr("width", bbox.width)
-      .attr("height", bbox.height)
-      
-    // clear out before we draw
-    svg.selectAll("*").remove();
-
-    const mapGroup = svg.append('g').attr('class', 'map-group')
-    mapGroup.selectAll('cross-street')
-      .data(crossStreets)
-      .enter()
-      .append('line')
-      .style("stroke", "#949494")
-      .style("stroke-dasharray", ("6, 6"))
-      .attr('class', 'cross-street')
-      .attr("x1", function(d) { 
-        return (d.idx) * props.mult 
-      })
-      .attr("y1",  function() { return 0 })
-      .attr('x2', function(d) { 
-        return (d.idx) * props.mult 
-      })
-      .attr("y2", function() { return bbox.height })
-
-    // draw line map
-    mapGroup.append('path')
-      .attr('class', 'line-map')
-      .datum(sunsetJson.features[0].geometry.coordinates)
-      .attr('d', line)
-      .attr("stroke", "black")
-      .attr("stroke-width", "6")
-      .attr("fill", "none")
-  
-    // draw street names
-    mapGroup.selectAll('cross-street-name')
-      .data(crossStreets)
-      .enter()
-      .append("text")
-      .attr("class", "cross-street-name")
-      .attr("transform", "rotate(-90)")
-      .attr("transform", function(d) {
-        return "translate(" + (d.idx * props.mult) + "," + 0 + ") rotate(90)";
-      })
-      .attr("dx", "0.5em")
-      .attr("dy", "-0.8em") 
-      .attr("font-size", "8px")
-      .style("fill", "black")
-      .style("text-anchor", "start")
-      .text(function(d) { return d.street });
-    
-    // draw brush controls
-    // svg.append("g")
-    //   .call(brush)
-    //   .call(brush.move, [defaultZoomRange[0], defaultZoomRange[1]].map(x))
-    //   .call(g => {
-    //     g.select(".overlay")
-    //       .datum({type: "selection"})
-    //   });
+    // figure out how close the coordinate is to each of the points
+    const rotation = pointAbove.r; //pointBelow.rotation +  * (percentAlongPath - pointBelowPercent) * (percentAlongPath - pointAbovePercent);
+    return rotation;
   }
 
-  // ---------------------------------------------------------
-  useEffect(() => {
-    drawMap()
-  }, [xDomain, yDomain, bbox])
-  
-
-  // ---------------------------------------------------------
-  // Brush controls
-  // ---------------------------------------------------------
-  const handleBrushEnd = (event) => {
-    if (event.selection === null) return
-    const [x0, x1] = event.selection.map(x.invert);
-    // console.log(`[handleBrushEnd]: ${x0}, ${x1}`)
-    props.setZoomRange([x0, x1])
-  }
-
-  const brushed = (event) => {
-    // if (event.selection === null) return
-    // const [x0, x1] = event.selection.map(x.invert);
-    // console.log(`${x0}, ${x1}`)
-    // TODO: figure out how to highlight north or south part of selection?
-  }
-
-  const x = d3.scaleLinear([xDomain[0], xDomain[1]], [0, bbox.width])
-  
-  const brush = d3.brushX()
-    .extent([[0, 0], [bbox.width, bbox.height]])
-    .on("start brush end", brushed)
-    .on("end", handleBrushEnd);
-
-
-  // ---------------------------------------------------------
-  const handleScroll = (direction) => {
-    let rangeDiff = props.zoomRange[1] - props.zoomRange[0]   
-    let lBounds, rBounds
-    if (direction === 'west') {
-      lBounds = props.zoomRange[0] - rangeDiff
-      rBounds = props.zoomRange[0]
-      if (lBounds < xDomain[0]) {
-        lBounds = xDomain[0]
-        rBounds = xDomain[0] + rangeDiff
-        props.setZoomRange([xDomain[0], rBounds])
-      } else {
-        props.setZoomRange([lBounds, rBounds])
-      }
-    } else {
-      lBounds = props.zoomRange[1]
-      rBounds = props.zoomRange[1] + rangeDiff
-      if (rBounds > xDomain[1]) {
-        rBounds = xDomain[1]
-        lBounds = xDomain[1] - rangeDiff
-        props.setZoomRange([lBounds, xDomain[1]])
-      } else {
-        props.setZoomRange([lBounds, rBounds])
-      }
-    }
-    
-    let dist = 0;
-    if (direction === 'east') {
-      dist = props.scrollAmount + (1 * bbox.width)
-    } else {
-      dist = props.scrollAmount - (1 * bbox.width);
-    } 
-
-    // We could move these two lines into a useeffect so 
-    // it all updates at the same time
-    const mapGroupSelection = d3.selectAll('.map-group')
-    mapGroupSelection.attr("transform", "translate(" + -dist + ",0)");
-    props.setScrollAmount(dist)
-  }
-
-  // ---------------------------------------------------------
-  const renderMapControls = () => {
-    return (
-      <div className="map-controls">
-        <div className="map-controls-inner">
-          <div className="map-controls-left">
-            <RoundedButton
-              icon="icon-arrow-left" 
-              label={'Head West'}
-              handleOnClicked={() => handleScroll('west')}
-            />
-            <RoundedButton 
-              label={`Direction: ${props.directionFacing.toUpperCase()}`}
-              handleOnClicked={() => {
-                if (props.directionFacing === 'n') {
-                  props.setDirectionFacing('s')
-                } else {
-                  props.setDirectionFacing('n')
-                }
-              }}
-            />
-          </div>
-          <div className="map-controls-right">
-            <RoundedButton
-              isActive={ props.isSearchAndFilterShowing }
-              icon="icon-search-filter" 
-              label={'Search & Filter'}
-              handleOnClicked={() => {
-                props.setIsSearchAndFilterShowing(true)
-              }}
-            />
-            <RoundedButton
-              icon="icon-arrow-right"  
-              label={'Head East'}
-              handleOnClicked={() => handleScroll('east')}
-            />
-
-            {/* TODO - don't put this in two places */}
-            <label className="hidden" htmlFor="minimize-map">
-              { props.isMapMinimized === false ? "Hide Map" : "Show Map" }
-            </label>
-            <button
-              id='minimize-map' 
-              className={`minimize-map-ctrl ${props.isMapMinimized ? 'visible' : 'hidden'}`}
-              onClick={ () => props.setIsMapMinimized(!props.isMapMinimized) }
-            >
-              {props.isMapMinimized ? 
-                <img src={iconMaximize} alt="icon-maximize"/> : 
-                <img src={iconMinimize} alt="icon-minimize"/>
-              }
-            </button>
-          </div>
-        </div>
-        <SearchAndFilter 
-          handleCenterAddress= { props.handleCenterAddress }
-          allAddresses={ props.allAddresses }
-          yearsShowing={ props.yearsShowing }
-          setYearsShowing={ props.setYearsShowing }
-          isSearchAndFilterShowing={ props.isSearchAndFilterShowing }
-          setIsSearchAndFilterShowing={ props.setIsSearchAndFilterShowing }
-        />
-      </div>
-    )
-  }
+  console.log(newCenter);
+  const [lng, lat] = coordinateToPoint(newCenter, maxCoordinate, strip_labels);
+  const rotation = coordinateRotation(newCenter / mult);
+  console.log(lng, lat, rotation, newCenter / mult);
+  const viewPosition = (direction === 'n')
+    ? [Math.cos((rotation + 180) * Math.PI / 180) * 0.003 + lng, Math.sin((rotation + 180) * Math.PI / 180) * 0.003 + lat]
+    : [Math.cos((rotation + 180) * Math.PI / 180) * -0.003 + lng, Math.sin((rotation + 180) * Math.PI / 180) * -0.003 + lat];
 
   // ---------------------------------------------------------
   return (
-    <div className="map-inner">
-      <div className="map" ref={mapContainer}>
-        <svg
-          className={`d3-component loaded-${true}`}
-          ref={d3Container}
-        />
-      </div>
-      { renderMapControls() }
+
+    <div className='map'>
+      <svg
+        width={1000}
+        height={250}
+      >
+        <g transform='scale(5000 4000) translate(118.399, 34.105) rotate(-10 -118.31 -34.0855) '>
+          <path d={path}
+            fill='transparent'
+            stroke='#FF8A58'
+            strokeWidth='0.0015'
+          />
+          <path d={path}
+            fill='transparent'
+            stroke='#F1EEE8'
+            strokeWidth='0.0004'
+          />
+          {strip_labels.filter(d => d.s === direction).map(d => (
+            <g key={`addr${d.l}`}>
+              <Link
+                to={`/panorama/${direction}/${d.l}/${years}`}
+              >
+                <circle
+                  cx={d.lng}
+                  cy={d.lat * -1}
+                  r={0.001}
+                  fill='transparent'
+                />
+              </Link>
+            </g>
+          ))}
+          <g transform={`rotate(${((direction === 'n') ? rotation + 90 + 3 : rotation - 90 + 3)} ${viewPosition[0]} -${viewPosition[1]}) scale(${1 / 5000} ${1 / 4000}) translate(${viewPosition[0] * 5000} ${viewPosition[1] * -1 * 4000})`}>
+            <circle
+              cx={0}
+              cy={0}
+              r={5}
+              fill='red'
+            />
+            <circle
+              cx={0}
+              cy={0}
+              r={15}
+              fill="transparent"
+              stroke="green"
+              strokeOpacity={0.5}
+              strokeWidth={15}
+              strokeDasharray="25 75"
+              strokeDashoffset="90"
+            />
+           {/* <line
+              x1={-100}
+              x2={100}
+              y1={0}
+              y2={0}
+              strokeWidth={1}
+              stroke='black'
+          /> */}
+          </g> 
+        </g>
+        <text
+          x={65}
+          y={83}
+          fontSize={16}
+          fill='grey'
+          textAnchor="middle"
+        >
+          SUNSET STRIP
+        </text>
+        <text
+          x={300}
+          y={30}
+          fontSize={16}
+          fill='grey'
+          textAnchor="middle"
+        >
+          HOLLYWOOD
+        </text>
+
+        <text
+          x={820}
+          y={110}
+          fontSize={16}
+          fill='grey'
+          textAnchor="middle"
+        >
+          CHINATOWN
+        </text>
+
+        <text
+          x={700}
+          y={100}
+          fontSize={16}
+          fill='grey'
+          textAnchor="middle"
+        >
+          ANGELINO
+          <tspan
+            x={700}
+            dy={18}
+          >
+            HEIGHTS
+          </tspan>
+        </text>
+
+        <text
+          x={660}
+          y={30}
+          fontSize={16}
+          fill='grey'
+          textAnchor="middle"
+        >
+          SILVER LAKE
+        </text>
+
+
+
+
+      </svg>
     </div>
   )
 }
+
+export default Map;
