@@ -37,11 +37,11 @@ const MapMarker = (props: { viewPosition: Point; rotation: number }) => {
           id="myGradient"
           cy={1}
         >
-          <stop offset="0%" stop-color="transparent" />
-          <stop offset="9%" stop-color="transparent" />
-          <stop offset="15%" stop-color="red" stopOpacity={0.7} />
-          <stop offset="50%" stop-color="red" stopOpacity={0.3} />
-          <stop offset="100%" stop-color="red" stopOpacity={0} />
+          <stop offset="0%" stopColor="transparent" />
+          <stop offset="9%" stopColor="transparent" />
+          <stop offset="15%" stopColor="red" stopOpacity={0.7} />
+          <stop offset="50%" stopColor="red" stopOpacity={0.3} />
+          <stop offset="100%" stopColor="red" stopOpacity={0} />
         </radialGradient>
       </defs>
       <circle

@@ -10,7 +10,7 @@ import PhotoViewerModalTSX  from './PhotoViewerModal.tsx';
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
-import { AddressView } from './AddressView';
+import AddressView from './AddressView/Index.tsx';
 import Footer from './Footer';
 import { DimensionsContext } from '../Contexts.ts';
 
@@ -54,7 +54,7 @@ export const App = () => {
             <Route path="/stories" element={StoriesView} />
             <Route path="/contact" element={Contact} />
             <Route path="/team" element={Team} />
-            <Route path="/address/:address" element={AddressView} />
+            <Route path="/address/:address" element={<AddressView />} />
             <Route path='/imagereference' element={<PhotoViewerModal
               nearbyAddresses={['707', '9156']}
               imgObj={{ id: 'a77dc2a3-d5ee-4fa3-b188-6cfd5e65f507' }}

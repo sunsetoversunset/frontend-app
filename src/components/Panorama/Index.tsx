@@ -9,7 +9,6 @@ import "../../styles/Panorama.scss"
 export const Panorama = () => {
   const [scrollDistance, setScrollDistance] = useState(0.4);
   
-
   return (
     <PanoramaContext.Provider value={{ scrollDistance: scrollDistance, setScrollDistance: setScrollDistance }}>
       <div id='panorama'>
