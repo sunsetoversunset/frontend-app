@@ -1,4 +1,4 @@
-import Direction from '..';
+import Direction from '../index.d';
 
 export type Photo = {
   id: string;
@@ -145,7 +145,7 @@ export type AssessorRow = {
 };
 
 export type AddressData = {
-  side: Direction;
+  side: 'n' | 's';
   boundaries: [number, number];
   photos: Photo[];
   census_data: CensusData;

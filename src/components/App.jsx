@@ -6,7 +6,7 @@ import { StoriesView } from './StoriesView'
 import Panorama from './Panorama/Index.tsx';
 import NavHeader from './NavHeader';
 import { PhotoViewerModal } from './PhotoViewerModal.jsx';
-import PhotoViewerModalTSX  from './PhotoViewerModal.tsx';
+import PhotoViewerModalTSX from './PhotoViewerModal.tsx';
 import { Contact } from './Contact'
 import { Team } from './Team'
 import { About } from './About'
@@ -54,7 +54,9 @@ export const App = () => {
             <Route path="/stories" element={StoriesView} />
             <Route path="/contact" element={Contact} />
             <Route path="/team" element={Team} />
-            <Route path="/address/:address" element={<AddressView />} />
+            <Route path="/address/">
+              <Route path=":address" element={<AddressView />} />
+            </Route>
             <Route path='/imagereference' element={<PhotoViewerModal
               nearbyAddresses={['707', '9156']}
               imgObj={{ id: 'a77dc2a3-d5ee-4fa3-b188-6cfd5e65f507' }}
