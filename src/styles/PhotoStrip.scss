@@ -10,6 +10,10 @@
     width: 293px;
     object-fit: none;
     position: absolute;
+
+    &.address {
+      position: relative;
+    }
   }
 }
 

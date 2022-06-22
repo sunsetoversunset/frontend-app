@@ -2,15 +2,17 @@
  
 .nav-header {
   position: fixed;
-	display: flex;
+	display: grid;
+  grid-template-columns: 1fr 1fr;
 	align-items: center;
 	justify-content: space-between;
   height: 39px;
   background-color: $main-bg;
-  width: 100vw;
   font-family: "Sunset-Gothic", sans-serif;
   z-index: 9999;
   top:0;
+  left: 0;
+  right: 0;
   border-bottom: 1px solid #000;
   transition: all 0.2s linear;
 
@@ -53,7 +55,6 @@
 
   .nav-links-container {
     flex-direction: row;
-    width: 50%;
     display: flex;
     justify-content: flex-end;
     margin-right: 24px;
@@ -62,6 +63,7 @@
       display: flex;
       list-style-type: none;
       padding: 0;
+      margin: 8px;
       column-gap: 24px;
 
       a {
