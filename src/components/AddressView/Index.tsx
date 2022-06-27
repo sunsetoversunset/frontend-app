@@ -1,22 +1,25 @@
-import axios from 'axios';
-import React, { useEffect, useState, useRef } from 'react';
+import axios, { AxiosError } from 'axios';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import CensusTable from './CensusTable';
 import OccupancyTable from './OccupancyTable';
 import NewspaperTable from './NewspaperTable';
 import PhotoStripAddress from "./PhotoStripAddress";
-import { AddressDataContext } from '../../Contexts';
+import { AddressDataContext, DimensionsContext } from '../../Contexts';
 import { AddressData } from '../../types/AddressView';
 import { getClosestAddressBelow, getClosestAddressAbove, addressToCoordinate } from '../../utiliities';
 import '../../styles/AddressView.scss';
 import iconArrowLeft from "../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../assets/icons/icon-arrow-right.svg"
+import { readJsonConfigFile } from 'typescript';
 
 const AddressView = () => {
   const { address } = useParams() as { address: string };
+  const { width } = useContext(DimensionsContext);
   const [addressData, setAddressData] = useState<AddressData>();
   const historicalProfileRef = useRef<HTMLHeadingElement>(null);
   const photosRef = useRef<HTMLHeadingElement>(null);
+  const [addressHasData, setAddressHasData] = useState(true);
 
   useEffect(() => {
     const cancelToken = axios.CancelToken;
@@ -24,9 +27,25 @@ const AddressView = () => {
     axios.get(`/address_data/${address}.json`)
       .then(response => {
         setAddressData(response.data as AddressData);
+      })
+      .catch((reason: AxiosError) => {
+        if (reason.response!.status === 404) {
+          setAddressHasData(false);
+        };
       });
     return () => { source.cancel(); }
   }, [address]);
+
+
+
+  if (!addressHasData) {
+    return (
+      <div className="app-page" id="address-page">
+        <p>{`${address} isn't a valid address.`}</p>
+
+      </div>
+    )
+  }
 
   if (!addressData) {
     return null;
@@ -43,7 +62,7 @@ const AddressView = () => {
         <div
           className="header-image"
           style={{
-            background: `url('https://media.getty.edu/iiif/image/${addressData.photos[Math.floor(Math.random() * addressData.photos.length)].id}/full/,1000/0/default.jpg')`
+            backgroundImage: `url('https://media.getty.edu/iiif/image/${addressData.photos[Math.floor(Math.random() * addressData.photos.length)].id}/full/,${width}/0/default.jpg')`,
           }}
         >
           <p className="hero-address">{address} Sunset Boulevard</p>
@@ -94,11 +113,11 @@ const AddressView = () => {
             )}
           </div>
 
-          <h1 ref={historicalProfileRef}>Historical Profile</h1>
-          <CensusTable />
-          <OccupancyTable />
-          <NewspaperTable />
         </div>
+        <h1 ref={historicalProfileRef}>Historical Profile</h1>
+        <OccupancyTable />
+        <NewspaperTable />
+        <CensusTable />
       </div>
     </AddressDataContext.Provider>
   );
