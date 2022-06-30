@@ -5,6 +5,7 @@ footer {
   display: flex;
 	flex-direction: column;
 	border-top: 1px solid;
+  z-index: 0;
 
   .footer-graphic {
     flex-grow: 1;

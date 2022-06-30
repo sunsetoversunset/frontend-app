@@ -13,15 +13,22 @@ const minLng = Math.min(...stripLabels.map(d => d.lng));
 const maxLng = Math.max(...stripLabels.map(d => d.lng));
 const midLat = maxLat - ((maxLat - minLat) / 2);
 const midLng = maxLng - ((maxLng - minLng) / 2);
+export const lngToLatRatio = (maxLng - minLng) / (maxLat - minLat);
 
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l))
+  // todo: fix the data error instead of ignoring it: theses addresses have incorrecto coordinates
+  .filter(d => d.l !== 1332)
   // map southern view the interverted x
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,
     x: (d.s === 'n') ? d.c * mult : (maxX - d.c) * mult,
+    lat: d.lat,
+    lng: d.lng,
+    percentAlongPath: d.c / maxX,
+    rotation: d.r,
   }))
   .sort((a, b) => a.x - b.x);
 
@@ -30,6 +37,9 @@ export const getWesternmostLabel = (direction?: Direction): StripLabel => (direc
 export const getEasternmostLabel = (direction?: Direction): StripLabel => (direction) ? labels.sort((a, b) => b.x - a.x).find(label => label.direction === direction) as StripLabel : labels[labels.length - 1];
 
 export const getOppositeX = (x: number) => maxX * mult - x;
+
+// `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
+export const getCenter = (addrOffset: string, width: number) => Math.min(maxX * mult - width / 2, Math.max(width / 2, addrOffsetToCoordinate(addrOffset)));
 
 export const addressToCoordinate = (address: string) => {
   const { c: coordinate, s: direction } = (stripLabels.find(d => d.l.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as any);
@@ -42,12 +52,11 @@ export const addressToCoordinateUnflipped = (address: string) => {
 }
 
 /* with an x value finds the nearest label and offset below it */
-export const getClosestAddressBelow = (x: number, direction?: Direction) => {
+export const getClosestAddressBelow = (x: number, direction?: Direction) => {  
   const closestAddresses = labels
     .filter(d => (direction) ? d.direction === direction : true)
     .filter(d => d.x <= x)
     .sort((a, b) => b.x - a.x);
-
   return (closestAddresses.length > 0) ? {
     addr: closestAddresses[0].label,
     offset: x - closestAddresses[0].x,
@@ -98,7 +107,7 @@ export function toggleDirectionAddrOffset(addrOffset: string, direction: Directi
   // get the best cooresponding address across the street
   const coordinate = addrOffsetToCoordinate(addrOffset)
   const newAddrData = coordinateToAddress(getOppositeX(coordinate), newDirection);
-  return `${newAddrData.addr}-${Math.round(newAddrData.offset)}`;
+  return `${newAddrData.addr.replace(/\s+/g, '')}-${Math.round(newAddrData.offset)}`;
 }
 
 // adapted from https://stackoverflow.com/questions/33907276/calculate-point-between-two-coordinates-based-on-a-percentage
@@ -126,21 +135,21 @@ export const coordinateToPoint = (coordinate: number, maxCoordinate: number, str
 }
 
 
-export const getRoadPath = () => {
+export const getRoadPath = (width: number) => {
   const points = GeoJson.geometry.coordinates[0];
-  const [firstX, firstY] = latLngToXY([points[0][1], points[0][0]]);
+  const [firstX, firstY] = latLngToXY([points[0][1], points[0][0]], width);
   const lineSegments = points
     .slice(1)
     .map((point) => {
-      const [x , y] = latLngToXY([point[1], point[0]])
+      const [x , y] = latLngToXY([point[1], point[0]], width)
       return `L ${x} ${y}`;
     });
 
   return `M ${firstX} ${firstY} ${lineSegments.join(" ")}`;
 };
 
-export const convertLngtoX = (lng: number): number => (lng - midLng) * 500 / (maxLng - midLng);
+export const convertLngtoX = (lng: number, width: number): number => (lng - midLng) * width / 2 / (maxLng - midLng);
 
 export const convertLattoY = (lat: number): number => 10 - ((lat - midLat) * 45 / (maxLat - midLat));
 
-export const latLngToXY = (latLng: Point): Point => [convertLngtoX(latLng[1]), convertLattoY(latLng[0])];
+export const latLngToXY = (latLng: Point, width: number): Point => [convertLngtoX(latLng[1], width), convertLattoY(latLng[0])];

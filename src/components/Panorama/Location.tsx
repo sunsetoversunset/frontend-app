@@ -39,7 +39,8 @@ const Location = (props: { to: string; x: number; y: number; label: string }) =>
         fontSize={10}
         textAnchor='middle'
         style={{
-          fill: 'transparent'
+          fill: 'transparent',
+          pointerEvents: 'none',
         }}
         ref={text}
       >

@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useContext }  from "react";
 import { useParams } from 'react-router-dom';
 import MapMarker from './MapMarker';
-import { addressToCoordinateUnflipped, getOppositeX, mult, coordinateToPoint, parseAddrOffset, getRoadPath, latLngToXY, convertLattoY, convertLngtoX } from '../../utiliities';
-import StripLabels from '../../assets/data/strip_labels.json';
+import { DimensionsContext } from "../../Contexts";
+import { labels, parseAddrOffset, getRoadPath, latLngToXY, convertLattoY, convertLngtoX } from '../../utiliities';
 import Location from './Location';
 import { URLParamsPanorama } from "./index.d";
 // import iconMinimize from "../../assets/icons/icon-minimize.svg"
 // import iconMaximize from "../../assets/icons/icon-maximize.svg";
 import '../../styles/Map.scss';
-
 
 const MapLabels = [
   {
@@ -38,74 +37,44 @@ const MapLabels = [
   }
 ]
 
-// ---------------------------------------------------------
-// In case it's useful later - handling responsiveness:  
-// https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
-// ---------------------------------------------------------
 const Map = () => {
+  const { width } = useContext(DimensionsContext);
   const { addrOffset, years, direction } = useParams<URLParamsPanorama>();
   const { addr } = parseAddrOffset(addrOffset as string);
-  const newCenter = addressToCoordinateUnflipped(addr);
 
-  // filter the labels to only get those on the side of the street we're viewing
-  const strip_labels = StripLabels
-    .filter((d, idx) => StripLabels.findIndex(_d => _d.l === d.l) === idx)
+  // the width of the map relative to the width of the full screen and the svg path for the road
+  const mapWidth = width * 0.9;
+  const path = getRoadPath(mapWidth);
+
+  // filter the labels to only get those on the side of the street we're viewing and project x and y values
+  const strip_labels = labels
+    .filter(d => d.direction === direction)
     .map(d => {
-      const [x, y] = latLngToXY([d.lat, d.lng]);
+      const [x, y] = latLngToXY([d.lat, d.lng], mapWidth); 
       return {
         ...d,
         x,
         y,
-        c: (d.s === 'n') ? d.c : getOppositeX(d.c * mult) / mult,
       };
-    })
-    .sort((a, b) => a.c - b.c);
+    });
 
-  /* the svg path for the road */
-  const path = getRoadPath();
+  // get the label data from the address
+  const addressData = strip_labels.find(d => d.label.replace(/\s+/g, '')=== addr)
 
-  const maxCoordinate = Math.max(...StripLabels.map(d => d.c * mult));
-
-  // const coordinateRotation = (coordinate: number) => {
-  //   // find the point it's on or points it's between
-  //   const percentAlongPath = coordinate / maxCoordinate;
-  //   const pointsBelow = strip_labels
-  //     .filter(d => d.c * mult / maxCoordinate <= percentAlongPath);
-  //   const pointBelow = (pointsBelow.length > 0) ? pointsBelow[pointsBelow.length - 1] : null;
-  //   const pointsAbove = strip_labels
-  //     .filter(d => d.c * mult / maxCoordinate >= percentAlongPath);
-  //   const pointAbove = pointsAbove[0];
-
-  //   if (pointBelow?.c === pointAbove.c) {
-  //     return pointAbove.r;
-  //   }
-
-  //   // const percentAlongPathLowerPoint = pointBelow.c * mult / maxCoordinate;
-  //   // const percentAlongPathHigherPoint = pointAbove.c * mult / maxCoordinate;
-
-  //   // figure out how close the coordinate is to each of the points
-  //   const rotation = pointAbove.r; //pointBelow.rotation +  * (percentAlongPath - pointBelowPercent) * (percentAlongPath - pointAbovePercent);
-  //   return rotation + 90;
-  // }
-
-
-  const [x, y] = latLngToXY((coordinateToPoint(newCenter, maxCoordinate, strip_labels)).reverse() as [number, number]);
-  const current_strip_label = strip_labels.find(d => d.l.toString().replace(/\s+/g, '') === addr);
-  const rotation = (current_strip_label) ? current_strip_label.r + 90 : 0;
-
-  // ---------------------------------------------------------
+  if (!addressData) {
+    return null;
+  }
 
   return (
-
     <div className='map'>
       <svg
-        width={1100}
-        height={150}
+        width={width}
+        height={200}
       >
-        <g transform='translate(550 75) rotate(0)'>
+        <g transform={`translate(${width / 2} 75) rotate(0)`}>
           {MapLabels.map(mapLabel => (
             <text
-              x={convertLngtoX(mapLabel.lng)}
+              x={convertLngtoX(mapLabel.lng, mapWidth)}
               y={convertLattoY(mapLabel.lat)}
               fontSize={16}
               fill='grey'
@@ -125,19 +94,18 @@ const Map = () => {
             stroke='#F1EEE8'
             strokeWidth='5'
           />
-          {strip_labels.filter(d => d.s === direction).map(d => (
+          {strip_labels.filter(d => d.direction === direction).map(d => (
             <Location
-              to={`/panorama/${direction}/${d.l}/${years}`}
-              key={`addr${d.l}`}
+              to={`/panorama/${direction}/${d.label.replace(/\s+/g, '')}/${years}`}
+              key={`addr${d.label}`}
               x={d.x}
               y={d.y}
-              label={d.l.toString()}
+              label={d.label}
             />
           ))}
-          {/* rotate(${((direction === 'n') ? rotation + 90 + 3 : rotation - 90 + 3)}  */}
           <MapMarker
-            viewPosition={[x, y]}
-            rotation={rotation}
+            label={addressData}
+            labels={strip_labels}
           />
         </g>
       </svg>

@@ -1,31 +1,61 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { PanoramaContext } from '../../Contexts';
-import { PanoramaContextParams } from './index.d';
-import { Point } from '../../index.d';
+import { StripLabel } from '../../index.d';
 
-const MapMarker = (props: { viewPosition: Point; rotation: number }) => {
-  const [translate, setTranslate] = useState(`translate(${props.viewPosition[0]} ${props.viewPosition[1]})`);
-  const [rotation, setRotation] = useState(props.rotation);
+type StripLabelWithXY = StripLabel & { x: number, y: number };
+
+const MapMarker = (props: { labels: StripLabelWithXY[], label: StripLabelWithXY }) => {
+  const [translate, setTranslate] = useState(`translate(${props.label.x} ${props.label.y})`);
+  const x = useRef(props.label.x);
+  const [rotation, setRotation] = useState((props.label.direction === 'n') ? props.label.rotation + 90 : props.label.rotation - 90) ;
   const g = useRef(null);
   const halo = useRef(null);
 
   useEffect(() => {
-    d3.select(g.current)
-      .transition()
-      .duration(1500)
-      .attr('transform', `translate(${props.viewPosition[0]} ${props.viewPosition[1]})`)
-      .on('end', () => {
-        setTranslate(`translate(${props.viewPosition[0]} ${props.viewPosition[1]})`);
-      });
-    d3.select(halo.current)
-      .transition()
-      .duration(1500)
-      .attr('transform', `rotate(${props.rotation})`)
-      .on('end', () => {
-        setRotation(props.rotation);
-      });
-  });
+    // to animate the movement of the marker as the user chooses as new address, filter to get those between the old and new marker
+    const oldX = x.current;
+    const newX = props.label.x;
+    if (oldX !== newX) {
+      const gElement = d3.select(g.current);
+      const haloElement = d3.select(halo.current);
+      const pointsToTraverse = props.labels
+        .filter(d => (d.x > oldX && d.x <= newX) || (d.x < oldX && d.x >= newX))
+        .sort((a, b) => {
+          if (oldX > newX) {
+            return b.x - a.x;
+          }
+          return a.x - b.x;
+        })
+        // you don't need to traverse a huge number of points, so filter it so there's no more than 11 points
+        .filter((d, idx, arr) => d.x === newX || idx % Math.round(arr.length / 10) === 0);
+      const transitionLength = 1500 / pointsToTraverse.length;
+
+      const animateStep = (idx: number) => {
+        const rotation = (pointsToTraverse[idx].direction === 'n') ? pointsToTraverse[idx].rotation + 90 : pointsToTraverse[idx].rotation - 90;
+        gElement
+          .transition()
+          .duration(transitionLength)
+          .attr('transform', `translate(${pointsToTraverse[idx].x} ${pointsToTraverse[idx].y})`)
+          .on('end', () => {
+            if (idx === pointsToTraverse.length -1) {
+              x.current = newX;
+              setTranslate(`translate(${pointsToTraverse[idx].x} ${pointsToTraverse[idx].y})`);
+              setRotation(rotation);
+            } else {
+              animateStep(idx + 1);
+            }
+          });
+        haloElement
+          .transition()
+          .duration(transitionLength)
+          .attr('transform', `rotate(${rotation})`)
+      };
+      if (pointsToTraverse.length > 0) {
+        animateStep(0);
+      }
+    }
+
+  }, [props.label]);
 
   return (
     <g

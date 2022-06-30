@@ -40,7 +40,7 @@ const MapControls = () => {
 
       <Link
         to={`../../${calcAddrOffset(addrOffset, direction, width * scrollDistance * -1)}/${years}`}
-        className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
+        //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
         replace={true}
         id='west'
       >

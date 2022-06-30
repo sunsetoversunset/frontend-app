@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import { DimensionsContext, PanoramaContext } from '../../Contexts';
-import { addrOffsetToCoordinate, labels } from '../../utiliities';
+import { getCenter, labels, maxX, mult } from '../../utiliities';
 import { Dimensions } from "../../index.d";
 import { URLParamsPanorama, PanoramaContextParams } from './index.d';
 import '../../styles/AddressBar.scss';
@@ -11,7 +11,7 @@ const AddressBar = () => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
   // `scrollAmount` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
-  const scrollAmount = addrOffsetToCoordinate(addrOffset || '');
+  const scrollAmount = getCenter(addrOffset as string, width);
   const [center, setCenter] = useState(scrollAmount);
   const [scrolling, setScrolling] = useState(false);
   const ref = useRef(null);
@@ -45,7 +45,6 @@ const AddressBar = () => {
     if (scrolling && ref.current) {
       d3.select(ref.current)
         .transition()
-        // TODO: should this be variable depending on the distance scrolled to?
         .duration(1500)
         .style('transform', `translateX(-${scrollAmount - width / 2}px)`)
         .on('end', () => {
@@ -66,7 +65,8 @@ const AddressBar = () => {
         id='addressBar'
         ref={ref}
         style={{
-          transform: `translateX(-${center - width / 2}px)`
+          transform: `translateX(-${center - width / 2}px)`,
+          width: maxX * mult,
         }}
       >
         {visibleAddresses.map(label => (

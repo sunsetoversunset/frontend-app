@@ -1,12 +1,12 @@
 import { useRef, useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
 import "../../styles/PhotoStrip.scss";
 import PhotoViewerModal from "../PhotoViewerModal";
 import { DimensionsContext } from '../../Contexts';
 import { Dimensions } from "../../index.d";
 import { URLParamsPanorama, PhotoData } from './index.d';
-import { getOppositeX, mult, addrOffsetToCoordinate } from '../../utiliities';
+import { getCenter, getOppositeX, mult, addrOffsetToCoordinate } from '../../utiliities';
 
 type Photo = {
   src: string;
@@ -16,9 +16,9 @@ type Photo = {
 
 const PhotoStrip = ({ year }: { year: number; }) => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
-  // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
-  const newCenter = addrOffsetToCoordinate(addrOffset as string);
+  // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
+  const newCenter = getCenter(addrOffset as string, width);
   const stripContainer = useRef(null)
   const imageWidth = 299;
   const [center, setCenter] = useState(newCenter);
