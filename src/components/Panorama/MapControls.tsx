@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { useParams, Link, } from 'react-router-dom';
+import { useState, useContext, useEffect } from "react";
+import { useParams, Link, useNavigate} from 'react-router-dom';
 import Slider from 'rc-slider';
 import { DimensionsContext, PanoramaContext } from '../../Contexts';
 import { SearchAndFilter } from "./SearchAndFilter"
@@ -19,12 +19,32 @@ import "../../styles/MapControls.scss";
 const MapControls = () => {
   const { width } = (useContext(DimensionsContext) as Dimensions);
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext) as PanoramaContextParams;
+  const navigate = useNavigate();
 
   const { addrOffset, years, direction } = useParams() as URLParamsPanorama;
 
   const [searchOpen, setSearchOpen] = useState(false);
 
+  const leftTo = `../../${calcAddrOffset(addrOffset, direction, width * scrollDistance * -1)}/${years}`;
+  const rightTo = `../../${calcAddrOffset(addrOffset, direction, width * scrollDistance)}/${years}`;
+
   const westernmostAddrOffset = `${getWesternmostLabel(direction).label.toString().replace(/\s+/g, '')}-0`;
+
+  const handleArrowKeysPressed = ((e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      navigate(leftTo, {replace: true});
+    }
+    if (e.key === 'ArrowRight') {
+      navigate(rightTo, {replace: true});
+    }
+  });
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleArrowKeysPressed);
+    return () => {
+      window.removeEventListener('keydown', handleArrowKeysPressed);
+    }
+  });
 
   return (
     <div className="map-controls">
@@ -39,7 +59,7 @@ const MapControls = () => {
 
 
       <Link
-        to={`../../${calcAddrOffset(addrOffset, direction, width * scrollDistance * -1)}/${years}`}
+        to={leftTo}
         //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
         replace={true}
         id='west'
@@ -88,7 +108,7 @@ const MapControls = () => {
       >faster</button> */}
 
       <Link
-        to={`../../${calcAddrOffset(addrOffset, direction, width * scrollDistance)}/${years}`}
+        to={rightTo}
         replace={true}
         id='scrollRight'
       >
