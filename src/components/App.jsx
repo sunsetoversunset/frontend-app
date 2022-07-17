@@ -12,7 +12,7 @@ import { Team } from './Team'
 import { About } from './About'
 import AddressView from './AddressView/Index.tsx';
 import Footer from './Footer';
-import { DimensionsContext } from '../Contexts.ts';
+import { AppContext } from '../Contexts.ts';
 
 export const App = () => {
 
@@ -37,6 +37,7 @@ export const App = () => {
   };
 
   const [dimensions, setDimensions] = useState(calculateDimensions());
+  const [modalActive, setModalActive] = useState(false)
 
   useEffect(() => {
     window.addEventListener('resize', () => setDimensions(calculateDimensions()));
@@ -45,7 +46,7 @@ export const App = () => {
 
   // --------------------------------------------------------------------
   return (
-    <DimensionsContext.Provider value={dimensions}>
+    <AppContext.Provider value={{...dimensions, modalActive, setModalActive}}>
       <div className="app">
         <Router basename={'/'}>
           <NavHeader />
@@ -101,7 +102,7 @@ export const App = () => {
           <Footer />
         </Router>
       </div>
-    </DimensionsContext.Provider>
+    </AppContext.Provider>
   );
 }
 

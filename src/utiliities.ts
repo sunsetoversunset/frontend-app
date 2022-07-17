@@ -42,19 +42,22 @@ export const getOppositeX = (x: number) => maxX * mult - x;
 export const getCenter = (addrOffset: string, width: number) => Math.min(maxX * mult - width / 2, Math.max(width / 2, addrOffsetToCoordinate(addrOffset)));
 
 export const addressToCoordinate = (address: string) => {
-  const { c: coordinate, s: direction } = (stripLabels.find(d => d.l.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as any);
-  return (direction === 'n') ? coordinate * mult : getOppositeX(coordinate * mult);
+  console.log(address);
+  const { x, direction } = (labels.find(d => d.label.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as StripLabel);
+  return (direction === 'n') ? x : getOppositeX(x);
 }
 
 export const addressToCoordinateUnflipped = (address: string) => {
-  const { c: coordinate } = (stripLabels.find(d => d.l.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as any);
-  return coordinate * mult;
+  const { x } = (labels.find(d => d.label.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as StripLabel);
+  return x;
 }
 
 /* with an x value finds the nearest label and offset below it */
-export const getClosestAddressBelow = (x: number, direction?: Direction) => {  
+export const getClosestAddressBelow = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+  console.log(x, options);
   const closestAddresses = labels
-    .filter(d => (direction) ? d.direction === direction : true)
+    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
+    .filter(d => (options && options.excludeCrossStreets) ? !isNaN(Number(d.label)) : true)
     .filter(d => d.x <= x)
     .sort((a, b) => b.x - a.x);
   return (closestAddresses.length > 0) ? {
@@ -64,21 +67,31 @@ export const getClosestAddressBelow = (x: number, direction?: Direction) => {
 }
 
 /* with an x value finds the nearest label and offset above it */
-export const getClosestAddressAbove = (x: number, direction?: Direction) => {
+export const getClosestAddressAbove = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
   const closestAddresses = labels
-    .filter(d => (direction) ? d.direction === direction : true)
+    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
+    .filter(d => (options && options.excludeCrossStreets) ? !isNaN(Number(d.label)) : true)
     .filter(d => d.x >= x)
     .sort((a, b) => a.x - b.x);
-  return {
+  return (closestAddresses.length > 0) ? {
     addr: closestAddresses[0].label,
     offset: x - closestAddresses[0].x,
-  }
+  } : null;
+}
+
+export const getNearbyAddresses = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+  // the 2.2448 here is the standard deviation from all the address boundaries. Those vary quite a bit, so this may be imperfect.
+  return labels
+    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
+    .filter(d => d.x >= x - 100 && d.x <= x + 100)
+    .sort((a, b) => a.x - b.x)
+    .map(d => d.label);
 }
 
 /* with an x value finds the nearest label to it, by default below and above it there isn't one below */
-export const coordinateToAddress = (x: number, direction?: Direction) => {
+export const coordinateToAddress = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
   // find the address that is closest but less than the coordinate
-  return getClosestAddressBelow(x, direction) || getClosestAddressAbove(x, direction) || null;
+  return getClosestAddressBelow(x, options) || getClosestAddressAbove(x, options) || null;
 }
 
 export function parseAddrOffset(addrOffset: string) {
@@ -98,16 +111,16 @@ export function addrOffsetToCoordinate(addrOffset: string) {
 
 /* takes an addrOffset and an x to offset it by and returns another addrOffset adjusted left/right or west/east */
 export function calcAddrOffset(addrOffset: string, direction: Direction, offsetBy: number) {
-  const newAddrData = coordinateToAddress(addrOffsetToCoordinate(addrOffset) + offsetBy, direction);
-  return `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}`;
+  const newAddrData = coordinateToAddress(addrOffsetToCoordinate(addrOffset) + offsetBy, { direction });
+  return (newAddrData) ? `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}` : null;
 }
 
 export function toggleDirectionAddrOffset(addrOffset: string, direction: Direction) {
   const newDirection = (direction === 'n') ? 's' : 'n';
   // get the best cooresponding address across the street
   const coordinate = addrOffsetToCoordinate(addrOffset)
-  const newAddrData = coordinateToAddress(getOppositeX(coordinate), newDirection);
-  return `${newAddrData.addr.replace(/\s+/g, '')}-${Math.round(newAddrData.offset)}`;
+  const newAddrData = coordinateToAddress(getOppositeX(coordinate), { direction: newDirection });
+  return (newAddrData) ? `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}` : null;
 }
 
 // adapted from https://stackoverflow.com/questions/33907276/calculate-point-between-two-coordinates-based-on-a-percentage
@@ -119,10 +132,10 @@ export const coordinateToPoint = (coordinate: number, maxCoordinate: number, str
   const pointsBelow = strip_labels
     .filter((d: any) => d.c * mult / maxCoordinate <= percentAlongPath)
     .sort((a: any, b: any) => b.c - a.c);
-  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : { c:0};
+  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : { c: 0 };
   const pointsAbove = strip_labels
-  .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
-  .sort((a: any, b: any) => a.c - b.c);
+    .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
+    .sort((a: any, b: any) => a.c - b.c);
   const pointAbove = (pointsAbove.length > 0) ? pointsAbove[0] : { c: Math.max(strip_labels.map((strip_label: any) => strip_label.c)) };
 
   const pointBelowPercent = pointBelow.c * mult / maxCoordinate;
@@ -141,7 +154,7 @@ export const getRoadPath = (width: number) => {
   const lineSegments = points
     .slice(1)
     .map((point) => {
-      const [x , y] = latLngToXY([point[1], point[0]], width)
+      const [x, y] = latLngToXY([point[1], point[0]], width)
       return `L ${x} ${y}`;
     });
 

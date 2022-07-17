@@ -30,12 +30,20 @@ const MapMarker = (props: { labels: StripLabelWithXY[], label: StripLabelWithXY 
         .filter((d, idx, arr) => d.x === newX || idx % Math.round(arr.length / 10) === 0);
       const transitionLength = 1500 / pointsToTraverse.length;
 
+      const pathToTraverse = d3.path();
+      pathToTraverse.moveTo(pointsToTraverse[0].x, pointsToTraverse[0].y);
+      if (pointsToTraverse.length > 1) {
+        pathToTraverse.lineTo(pointsToTraverse[1].x, pointsToTraverse[1].y);
+      }
+      console.log(pathToTraverse);
+
       const animateStep = (idx: number) => {
         const rotation = (pointsToTraverse[idx].direction === 'n') ? pointsToTraverse[idx].rotation + 90 : pointsToTraverse[idx].rotation - 90;
         gElement
           .transition()
           .duration(transitionLength)
           .attr('transform', `translate(${pointsToTraverse[idx].x} ${pointsToTraverse[idx].y})`)
+          //.attrTween('transform', () => (t) => `translate(${pointsToTraverse[idx].x} ${pointsToTraverse[idx].y})`)
           .on('end', () => {
             if (idx === pointsToTraverse.length -1) {
               x.current = newX;

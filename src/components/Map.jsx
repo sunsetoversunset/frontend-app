@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useContext } from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
-import { DimensionsContext } from '../Contexts';
+import { AppContext } from '../Contexts';
 import { addressToCoordinateUnflipped, getOppositeX, mult, coordinateToPoint, calcAddrOffset, toggleDirectionAddrOffset, parseAddrOffset } from '../utiliities.ts';
 import * as d3 from 'd3'
 import "../styles/Map.scss";
@@ -16,7 +16,7 @@ import '../styles/Map.scss';
 // https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
 // ---------------------------------------------------------
 const Map = (props) => {
-  const { width } = (useContext(DimensionsContext));
+  const { width } = (useContext(AppContext));
   const state = useParams();
   const { addrOffset, years, direction } = state;
   const { addr, offset } = parseAddrOffset(addrOffset);

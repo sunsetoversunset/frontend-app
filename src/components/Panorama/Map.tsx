@@ -1,7 +1,7 @@
 import React, { useContext }  from "react";
 import { useParams } from 'react-router-dom';
 import MapMarker from './MapMarker';
-import { DimensionsContext } from "../../Contexts";
+import { AppContext } from "../../Contexts";
 import { labels, parseAddrOffset, getRoadPath, latLngToXY, convertLattoY, convertLngtoX } from '../../utiliities';
 import Location from './Location';
 import { URLParamsPanorama } from "./index.d";
@@ -16,9 +16,19 @@ const MapLabels = [
     lng: -118.383
   },
   {
+    label: "West Hollywood",
+    lat: 34.0872301,
+    lng: -118.37
+  },
+  {
+    label: "East Hollywood",
+    lat: 34.0897913,
+    lng: -118.305463
+  },
+  {
     label: "Silver Lake",
-    lat: 34.087896,
-    lng: -118.265
+    lat: 34.092,
+    lng: -118.266
   },
   {
     label: "Chinatown",
@@ -34,11 +44,21 @@ const MapLabels = [
     label: "Hollywood",
     lat: 34.103,
     lng: -118.323963
+  },
+  {
+    label: "Echo Park",
+    lat: 34.0854292,
+    lng: -118.262
+  },
+  {
+    label: "Downtown",
+    lat: 34.045,
+    lng: -118.246
   }
 ]
 
 const Map = () => {
-  const { width } = useContext(DimensionsContext);
+  const { width } = useContext(AppContext);
   const { addrOffset, years, direction } = useParams<URLParamsPanorama>();
   const { addr } = parseAddrOffset(addrOffset as string);
 

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams, Link, useNavigate} from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Slider from 'rc-slider';
-import { DimensionsContext, PanoramaContext } from '../../Contexts';
+import { AppContext, PanoramaContext } from '../../Contexts';
 import { SearchAndFilter } from "./SearchAndFilter"
 import iconArrowLeft from "../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../assets/icons/icon-arrow-right.svg"
@@ -17,7 +17,7 @@ import "../../styles/MapControls.scss";
 // https://gist.github.com/morajabi/523d7a642d8c0a2f71fcfa0d8b3d2846
 // ---------------------------------------------------------
 const MapControls = () => {
-  const { width } = (useContext(DimensionsContext) as Dimensions);
+  const { width, modalActive } = useContext(AppContext);
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext) as PanoramaContextParams;
   const navigate = useNavigate();
 
@@ -32,15 +32,20 @@ const MapControls = () => {
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
-      navigate(leftTo, {replace: true});
+      navigate(leftTo, { replace: true });
     }
     if (e.key === 'ArrowRight') {
-      navigate(rightTo, {replace: true});
+      navigate(rightTo, { replace: true });
     }
   });
 
   useEffect(() => {
-    window.addEventListener('keydown', handleArrowKeysPressed);
+    // only adjust map if the modal isn't open. The modal uses left/right arrow keys too to navigate.
+    if (!modalActive) {
+      window.addEventListener('keydown', handleArrowKeysPressed);
+    } else {
+      window.removeEventListener('keydown', handleArrowKeysPressed);
+    }
     return () => {
       window.removeEventListener('keydown', handleArrowKeysPressed);
     }
@@ -90,7 +95,7 @@ const MapControls = () => {
             backgroundColor: 'grey'
           }}
           className="slider"
-      
+
         />
         <label>More</label>
       </div>

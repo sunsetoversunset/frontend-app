@@ -1,21 +1,20 @@
 import axios, { AxiosError } from 'axios';
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import CensusTable from './CensusTable';
 import OccupancyTable from './OccupancyTable';
 import NewspaperTable from './NewspaperTable';
 import PhotoStripAddress from "./PhotoStripAddress";
-import { AddressDataContext, DimensionsContext } from '../../Contexts';
+import { AddressDataContext, AppContext } from '../../Contexts';
 import { AddressData } from '../../types/AddressView';
 import { getClosestAddressBelow, getClosestAddressAbove, addressToCoordinate } from '../../utiliities';
 import '../../styles/AddressView.scss';
 import iconArrowLeft from "../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../assets/icons/icon-arrow-right.svg"
-import { readJsonConfigFile } from 'typescript';
 
 const AddressView = () => {
   const { address } = useParams() as { address: string };
-  const { width } = useContext(DimensionsContext);
+  const { width } = useContext(AppContext);
   const [addressData, setAddressData] = useState<AddressData>();
   const historicalProfileRef = useRef<HTMLHeadingElement>(null);
   const photosRef = useRef<HTMLHeadingElement>(null);
@@ -36,13 +35,10 @@ const AddressView = () => {
     return () => { source.cancel(); }
   }, [address]);
 
-
-
   if (!addressHasData) {
     return (
       <div className="app-page" id="address-page">
         <p>{`${address} isn't a valid address.`}</p>
-
       </div>
     )
   }
@@ -51,9 +47,10 @@ const AddressView = () => {
     return null;
   }
 
-  const previousAddressData = getClosestAddressBelow(addressToCoordinate(address) - 0.001, addressData.side);
+  const previousAddressData = getClosestAddressBelow(addressToCoordinate(address) - 0.001, { direction: addressData.side, excludeCrossStreets: true });
+  console.log(previousAddressData);
   const previousAddress = (previousAddressData) ? previousAddressData.addr : null;
-  const nextAddressData = getClosestAddressAbove(addressToCoordinate(address) + 0.001, addressData.side);
+  const nextAddressData = getClosestAddressAbove(addressToCoordinate(address) + 0.001, { direction: addressData.side, excludeCrossStreets: true });
   const nextAddress = (nextAddressData) ? nextAddressData.addr : null;
 
   return (

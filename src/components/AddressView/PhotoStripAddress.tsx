@@ -56,6 +56,7 @@ const PhotoStripAddress = ({year}: { year: number }) => {
       {(modalId) && (
         <PhotoViewerModal
           id={modalId}
+          x={0}
           previousId={getPreviousId(modalId)}
           nextId={getNextId(modalId)}
           setModalId={setModalId}

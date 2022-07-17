@@ -4,7 +4,7 @@
 
 .map-controls {
   position: sticky;
-  top: calc(40px + 150px);
+  top: calc(40px);
   display: grid;
   grid-template-columns: min-content auto min-content auto min-content;
   grid-template-rows: 38px 400px;

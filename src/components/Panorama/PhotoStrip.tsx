@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import * as d3 from 'd3';
 import "../../styles/PhotoStrip.scss";
 import PhotoViewerModal from "../PhotoViewerModal";
-import { DimensionsContext } from '../../Contexts';
-import { Dimensions } from "../../index.d";
+import { AppContext } from '../../Contexts';
 import { URLParamsPanorama, PhotoData } from './index.d';
-import { getCenter, getOppositeX, mult, addrOffsetToCoordinate } from '../../utiliities';
+import { getCenter, getOppositeX, mult, } from '../../utiliities';
 
 type Photo = {
   src: string;
@@ -15,7 +14,7 @@ type Photo = {
 }
 
 const PhotoStrip = ({ year }: { year: number; }) => {
-  const { width } = (useContext(DimensionsContext) as Dimensions);
+  const { width, setModalActive } = (useContext(AppContext));
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const newCenter = getCenter(addrOffset as string, width);
@@ -123,6 +122,8 @@ const PhotoStrip = ({ year }: { year: number; }) => {
     return undefined;
   }
 
+  const getPhotoX = (id: string) => (photoData.find(photo => photo.identifier === id) as PhotoData).x;
+
   return (
     <>
       <div className={`strip-container strip-${year}-${direction}`}>
@@ -143,6 +144,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
               key={photo.src}
               onClick={() => {
                 setModalId(photo.id);
+                setModalActive(true);
               }}
               // TODO: this alt tag is meaningless--is there something that can be added?
               alt={`${photo.src}`}
@@ -159,6 +161,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       {(modalId) && (
         <PhotoViewerModal
           id={modalId}
+          x={getPhotoX(modalId)}
           previousId={getPreviousId(modalId)}
           nextId={getNextId(modalId)}
           setModalId={setModalId}

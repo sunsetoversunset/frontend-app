@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
-import { DimensionsContext, PanoramaContext } from '../../Contexts';
+import ConditionalWrapper from "../ConditionalWrapper";
+import { AppContext, PanoramaContext } from '../../Contexts';
 import { getCenter, labels, maxX, mult } from '../../utiliities';
 import { Dimensions } from "../../index.d";
 import { URLParamsPanorama, PanoramaContextParams } from './index.d';
 import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
-  const { width } = (useContext(DimensionsContext) as Dimensions);
+  const { width } = (useContext(AppContext) as Dimensions);
   // `scrollAmount` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   const { addrOffset, direction } = useParams<URLParamsPanorama>();
   const scrollAmount = getCenter(addrOffset as string, width);
@@ -63,27 +64,34 @@ const AddressBar = () => {
     <>
       <div
         id='addressBar'
-        ref={ref}
-        style={{
-          transform: `translateX(-${center - width / 2}px)`,
-          width: maxX * mult,
-        }}
       >
-        {visibleAddresses.map(label => (
-          <Link
-            to={`/address/${label.label}`}
-            key={label.label}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                left: label.x,
-              }}
-            >
-              {label.label}
-            </span>
-          </Link>
-        ))}
+        <div
+          id='barContainer'
+          ref={ref}
+          style={{
+            transform: `translateX(-${center - width / 2}px)`,
+            width: maxX * mult,
+          }}
+        >
+          {visibleAddresses.map(label => (
+            // only numerical addresses are linked to address pages
+            <ConditionalWrapper
+              condition={!isNaN(Number(label.label))}
+              wrapper={(children: any) => (<Link to={`/address/${label.label}`}>{children}</Link>)}
+              children={
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: label.x,
+                  }}
+                >
+                  {label.label}
+                </span>
+              }
+              key={label.label}
+            />
+          ))}
+        </div>
       </div>
       <Outlet />
     </>
