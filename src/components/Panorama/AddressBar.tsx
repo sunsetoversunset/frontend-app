@@ -83,6 +83,8 @@ const AddressBar = () => {
                   style={{
                     position: 'absolute',
                     left: label.x,
+                    color: (!isNaN(Number(label.label))) ? 'black' : '#999',
+                    fontWeight: (!isNaN(Number(label.label))) ? 'bold' : 'normal',
                   }}
                 >
                   {label.label}
