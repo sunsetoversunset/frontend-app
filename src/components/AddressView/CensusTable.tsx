@@ -43,6 +43,8 @@ const CensusTable = () => {
                 key={`censusTableHeaderFor${decade}`}
               >
                 {decade}
+                <br />
+                <span className='deemphasize'>{`Tract ${census_data.tracts[decade as DecadeIndex]}`}</span>
               </th>
             ))}
           </tr>

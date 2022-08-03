@@ -5,6 +5,7 @@ import CensusTable from './CensusTable';
 import OccupancyTable from './OccupancyTable';
 import NewspaperTable from './NewspaperTable';
 import PhotoStripAddress from "./PhotoStripAddress";
+import PhotoStrips from '../Panorama/PhotoStrips';
 import { AddressDataContext, AppContext } from '../../Contexts';
 import { AddressData } from '../../types/AddressView';
 import { getClosestAddressBelow, getClosestAddressAbove, addressToCoordinate } from '../../utiliities';
@@ -97,7 +98,8 @@ const AddressView = () => {
 
         <div id="photographs" className="strip-container-wrap">
           <h1 ref={photosRef}>Photographs</h1>
-          <div className="photo-strip">
+          <PhotoStrips />
+          {/* <div className="photo-strip">
             {(addressData && addressData.photos) && (
               <>
                 {[1966, 1973, 1985, 1995, 2007].map(year => (
@@ -108,7 +110,7 @@ const AddressView = () => {
                 ))}
               </>
             )}
-          </div>
+          </div> */}
 
         </div>
         <h1 ref={historicalProfileRef}>Historical Profile</h1>

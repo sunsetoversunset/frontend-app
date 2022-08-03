@@ -15,9 +15,14 @@ type Photo = {
 
 const PhotoStrip = ({ year }: { year: number; }) => {
   const { width, setModalActive } = (useContext(AppContext));
-  const { addrOffset, direction } = useParams<URLParamsPanorama>();
+  let { addrOffset, direction, address } = useParams<Partial<URLParamsPanorama> & { address?: string }>();
+  const pageType = (address) ? 'addressView' : 'panorama';
+  const widthMultiplier = (pageType === 'panorama') ? 1 : 3.5;
+  if (pageType === 'addressView') {
+    direction = (parseInt(address as string) % 2 === 0) ? 's' : 'n';
+  }
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  const newCenter = getCenter(addrOffset as string, width);
+  let newCenter = (pageType === 'panorama') ? getCenter(addrOffset as string, width) : getCenter(`${address}-0`, width) * widthMultiplier;
   const stripContainer = useRef(null)
   const imageWidth = 299;
   const [center, setCenter] = useState(newCenter);
@@ -29,7 +34,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
 
   const getVisiblePhotosInRange = (left: number, right: number) => {
     return photoData
-      .filter(d => d.x >= left - imageWidth && d.x <= right + imageWidth)
+      .filter(d => d.x >= left / widthMultiplier - imageWidth && d.x <= right / widthMultiplier + imageWidth)
       .map(d => ({
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
@@ -139,7 +144,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
             <img
               src={photo.src}
               style={{
-                transform: `translateX(${photo.x}px)`,
+                transform: `translateX(${photo.x * widthMultiplier}px)`,
               }}
               key={photo.src}
               onClick={() => {

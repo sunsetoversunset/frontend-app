@@ -31,6 +31,12 @@
 		tr{
 			border-top: 1px solid #dedede;
 			border-bottom: 1px solid #dedede;
+
+			.deemphasize {
+				color: #999;
+				font-size: 0.75em;
+				font-weight: normal;
+			}
 		}
 
 		tr.year{
@@ -53,6 +59,8 @@
 			text-align: right;
 
 		}
+
+
 		td {
 			border-left: 0px;
 			font-weight: 600;
