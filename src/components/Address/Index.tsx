@@ -5,6 +5,7 @@ import CensusTable from './Tables/Census';
 import OccupancyTable from './Tables/Occupancy';
 import NewspaperTable from './Tables/Newspaper';
 import SocialCulturalTable from './Tables/SocialCultural';
+import BuildingRecordsTable from './Tables/BuildingRecords';
 import PhotoStrips from '../Panorama/PhotoStrips';
 import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
@@ -80,6 +81,7 @@ const AddressView = () => {
         <NewspaperTable />
         <SocialCulturalTable />
         <CensusTable />
+        <BuildingRecordsTable />
       </div>
     </AddressDataContext.Provider>
   );

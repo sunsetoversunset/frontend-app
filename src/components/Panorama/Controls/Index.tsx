@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import ScrollDistanceSlider from "./ScrollDistanceSlider";
 import SearchAndFilter from "./SearchAndFilter";
+import ConditionalWrapper from "../../ConditionalWrapper";
 import { useAppContext, usePanoramaData } from "../../../hooks";
 import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg"
 import iconSearch from "../../../assets/icons/icon-search.svg"
-import { toggleDirectionAddrOffset, getWesternmostLabel, getEasternmostLabel, getClosestAddressBelowString } from '../../../utiliities';
+import { toggleDirectionAddrOffset, getWesternmostLabel, getEasternmostLabel, getClosestAddressBelowString, maxX } from '../../../utiliities';
 import 'rc-slider/assets/index.css';
 import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
   const { width, modalActive } = useAppContext();
-  const { address, offset, direction, years, scrollDistance, x } = usePanoramaData();
+  const { address, offset, direction, years, scrollDistance, x, leftX, rightX } = usePanoramaData();
   const navigate = useNavigate();
 
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const leftTo = `../../${getClosestAddressBelowString(x - width * scrollDistance, { direction })}/${years}`;
+  const leftTo = `../../${getClosestAddressBelowString(Math.max(x - width * scrollDistance, width / 2), { direction })}/${years}`;
   const rightTo = `../../${getClosestAddressBelowString(x + width * scrollDistance, { direction })}/${years}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${years}` : '';
@@ -58,34 +59,53 @@ const MapControls = () => {
         </button>
       </Link>
 
-      <Link
-        to={leftTo}
-        //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
-        replace={true}
-        id='west'
-      >
-        <button className={`btn-rounded inactive`} >
-          <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
-        </button>
-      </Link>
+      {(leftX > 0) ?
+        <Link
+          to={leftTo}
+          //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
+          replace={true}
+          id='west'
+        >
+          <button className={`btn-rounded inactive`} >
+            <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
+          </button>
+        </Link>
+        :
+        <div id='west'>
+          <button className={`btn-rounded inactive disabled`} >
+            <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
+          </button>
+        </div>
+
+      }
+
       <ScrollDistanceSlider />
 
-      <Link
-        to={rightTo}
-        replace={true}
-        id='scrollRight'
-      >
-        <button>
-          {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
-        </button>
-      </Link>
+      {(rightX - width < maxX) ? (
+        <Link
+          to={rightTo}
+          replace={true}
+          id='scrollRight'
+        >
+          <button>
+            {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
+          </button>
+        </Link> 
+        ): (
+        <div id='east'>
+          <button className='disabled'>
+            {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
+          </button>
+        </div>
+
+      )}
+
       <button
         id='searchAndFilter'
         onClick={() => setSearchOpen(!searchOpen)}
       >
         <img src={iconSearch} alt="icon-search" /> Search & Filter
       </button>
-
       {(searchOpen) && (
         <SearchAndFilter
           setSearchOpen={setSearchOpen}

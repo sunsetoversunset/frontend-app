@@ -116,6 +116,9 @@ export function usePhotoStrip(year: number) {
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
   let x = (getAddressX(address as string) + offset) * widthMultiplier;
   const [photoData, setPhotoData] = useState<PhotoData[]>([]);
+
+  // set a variable to store what direction the most recent data was loaded for, used to trigger the retrieval of the visible photos when the data has finished loaded
+  const [directionLoaded, setDirectionsLoaded] = useState<Direction | undefined>()
   //const [boundaries, setBoundaries] = useState<[number, number]>();
 
   /* retrive the photos coordinates on initial load */
@@ -134,6 +137,7 @@ export function usePhotoStrip(year: number) {
             year,
           }))
           .sort((a: any, b: any) => a.x - b.x));
+        setDirectionsLoaded(direction);
       });
     return () => { source.cancel(); }
   }, [direction, year]);
@@ -157,6 +161,7 @@ export function usePhotoStrip(year: number) {
 
   return {
     photoData,
+    directionLoaded,
     address,
     x,
     leftX: x - width / 2,

@@ -46,7 +46,7 @@ const AddressBar = () => {
       d3.select(ref.current)
         .transition()
         .duration(1500)
-        .style('transform', `translateX(-${leftX}px)`)
+        .style('transform', `translateX(${leftX * -1}px)`)
         .on('end', () => {
           leftXRef.current = leftX;
           // clean up the addresses

@@ -82,12 +82,12 @@ export function getProximateAddress(previousOrNext: 'previous' | 'next', address
     // filter out cross streets if that option is true
     .filter(labelData => (options?.excludeCrossStreets) ? !isNaN(Number(labelData.label)) : true)
     // filter for those with a larger coordinate
-    .filter(labelData => (previousOrNext === 'previous' || (addressLabelData.direction === 's' && previousOrNext === 'next'))
-      ? labelData.coordinate < addressLabelData.coordinate 
-      : labelData.coordinate > addressLabelData.coordinate)
+    .filter(labelData => (previousOrNext === 'previous')
+      ? labelData.x < addressLabelData.x 
+      : labelData.x > addressLabelData.x)
     .sort((a, b) => (previousOrNext === 'previous')
-      ? b.coordinate - a.coordinate
-      : a.coordinate - b.coordinate);
+      ? b.x - a.x
+      : a.x - b.x);
   return (closestLabels.length > 0) ? closestLabels[0].label : undefined;
 }
 

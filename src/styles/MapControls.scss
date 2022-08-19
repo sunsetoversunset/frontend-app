@@ -35,18 +35,15 @@
 
   a {
     text-decoration: none;
-    &.disabled {
-      pointer-events: none;
+  }
 
-      button {
-        color: silver;
-        pointer-events: none;
-      }
-    }
+  *#west {
+    justify-self: end;
+  }
 
-    &#west {
-      justify-self: end;
-    }
+  button.disabled {
+    color: silver;
+    pointer-events: none;
   }
 
   div {

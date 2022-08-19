@@ -12,7 +12,7 @@ type Photo = {
 }
 
 const PhotoStrip = ({ year }: { year: number; }) => {
-  const { leftX, rightX, photoData, direction } = usePhotoStrip(year);
+  const { leftX, rightX, photoData, direction, directionLoaded } = usePhotoStrip(year);
   const { setModalActive } = useAppContext();
   
   // scrolling: whether it's scrolling with an animation
@@ -48,8 +48,8 @@ const PhotoStrip = ({ year }: { year: number; }) => {
   // this happens on initialization and on a change of the direction
   // the conditions with the photoData are needed to test that the photo data has been set or reset
   useEffect(() => {
-    if (load && photoData.length > 0 && photoData[0].facing === direction) {
-      directionRef.current = direction;
+    if (load && directionLoaded !== directionRef.current) {
+      directionRef.current = directionLoaded;
       setPhotos(getVisiblePhotosInRange(leftX, rightX));
       setTranslateX(leftX * -1)
       setLoad(false);
