@@ -1,61 +1,58 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import ConditionalWrapper from "../ConditionalWrapper";
-import { AppContext, PanoramaContext } from '../../Contexts';
-import { getCenter, labels, maxX, mult } from '../../utiliities';
-import { Dimensions } from "../../index.d";
-import { URLParamsPanorama, PanoramaContextParams } from './index.d';
+import { maxX } from '../../utiliities';
+import { usePanoramaData } from "../../hooks";
 import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
-  const { width } = (useContext(AppContext) as Dimensions);
-  // `scrollAmount` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  const { addrOffset, direction } = useParams<URLParamsPanorama>();
-  const scrollAmount = getCenter(addrOffset as string, width);
-  const [center, setCenter] = useState(scrollAmount);
+  const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
+
+  // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
+  // the translateX value for the strip container
+  const [translateX, setTranslateX] = useState(leftX * -1);
   const ref = useRef(null);
+  const leftXRef = useRef(leftX);
   const currentDirection = useRef(direction);
 
-  const getVisibleAddresses = (left: number, right: number) => labels.filter(d => d.direction === direction && d.x >= left && d.x <= right);
-
-  const [visibleAddresses, setVisibleAddressess] = useState(getVisibleAddresses(scrollAmount - width / 2, scrollAmount + width / 2));
+  const [visibleAddresses, setVisibleAddressess] = useState(addresses);
 
   // if the direction is changed, skip all transitions
   useEffect(() => {
-    setVisibleAddressess(getVisibleAddresses(scrollAmount - width / 2, scrollAmount + width / 2));
-    setCenter(scrollAmount);
-    currentDirection.current = direction;
-  }, [direction]);
+    if (direction !== currentDirection.current) {
+      leftXRef.current = leftX;
+      currentDirection.current = direction;
+      setVisibleAddressess(addresses);
+      setTranslateX(leftX * -1);
+    }
+  }, [addresses, direction, x]);
 
   // load photos when a different address or coordinate is requested
   useEffect(() => {
-    if (scrollAmount !== center && currentDirection.current === direction) {
-      const left = (scrollAmount < center) ? scrollAmount - width / 2 : center - width / 2;
-      const right = (scrollAmount < center) ? center + width / 2 : scrollAmount + width / 2;
-
-      // get the photoset that will be visible after scrolling
-      const addressesForScroll = getVisibleAddresses(left, right);
+    if (leftX !== leftXRef.current && currentDirection.current === direction) {
+      // combine the current addresses with the new ones for the next left and right boundaries
+      const addressesForScroll = addresses
+        .concat(visibleAddresses)
+        .filter((d, idx, arr) => arr.indexOf(d) === idx);
       setVisibleAddressess(addressesForScroll);
       setScrolling(true);
     }
-  }, [scrollAmount]);
+  }, [leftX]);
 
   useEffect(() => {
     if (scrolling && ref.current) {
       d3.select(ref.current)
         .transition()
         .duration(1500)
-        .style('transform', `translateX(-${scrollAmount - width / 2}px)`)
+        .style('transform', `translateX(-${leftX}px)`)
         .on('end', () => {
-          const left = scrollAmount - width / 2;
-          const right = scrollAmount + width / 2;
-          setScrolling(false);
+          leftXRef.current = leftX;
           // clean up the addresses
-          const addresses = getVisibleAddresses(left, right);
           setVisibleAddressess(addresses);
-          setCenter(scrollAmount);
+          setTranslateX(leftX * -1)
+          setScrolling(false);
         });
     }
   });
@@ -69,8 +66,8 @@ const AddressBar = () => {
           id='barContainer'
           ref={ref}
           style={{
-            transform: `translateX(-${center - width / 2}px)`,
-            width: maxX * mult,
+            transform: `translateX(${translateX}px)`,
+            width: maxX,
           }}
         >
           {visibleAddresses.map(label => (
@@ -98,8 +95,6 @@ const AddressBar = () => {
       <Outlet />
     </>
   );
-
-
 }
 
 export default AddressBar;

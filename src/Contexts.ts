@@ -5,5 +5,5 @@ import { AddressData } from './types/AddressView.d';
 
 
 export const AppContext = React.createContext<AppContextParams>({} as AppContextParams);
-export const PanoramaContext = React.createContext<PanoramaContextParams | null>(null);
+export const PanoramaContext = React.createContext<PanoramaContextParams>({} as PanoramaContextParams);
 export const AddressDataContext = React.createContext<AddressData>({} as AddressData);

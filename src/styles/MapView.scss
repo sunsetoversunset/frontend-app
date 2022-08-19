@@ -107,6 +107,8 @@ text {
   position: fixed; */
   //height: calc(100vh - (40px + 150px + 56px + 100px));
 	width: 100vw;
+  overflow: hidden;
+  overflow-x: hidden;
 	//overflow: scroll;
 }
 

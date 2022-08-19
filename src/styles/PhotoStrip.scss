@@ -1,7 +1,7 @@
 @import './global/index.scss';
 
 .strip-container {
-  overflow-x: scroll;
+  overflow-x: none;
   max-width: 100vw;
   height: 200px;
   border-top: $outline-border;

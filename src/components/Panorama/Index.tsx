@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Map from "./Map";
-import MapControls from './MapControls';
+import Map from "./Map/Index";
+import MapControls from './Controls/Index';
 import AddressBar from './AddressBar';
 import PhotoStrips from "./PhotoStrips";
 import { PanoramaContext } from '../../Contexts';

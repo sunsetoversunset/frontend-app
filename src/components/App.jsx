@@ -2,17 +2,15 @@ import { useState, useEffect } from 'react';
 import '../styles/App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 //import { Home } from './Home'
-import { StoriesView } from './StoriesView'
+import { StoriesView } from './Stories/StoriesView'
 import Panorama from './Panorama/Index.tsx';
 import NavHeader from './NavHeader';
-import { PhotoViewerModal } from './PhotoViewerModal.jsx';
 import PhotoViewerModalTSX from './PhotoViewerModal.tsx';
-import { Contact } from './Contact'
-import { Team } from './Team'
-import { About } from './About'
-import AddressView from './AddressView/Index.tsx';
+import About from './Pages/About.jsx';
+import AddressView from './Address/Index.tsx';
 import Footer from './Footer';
 import { AppContext } from '../Contexts.ts';
+import { getClosestAddressBelowString } from '../utiliities';
 
 export const App = () => {
 
@@ -44,6 +42,14 @@ export const App = () => {
     setDimensions(calculateDimensions());
   }, []);
 
+  // use the width to set the preliminary western position if the address isn't specified
+  const defaultAddressNorth = (dimensions.width)
+    ? getClosestAddressBelowString(dimensions.width / 2, { direction: 'n' })
+    : 'DohenyRoad';
+  const defaultAddressSouth = (dimensions.width)
+    ? getClosestAddressBelowString(dimensions.width / 2, { direction: 's' })
+    : '9176';
+
   // --------------------------------------------------------------------
   return (
     <AppContext.Provider value={{...dimensions, modalActive, setModalActive}}>
@@ -51,34 +57,26 @@ export const App = () => {
         <Router basename={'/'}>
           <NavHeader />
           <Routes>
-            <Route path="/about" element={About} />
-            <Route path="/stories" element={StoriesView} />
-            <Route path="/contact" element={Contact} />
-            <Route path="/team" element={Team} />
+            <Route path="/about" element={<About />} />
+            <Route path="/stories" element={<StoriesView />} />
             <Route path="/address/">
               <Route path=":address" element={<AddressView />} />
             </Route>
-            <Route path='/imagereference' element={<PhotoViewerModal
-              nearbyAddresses={['707', '9156']}
-              imgObj={{ id: 'a77dc2a3-d5ee-4fa3-b188-6cfd5e65f507' }}
-              handleHideModal={() => false}
-              isVisible={true}
-            />} />
             <Route path='/image/:id' element={<PhotoViewerModalTSX />} />
             <Route
               path='/panorama'
             >
               <Route
                 index
-                element={<Navigate replace to='n/DohenyRoad/1966,1973,1985,1995,2007' />}
+                element={<Navigate replace to={`n/${defaultAddressNorth}/1966,1973,1985,1995,2007`} />}
               />
               <Route
                 path='n'
-                element={<Navigate replace to='DohenyRoad/1966,1973,1985,1995,2007' />}
+                element={<Navigate replace to={`${defaultAddressNorth}/1966,1973,1985,1995,2007`} />}
               />
               <Route
                 path='s'
-                element={<Navigate replace to='9176/1966,1973,1985,1995,2007' />}
+                element={<Navigate replace to={`${defaultAddressSouth}/1966,1973,1985,1995,2007`} />}
               />
               <Route
                 path=':direction'

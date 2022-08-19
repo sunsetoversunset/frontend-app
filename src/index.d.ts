@@ -21,6 +21,7 @@ export type StripLabel = {
   label: string;
   direction: Direction;
   x: number;
+  coordinate: number;
   lat: number;
   lng: number;
   percentAlongPath: number;

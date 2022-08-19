@@ -56,6 +56,15 @@ export type NewspaperArticle = {
   url: string;
 }
 
+export type SocialCulturalInformation = {
+  source_date: number;
+  building_date: number;
+  data_type: 'Menu' | 'Article' | 'Map' | 'Blog';
+  source: string;
+  entry: string;
+  url: string;
+}
+
 export type AssessorRow = {
   id: number;
   order: string;
@@ -151,5 +160,6 @@ export type AddressData = {
   census_data: CensusData;
   occupants_data: Occupants_Data[];
   newspaper_data: NewspaperArticle[];
+  social_cultural_data: SocialCulturalInformation[];
   assessor_data: AssessorRow[];
 };

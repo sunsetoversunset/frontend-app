@@ -1,11 +1,9 @@
-import { useRef, useEffect, useState, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useRef, useEffect, useState } from "react";
 import * as d3 from 'd3';
 import "../../styles/PhotoStrip.scss";
 import PhotoViewerModal from "../PhotoViewerModal";
-import { AppContext } from '../../Contexts';
-import { URLParamsPanorama, PhotoData } from './index.d';
-import { getCenter, getOppositeX, mult, } from '../../utiliities';
+import { PhotoData } from './index.d';
+import { usePhotoStrip, useAppContext } from '../../hooks';
 
 type Photo = {
   src: string;
@@ -14,92 +12,90 @@ type Photo = {
 }
 
 const PhotoStrip = ({ year }: { year: number; }) => {
-  const { width, setModalActive } = (useContext(AppContext));
-  let { addrOffset, direction, address } = useParams<Partial<URLParamsPanorama> & { address?: string }>();
-  const pageType = (address) ? 'addressView' : 'panorama';
-  const widthMultiplier = (pageType === 'panorama') ? 1 : 3.5;
-  if (pageType === 'addressView') {
-    direction = (parseInt(address as string) % 2 === 0) ? 's' : 'n';
-  }
-  // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  let newCenter = (pageType === 'panorama') ? getCenter(addrOffset as string, width) : getCenter(`${address}-0`, width) * widthMultiplier;
-  const stripContainer = useRef(null)
-  const imageWidth = 299;
-  const [center, setCenter] = useState(newCenter);
+  const { leftX, rightX, photoData, direction } = usePhotoStrip(year);
+  const { setModalActive } = useAppContext();
+  
+  // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
-  const [photoData, setPhotoData] = useState<PhotoData[]>([]);
+  // the translateX value for the strip container
+  const [translateX, setTranslateX] = useState(leftX * -1);
+  // the photos that are visible for the visible part of the strip container
   const [photos, setPhotos] = useState<Photo[]>([]);
+  // the if for the image that is displayed in the modal. Undefined is unopened
   const [modalId, setModalId] = useState<string>();
-  const currentDirection = useRef(direction);
+  
+  // refs to track the previous leftX and rightX, which are used to retrieve and display both the last and the next photos during a scroll
+  const leftXRef = useRef(leftX);
+  const rightXRef = useRef(rightX);
+  // the div for the strip container
+  const stripContainer = useRef(null);
+  const directionRef = useRef(direction);
+  const [load, setLoad] = useState(true);
+  
+  const imageWidth = 299;
 
   const getVisiblePhotosInRange = (left: number, right: number) => {
     return photoData
-      .filter(d => d.x >= left / widthMultiplier - imageWidth && d.x <= right / widthMultiplier + imageWidth)
+      .filter(d => d.x >= left - imageWidth && d.x <= right + imageWidth)
       .map(d => ({
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
-      }))
-      .sort((a, b) => b.x - a.x);
-    //.sort((a, b) => Math.abs(center - b.x - imageWidth / 2) - Math.abs(center - a.x - imageWidth / 2));
-    //.sort((a, b) => Math.abs(center - a.x - imageWidth / 2) - Math.abs(center - b.x - imageWidth / 2));
+      }));
   }
 
-  /* retrive the photos coordinates on initial load */
+  // load the visible photos and immediately set the translateX without any animation
+  // this happens on initialization and on a change of the direction
+  // the conditions with the photoData are needed to test that the photo data has been set or reset
   useEffect(() => {
-    //d3.csv(`https://raw.githubusercontent.com/sunsetoversunset/frontend-app/main/src/assets/data/photographs_${year}_${direction}.csv?token=GHSAT0AAAAAABUS6E6HWHN4EFKDW4VGHYQOYUBMD4A`)
-    d3.csv(`/data/photographs_${year}_${direction}.csv`)
-      .then(d => {
-        const _d = d as any;
-        if (currentDirection.current !== direction) {
-          currentDirection.current = direction;
-          setCenter(newCenter)
-        }
+    if (load && photoData.length > 0 && photoData[0].facing === direction) {
+      directionRef.current = direction;
+      setPhotos(getVisiblePhotosInRange(leftX, rightX));
+      setTranslateX(leftX * -1)
+      setLoad(false);
+    }
+  });
 
-        setPhotoData(_d
-          .map((row: any) => ({
-            ...row,
-            x: (direction === 'n') ? parseFloat(row.coordinate) * mult : getOppositeX(parseFloat(row.coordinate) * mult),
-            facing: direction,
-            year,
-          }))
-          .sort((a: any, b: any) => a.x - b.x)
-        );
-      });
-  }, [direction, year]);
 
   // set the photos if the photoData--stemming from the direction--has changed
   useEffect(() => {
-    setPhotos(getVisiblePhotosInRange(center - width / 2, center + width / 2));
-  }, [photoData]);
+    if (directionRef.current !== direction) {
+      setLoad(true);
+    }
+  }, [direction]);
 
   // set the photos on initial load or when the newCenter changes
   useEffect(() => {
-    if (currentDirection.current === direction) {
-      const left = (newCenter < center) ? newCenter - width / 2 : center - width / 2;
-      const right = (newCenter < center) ? center + width / 2 : newCenter + width / 2;
-
+    if (directionRef.current === direction) {
       // get the photoset that will be visible after scrolling 
-      const photosForScroll = getVisiblePhotosInRange(left, right);
+      // only retrieve new photos if the distance is 3000px or less
+      const photosForScroll = (Math.abs(leftX * -1 - translateX) < 3000)
+        ? getVisiblePhotosInRange(Math.min(leftX, leftXRef.current), Math.max(rightX, rightXRef.current))
+        : getVisiblePhotosInRange(leftX, rightX);
       setPhotos(photosForScroll);
-      if (newCenter !== center) {
+      if (translateX !== leftX * -1) {
         setScrolling(true);
       }
     }
-  }, [newCenter]);
+  }, [leftX, rightX]);
+
+
 
   // scroll the bar when after new photos have been loaded
   useEffect(() => {
     if (scrolling) {
+      // only run the transition if the distance is less than 3000 pixels
       d3.select(stripContainer.current)
         .transition()
-        // TODO: should this be variable depending on the distance scrolled to?
         .duration(1500)
-        .style('transform', `translateX(-${newCenter - width / 2}px)`)
+        .style('transform', `translateX(${leftX * -1}px)`)
         .on('end', () => {
-          setCenter(newCenter);
+          // updated the state/ref values to reflect the post-scroll values
+          leftXRef.current = leftX;
+          rightXRef.current = rightX;
+          setTranslateX(leftX * -1);
           // set the photos to remove those now off the canvas
-          setPhotos(getVisiblePhotosInRange(newCenter - width / 2, newCenter + width / 2));
+          setPhotos(getVisiblePhotosInRange(leftX, rightX));
           setScrolling(false);
         });
     }
@@ -129,6 +125,14 @@ const PhotoStrip = ({ year }: { year: number; }) => {
 
   const getPhotoX = (id: string) => (photoData.find(photo => photo.identifier === id) as PhotoData).x;
 
+  if (photos.length === 0) {
+    return (
+      <div style={{ textAlign: 'center', margin: '5px 0' }}>
+        {`There are no photos for this location for ${year}`}
+      </div>
+    );
+  }
+
   return (
     <>
       <div className={`strip-container strip-${year}-${direction}`}>
@@ -136,15 +140,15 @@ const PhotoStrip = ({ year }: { year: number; }) => {
           className={`strip-photos-container year-${year}`}
           ref={stripContainer}
           style={{
-            width: width,
-            transform: `translateX(-${center - width / 2}px)`,
+            width: rightX - leftX,
+            transform: `translateX(${translateX}px)`,
           }}
         >
           {photos.map(photo => (
             <img
               src={photo.src}
               style={{
-                transform: `translateX(${photo.x * widthMultiplier}px)`,
+                transform: `translateX(${photo.x}px)`,
               }}
               key={photo.src}
               onClick={() => {
