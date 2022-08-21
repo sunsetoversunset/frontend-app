@@ -1,6 +1,6 @@
 import React from "react";
 import { getRoadPath, convertLattoY, convertLngtoX } from '../../../utiliities';
-import { useAppContext } from "../../../hooks";
+import { useAppContext, useRoadPath } from "../../../hooks"; 
 import '../../../styles/Map.scss';
 
 const MapLabels = [
@@ -56,7 +56,7 @@ const Base = () => {
 
   // the width of the map relative to the width of the full screen and the svg path for the road
   const mapWidth = width * 0.9;
-  const path = getRoadPath(mapWidth);
+  const { activePath, completePath } = useRoadPath();
 
   return (
     <svg
@@ -76,12 +76,17 @@ const Base = () => {
             {mapLabel.label.toUpperCase()}
           </text>
         ))}
-        <path d={path}
+        <path d={completePath}
+          fill='transparent'
+          stroke='#ddd'
+          strokeWidth='10'
+        />
+        <path d={activePath}
           fill='transparent'
           stroke='#FF8A58'
           strokeWidth='10'
         />
-        <path d={path}
+        <path d={completePath}
           fill='transparent'
           stroke='#F1EEE8'
           strokeWidth='5'

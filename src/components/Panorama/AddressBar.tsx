@@ -7,7 +7,7 @@ import { usePanoramaData } from "../../hooks";
 import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
-  const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
+  const { visibleAddresses: addresses, x, leftX, direction, years } = usePanoramaData();
 
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
@@ -82,6 +82,7 @@ const AddressBar = () => {
                     left: label.x,
                     color: (!isNaN(Number(label.label))) ? 'black' : '#999',
                     fontWeight: (!isNaN(Number(label.label))) ? 'bold' : 'normal',
+                    textShadow: '-4px 2px 6px white, -4px -2px 6px white',
                   }}
                 >
                   {label.label}

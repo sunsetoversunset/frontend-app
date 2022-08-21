@@ -128,15 +128,6 @@ const SearchAndFilter = ({setSearchOpen}: { setSearchOpen: React.Dispatch<React.
                     alt="icon-year-checked"
                   />
               )}
-              {/*<label
-                className="hidden"
-                htmlFor={`year-${year}`}
-              >
-                {
-                  props.yearsShowing[year] ?
-                    `Hide ${year}` : `Show ${year}`
-                }
-              </label>*/}
               <span className="year-label"
 
               >{year}</span>

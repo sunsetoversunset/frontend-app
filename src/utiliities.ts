@@ -4,20 +4,11 @@ import { Direction, StripLabel } from './index.d';
 import stripLabels from './assets/data/strip_labels.json';
 import GeoJson from './assets/data/sunset.json';
 
+
 // the multiplier used for the placement of the photos on the strip for the panorama view
 export const mult = 200;
 // the maximum coordinate value among all the addresses
 export const maxX = Math.max(...stripLabels.map(d => d.c * mult));
-// the minimum, maximums, and middle latitudes of the addresses
-const minLat = Math.min(...stripLabels.map(d => d.lat));
-const maxLat = Math.max(...stripLabels.map(d => d.lat));
-const minLng = Math.min(...stripLabels.map(d => d.lng));
-const maxLng = Math.max(...stripLabels.map(d => d.lng));
-const midLat = maxLat - ((maxLat - minLat) / 2);
-const midLng = maxLng - ((maxLng - minLng) / 2);
-
-// the ratio of the latitude and longitude, used for sizing the width and height of the map
-export const lngToLatRatio = (maxLng - minLng) / (maxLat - minLat);
 
 // the raw strip labels data positionin data 
 export const labels: StripLabel[] = stripLabels
@@ -37,6 +28,52 @@ export const labels: StripLabel[] = stripLabels
     rotation: d.r,
   }))
   .sort((a, b) => a.x - b.x);
+
+// these are just copied out of the baserow data--they shouldn't change, and there's no reason to load the photos data files asyncronously just to get them.
+export const maxXs = {
+  '1966': 163.47121 * mult,
+  '1973': 977.54089 * mult,
+  '1985': 979.36723 * mult,
+  '1995': 984.23148 * mult,
+  '2007': 993.27018 * mult,
+}
+export const easternMostAddresses = {
+  '1966': ensure(getClosestAddressBelow(maxXs['1966'], { direction: 'n' })).addr,
+  '1973': ensure(getClosestAddressBelow(maxXs['1973'], { direction: 'n' })).addr,
+  '1985': ensure(getClosestAddressBelow(maxXs['1985'], { direction: 'n' })).addr,
+  '1995': ensure(getClosestAddressBelow(maxXs['1995'], { direction: 'n' })).addr,
+  '2007': ensure(getClosestAddressBelow(maxXs['2007'], { direction: 'n' })).addr,
+}
+
+export const easternLongitudes = {
+  '1966': ensure(labels.find(d => d.label === easternMostAddresses['1966'])).lng,
+  '1973': ensure(labels.find(d => d.label === easternMostAddresses['1973'])).lng,
+  '1985': ensure(labels.find(d => d.label === easternMostAddresses['1985'])).lng,
+  '1995': ensure(labels.find(d => d.label === easternMostAddresses['1995'])).lng,
+  '2007': ensure(labels.find(d => d.label === easternMostAddresses['2007'])).lng,
+}
+
+// the minimum, maximums, and middle latitudes of the addresses
+const minLat = Math.min(...stripLabels.map(d => d.lat));
+const maxLat = Math.max(...stripLabels.map(d => d.lat));
+const minLng = Math.min(...stripLabels.map(d => d.lng));
+const maxLng = Math.max(...stripLabels.map(d => d.lng));
+const midLat = maxLat - ((maxLat - minLat) / 2);
+const midLng = maxLng - ((maxLng - minLng) / 2);
+
+// from https://stackoverflow.com/questions/54738221/typescript-array-find-possibly-undefind
+export function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
+  if (argument === undefined || argument === null) {
+    throw new TypeError(message);
+  }
+
+  return argument;
+}
+
+// the ratio of the latitude and longitude, used for sizing the width and height of the map
+export const lngToLatRatio = (maxLng - minLng) / (maxLat - minLat);
+
+
 
 export function getAddressField(address: string, field: keyof StripLabel) {
   const addressData = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
@@ -101,7 +138,7 @@ export function getNextAddress(address: string, options?: { direction?: Directio
 
 /* with an x value finds the nearest label and offset below it */
 // todo direction shouldn't be an option but required as it you can't compare x values for different sides of the street
-export const getClosestAddressBelow = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+export function getClosestAddressBelow(x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) {
   const closestAddresses = labels
     .filter(d => (options && options.direction) ? d.direction === options.direction : true)
     .filter(d => (options && options.excludeCrossStreets) ? !isNaN(Number(d.label)) : true)

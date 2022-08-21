@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import ScrollDistanceSlider from "./ScrollDistanceSlider";
 import SearchAndFilter from "./SearchAndFilter";
-import ConditionalWrapper from "../../ConditionalWrapper";
 import { useAppContext, usePanoramaData } from "../../../hooks";
 import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg"
 import iconSearch from "../../../assets/icons/icon-search.svg"
-import { toggleDirectionAddrOffset, getWesternmostLabel, getEasternmostLabel, getClosestAddressBelowString, maxX } from '../../../utiliities';
+import { toggleDirectionAddrOffset, getClosestAddressBelowString } from '../../../utiliities';
 import 'rc-slider/assets/index.css';
 import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
   const { width, modalActive } = useAppContext();
-  const { address, offset, direction, years, scrollDistance, x, leftX, rightX } = usePanoramaData();
+  const { address, offset, direction, years, scrollDistance, x, leftX, rightX, maxX } = usePanoramaData();
   const navigate = useNavigate();
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -22,8 +21,6 @@ const MapControls = () => {
   const rightTo = `../../${getClosestAddressBelowString(x + width * scrollDistance, { direction })}/${years}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${years}` : '';
-
-  const westernmostAddrOffset = `${getWesternmostLabel(direction).label.toString().replace(/\s+/g, '')}-0`;
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
