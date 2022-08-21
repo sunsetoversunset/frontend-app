@@ -14,11 +14,13 @@ const MapControls = () => {
   const { width, modalActive } = useAppContext();
   const { address, offset, direction, years, scrollDistance, x, leftX, rightX, maxX } = usePanoramaData();
   const navigate = useNavigate();
+  console.log(maxX, x, rightX, rightX - width < maxX);
+
 
   const [searchOpen, setSearchOpen] = useState(false);
 
   const leftTo = `../../${getClosestAddressBelowString(Math.max(x - width * scrollDistance, width / 2), { direction })}/${years}`;
-  const rightTo = `../../${getClosestAddressBelowString(x + width * scrollDistance, { direction })}/${years}`;
+  const rightTo = `../../${getClosestAddressBelowString(Math.min(x + width * scrollDistance, maxX), { direction })}/${years}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${years}` : '';
 
@@ -78,7 +80,7 @@ const MapControls = () => {
 
       <ScrollDistanceSlider />
 
-      {(rightX - width < maxX) ? (
+      {(x + width * scrollDistance < maxX) ? (
         <Link
           to={rightTo}
           replace={true}
