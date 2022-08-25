@@ -61,9 +61,9 @@ const Base = () => {
   return (
     <svg
       width={width}
-      height={200}
+      height={250}
     >
-      <g transform={`translate(${width / 2} 75) rotate(0)`}>
+      <g transform={`translate(${width / 2} 100) rotate(0)`}>
         {MapLabels.map(mapLabel => (
           <text
             x={convertLngtoX(mapLabel.lng, mapWidth)}

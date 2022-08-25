@@ -44,7 +44,7 @@ const AddressView = () => {
 
         <nav>
           {(previousAddress)
-            ? <Link to={`../${previousAddress}`}><img src={iconArrowLeft} alt="icon-arrow-left" /> {previousAddress}</Link>
+            ? <Link to={`../${previousAddress}`} className='previous address_button'><img src={iconArrowLeft} alt="icon-arrow-left" /> {previousAddress}</Link>
             : <span />
           }
           <div
@@ -67,13 +67,13 @@ const AddressView = () => {
             Historical Profile
           </div>
           {(nextAddress)
-            ? <Link to={`../${nextAddress}`} className='next'>{nextAddress} <img src={iconArrowRight} alt="icon-arrow-right" /> </Link>
+            ? <Link to={`../${nextAddress}`} className='next address_button'>{nextAddress} <img src={iconArrowRight} alt="icon-arrow-right" /> </Link>
             : <span />
           }
         </nav>
 
         <div id="photographs" className="strip-container-wrap">
-          <h1 ref={photosRef}>Photographs</h1>
+          {/* <h1 ref={photosRef}>Photographs</h1> */}
           <PhotoStrips />
         </div>
         <h1 ref={historicalProfileRef}>Historical Profile</h1>

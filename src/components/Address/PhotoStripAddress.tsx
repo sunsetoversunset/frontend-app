@@ -60,6 +60,7 @@ const PhotoStripAddress = ({year}: { year: number }) => {
           previousId={getPreviousId(modalId)}
           nextId={getNextId(modalId)}
           setModalId={setModalId}
+          year={year}
         />
       )}
     </>

@@ -12,10 +12,8 @@ import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
   const { width, modalActive } = useAppContext();
-  const { address, offset, direction, years, scrollDistance, x, leftX, rightX, maxX } = usePanoramaData();
+  const { address, offset, direction, years, scrollDistance, x, leftX, minX, rightX, maxX } = usePanoramaData();
   const navigate = useNavigate();
-  console.log(maxX, x, rightX, rightX - width < maxX);
-
 
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -45,6 +43,7 @@ const MapControls = () => {
     }
   });
 
+  console.log(x - width / 2, minX);
 
 
   return (
@@ -58,7 +57,7 @@ const MapControls = () => {
         </button>
       </Link>
 
-      {(leftX > 0) ?
+      {(x - width / 2 >= minX) ?
         <Link
           to={leftTo}
           //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
@@ -80,7 +79,7 @@ const MapControls = () => {
 
       <ScrollDistanceSlider />
 
-      {(x + width * scrollDistance < maxX) ? (
+      {(x + width * scrollDistance <= maxX) ? (
         <Link
           to={rightTo}
           replace={true}

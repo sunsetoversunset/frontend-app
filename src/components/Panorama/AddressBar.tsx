@@ -2,12 +2,12 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import ConditionalWrapper from "../ConditionalWrapper";
-import { maxX } from '../../utiliities';
+import { maxX, hasAddressData } from '../../utiliities';
 import { usePanoramaData } from "../../hooks";
 import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
-  const { visibleAddresses: addresses, x, leftX, direction, years } = usePanoramaData();
+  const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
 
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
@@ -68,20 +68,22 @@ const AddressBar = () => {
           style={{
             transform: `translateX(${translateX}px)`,
             width: maxX,
+            height: 40,
+            lineHeight: '40px',
           }}
         >
           {visibleAddresses.map(label => (
             // only numerical addresses are linked to address pages
             <ConditionalWrapper
-              condition={!isNaN(Number(label.label))}
+              condition={hasAddressData(label.label)}
               wrapper={(children: any) => (<Link to={`/address/${label.label}`}>{children}</Link>)}
               children={
                 <span
                   style={{
                     position: 'absolute',
                     left: label.x,
-                    color: (!isNaN(Number(label.label))) ? 'black' : '#999',
-                    fontWeight: (!isNaN(Number(label.label))) ? 'bold' : 'normal',
+                    color: (hasAddressData(label.label)) ? 'black' : '#999',
+                    fontWeight: (hasAddressData(label.label)) ? 'bold' : 'normal',
                     textShadow: '-4px 2px 6px white, -4px -2px 6px white',
                   }}
                 >

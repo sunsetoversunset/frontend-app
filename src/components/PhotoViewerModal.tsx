@@ -18,10 +18,11 @@ type Props = {
   previousId: string | undefined;
   x: number;
   setModalId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  year: number;
 };
 
 const PhotoViewerModal = (props: Props) => {
-  const { id, nextId, previousId, x, setModalId } = props;
+  const { id, nextId, previousId, x, setModalId, year } = props;
   const nearbyAddresses = getNearbyAddresses(x);
 
   const [isHoveringExpanded, setIsHoveringExpand] = useState(false);
@@ -56,7 +57,7 @@ const PhotoViewerModal = (props: Props) => {
       </div>
       <Viewer iiifUrl={`https://media.getty.edu/iiif/image/${id}/info.json`} />
       <div className='photo-credits'>
-        Year | © Ed Ruscha.{" "}
+        {`${year} | © Ed Ruscha. `}
         <a href={`https://www.getty.edu/research/collections/lookup/imageUUID?id=${id}`} rel="noreferrer" target="_blank">
           View record at Getty Research Institute</a>
       </div>

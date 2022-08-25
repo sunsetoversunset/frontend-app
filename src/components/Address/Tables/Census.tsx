@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAddressDataContext } from '../../../hooks';
 import { CensusField, DecadeIndex } from '../../../types/AddressView';
 import '../../../styles/Tables.scss';
@@ -23,11 +24,21 @@ const CensusTable = () => {
     return (
       <>
         {([1960, 1970, 1980, 1990, 2000, 2010].map(decade => (
-          <td className='value' key={`${key}${decade}`}>{format(unit, census_data[key][decade as DecadeIndex])}</td>
+          <>
+            {(census_data[key] && census_data[key][decade as DecadeIndex])
+              ? <td className='value' key={`${key}${decade}`}>{format(unit, census_data[key][decade as DecadeIndex])}</td>
+              : <td className='empty' />
+          }
+          </>
         )))}
       </>
     );
   };
+
+  if (![1960, 1970, 1980, 1990, 2000, 2010].some(decade => { return census_data.tracts && census_data.tracts[decade as DecadeIndex] } )) {
+    return null;
+  }
+  
   return (
     <div
       className={"censusTable dataTable "}

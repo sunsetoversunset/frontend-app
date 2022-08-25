@@ -15,7 +15,7 @@ const Map = () => {
         height={200}
       >
         <Base />
-        <g transform={`translate(${width / 2} 75) rotate(0)`}>
+        <g transform={`translate(${width / 2} 100) rotate(0)`}>
           <SelectableAddresses />
           <MapMarker />
         </g>

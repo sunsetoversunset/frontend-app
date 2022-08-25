@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
-import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
+import { hasAddressData, mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
 import type { StripLabel, Direction } from './index.d';
 import type { PhotoData } from './components/Panorama/index.d';
@@ -37,8 +37,8 @@ export function useAddressData() {
     return () => { source.cancel(); }
   }, [address]);
 
-  let previousAddress = (addressData) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true }) : undefined;
-  let nextAddress = (addressData) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true }) : undefined;
+  let previousAddress = (addressData) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let nextAddress = (addressData) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
 
   return {
     address,
@@ -55,6 +55,34 @@ export function usePanoramaData() {
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
   const { addr: address, offset } = parseAddrOffset(addrOffset);
+  // todo: this seems DUMB!! there must be a better way to get this to parse without typeerros than put in this dummy data.
+  if (typeof labels.find(label => label.label.replace(/\s+/g, '') === address) === 'undefined') {
+    return { 
+      isInvalidAddress: true,
+      address: '',
+      offset: -99,
+      direction,
+      yearsStr: '',
+      years: [],
+      x: -99,
+      leftX: -99,
+      rightX: -99,
+      minX: -99,
+      maxX: -99, 
+      width: -99,
+      coordinate: -99,
+      percentAlongPath: -99,
+      lat: -99,
+      lng: -99,
+      easternmostLongitude: -99,
+      mapX: -99,
+      mapY: -99,
+      visibleAddresses: [] as StripLabel[],
+      rotation: -99,
+      scrollDistance,
+      setScrollDistance,
+    }
+  }
   const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth);
 
@@ -62,7 +90,12 @@ export function usePanoramaData() {
   const x = addressX + offset;
   const leftX = x - width / 2;
   const rightX = x + width / 2;
-  const maxX = Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs]));
+  const maxX = (direction === 'n')
+    ? Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs]))
+    : getOppositeX(0);
+  const minX = (direction === 'n')
+    ? width / 2
+    : getOppositeX(Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])));
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
 
   const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year.toString() as keyof typeof easternLongitudes]))
@@ -75,6 +108,7 @@ export function usePanoramaData() {
     x,
     leftX,
     rightX,
+    minX,
     maxX, 
     width,
     coordinate,
@@ -97,7 +131,7 @@ export function useAddresses(direction?: Direction) {
   const mapWidth = width * 0.9;
   return labels
     .filter(d => !direction || direction === d.direction)
-    .filter(d => d.lng <= easternmostLongitude)
+    .filter(d => !easternmostLongitude || d.lng <= easternmostLongitude)
     .map(d => {
       const [mapX, mapY] = latLngToXY([d.lat, d.lng], mapWidth);
       return {
@@ -138,14 +172,14 @@ export function usePhotoStrip(year: number) {
       .then(response => {
         setPhotoData((response.data as any)
           // at the moment there are some issues with the 1966 images where those above id 371 are misplaced relative to the other images
-          .filter((row: any) => year !== 1966 || row.id < 371 || row.coordinate >= 156.58693)
+          //.filter((row: any) => year !== 1966 || row.id < 371 || row.coordinate >= 156.58693)
           .map((row: any) => ({
             identifier: row.identifier,
             x: (direction === 'n') ? parseFloat(row.coordinate) * mult * widthMultiplier : getOppositeX(parseFloat(row.coordinate) * mult) * widthMultiplier,
             facing: direction,
             year,
-          }))
-          .sort((a: any, b: any) => a.x - b.x));
+          })));
+          //.sort((a: any, b: any) => a.x - b.x));
         setDirectionsLoaded(direction);
       });
     return () => { source.cancel(); }
