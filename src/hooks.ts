@@ -67,8 +67,8 @@ export function usePanoramaData() {
       x: -99,
       leftX: -99,
       rightX: -99,
-      minX: -99,
-      maxX: -99, 
+      minLeftX: -99,
+      maxRightX: -99, 
       width: -99,
       coordinate: -99,
       percentAlongPath: -99,
@@ -88,13 +88,13 @@ export function usePanoramaData() {
 
   const years = yearsStr.split(',').map(d => parseInt(d));
   const x = addressX + offset;
-  const leftX = x - width / 2;
-  const rightX = x + width / 2;
-  const maxX = (direction === 'n')
+  const leftX = Math.ceil(x - width / 2);
+  const rightX = Math.floor(x + width / 2);
+  const maxRightX = (direction === 'n')
     ? Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs]))
     : getOppositeX(0);
-  const minX = (direction === 'n')
-    ? width / 2
+    const minLeftX = (direction === 'n')
+    ? 0
     : getOppositeX(Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])));
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
 
@@ -108,8 +108,8 @@ export function usePanoramaData() {
     x,
     leftX,
     rightX,
-    minX,
-    maxX, 
+    minLeftX: Math.ceil(minLeftX),
+    maxRightX: Math.floor(maxRightX), 
     width,
     coordinate,
     percentAlongPath,

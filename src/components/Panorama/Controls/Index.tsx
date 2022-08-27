@@ -12,13 +12,18 @@ import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
   const { width, modalActive } = useAppContext();
-  const { address, offset, direction, years, scrollDistance, x, leftX, minX, rightX, maxX } = usePanoramaData();
+  const { address, offset, direction, years, scrollDistance, x, leftX, rightX, minLeftX, maxRightX } = usePanoramaData();
   const navigate = useNavigate();
 
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const leftTo = `../../${getClosestAddressBelowString(Math.max(x - width * scrollDistance, width / 2), { direction })}/${years}`;
-  const rightTo = `../../${getClosestAddressBelowString(Math.min(x + width * scrollDistance, maxX), { direction })}/${years}`;
+  // calculate the x values for moving left or right
+  // for the left it's the greater of current center (x) minus distance the user has set for scrolling and the minimul left value plus half the width to prevent scrolling beyond the leftmost photo
+  const xScrollingLeft = Math.max(x - width * scrollDistance, minLeftX + width / 2);
+  const xScrollingRight = Math.min(x + width * scrollDistance, maxRightX - width / 2);
+
+  const leftTo = `../../${getClosestAddressBelowString(xScrollingLeft, { direction })}/${years}`;
+  const rightTo = `../../${getClosestAddressBelowString(xScrollingRight, { direction })}/${years}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${years}` : '';
 
@@ -43,9 +48,6 @@ const MapControls = () => {
     }
   });
 
-  console.log(x - width / 2, minX);
-
-
   return (
     <div className="map-controls">
       <Link
@@ -57,7 +59,7 @@ const MapControls = () => {
         </button>
       </Link>
 
-      {(x - width / 2 >= minX) ?
+      {(leftX > minLeftX) ?
         <Link
           to={leftTo}
           //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
@@ -79,7 +81,7 @@ const MapControls = () => {
 
       <ScrollDistanceSlider />
 
-      {(x + width * scrollDistance <= maxX) ? (
+      {(rightX < maxRightX) ? (
         <Link
           to={rightTo}
           replace={true}

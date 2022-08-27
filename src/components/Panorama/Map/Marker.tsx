@@ -15,7 +15,7 @@ const MapMarker = () => {
     // to animate the movement of the marker as the user chooses as new address, filter to get those between the old and new marker
     const oldX = x.current;
     const newX = mapX;
-    if (oldX !== newX) {
+    if (oldX !== newX && addresses && addresses.length > 0) {
       const gElement = d3.select(g.current);
       const haloElement = d3.select(halo.current);
       const pointsToTraverse = addresses
@@ -31,9 +31,11 @@ const MapMarker = () => {
       const transitionLength = 1500 / pointsToTraverse.length;
 
       const pathToTraverse = d3.path();
-      pathToTraverse.moveTo(pointsToTraverse[0].mapX, pointsToTraverse[0].mapY);
-      if (pointsToTraverse.length > 1) {
-        pathToTraverse.lineTo(pointsToTraverse[1].mapX, pointsToTraverse[1].mapY);
+      if (pointsToTraverse.length > 0) {
+        pathToTraverse.moveTo(pointsToTraverse[0].mapX, pointsToTraverse[0].mapY);
+        if (pointsToTraverse.length > 1) {
+          pathToTraverse.lineTo(pointsToTraverse[1].mapX, pointsToTraverse[1].mapY);
+        }
       }
 
       const animateStep = (idx: number) => {

@@ -23,7 +23,6 @@ const AddressView = () => {
   } = useAddressData();
 
   const historicalProfileRef = useRef<HTMLHeadingElement>(null);
-  const photosRef = useRef<HTMLHeadingElement>(null);
 
   if (!addressHasData) {
     return (
@@ -49,9 +48,10 @@ const AddressView = () => {
           }
           <div
             onClick={() => {
-              if (photosRef.current) {
-                photosRef.current.scrollIntoView({ behavior: 'smooth' });
-              }
+              window.scrollTo({
+                top: 340,
+                behavior: 'smooth',
+              });
             }}
             className='photos'
           >

@@ -37,14 +37,14 @@ export const maxXs = {
   '1985': 979.36723 * mult,
   '1995': 984.23148 * mult,
   '2007': 993.27018 * mult,
-}
+};
 export const easternMostAddresses = {
   '1966': ensure(getClosestAddressBelow(maxXs['1966'], { direction: 'n' })).addr,
   '1973': ensure(getClosestAddressBelow(maxXs['1973'], { direction: 'n' })).addr,
   '1985': ensure(getClosestAddressBelow(maxXs['1985'], { direction: 'n' })).addr,
   '1995': ensure(getClosestAddressBelow(maxXs['1995'], { direction: 'n' })).addr,
   '2007': ensure(getClosestAddressBelow(maxXs['2007'], { direction: 'n' })).addr,
-}
+};
 
 export const easternLongitudes = {
   '1966': ensure(labels.find(d => d.label === easternMostAddresses['1966'])).lng,
