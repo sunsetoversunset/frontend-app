@@ -11,22 +11,32 @@ import 'rc-slider/assets/index.css';
 import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
-  const { width, modalActive } = useAppContext();
-  const { address, offset, direction, years, scrollDistance, x, leftX, rightX, minLeftX, maxRightX } = usePanoramaData();
+  const { modalActive } = useAppContext();
+  const {
+    x, 
+    minX,
+    maxX,
+    scrollDistanceX,
+    address,
+    offset,
+    direction,
+    yearsStr
+  } = usePanoramaData();
   const navigate = useNavigate();
-
   const [searchOpen, setSearchOpen] = useState(false);
 
   // calculate the x values for moving left or right
-  // for the left it's the greater of current center (x) minus distance the user has set for scrolling and the minimul left value plus half the width to prevent scrolling beyond the leftmost photo
-  const xScrollingLeft = Math.max(x - width * scrollDistance, minLeftX + width / 2);
-  const xScrollingRight = Math.min(x + width * scrollDistance, maxRightX - width / 2);
+  // for the left it's the greater of current center (x) minus distance the user has set for scrolling and the minimum left value plus half the width to prevent scrolling beyond the leftmost photo
+  const xScrollingLeft = Math.max(x - scrollDistanceX, minX);
+  const xScrollingRight = Math.min(x + scrollDistanceX, maxX);
 
-  const leftTo = `../../${getClosestAddressBelowString(xScrollingLeft, { direction })}/${years}`;
-  const rightTo = `../../${getClosestAddressBelowString(xScrollingRight, { direction })}/${years}`;
+  // create the link paths for the move left, move right, and toggle directions buttons
+  const leftTo = `../../${getClosestAddressBelowString(xScrollingLeft, { direction })}/${yearsStr}`;
+  const rightTo = `../../${getClosestAddressBelowString(xScrollingRight, { direction })}/${yearsStr}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
-  const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${years}` : '';
+  const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${yearsStr}` : '';
 
+  // move left or right using arrow keys if the modal isn't active
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
       navigate(leftTo, { replace: true });
@@ -59,7 +69,7 @@ const MapControls = () => {
         </button>
       </Link>
 
-      {(leftX > minLeftX) ?
+      {(Math.floor(x) > minX) ?
         <Link
           to={leftTo}
           //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
@@ -81,7 +91,7 @@ const MapControls = () => {
 
       <ScrollDistanceSlider />
 
-      {(rightX < maxRightX) ? (
+      {(Math.ceil(x) < maxX) ? (
         <Link
           to={rightTo}
           replace={true}
@@ -97,7 +107,6 @@ const MapControls = () => {
             {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
           </button>
         </div>
-
       )}
 
       <button

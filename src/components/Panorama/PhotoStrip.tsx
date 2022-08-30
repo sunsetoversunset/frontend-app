@@ -9,11 +9,14 @@ type Photo = {
   src: string;
   x: number;
   id: string;
+  opacity?: number;
 }
 
 const PhotoStrip = ({ year }: { year: number; }) => {
-  const { leftX, rightX, photoData, direction, directionLoaded } = usePhotoStrip(year);
+  const { leftX, rightX, photoData, direction, directionLoaded, addressPhotoIds } = usePhotoStrip(year);
   const { setModalActive } = useAppContext();
+
+  console.log(photoData);
   
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
@@ -41,6 +44,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
+        opacity: (!addressPhotoIds || addressPhotoIds.includes(d.identifier)) ? 1 : 0.3, 
       }));
   }
 
@@ -79,7 +83,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
     }
   }, [leftX, rightX]);
 
-
+  console.log(photos);
 
   // scroll the bar when after new photos have been loaded
   useEffect(() => {
@@ -149,6 +153,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
               src={photo.src}
               style={{
                 transform: `translateX(${photo.x}px)`,
+                opacity: photo.opacity,
               }}
               key={photo.src}
               onClick={() => {

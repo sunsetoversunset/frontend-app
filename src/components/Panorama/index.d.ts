@@ -12,6 +12,7 @@ export type PhotoData = {
   x: number;
   facing: Direction;
   year: number;
+  opacity?: number;
 };
 
 export type PanoramaContextParams = {

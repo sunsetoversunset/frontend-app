@@ -2,7 +2,8 @@ import { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
-import { hasAddressData, mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
+import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
+import type { AddressDataAndNavData, PanoramaData } from './types/hooks.d';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
 import type { StripLabel, Direction } from './index.d';
 import type { PhotoData } from './components/Panorama/index.d';
@@ -17,7 +18,29 @@ export function useAppContext() {
   return useContext(AppContext);
 }
 
-export function useAddressData() {
+/* 
+ * Used by the address view components, it retrieves the address data asyncronously from the json file and returns:
+ *  {
+ *    addressHasData: boolean;                
+ *    address: string;                         // the address
+ *    previousAddress: string | undefined;     // the previousAddress if there is one
+ *    nextAddress: string | undefined;         // the nextAddress if there is one
+ *    addressData: AddressData | undefined;    // the data for the address 
+ *  }
+ * 
+ * The addressData is:
+ *  {
+ *    side: 'n' | 's';                         // the direction
+ *    boundaries: [number, number];            // the x values defining the boundaries of the address in space
+ *    photos: Photo[];                         // photos within those boundaries
+ *    census_data: CensusData;                 // the data for the following tables--full types in AddressView.d.ts
+ *    occupants_data: Occupants_Data[];
+ *    newspaper_data: NewspaperArticle[];
+ *    social_cultural_data: SocialCulturalInformation[];
+ *    assessor_data: AssessorRow[];
+ *  }
+ */
+export function useAddressData(): AddressDataAndNavData {
   const { address } = useParams() as { address: string };
   const [addressData, setAddressData] = useState<AddressData>();
   const [addressHasData, setAddressHasData] = useState(true);
@@ -49,40 +72,41 @@ export function useAddressData() {
   };
 }
 
-export function usePanoramaData() {
+/*
+ * Calculates and returns the basic data for the panorama view, calculated from the view window with and the address from the URL. Returns:
+ *  {
+ *    isIvalidAddress: boolean;                // 
+ *    address: string;                         // the address
+ *    offset: number;                          // the distance between the address and the center of the view window in pixels
+ *    direction: Direction;                    // the direction being viewed
+ *    yearsStr: string;                        // the years being shown from the URL separated by commas
+ *    years: number[];                         // the years
+ *    x: number;                               // the center of the view window
+ *    leftX: number;                           // the left value of the view window
+ *    rightX: number;                          // the right value of the view window
+ *    minLeftX: number;                        // the minimum left value possible given the selected years, used to disable the move left button
+ *    maxRightX: number;                       // the maximum right value possible given the selected years, used toe disable the move right button
+ *    width: number;                           // the width of the window
+ *    coordinate: number;                      // the coordinate center before the multiplier is applied--i.e. what the number would be using the photos coordinates
+ *    percentAlongPath: number;                // the percent the x value is along the road path
+ *    lat: number;                             // the latitude corresponding to x
+ *    lng: number;                             // the longitude corresponding to x
+ *    mapX: number;                            // the x coordinate for the selected location on the map
+ *    mapY: number;                            // the y coordinate for the selected location on the map
+ *    rotation: number;                        // the rotation of the marker on the map
+ *    visibleAddresses: StripLabel[],          // the addresses the are visibile with the view bounds
+ *    scrollDistance,                          // the selected distance as a percent if the view bounds the user scrolls when going left or right
+ *    scrollDistanceX,                         // the selected distance the users scrolls when going left or right
+ *    setScrollDistance: React.Dispatch<React.SetStateAction<number>>    // the function to set the scroll distance
+ * }
+ */
+export function usePanoramaData(): PanoramaData {
   const { width } = useAppContext();
   const mapWidth = width * 0.9;
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
   const { addr: address, offset } = parseAddrOffset(addrOffset);
-  // todo: this seems DUMB!! there must be a better way to get this to parse without typeerros than put in this dummy data.
-  if (typeof labels.find(label => label.label.replace(/\s+/g, '') === address) === 'undefined') {
-    return { 
-      isInvalidAddress: true,
-      address: '',
-      offset: -99,
-      direction,
-      yearsStr: '',
-      years: [],
-      x: -99,
-      leftX: -99,
-      rightX: -99,
-      minLeftX: -99,
-      maxRightX: -99, 
-      width: -99,
-      coordinate: -99,
-      percentAlongPath: -99,
-      lat: -99,
-      lng: -99,
-      easternmostLongitude: -99,
-      mapX: -99,
-      mapY: -99,
-      visibleAddresses: [] as StripLabel[],
-      rotation: -99,
-      scrollDistance,
-      setScrollDistance,
-    }
-  }
+
   const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth);
 
@@ -90,12 +114,12 @@ export function usePanoramaData() {
   const x = addressX + offset;
   const leftX = Math.ceil(x - width / 2);
   const rightX = Math.floor(x + width / 2);
-  const maxRightX = (direction === 'n')
-    ? Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs]))
-    : getOppositeX(0);
-    const minLeftX = (direction === 'n')
-    ? 0
-    : getOppositeX(Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])));
+  const maxX = (direction === 'n')
+    ? Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])) - width / 2
+    : getOppositeX(width / 2);
+  const minX = (direction === 'n')
+    ? width / 2
+    : getOppositeX(Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])) - width / 2);
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
 
   const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year.toString() as keyof typeof easternLongitudes]))
@@ -108,8 +132,8 @@ export function usePanoramaData() {
     x,
     leftX,
     rightX,
-    minLeftX: Math.ceil(minLeftX),
-    maxRightX: Math.floor(maxRightX), 
+    minX: Math.ceil(minX),
+    maxX: Math.floor(maxX),
     width,
     coordinate,
     percentAlongPath,
@@ -121,10 +145,14 @@ export function usePanoramaData() {
     visibleAddresses,
     rotation,
     scrollDistance,
+    scrollDistanceX: scrollDistance * width,
     setScrollDistance,
   };
 }
 
+/* 
+  Returns addresses for the map to place them on the canvas
+*/
 export function useAddresses(direction?: Direction) {
   const { width } = useAppContext();
   const { easternmostLongitude } = usePanoramaData();
@@ -145,6 +173,7 @@ export function useAddresses(direction?: Direction) {
 export function usePhotoStrip(year: number) {
   const { width } = useAppContext();
   let { addrOffset, direction, address } = useParams<Partial<URLParamsPanorama> & { address?: string }>();
+  const addressData = useAddressData();
   const pageType = (address) ? 'addressView' : 'panorama';
   const widthMultiplier = (pageType === 'panorama') ? 1 : 3.25;
   if (pageType === 'addressView') {
@@ -164,6 +193,7 @@ export function usePhotoStrip(year: number) {
   const [directionLoaded, setDirectionsLoaded] = useState<Direction | undefined>()
   //const [boundaries, setBoundaries] = useState<[number, number]>();
 
+
   /* retrive the photos coordinates on initial load */
   useEffect(() => {
     const cancelToken = axios.CancelToken;
@@ -179,7 +209,7 @@ export function usePhotoStrip(year: number) {
             facing: direction,
             year,
           })));
-          //.sort((a: any, b: any) => a.x - b.x));
+        //.sort((a: any, b: any) => a.x - b.x));
         setDirectionsLoaded(direction);
       });
     return () => { source.cancel(); }
@@ -211,12 +241,17 @@ export function usePhotoStrip(year: number) {
     rightX: x + width / 2,
     direction,
     widthMultiplier,
+    addressPhotoIds: addressData?.addressData?.photos?.map(photo => photo.id),
     //boundaries,
   }
 }
 
+/*
+ * Returns two svg paths for Sunset for the map--one the complete path, the other the path just for
+ * the area with visible photos for selected years.
+*/
 export function useRoadPath() {
-  const { years, width, easternmostLongitude } = usePanoramaData();
+  const { width, easternmostLongitude } = usePanoramaData();
   const mapWidth = width * 0.9;
 
   const pointsWithPhotos = GeoJson.geometry.coordinates[0].filter(point => point[0] <= easternmostLongitude);
@@ -228,18 +263,29 @@ export function useRoadPath() {
       return `L ${x} ${y}`;
     });
 
-    const allPoints = GeoJson.geometry.coordinates[0];
-    const [firstX, firstY] = latLngToXY([allPoints[0][1], allPoints[0][0]], mapWidth);
-    const lineSegmentsAll = allPoints
-      .slice(1)
-      .map((point) => {
-        const [x, y] = latLngToXY([point[1], point[0]], mapWidth)
-        return `L ${x} ${y}`;
-      });
-  
+  const allPoints = GeoJson.geometry.coordinates[0];
+  const [firstX, firstY] = latLngToXY([allPoints[0][1], allPoints[0][0]], mapWidth);
+  const lineSegmentsAll = allPoints
+    .slice(1)
+    .map((point) => {
+      const [x, y] = latLngToXY([point[1], point[0]], mapWidth)
+      return `L ${x} ${y}`;
+    });
 
   return {
-    activePath:`M ${firstXActive} ${firstYActive} ${lineSegmentsActive.join(" ")}`,
+    activePath: `M ${firstXActive} ${firstYActive} ${lineSegmentsActive.join(" ")}`,
     completePath: `M ${firstX} ${firstY} ${lineSegmentsAll.join(" ")}`,
   }
+}
+
+/*
+ * returns true or false if the address in the url is valid--used for the panorama to prevent the page from returning nothing
+*/
+export function useIsValidAddress() {
+  let { addrOffset, address } = useParams<Partial<URLParamsPanorama> & { address?: string }>();
+  if (addrOffset) {
+    const addressAndOffset = parseAddrOffset(addrOffset as string);
+    address = addressAndOffset.addr;
+  }
+  return typeof labels.find(label => label.label.replace(/\s+/g, '') === address) !== 'undefined';
 }

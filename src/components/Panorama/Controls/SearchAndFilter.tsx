@@ -101,7 +101,7 @@ const SearchAndFilter = ({setSearchOpen}: { setSearchOpen: React.Dispatch<React.
       </div>
       <div className="years-control">
         <label className="control-label">Display years</label>
-        [{[1966, 1973, 1985, 1995, 2007].map(year => {
+        {[1966, 1973, 1985, 1995, 2007].map(year => {
           return (
             <div
               key={`check-${year}`}

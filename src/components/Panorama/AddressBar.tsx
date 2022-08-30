@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import ConditionalWrapper from "../ConditionalWrapper";
@@ -73,19 +73,14 @@ const AddressBar = () => {
           }}
         >
           {visibleAddresses.map(label => (
-            // only numerical addresses are linked to address pages
+            // only addresses with data are linked to address pages
             <ConditionalWrapper
               condition={hasAddressData(label.label)}
               wrapper={(children: any) => (<Link to={`/address/${label.label}`}>{children}</Link>)}
               children={
                 <span
-                  style={{
-                    position: 'absolute',
-                    left: label.x,
-                    color: (hasAddressData(label.label)) ? 'black' : '#999',
-                    fontWeight: (hasAddressData(label.label)) ? 'bold' : 'normal',
-                    textShadow: '-4px 2px 6px white, -4px -2px 6px white',
-                  }}
+                  className={`address ${(hasAddressData(label.label)) ? 'selectable' : 'unselectable'}`}
+                  style={{ left: label.x }}
                 >
                   {label.label}
                 </span>

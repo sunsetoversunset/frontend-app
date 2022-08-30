@@ -5,23 +5,24 @@ import MapControls from './Controls/Index';
 import AddressBar from './AddressBar';
 import PhotoStrips from "./PhotoStrips";
 import { PanoramaContext } from '../../Contexts';
-import { usePanoramaData } from "../../hooks";
+import { useIsValidAddress } from "../../hooks";
 import "../../styles/Panorama.scss"
 
 export const Panorama = () => {
   const [scrollDistance, setScrollDistance] = useState(0.6);
-  const { isInvalidAddress } = usePanoramaData();
+  const isValidAddress = useIsValidAddress();
   const navigate = useNavigate();
 
-  if (isInvalidAddress) {
+  if (!isValidAddress) {
     navigate('/panorama/n/');
     return null;
   }
 
-  
   return (
     <PanoramaContext.Provider value={{ scrollDistance: scrollDistance, setScrollDistance: setScrollDistance }}>
-      <div id='panorama'>
+      <div
+        id='panorama'
+      >
         <Map />
         <MapControls />
         <AddressBar />
