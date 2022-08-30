@@ -113,7 +113,7 @@ export const addressToCoordinateUnflipped = (address: string) => {
 }
 
 export function getProximateAddress(previousOrNext: 'previous' | 'next', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean}) {
-  const addressLabelData = ensure(labels.find(d => d.label.toString() === address));
+  const addressLabelData = ensure(labels.find(d => d.label.toString() === address), 'error in getProximateAddress');
   const closestLabels = labels
     // filter out addresses on othe side if there is a direction option
     .filter(labelData => (options?.direction) ? labelData.direction === options.direction : true)
