@@ -44,7 +44,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
-        opacity: (!addressPhotoIds || addressPhotoIds.includes(d.identifier)) ? 1 : 0.3, 
+        opacity: (!addressPhotoIds || (addressPhotoIds.length > 0 && addressPhotoIds.includes(d.identifier))) ? 1 : 0.3, 
       }));
   }
 
