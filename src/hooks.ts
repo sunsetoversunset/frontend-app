@@ -60,8 +60,8 @@ export function useAddressData(): AddressDataAndNavData {
     return () => { source.cancel(); }
   }, [address]);
 
-  let previousAddress = (addressData) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
-  let nextAddress = (addressData) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let previousAddress = (addressData && address) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let nextAddress = (addressData && address) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
 
   return {
     address,

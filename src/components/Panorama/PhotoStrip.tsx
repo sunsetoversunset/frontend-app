@@ -15,8 +15,6 @@ type Photo = {
 const PhotoStrip = ({ year }: { year: number; }) => {
   const { leftX, rightX, photoData, direction, directionLoaded, addressPhotoIds } = usePhotoStrip(year);
   const { setModalActive } = useAppContext();
-
-  console.log(photoData);
   
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
@@ -82,8 +80,6 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       }
     }
   }, [leftX, rightX]);
-
-  console.log(photos);
 
   // scroll the bar when after new photos have been loaded
   useEffect(() => {
