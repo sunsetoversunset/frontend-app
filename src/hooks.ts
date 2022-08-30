@@ -53,9 +53,9 @@ export function useAddressData(): AddressDataAndNavData {
         setAddressData(response.data as AddressData);
       })
       .catch((reason: AxiosError) => {
-        if (reason.response!.status === 404) {
-          setAddressHasData(false);
-        };
+        setAddressHasData(false);
+        // if (reason.response!.status === 404) {
+        // };
       });
     return () => { source.cancel(); }
   }, [address]);
