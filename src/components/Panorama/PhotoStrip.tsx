@@ -28,6 +28,8 @@ const PhotoStrip = ({ year }: { year: number; }) => {
   // refs to track the previous leftX and rightX, which are used to retrieve and display both the last and the next photos during a scroll
   const leftXRef = useRef(leftX);
   const rightXRef = useRef(rightX);
+  // track the addressPhotoIdsToo 
+  const addressPhotoIdsRef = useRef(addressPhotoIds?.join(','));
   // the div for the strip container
   const stripContainer = useRef(null);
   const directionRef = useRef(direction);
@@ -57,6 +59,14 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       setLoad(false);
     }
   });
+
+  //set the photos when adddressDataIds are updated
+  useEffect(() => {
+    if (addressPhotoIds && addressPhotoIds.length > 0 && addressPhotoIds.join(',') !== addressPhotoIdsRef.current) {
+      addressPhotoIdsRef.current = addressPhotoIds.join(',');
+      setPhotos(getVisiblePhotosInRange(leftX, rightX));
+    }
+  }, [addressPhotoIds]);
 
 
   // set the photos if the photoData--stemming from the direction--has changed

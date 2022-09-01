@@ -23,14 +23,13 @@ const CensusTable = () => {
     }
     return (
       <>
-        {([1960, 1970, 1980, 1990, 2000, 2010].map(decade => (
-          <>
-            {(census_data[key] && census_data[key][decade as DecadeIndex])
-              ? <td className='value' key={`${key}${decade}`}>{format(unit, census_data[key][decade as DecadeIndex])}</td>
-              : <td className='empty' />
+        {([1960, 1970, 1980, 1990, 2000, 2010].map(decade => {
+          if (census_data[key] && census_data[key][decade as DecadeIndex]) {
+            return <td className='value' key={`${key}${decade}`}>{format(unit, census_data[key][decade as DecadeIndex])}</td>;
+          } else {
+            return <td className='empty' key={`${key}${decade}`} />;
           }
-          </>
-        )))}
+        }))}
       </>
     );
   };
