@@ -1,7 +1,7 @@
 import { useAddressDataContext } from '../../../hooks';
 import '../../../styles/Tables.scss';
 
-const BuildingRecordsTable = () => {
+const TaxAssessments = () => {
   const { assessor_data } = useAddressDataContext();
   if (assessor_data.length === 0) {
     return null;
@@ -9,9 +9,9 @@ const BuildingRecordsTable = () => {
 
   return (
     <div
-      className={"buildingRecordsTable dataTable"}
+      className={"taxAssessments dataTable"}
     >
-      <h1>Online Building Records</h1>
+      <h1>Tax Assessments</h1>
       <table>
         <tbody>
           {assessor_data
@@ -33,4 +33,4 @@ const BuildingRecordsTable = () => {
   );
 };
 
-export default BuildingRecordsTable;
+export default TaxAssessments;
