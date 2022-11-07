@@ -2,23 +2,24 @@ import React from 'react';
 import { useMatch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/NavHeader.scss';
+import iconHeader from "../assets/icons/sos-logo-orange-text.png"
 
 const NavHeader = () => {
   // if the pages is an addressview page, get it so you can set the panorama link to that address
   const match = useMatch(`address/:address`);
-  let panoramaTo = '/panorama';
+  let panoramaTo = '/';
   if (match) {
     const { address } = match.params;
     if (address && !isNaN(Number(address))) {
       const direction = (Number(address) % 2) ? 'n' : 's';
-      panoramaTo += `/${direction}/${address}`;
+      panoramaTo += `${direction}/${address}`;
     }
   }
 
   return (
     <nav className='nav-header'>
       <Link className="home-link"to="/">
-        <h1>Sunset over Sunset</h1>
+        <img className="footer-hero" src={iconHeader} alt="Sunset Over Sunset Icon" />
       </Link>
       <div className='nav-links-container'>
         <ul>

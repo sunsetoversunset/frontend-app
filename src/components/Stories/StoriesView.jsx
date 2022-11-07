@@ -13,12 +13,12 @@ export const StoriesView = () => {
   return (
 
     <div className="app-page stories-view">
-    <PhotoViewerModal 
+    {/* <PhotoViewerModal 
         nearbyAddresses={ [] } 
         imgObj={ modalImgUrl }
         handleHideModal={ () => setIsModalShowing(false) }
         isVisible={ isModalShowing } 
-      /> 
+      />  */}
       <div className='stories-view-container'>
         <div className="header-image" style={{backgroundImage: `url('https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,1400/0/default.jpg`}}>
           <span className="background-texture"></span>
