@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios, { AxiosError } from 'axios';
-import csvToJson from 'csvtojson';
 import '../styles/App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 //import { Home } from './Home'
@@ -13,7 +11,7 @@ import Footer from './Footer';
 import Landing from "./Landing";
 import { AppContext } from '../Contexts';
 import { getClosestAddressBelowString } from '../utiliities';
-import type { StripLabel, Dimensions } from '../index.d';
+import type { Dimensions } from '../index.d';
 
 export const App = () => {
   const [landingOpen, setLandingOpen] = useState(true);
@@ -41,65 +39,6 @@ export const App = () => {
 
   const [dimensions, setDimensions] = useState<Dimensions>(calculateDimensions());
   const [modalActive, setModalActive] = useState(false);
-
-  const [labels, setLabels] = useState<StripLabel[]>([]);
-
-  const fetchData = async () => {
-    const responses = await axios.all(
-      [axios.get(`/data/strip_labels_n.csv`, { responseType: 'blob', }),
-      axios.get(`/data/strip_labels_s.csv`, { responseType: 'blob', })]
-    );
-    const n_labels_str = await responses[0].data.text();
-    let n_labels = await csvToJson().fromString(n_labels_str);
-    n_labels = n_labels
-      .map((label: { label: string, coordinate: string }) => ({
-        label,
-        coordinate: parseFloat(label.coordinate),
-        direction: 'n',
-      }));
-    const s_labels_str = await responses[1].data.text(0);
-    let s_labels = await csvToJson().fromString(s_labels_str);
-    s_labels = s_labels
-      .map((label: { label: string, coordinate: string }) => ({
-        label,
-        coordinate: parseFloat(label.coordinate),
-        direction: 's',
-      }));
-    const labels = [...n_labels, ...s_labels];
-    // the multiplier used for the placement of the photos on the strip for the panorama view
-    const mult = 200;
-    // the maximum coordinate value among all the addresses
-    const maxX = Math.max(...labels.map(d => d.coordinate * mult));
-    console.log(maxX);
-
-    console.log(labels);
-  };
-  useEffect(() => {
-    fetchData();
-
-    //   .then(async (responses) => {
-    //     const strip_labels = await responses.map(async (response) => {
-    //       const csvStr: string = await response.data.text();
-    //       const strip_labels = await csvToJson().fromString(csvStr) as StripLabel[];
-    //       console.log(strip_labels);
-    //       return strip_labels;
-    //       // response.data.text().then((csvStr: string) => {
-    //       //   csvToJson()
-    //       //     .fromString(csvStr)
-    //       //     .then((jsonObj) => {
-    //       //       strip_labels.push(...jsonObj);
-    //       //     });
-    //       // });
-    //     });
-    //     console.log(strip_labels);
-    //   })
-    // .catch((reason: AxiosError) => {
-    //   console.warn('failed to retrieve strip labels')
-    // });
-    const cancelToken = axios.CancelToken;
-    const source = cancelToken.source();
-    return () => { source.cancel(); }
-  }, []);
 
   useEffect(() => {
     window.addEventListener('resize', () => setDimensions(calculateDimensions()));

@@ -14,7 +14,7 @@ export const Panorama = () => {
   const navigate = useNavigate();
 
   if (!isValidAddress) {
-    navigate('/panorama/n/');
+    navigate('/n/');
     return null;
   }
 

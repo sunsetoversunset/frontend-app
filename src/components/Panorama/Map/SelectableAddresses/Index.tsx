@@ -9,7 +9,7 @@ const SelectableAddresses = () => {
     <>
       {addresses.map(d => (
         <SelectableAddress
-          to={`/panorama/${direction}/${d.label.replace(/\s+/g, '')}/${yearsStr}`}
+          to={`/${direction}/${d.label.replace(/\s+/g, '')}/${yearsStr}`}
           key={`addr${d.label}`}
           x={d.mapX}
           y={d.mapY}
