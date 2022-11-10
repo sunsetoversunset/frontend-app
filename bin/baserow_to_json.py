@@ -107,7 +107,7 @@ def labelWithLatLngs(label):
 
 #map the strip labels adding lat/lng and rotation data and write the json file
 stripLabelsWithLatLngs = list(map(labelWithLatLngs, strip_labels))
-with open("../../src/assets/data/strip_labels.json", "w") as f:
+with open("./src/assets/data/strip_labels.json", "w") as f:
     json.dump(stripLabelsWithLatLngs, f)
 
 #retrieve the photo data for each year
@@ -130,9 +130,9 @@ def is_s(item):
 for year, value in photographs.items():
     n_values_iteratator = filter(is_n, value)
     n_values = list(n_values_iteratator)
-    with open(f"../../public/data/photographs_{year}_n.json", "w") as f:
+    with open(f"./public/data/photographs_{year}_n.json", "w") as f:
         json.dump(n_values, f)
     s_values_iteratator = filter(is_s, value)
     s_values = list(s_values_iteratator)
-    with open(f"../../public/data/photographs_{year}_s.json", "w") as f:
+    with open(f"./public/data/photographs_{year}_s.json", "w") as f:
         json.dump(s_values, f)
