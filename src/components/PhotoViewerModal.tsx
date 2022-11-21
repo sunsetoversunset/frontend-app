@@ -14,26 +14,26 @@ import iconLeftRust from "../assets/icons/icon-left-bracket-rust.svg"
 
 type Props = {
   id: string;
-  nextId: string | undefined;
-  previousId: string | undefined;
-  x: number;
+  nextId?: string | undefined;
+  previousId?: string | undefined;
+  x?: number;
   setModalId: React.Dispatch<React.SetStateAction<string | undefined>>;
-  year: number;
+  year?: number;
 };
 
 const PhotoViewerModal = (props: Props) => {
   const { id, nextId, previousId, x, setModalId, year } = props;
-  const nearbyAddresses = getNearbyAddresses(x);
+  const nearbyAddresses = (x) ? getNearbyAddresses(x) : [];
 
   const [isHoveringExpanded, setIsHoveringExpand] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
+    if (previousId && e.key === 'ArrowLeft') {
       setModalId(previousId);
     }
-    if (e.key === 'ArrowRight') {
+    if (nextId && e.key === 'ArrowRight') {
       setModalId(nextId);
     }
   });

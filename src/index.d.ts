@@ -28,6 +28,18 @@ export type StripLabel = {
   rotation: number;
 };
 
+export type StoryMetadata = {
+  slug: string;
+  title: string;
+  author: string;
+  img_id: string;
+  date: {
+    year: number;
+    month: number;
+    day: number;
+  };
+};
+
 
 
 export type Point = [number, number];

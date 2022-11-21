@@ -10,7 +10,6 @@ import '../../styles/App.scss'
 import '../../styles/Stories.scss' 
 
 const About = () => {
-  console.log('about');
   return (
     <div className="app-page about-view" id="about">
       <div className='about-view-container'>

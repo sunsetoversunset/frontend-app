@@ -5,7 +5,7 @@ import img from '../../assets/images/5025-5007.jpg'
 import '../../styles/App.scss'
 import '../../styles/Stories.scss'
 
-export const StoriesView = () => {
+const StoriesView = () => {
   //modal states
   const [ modalImgUrl, setModalImgUrl ] = useState(null)
   const [ isModalShowing, setIsModalShowing ] = useState(false)
@@ -273,3 +273,5 @@ export const StoriesView = () => {
     </div>
   )
 }
+
+export default StoriesView;

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import '../styles/App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 //import { Home } from './Home'
-import { StoriesView } from './Stories/StoriesView'
+import StoriesView from './Stories/Index'
+import Story from './Stories/StoriesView';
+import StoryMd from './Stories/Story';
 import Panorama from './Panorama/Index';
 import NavHeader from './NavHeader';
 import About from './Pages/About.jsx';
@@ -14,7 +16,7 @@ import { getClosestAddressBelowString } from '../utiliities';
 import type { Dimensions } from '../index.d';
 
 export const App = () => {
-  const [landingOpen, setLandingOpen] = useState(true);
+  const [landingOpen, setLandingOpen] = useState(false);
 
   const calculateDimensions = () => {
     const { innerWidth, innerHeight } = window;
@@ -61,7 +63,17 @@ export const App = () => {
           <NavHeader />
           <Routes>
             <Route path="/about" element={<About />} />
-            <Route path="/stories" element={<StoriesView />} />
+            <Route path="/stories">
+              <Route
+                index
+                element={<StoriesView />}
+              />
+              <Route
+                path='gasstationsold'
+                element={<Story />}
+              />
+              <Route path=":storyslug" element={<StoryMd />} />
+            </Route> 
             <Route path="/address/">
               <Route path=":address" element={<AddressView />} />
             </Route>
