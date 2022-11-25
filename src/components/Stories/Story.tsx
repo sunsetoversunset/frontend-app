@@ -133,7 +133,9 @@ const Story = () => {
             options={{
               wrapper: 'article',
               overrides: {
-                p: ToPOrNotToP,
+                p: {
+                  component: ToPOrNotToP,
+                },
                 img: {
                   component: ModalImg,
                   props: {
@@ -141,8 +143,12 @@ const Story = () => {
                     setModalActive,
                   }
                 },
-                a: AOrLink,
-                ul: ImageList,
+                a: {
+                  component: AOrLink,
+                },
+                ul: {
+                  component: ImageList,
+                },
               }
             }}
           >
