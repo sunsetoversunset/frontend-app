@@ -148,6 +148,7 @@ const Story = () => {
                 },
                 ul: {
                   component: ImageList,
+                  props: {}
                 },
               }
             }}
