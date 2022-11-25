@@ -1,8 +1,9 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses } from "../utiliities";
+import { getNearbyAddresses, mult } from "../utiliities";
 
 import "../styles/PhotoViewerModalNew.scss";
 
@@ -14,29 +15,41 @@ import iconLeftRust from "../assets/icons/icon-left-bracket-rust.svg"
 
 type Props = {
   id: string;
-  nextId?: string | undefined;
-  previousId?: string | undefined;
-  x?: number;
   setModalId: React.Dispatch<React.SetStateAction<string | undefined>>;
-  year?: number;
 };
 
-const PhotoViewerModal = (props: Props) => {
-  const { id, nextId, previousId, x, setModalId, year } = props;
-  const nearbyAddresses = (x) ? getNearbyAddresses(x) : [];
+type PhotoData = {
+  id: string;
+  next_id: string | undefined;
+  previous_id: string | undefined;
+  side: 'n' | 's';
+  year: number;
+  coordinate: number;
+}
 
+const PhotoViewerModal = ({ id, setModalId }: Props) => {
+  const [photoData, setPhotoData] = useState<PhotoData>();
+  const nearbyAddresses = (photoData?.coordinate) ? getNearbyAddresses(photoData.coordinate * mult) : [];
   const [isHoveringExpanded, setIsHoveringExpand] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
-    if (previousId && e.key === 'ArrowLeft') {
-      setModalId(previousId);
+    if (photoData?.previous_id && e.key === 'ArrowLeft') {
+      setModalId(photoData?.previous_id);
     }
-    if (nextId && e.key === 'ArrowRight') {
-      setModalId(nextId);
+    if (photoData?.next_id && e.key === 'ArrowRight') {
+      setModalId(photoData?.next_id);
     }
   });
+
+  useEffect(() => {
+    axios.get(`/photos_data/${id.substring(0, 2)}.json`)
+      .then(response => {
+        const photoData = (response.data as PhotoData[]).find(d => d.id === id);
+        setPhotoData(photoData);
+      })
+  }, [id]);
 
   useEffect(() => {
       window.addEventListener('keydown', handleArrowKeysPressed);
@@ -44,6 +57,10 @@ const PhotoViewerModal = (props: Props) => {
       window.removeEventListener('keydown', handleArrowKeysPressed);
     }
   });
+
+  if (!photoData) {
+    return null;
+  }
 
   return (
     <div className='modal-backdrop'>
@@ -57,24 +74,24 @@ const PhotoViewerModal = (props: Props) => {
       </div>
       <Viewer iiifUrl={`https://media.getty.edu/iiif/image/${id}/info.json`} />
       <div className='photo-credits'>
-        {`${year} | © Ed Ruscha. `}
+        {`${photoData.year} | © Ed Ruscha. `}
         <a href={`https://www.getty.edu/research/collections/lookup/imageUUID?id=${id}`} rel="noreferrer" target="_blank">
           View record at Getty Research Institute</a>
       </div>
-      {(previousId) && (
+      {(photoData.previous_id) && (
         <img
           id='previousImage'
-          src={`https://media.getty.edu/iiif/image/${previousId}/full/204,/0/default.jpg`}
+          src={`https://media.getty.edu/iiif/image/${photoData.previous_id}/full/204,/0/default.jpg`}
           alt={id}
-          onClick={() => { setModalId(previousId); }}
+          onClick={() => { setModalId(photoData.previous_id); }}
         />
       )}
-      {(nextId) && (
+      {(photoData.next_id) && (
         <img
           id='nextImage'
-          src={`https://media.getty.edu/iiif/image/${nextId}/full/204,/0/default.jpg`}
+          src={`https://media.getty.edu/iiif/image/${photoData.next_id}/full/204,/0/default.jpg`}
           alt={id}
-          onClick={() => { setModalId(nextId); }}
+          onClick={() => { setModalId(photoData.next_id); }}
         />
       )}
 

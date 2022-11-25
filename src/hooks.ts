@@ -215,7 +215,7 @@ export function usePhotoStrip(year: number) {
         setDirectionsLoaded(direction);
       });
     return () => { source.cancel(); }
-  }, [direction, year]);
+  }, [direction, year, widthMultiplier]);
 
   // get the address boundaries type is addressView
   // useEffect(() => {

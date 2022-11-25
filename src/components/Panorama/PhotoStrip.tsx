@@ -2,7 +2,6 @@ import { useRef, useEffect, useState } from "react";
 import * as d3 from 'd3';
 import "../../styles/PhotoStrip.scss";
 import PhotoViewerModal from "../PhotoViewerModal";
-import { PhotoData } from './index.d';
 import { usePhotoStrip, useAppContext } from '../../hooks';
 
 type Photo = {
@@ -111,30 +110,6 @@ const PhotoStrip = ({ year }: { year: number; }) => {
     }
   });
 
-  const getNextId = (id: string) => {
-    const thePhoto = photoData.find(photo => photo.identifier === id);
-    if (thePhoto) {
-      const photosAbove = photoData
-        .filter(photo => photo.x > thePhoto.x)
-        .sort((a, b) => a.x - b.x)
-      return (photosAbove.length > 0) ? photosAbove[0].identifier : undefined
-    }
-    return undefined;
-  }
-
-  const getPreviousId = (id: string) => {
-    const thePhoto = photoData.find(photo => photo.identifier === id);
-    if (thePhoto) {
-      const photosBelow = photoData
-        .filter(photo => photo.x < thePhoto.x)
-        .sort((a, b) => b.x - a.x)
-      return (photosBelow.length > 0) ? photosBelow[0].identifier : undefined
-    }
-    return undefined;
-  }
-
-  const getPhotoX = (id: string) => (photoData.find(photo => photo.identifier === id) as PhotoData).x;
-
   if (photos.length === 0) {
     return (
       <div style={{ textAlign: 'center', margin: '5px 0' }}>
@@ -181,11 +156,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
       {(modalId) && (
         <PhotoViewerModal
           id={modalId}
-          x={getPhotoX(modalId)}
-          previousId={getPreviousId(modalId)}
-          nextId={getNextId(modalId)}
           setModalId={setModalId}
-          year={year}
         />
       )}
     </>

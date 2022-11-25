@@ -7,6 +7,7 @@ import NewspaperTable from './Tables/Newspaper';
 import SocialCulturalTable from './Tables/SocialCultural';
 import TaxAssessments from './Tables/TaxAssessments';
 import PhotoStrips from '../Panorama/PhotoStrips';
+import ScrollToTop from '../ScrollToTop';
 import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
 import '../../styles/AddressView.scss';
@@ -39,6 +40,7 @@ const AddressView = () => {
   return (
     <AddressDataContext.Provider value={addressData}>
       <div className="app-page" id="address-page">
+        <ScrollToTop />
         <Header />
 
         <nav>

@@ -9,28 +9,6 @@ const PhotoStripAddress = ({year}: { year: number }) => {
   const photos = allPhotos.filter((photo: any) => photo.year === year);
   const [modalId, setModalId] = useState<string>();
 
-  const getNextId = (id: string) => {
-    const thePhoto = photos.find(photo => photo.id === id);
-    if (thePhoto) {
-      const photosAbove = photos
-        .filter(photo => photo.coordinate > thePhoto.coordinate)
-        .sort((a, b) => a.coordinate - b.coordinate)
-      return (photosAbove.length > 0) ? photosAbove[0].id : undefined
-    }
-    return undefined;
-  }
-
-  const getPreviousId = (id: string) => {
-    const thePhoto = photos.find(photo => photo.id === id);
-    if (thePhoto) {
-      const photosBelow = photos
-        .filter(photo => photo.coordinate < thePhoto.coordinate)
-        .sort((a, b) => b.coordinate - a.coordinate)
-      return (photosBelow.length > 0) ? photosBelow[0].id : undefined
-    }
-    return undefined;
-  }
-
   return (
     <>
       <div className={`strip-container`}>
@@ -56,11 +34,7 @@ const PhotoStripAddress = ({year}: { year: number }) => {
       {(modalId) && (
         <PhotoViewerModal
           id={modalId}
-          x={0}
-          previousId={getPreviousId(modalId)}
-          nextId={getNextId(modalId)}
           setModalId={setModalId}
-          year={year}
         />
       )}
     </>

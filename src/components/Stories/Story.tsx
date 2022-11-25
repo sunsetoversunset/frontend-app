@@ -11,6 +11,15 @@ import { useAppContext } from '../../hooks';
 import '../../styles/App.scss';
 import '../../styles/Story.scss';
 
+const ImageList = ({ children }: any) => {
+  if (children.every((li: any) => li.props?.children?.length === 1 && li.props?.children[0].type?.name === 'ModalImg')) {
+    return <ul className='strip'>{children}</ul>;
+  }
+  
+  return <ul>{children}</ul>
+}
+
+
 
 const Story = () => {
   const { storyslug } = useParams();
@@ -58,7 +67,7 @@ const Story = () => {
 
           // image bars are coded as lists of images.
           // find consequtive image lists and resize the image to fit the screen
-          const barImgPattern = /\* !\[[^\]]*\]\(https:\/\/media\.getty\.edu\/iiif\/image\/(?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/;
+          const barImgPattern = /\* !\[[^\]]*\]\(https:\/\/media\.getty\.edu\/iiif\/image\/(?<filename>.*?)(?="|\))(?<optionalpart>".*")?\)/;
           lines.forEach((line, idx) => {
             const match = line.match(barImgPattern);
             if (match && match.groups?.filename) {
@@ -98,8 +107,6 @@ const Story = () => {
       });
   }, [storyslug, width]);
 
-  console.log(headerBgImage);
-
   return (
     <>
       <div className='app-page story'>
@@ -135,6 +142,7 @@ const Story = () => {
                   }
                 },
                 a: AOrLink,
+                ul: ImageList,
               }
             }}
           >
