@@ -1,7 +1,6 @@
 // By default the markdown-to-jsx wraps a most elements in paragraph tags. 
 //  This prevents that for images.
 const ToPOrNotToP = ({ children, ...props }: any) => {
-  console.log(children[0], children[0].type, children[0]?.type?.name);
   if (children[0]?.type === 'code' && children[0]?.props?.children) {
     return <div className="fullwidth-text"><p>{children[0]?.props?.children}</p></div>
   }

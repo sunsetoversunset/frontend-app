@@ -5,21 +5,12 @@ import Markdown from 'markdown-to-jsx';
 import PhotoViewerModal from "../PhotoViewerModal";
 import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP';
 import ModalImg from './MarkdownOverrides/ModalImg';
+import ImageList from './MarkdownOverrides/ImageList';
 import AOrLink from './MarkdownOverrides/Link';
 import { StoryMetadata } from '../..';
 import { useAppContext } from '../../hooks';
 import '../../styles/App.scss';
 import '../../styles/Story.scss';
-
-const ImageList = ({ children }: any) => {
-  if (children.every((li: any) => li.props?.children?.length === 1 && li.props?.children[0].props?.src)) {
-    return <ul className='strip'>{children}</ul>;
-  }
-  
-  return <ul>{children}</ul>
-}
-
-
 
 const Story = () => {
   const { storyslug } = useParams();
@@ -110,52 +101,51 @@ const Story = () => {
   return (
     <>
       <div className='app-page story'>
-        <div className='stories-view-container'>
-          {(title && headerBgImage) && (
-            <div
-              className="header-image"
-              style={{
-                backgroundImage: `url(${headerBgImage}`
-              }}
-            >
-              <h1 className="story-title">
-                {title}
-              </h1>
-            </div>
-          )}
-
-          {(author && byDate) && (
-            <div className="byline">
-              <strong>By {author}</strong> {byDate}
-            </div>
-          )}
-          <Markdown
-            options={{
-              wrapper: 'article',
-              overrides: {
-                p: {
-                  component: ToPOrNotToP,
-                },
-                img: {
-                  component: ModalImg,
-                  props: {
-                    setModalId,
-                    setModalActive,
-                  }
-                },
-                a: {
-                  component: AOrLink,
-                },
-                ul: {
-                  component: ImageList,
-                  props: {}
-                },
-              }
+        {(title && headerBgImage) && (
+          <div
+            className="header-image"
+            style={{
+              backgroundImage: `url(${headerBgImage}`
             }}
           >
-            {story}
-          </Markdown>
-        </div>
+            <span className="background-texture"></span>
+            <h1 className="story-title">
+              {title}
+            </h1>
+          </div>
+        )}
+
+        {(author && byDate) && (
+          <div className="byline">
+            <strong>By {author}</strong> {byDate}
+          </div>
+        )}
+        <Markdown
+          options={{
+            wrapper: 'article',
+            overrides: {
+              p: {
+                component: ToPOrNotToP,
+              },
+              img: {
+                component: ModalImg,
+                props: {
+                  setModalId,
+                  setModalActive,
+                }
+              },
+              a: {
+                component: AOrLink,
+              },
+              ul: {
+                component: ImageList,
+                props: {}
+              },
+            }
+          }}
+        >
+          {story}
+        </Markdown>
       </div>
 
       {

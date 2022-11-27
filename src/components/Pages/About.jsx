@@ -7,7 +7,7 @@ import uPenn from '../../assets/images/logo-UPenn.png'
 import swarthmore from '../../assets/images/swarthmore.png'
 
 import '../../styles/App.scss'
-import '../../styles/Stories.scss' 
+import '../../styles/About.scss' 
 
 const About = () => {
   return (
