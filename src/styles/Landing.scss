@@ -6,6 +6,8 @@
   right: 0;
   background-color: rgba(200, 200, 200, 0.5);
   z-index: 10000;
+
+  font-size: 1.1em;
   .content {
     position: fixed;
     width: 500px;
@@ -23,5 +25,10 @@
     button {
       margin: 10px auto;
     }
+  }
+
+  .dontshow {
+    font-size: 0.9em;
+    text-align: right;
   }
 }

@@ -16,8 +16,7 @@ import { getClosestAddressBelowString } from '../utiliities';
 import type { Dimensions } from '../index.d';
 
 export const App = () => {
-  const [landingOpen, setLandingOpen] = useState(false);
-
+  const [landingOpen, setLandingOpen] = useState(localStorage.getItem('SOSArrivalPopup') !== 'dontshow');
   const calculateDimensions = () => {
     const { innerWidth, innerHeight } = window;
     const { clientWidth, clientHeight } = (document.documentElement) ? document.documentElement : { clientWidth: null, clientHeight: null };
