@@ -5,7 +5,7 @@ import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
 import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
 import type { AddressDataAndNavData, PanoramaData } from './types/hooks.d';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
-import type { StripLabel, Direction } from './index.d';
+import type { StripLabel, Direction, StoryMetadata } from './index.d';
 import type { PhotoData } from './components/Panorama/index.d';
 import { AddressData } from './types/AddressView';
 import GeoJson from './assets/data/sunset.json';
@@ -290,4 +290,13 @@ export function useIsValidAddress() {
     address = addressAndOffset.addr;
   }
   return typeof labels.find(label => label.label.replace(/\s+/g, '') === address) !== 'undefined';
+}
+
+export function useStoriesMetadata() {
+  const [storiesMetadata, setStoriesMetadata] = useState<StoryMetadata[]>([]);
+  axios.get(`/stories/stories.json`)
+    .then(response => {
+      setStoriesMetadata((response.data as StoryMetadata[]).sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day));
+    });
+  return storiesMetadata;
 }
