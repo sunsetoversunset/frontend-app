@@ -51,7 +51,8 @@ const About = () => {
 
           <div className="section">
             <p className="header">Design & Development</p>
-            <p><a target="_blank" rel="noreferrer" href="https://livia-foldes.com/">Livia Foldes</a>, Project lead & visual design</p>
+            <p><a target="_blank" rel="noreferrer" href="">Rob Nelson</a>, Design and Development Lead</p>
+            <p><a target="_blank" rel="noreferrer" href="https://livia-foldes.com/">Livia Foldes</a>, Visual design</p>
             <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/rachel-s-ng">Rachel Ng</a>, UX Design</p>
             <p><a target="_blank" rel="noreferrer" href="https://andrewlux.com/">Andrew Lux</a>, Development</p>
             <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/walei">Walei Sabry</a>, Accessibility consultant</p>
@@ -59,7 +60,7 @@ const About = () => {
 
           <div className="section">
             <p className="header">Advisory Board</p>
-            <p><a target="_blank" rel="noreferrer" href="http://www.fallon-samuels-aidoo.com/">Fallon Samuels Aidoo</a>, University of New Orleans</p>
+            <p><a target="_blank" rel="noreferrer" href="http://www.fallon-samuels-aidoo.com/">Fallon Samuels Aidoo</a>, Tulane University</p>
             <p><a target="_blank" rel="noreferrer" href="https://www.genevievecarpio.com/">Genevieve Carpio</a>, University of California, Los Angeles</p>
             <p><a target="_blank" rel="noreferrer" href="http://www.nathanieldeines.com">Nathaniel Deines</a>, Getty Digital</p>
             <p><a target="_blank" rel="noreferrer" href="http://www.esperdy.net/">Gabrielle Esperdy</a>, New Jersey Institute of Technology</p>
