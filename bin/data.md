@@ -108,7 +108,7 @@ These json files are instantiated nightly from the authoritative data in baserow
 }[]
 ```
 
-The eleventh json file, [`strip_labels.json`[(../src/assets/data/strip_labels.json, is a one that isn't loaded asynchronously by the app but included in the js app bundle itself as it's used throughout the application for placing locations on the address strip and the map. It's data structure is:
+The eleventh json file, [`strip_labels.json`](../src/assets/data/strip_labels.json), is a one that isn't loaded asynchronously by the app but included in the js app bundle itself as it's used throughout the application for placing locations on the address strip and the map. It's data structure is:
 
 ```
 {
@@ -121,7 +121,7 @@ The eleventh json file, [`strip_labels.json`[(../src/assets/data/strip_labels.js
   rotation: number;    // a rotation in degrees for to orient any marker for the location rougly perpendicular to Sunset or its tangent line
 ```
 
-`baserow_to_addresses.py` script creats json files for addresses. It writes a large number of files: [one listing addresses with data](../src/assets/data/addresses_with_boundaries.json and one for each address containing census data, newspapers, social and cultural data, etc. for the address. The former, like strip_labels.json, is bundled with the application. It's structure could not be simpler: it's just an array of addresses (as strings) that have address data, which is used to determine whether an address is linked to an address page or not.
+`baserow_to_addresses.py` script creats json files for addresses. It writes a large number of files: [one listing addresses with data](../src/assets/data/addresses_with_boundaries.json) and one for each address containing census data, newspapers, social and cultural data, etc. for the address. The former, like strip_labels.json, is bundled with the application. It's structure could not be simpler: it's just an array of addresses (as strings) that have address data, which is used to determine whether an address is linked to an address page or not.
 
 Those address pages load a json file with all the data about that address. These files are written by `baserow_to_addresses.py` to (`./public/address_data/`)[../public/address_data/] using the file naming convention `{address}.json`. The structure of those files is a bit involved as it includes all the different kinds of data (census data, newspapers, social and cultural data, etc.) about each address:
 
