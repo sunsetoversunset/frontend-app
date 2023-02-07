@@ -84,16 +84,20 @@ const AddressView = () => {
         <SocialCulturalTable />
         <CensusTable />
         <TaxAssessments />
-        <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearch.aspx?SearchType=DCMT_ADDR" target="_blank">
+        
           <div id="building_records">
             <h1>
               Search Building Records
             </h1>
             <p>
-              {`Click here to open the search page on the Los Angeles Department of Builidings and Safety site. Enter "${address} W Sunset Blvd" and click Search to find building records for this address. Please note, it's  important to search for this address exactly—with the W and the abbreviation Blvd, not Boulevard—in order to successfully search their portal.`}
+            <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearchSelection.aspx" target="_blank">Click here to open the search page on the Los Angeles Department of Builidings and Safety site.</a></p><p>You'll then need to do the following:
             </p>
+            <ol>
+              <li>Click <strong>"By Address"</strong></li>
+              <li>Enter <strong>{address} W Sunset Blvd</strong>, using exactly that text, including the direction and the abbreviated "Blvd".</li>
+              <li>Click <strong>"Search"</strong> to find building records for this address.</li>
+            </ol>
           </div>
-        </a>
       </div>
     </AddressDataContext.Provider>
   );
