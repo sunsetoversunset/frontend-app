@@ -9,6 +9,8 @@
   align-items: center;
   z-index: 1000;
 
+
+
   .address {
     white-space: nowrap;
     position: absolute;
@@ -24,4 +26,10 @@
       font-weight: normal;
     }
   }
+}
+
+#indexingBar {
+  height: 5px;
+  width: 100%;
+  background-color: purple;
 }

@@ -90,7 +90,7 @@ const AddressView = () => {
               Search Building Records
             </h1>
             <p>
-            <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearchSelection.aspx" target="_blank">Click here to open the search page on the Los Angeles Department of Builidings and Safety site.</a></p><p>You'll then need to do the following:
+            <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearchSelection.aspx" target="_blank">Click here to open the search page on the Los Angeles Department of Buildings and Safety site.</a></p><p>You'll then need to do the following:
             </p>
             <ol>
               <li>Click <strong>"By Address"</strong></li>
