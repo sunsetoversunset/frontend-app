@@ -55,7 +55,7 @@ const About = () => {
             <p><a target="_blank" rel="noreferrer" href="https://livia-foldes.com/">Livia Foldes</a>, Visual design</p>
             <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/rachel-s-ng">Rachel Ng</a>, UX Design</p>
             <p><a target="_blank" rel="noreferrer" href="https://andrewlux.com/">Andrew Lux</a>, Development</p>
-            <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/walei">Walei Sabry</a>, Accessibility consultant</p>
+            <p><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/walei">Walei Sabry</a>, Accessibility Consultant</p>
           </div>
 
           <div className="section">
