@@ -1,5 +1,5 @@
 import React from "react";
-import { getRoadPath, convertLattoY, convertLngtoX } from '../../../utiliities';
+import { convertLattoY, convertLngtoX } from '../../../utiliities';
 import { useAppContext, useRoadPath } from "../../../hooks"; 
 import '../../../styles/Map.scss';
 
