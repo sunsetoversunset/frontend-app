@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Map from "./Map/Index";
 import MapControls from './Controls/Index';
 import AddressBar from './AddressBar';
+import XBar from './XBar';
 import PhotoStrips from "./PhotoStrips";
 import { PanoramaContext } from '../../Contexts';
 import { useIsValidAddress } from "../../hooks";
@@ -12,6 +13,8 @@ export const Panorama = () => {
   const [scrollDistance, setScrollDistance] = useState(0.6);
   const isValidAddress = useIsValidAddress();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const refining = pathname.startsWith('/refine');
 
   if (!isValidAddress) {
     navigate('/n/');
@@ -25,6 +28,7 @@ export const Panorama = () => {
       >
         <Map />
         <MapControls />
+        {(refining) && (<XBar />)}
         <AddressBar />
         <PhotoStrips />
       </div>

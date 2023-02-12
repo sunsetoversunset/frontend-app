@@ -89,7 +89,7 @@ const SearchAndFilter = ({setSearchOpen}: { setSearchOpen: React.Dispatch<React.
       <div className='search-control'>
         <Select
           options={searchOptions}
-          placeholder='search'
+          placeholder='Enter Address'
           styles={customStyles}
           onChange={(selected) => {
             if (selected?.value) {

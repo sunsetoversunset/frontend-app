@@ -2,15 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
 import * as d3 from "d3";
 import ConditionalWrapper from "../ConditionalWrapper";
-import { maxX, hasAddressData, mult } from '../../utiliities';
+import { maxX, hasAddressData } from '../../utiliities';
 import { usePanoramaData } from "../../hooks";
 import '../../styles/AddressBar.scss';
 
 const AddressBar = () => {
-  const queryParams = new URLSearchParams(window.location.search)
-  const indexingTool = queryParams.get("index") ? true : false;
-
-
   const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
 
   // scrolling: whether it's scrolling with an animation
@@ -62,16 +58,7 @@ const AddressBar = () => {
   });
 
   return (
-    <>
-          {indexingTool &&
-        <div id="indexingBar"
-        onMouseDown={(e)=>{
-          window.alert((leftX + e.clientX)/mult);
-          // this works for N facing; Rob I can't quite make sense of how you're handling the S-facing side coordinates
-         }}
-        ></div>
-      }
-        
+    <>        
       <div
         id='addressBar'
       >
@@ -94,7 +81,12 @@ const AddressBar = () => {
               children={
                 <span
                   className={`address ${(hasAddressData(label.label)) ? 'selectable' : 'unselectable'}`}
-                  style={{ left: label.x }}
+                  style={{
+                    left: label.x - 20,
+                    textAlign: 'center',
+                    width: 40,
+                    overflowX: 'visible',
+                  }}
                 >
                   {label.label}
                 </span>

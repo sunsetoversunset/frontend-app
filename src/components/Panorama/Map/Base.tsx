@@ -17,7 +17,7 @@ const MapLabels = [
   {
     label: "East Hollywood",
     lat: 34.0897913,
-    lng: -118.305463
+    lng: -118.297
   },
   {
     label: "Silver Lake",
@@ -48,6 +48,16 @@ const MapLabels = [
     label: "Downtown",
     lat: 34.045,
     lng: -118.246
+  },
+  {
+    label: "Thai Town",
+    lat: 34.105,
+    lng: -118.303
+  },
+  {
+    label: "Little Armenia",
+    lat: 34.101,
+    lng: -118.3
   }
 ]
 

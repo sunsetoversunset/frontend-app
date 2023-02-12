@@ -38,6 +38,9 @@ export const maxXs = {
   '1995': 984.23148 * mult,
   '2007': 993.27018 * mult,
 };
+
+export const maxMaxX = Math.max(...Object.values(maxXs));
+
 export const easternMostAddresses = {
   '1966': ensure(getClosestAddressBelow(maxXs['1966'], { direction: 'n' })).addr,
   '1973': ensure(getClosestAddressBelow(maxXs['1973'], { direction: 'n' })).addr,

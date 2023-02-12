@@ -65,7 +65,7 @@ const MapControls = () => {
         replace={true}
       >
         <button>
-          {`Direction: ${direction.toUpperCase()}`}
+          {`Look ${(direction === 'n') ? 'South' : 'North'}`}
         </button>
       </Link>
 

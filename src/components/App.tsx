@@ -107,6 +107,26 @@ export const App = () => {
                   />
                 </Route>
               </Route>
+
+              <Route path='refine'>
+                <Route
+                  path=':direction'
+                >
+                  <Route
+                    path=':addrOffset'
+                  >
+                    <Route
+                      index
+                      element={<Navigate replace to='1966,1973,1985,1995,2007' />}
+                    />
+                    <Route
+                      path=':years'
+                      element={<Panorama />}
+                    />
+                  </Route>
+                </Route>
+              </Route>
+
             </Route>
 
           </Routes>
