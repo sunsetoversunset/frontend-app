@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses, mult } from "../utiliities";
+import { getNearbyAddresses, mult, coordinateToAddress, getClosestAddress } from "../utiliities";
 
 import "../styles/PhotoViewerModalNew.scss";
 
@@ -28,17 +28,26 @@ type PhotoData = {
 }
 
 const PhotoViewerModal = ({ id, setModalId }: Props) => {
+  const { pathname } = useLocation();
+  let pageType: 'panorama' | 'address' | 'story' = 'panorama';
+  if (pathname.startsWith('/address/')) {
+    pageType = 'address';
+  }
+  if (pathname.startsWith('/stories/')) {
+    pageType = 'story';
+  }
+  const navigate = useNavigate();
   const [photoData, setPhotoData] = useState<PhotoData>();
-  const nearbyAddresses = (photoData?.coordinate) ? getNearbyAddresses(photoData.coordinate * mult) : [];
+  const nearbyAddresses = (photoData) ? getNearbyAddresses(photoData.coordinate * mult, { direction: photoData.side, excludeCrossStreets: true }) : [];
   const [isHoveringExpanded, setIsHoveringExpand] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
-    if (photoData?.previous_id && e.key === 'ArrowLeft') {
+    if (photoData?.previous_id && ((photoData?.side === 'n' && e.key === 'ArrowLeft') || (photoData?.side === 's' && e.key === 'ArrowRight'))) {
       setModalId(photoData?.previous_id);
     }
-    if (photoData?.next_id && e.key === 'ArrowRight') {
+    if (photoData?.next_id && ((photoData?.side === 'n' && e.key === 'ArrowRight') || (photoData?.side === 's' && e.key === 'ArrowLeft'))) {
       setModalId(photoData?.next_id);
     }
   });
@@ -62,11 +71,31 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
     return null;
   }
 
+  const closeTos = {
+    panorama: (() => {
+      const addrOffset = coordinateToAddress(photoData.coordinate * mult);
+      const pathpieces = pathname.split('/');
+      return (addrOffset) ? [pathpieces[0], pathpieces[1],`${addrOffset.addr.replace(/\s+/g, '')}-${addrOffset.offset}`, pathpieces[3]].join('/') : pathname;
+    })(),
+    address: (() => {
+      const addr = getClosestAddress(photoData.coordinate * mult, { excludeCrossStreets: true });
+      return (addr) ? `../${addr.replace(/\s+/g, '') }` : pathname;
+    })(),
+  };
+
+  const leftId = (photoData.side === 's') ? photoData.next_id : photoData.previous_id;
+  const rightId = (photoData.side === 's') ? photoData.previous_id : photoData.next_id;
+
   return (
     <div className='modal-backdrop'>
       <div className="modal-header">
         <div
-          onClick={() => setModalId(undefined)}
+          onClick={() => {
+            setModalId(undefined);
+            if (pageType === 'panorama' || pageType === 'address') {
+              navigate(closeTos[pageType]);
+            }
+          }}
           className='modal-close-icon'
         >
           <img src={iconCloseWhite} alt="icon-close-modal" />
@@ -78,20 +107,20 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
         <a href={`https://www.getty.edu/research/collections/lookup/imageUUID?id=${id}`} rel="noreferrer" target="_blank">
           View record at Getty Research Institute</a>
       </div>
-      {(photoData.previous_id) && (
+      {(leftId) && (
         <img
           id='previousImage'
-          src={`https://media.getty.edu/iiif/image/${photoData.previous_id}/full/204,/0/default.jpg`}
+          src={`https://media.getty.edu/iiif/image/${leftId}/full/204,/0/default.jpg`}
           alt={id}
-          onClick={() => { setModalId(photoData.previous_id); }}
+          onClick={() => { setModalId(leftId); }}
         />
       )}
-      {(photoData.next_id) && (
+      {(rightId) && (
         <img
           id='nextImage'
-          src={`https://media.getty.edu/iiif/image/${photoData.next_id}/full/204,/0/default.jpg`}
+          src={`https://media.getty.edu/iiif/image/${rightId}/full/204,/0/default.jpg`}
           alt={id}
-          onClick={() => { setModalId(photoData.next_id); }}
+          onClick={() => { setModalId(rightId); }}
         />
       )}
 
@@ -108,18 +137,17 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <span className="nearby-addresses-label">
-              Learn more about nearby addresses
+              Learn more about nearby addresses:
             </span>
-            {
+            {/* {
               isExpanded === false ?
                 isHoveringExpanded === true ?
                   <img src={iconRightRust} alt="icon-right-rust" /> :
                   <img src={iconRightWhite} alt="icon-right-white" />
                 : null
-            }
+            } */}
           </div>
-          {
-            isExpanded ?
+          {(nearbyAddresses) && (
               <ul className="nearby-addresses-list">
                 {nearbyAddresses.map((address) => {
                   return (
@@ -135,8 +163,8 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
                     </li>
                   )
               })}
-          </ul> : null
-          }
+            </ul>
+          )}
           {
             isExpanded ?
               <div

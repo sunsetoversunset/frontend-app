@@ -115,7 +115,7 @@ export const addressToCoordinateUnflipped = (address: string) => {
   return x;
 }
 
-export function getProximateAddress(previousOrNext: 'previous' | 'next', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean}) {
+export function getProximateAddress(previousOrNext: 'previous' | 'next', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
   const addressLabelData = ensure(labels.find(d => d.label.toString() === address), `error with label ${address}`);
   const closestLabels = labels
     // filter out addresses on othe side if there is a direction option
@@ -126,7 +126,7 @@ export function getProximateAddress(previousOrNext: 'previous' | 'next', address
     .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
     // filter for those with a larger coordinate
     .filter(labelData => (previousOrNext === 'previous')
-      ? labelData.x < addressLabelData.x 
+      ? labelData.x < addressLabelData.x
       : labelData.x > addressLabelData.x)
     .sort((a, b) => (previousOrNext === 'previous')
       ? b.x - a.x
@@ -136,11 +136,11 @@ export function getProximateAddress(previousOrNext: 'previous' | 'next', address
 
 export function getPreviousAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
   return getProximateAddress('previous', address, options); //
-} 
+}
 
 export function getNextAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
   return getProximateAddress('next', address, options); //
-} 
+}
 
 /* with an x value finds the nearest label and offset below it */
 // todo direction shouldn't be an option but required as it you can't compare x values for different sides of the street
@@ -155,7 +155,7 @@ export function getClosestAddressBelow(x: number, options?: { direction?: Direct
       return {
         addr: closestAddresses[0].label,
         offset: Math.round(x - closestAddresses[0].x),
-      } 
+      }
     } else {
       console.log(closestAddresses[0]);
       return getClosestAddressBelow(closestAddresses[0].x, options);
@@ -185,14 +185,40 @@ export const getClosestAddressAbove = (x: number, options?: { direction?: Direct
   } : null;
 }
 
-export const getNearbyAddresses = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+export const getClosestAddress = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
   // the 2.2448 here is the standard deviation from all the address boundaries. Those vary quite a bit, so this may be imperfect.
+  const closestBelow = getClosestAddressBelow(x, options);
+  const closestAbove = getClosestAddressAbove(x, options);
+  if (closestBelow && closestAbove) {
+    if (closestBelow.offset <= Math.abs(closestAbove.offset)) {
+      return closestBelow.addr;
+    }
+    return closestAbove.addr;
+  } else if (closestBelow) {
+    return closestBelow.addr;
+  } else if (closestAbove) {
+    return closestAbove.addr;
+  } else {
+    return '9157';
+  }
+}
+
+export const getNearbyAddresses = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
   return labels
-    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
-    .filter(d => !isNaN(Number(d.label)))
-    .filter(d => d.x >= x - 100 && d.x <= x + 100)
-    .sort((a, b) => a.x - b.x)
+    .filter(d => !options || (options.excludeCrossStreets && !isNaN(parseInt(d.label))))
+    .filter(d => !options || (options.direction === d.direction)) 
+    .sort((a, b) => Math.abs(a.x - x) - Math.abs(b.x - x))
+    // filter to keep at least three addresses and no more than five addresses if those addresses are within 500pxs of the x coordinate
+    .filter((d, idx) => idx <= 2 || Math.abs(d.x - x) <= 500)
     .map(d => d.label);
+
+  // the 2.2448 here is the standard deviation from all the address boundaries. Those vary quite a bit, so this may be imperfect.
+  // return labels
+  //   .filter(d => (options && options.direction) ? d.direction === options.direction : true)
+  //   .filter(d => !isNaN(Number(d.label)))
+  //   .filter(d => d.x >= x - 100 && d.x <= x + 100)
+  //   .sort((a, b) => a.x - b.x)
+  //   .map(d => d.label);
 }
 
 /* with an x value finds the nearest label to it, by default below and above it there isn't one below */
@@ -229,7 +255,7 @@ export function toggleDirectionAddrOffset(address: string, direction: Direction,
   const oldX = getAddressX(address) + (offset || 0);
   const newX = maxX - oldX;
   // find the 
-  return getClosestAddressBelow(newX, {direction: newDirection});
+  return getClosestAddressBelow(newX, { direction: newDirection });
 }
 
 // export function toggleDirectionAddrOffsetOld(addrOffset: string, direction: Direction) {
@@ -277,7 +303,7 @@ export const getRoadPath = (width: number) => {
   return `M ${firstX} ${firstY} ${lineSegments.join(" ")}`;
 };
 
-export const hasAddressData = (address: string) => AddressesWithBoundaries.includes(address); 
+export const hasAddressData = (address: string) => AddressesWithBoundaries.includes(address);
 
 export const convertLngtoX = (lng: number, width: number): number => (lng - midLng) * width / 2 / (maxLng - midLng);
 

@@ -48,18 +48,20 @@ export function useAddressData(): AddressDataAndNavData {
   const [addressHasData, setAddressHasData] = useState(true);
 
   useEffect(() => {
-    const cancelToken = axios.CancelToken;
-    const source = cancelToken.source();
-    axios.get(`/address_data/${address}.json`)
-      .then(response => {
-        setAddressData(response.data as AddressData);
-      })
-      .catch((reason: AxiosError) => {
-        setAddressHasData(false);
-        // if (reason.response!.status === 404) {
-        // };
-      });
-    return () => { source.cancel(); }
+    if (address) {
+      const cancelToken = axios.CancelToken;
+      const source = cancelToken.source();
+      axios.get(`/address_data/${address}.json`)
+        .then(response => {
+          setAddressData(response.data as AddressData);
+        })
+        .catch((reason: AxiosError) => {
+          setAddressHasData(false);
+          // if (reason.response!.status === 404) {
+          // };
+        });
+      return () => { source.cancel(); }
+    }
   }, [address]);
 
   let previousAddress = (addressData && address) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
