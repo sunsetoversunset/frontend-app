@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses,coordinateToAddress } from "../utiliities";
+import { getNearbyAddresses,coordinateToAddress, halfPhotoCoordinate } from "../utiliities";
 
 import "../styles/PhotoViewerModalNew.scss";
 
@@ -38,8 +38,7 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
   }
   const navigate = useNavigate();
   const [photoData, setPhotoData] = useState<PhotoData>();
-  const nearbyAddresses = (photoData) ? getNearbyAddresses(photoData.coordinate, photoData.side, { excludeCrossStreets: true }) : [];
-  const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
@@ -70,10 +69,12 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
     return null;
   }
 
-  console.log(photoData.coordinate);
+  // the photo coordinates are from the edge; the addresses should be calculated from the center
+  const photoCenterCoordinate = (photoData.side === 'n') ? photoData.coordinate + halfPhotoCoordinate : photoData.coordinate - halfPhotoCoordinate;
+  const nearbyAddresses = getNearbyAddresses(photoCenterCoordinate, photoData.side, { excludeCrossStreets: true });
   const closeTos = {
     panorama: (() => {
-      const addrOffset = coordinateToAddress(photoData.coordinate, photoData.side);
+      const addrOffset = coordinateToAddress(photoCenterCoordinate, photoData.side);
       const pathpieces = pathname.split('/');
       return (addrOffset) ? [pathpieces[0], pathpieces[1],`${addrOffset.addr.replace(/\s+/g, '')}-${addrOffset.offset}`, pathpieces[3]].join('/') : pathname;
     })(),
@@ -82,6 +83,8 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
 
   const leftId = (photoData.side === 's') ? photoData.next_id : photoData.previous_id;
   const rightId = (photoData.side === 's') ? photoData.previous_id : photoData.next_id;
+  // the photo coordinates are the edge to the photo; addresses should be calculated from the center of it
+
 
   return (
     <div className='modal-backdrop'>

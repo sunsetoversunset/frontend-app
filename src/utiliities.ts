@@ -10,6 +10,11 @@ import GeoJson from './assets/data/sunset.json';
 export const mult = 200;
 // the maximum coordinate value among all the addresses
 export const maxX = Math.max(...stripLabels.map(d => d.c * mult));
+// the images are 294 in width and 200 in height. This is the ratio
+export const widthToHeightRatio = 294 / 200;
+export const halfPhotoX = 294 / 2;
+export const halfPhotoCoordinate = halfPhotoX / mult;
+
 
 export const getCoordinateToX = (coordinate: number, direction: Direction) => (direction === 'n') ? coordinate * mult : maxX - coordinate * mult;
 
