@@ -11,6 +11,8 @@ export const mult = 200;
 // the maximum coordinate value among all the addresses
 export const maxX = Math.max(...stripLabels.map(d => d.c * mult));
 
+export const getCoordinateToX = (coordinate: number, direction: Direction) => (direction === 'n') ? coordinate * mult : maxX - coordinate * mult;
+
 // the raw strip labels data positionin data 
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
@@ -21,7 +23,7 @@ export const labels: StripLabel[] = stripLabels
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,
-    x: (d.s === 'n') ? d.c * mult : (maxX - d.c * mult),
+    x: getCoordinateToX(d.c, d.s as Direction), // (d.s === 'n') ? d.c * mult : (maxX - d.c * mult),
     coordinate: d.c,
     lat: d.lat,
     lng: d.lng,
@@ -203,10 +205,11 @@ export const getClosestAddress = (x: number, options?: { direction?: Direction, 
   }
 }
 
-export const getNearbyAddresses = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+export const getNearbyAddresses = (coordinate: number, direction: Direction, options?: { excludeCrossStreets?: boolean }) => {
+  const x = getCoordinateToX(coordinate, direction);
   return labels
     .filter(d => !options || (options.excludeCrossStreets && !isNaN(parseInt(d.label))))
-    .filter(d => !options || (options.direction === d.direction)) 
+    .filter(d => d.direction === direction)
     .sort((a, b) => Math.abs(a.x - x) - Math.abs(b.x - x))
     // filter to keep at least three addresses and no more than five addresses if those addresses are within 500pxs of the x coordinate
     .filter((d, idx) => idx <= 2 || Math.abs(d.x - x) <= 500)
@@ -222,9 +225,14 @@ export const getNearbyAddresses = (x: number, options?: { direction?: Direction,
 }
 
 /* with an x value finds the nearest label to it, by default below and above it there isn't one below */
-export const coordinateToAddress = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+export const coordinateToAddress = (coordinate: number, direction: Direction, options?: { excludeCrossStreets?: boolean }) => {
+  const x = getCoordinateToX(coordinate, direction);
   // find the address that is closest but less than the coordinate
-  return getClosestAddressBelow(x, options) || getClosestAddressAbove(x, options) || null;
+  const _options = {
+    ...options,
+    side: direction,
+  }
+  return getClosestAddressBelow(x, _options) || getClosestAddressAbove(x, _options) || null;
 }
 
 export function parseAddrOffset(addrOffset: string) {
@@ -244,7 +252,7 @@ export function addrOffsetToCoordinate(addrOffset: string) {
 
 /* takes an addrOffset and an x to offset it by and returns another addrOffset adjusted left/right or west/east */
 export function calcAddrOffset(addrOffset: string, direction: Direction, offsetBy: number) {
-  const newAddrData = coordinateToAddress(addrOffsetToCoordinate(addrOffset) + offsetBy, { direction });
+  const newAddrData = coordinateToAddress(addrOffsetToCoordinate(addrOffset) + offsetBy, direction);
   return (newAddrData) ? `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}` : null;
 }
 

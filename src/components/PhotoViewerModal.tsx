@@ -3,12 +3,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses, mult, coordinateToAddress, getClosestAddress } from "../utiliities";
+import { getNearbyAddresses,coordinateToAddress } from "../utiliities";
 
 import "../styles/PhotoViewerModalNew.scss";
 
-import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
-import iconRightRust from "../assets/icons/icon-right-bracket-rust.svg"
+// import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
+// import iconRightRust from "../assets/icons/icon-right-bracket-rust.svg"
 import iconCloseWhite from "../assets/icons/icon-close-white.svg"
 import iconLeftWhite from "../assets/icons/icon-left-bracket.svg"
 import iconLeftRust from "../assets/icons/icon-left-bracket-rust.svg"
@@ -38,8 +38,7 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
   }
   const navigate = useNavigate();
   const [photoData, setPhotoData] = useState<PhotoData>();
-  const nearbyAddresses = (photoData) ? getNearbyAddresses(photoData.coordinate * mult, { direction: photoData.side, excludeCrossStreets: true }) : [];
-  const [isHoveringExpanded, setIsHoveringExpand] = useState(false);
+  const nearbyAddresses = (photoData) ? getNearbyAddresses(photoData.coordinate, photoData.side, { excludeCrossStreets: true }) : [];
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
@@ -71,16 +70,14 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
     return null;
   }
 
+  console.log(photoData.coordinate);
   const closeTos = {
     panorama: (() => {
-      const addrOffset = coordinateToAddress(photoData.coordinate * mult);
+      const addrOffset = coordinateToAddress(photoData.coordinate, photoData.side);
       const pathpieces = pathname.split('/');
       return (addrOffset) ? [pathpieces[0], pathpieces[1],`${addrOffset.addr.replace(/\s+/g, '')}-${addrOffset.offset}`, pathpieces[3]].join('/') : pathname;
     })(),
-    address: (() => {
-      const addr = getClosestAddress(photoData.coordinate * mult, { excludeCrossStreets: true });
-      return (addr) ? `../${addr.replace(/\s+/g, '') }` : pathname;
-    })(),
+    address: (nearbyAddresses && nearbyAddresses.length >= 1) ? `../${nearbyAddresses[0]}` : pathname,
   };
 
   const leftId = (photoData.side === 's') ? photoData.next_id : photoData.previous_id;
@@ -126,15 +123,15 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
 
       {(nearbyAddresses.length > 0) && (
         <div
-          onMouseEnter={() => setIsHoveringExpand(true)}
-          onMouseLeave={() => setIsHoveringExpand(false)}
+          // onMouseEnter={() => setIsHoveringExpand(true)}
+          // onMouseLeave={() => setIsHoveringExpand(false)}
           className={
             `nearby-addresses ${isExpanded ? 'expanded' : 'collapsed'}`
           }
         >
           <div
             className="nearby-addresses-label-container"
-            onClick={() => setIsExpanded(!isExpanded)}
+            //onClick={() => setIsExpanded(!isExpanded)}
           >
             <span className="nearby-addresses-label">
               Learn more about nearby addresses:
