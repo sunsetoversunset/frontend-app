@@ -16,7 +16,9 @@ Those gas stations that survived across the decades tended to remain in the same
 * ![8101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/57797332-eb53-4483-b31c-95ec1f47ced3/full/,400/0/default.jpg)
 * ![8101 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/9c0f8a45-41ba-4832-b9a0-e1e79bca457c/full/,400/0/default.jpg)
 
-```Ruscha’s photographs demonstrate changes in signage and architecture, but not ownership.```
+```
+Ruscha’s photographs demonstrate changes in signage and architecture, but not ownership.
+```
 
 The Union 76 station at [7979 Sunset Blvd](/address/7979) illustrates a similar story. Here, however, Ruscha’s photographs also capture a changing landscape around the station—including the growth of trees and new construction to its rear.
 
@@ -43,7 +45,9 @@ In 1973, for example, [7980 Sunset Blvd](/address/7980) was the site of a Shell 
 * ![7980 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/b5ec8cb8-0a95-48ec-a0bd-cee195583463/full/,400/0/default.jpg)
 * ![7980 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/f68e494a-2d0c-4a4b-8416-711120ecdb12/full/,400/0/default.jpg)
 
-```In the wake of this reshaping of the global market, U.S. gasoline companies shifted their strategies from dominating market share to dominating profitability.```
+```
+In the wake of this reshaping of the global market, U.S. gasoline companies shifted their strategies from dominating market share to dominating profitability.
+```
 
 At [8873 Sunset Blvd](/address/8873), property owners proceeded to demolish the entire gas station facility while awaiting a new occupant. After photographing a Shell station on the site in 1966 through 1985, Ruscha captured an empty lot in 1995 and construction in progress in 2007. Shortly after, a Japanese restaurant opened there.
 
@@ -81,6 +85,8 @@ In October 1973, the Organization of Petroleum Exporting Countries (OPEC) impose
 * ![5278 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/2e30f26a-0d8d-4d37-997e-e5af1bd9a41f/full/,400/0/default.jpg "5278 Sunset Boulevard. From left: 1985, 1995")
 * ![5278 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/1e531efe-d457-49d7-9aab-644b186cc85c/full/,400/0/default.jpg)
 
-```At 5278 Sunset Boulevard, a handmade sign facing the street announced, “No Gas.”```
+```
+At 5278 Sunset Boulevard, a handmade sign facing the street announced, “No Gas.”
+```
 
 Not only the oil crisis, but also changing gasoline retail trends hastened the demise of postwar gas stations in places like Sunset Boulevard. Many of the gas stations depicted in these photographs were developed in cooperation with the auto garages that also occupied their parcel. By the 1980s, however, gas stations were changing. Self-service was increasingly common, buildings that had once served as garages now housed convenience stores instead. The overall footprint of these gas stations was also expanding. For all these reasons, earlier gas stations were becoming out of date. While drivers along Sunset Boulevard still require gasoline, and a range of facilities continued to satisfy that need, most companies have now shifted the bulk of their properties outside the dense commercial strip.
