@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
-import styled from 'styled-components';
 import PhotoViewerModal from "../PhotoViewerModal";
 import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP';
+import Callout from './MarkdownOverrides/Callout';
 import ModalImg from './MarkdownOverrides/ModalImg';
 import ImageList from './MarkdownOverrides/ImageList';
 import AOrLink from './MarkdownOverrides/Link';
@@ -13,22 +13,19 @@ import { useAppContext } from '../../hooks';
 import '../../styles/App.scss';
 import '../../styles/Story.scss';
 
-export const Callout = styled.div`
-  width: 100%;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  font-size: 44px;
-  line-height: 42px;
-  text-align: center;
-  font-weight: 900;
-  margin-bottom: 100px;
-  p {
-    padding: 100px 0;
-    max-width: 76%;
-    margin: 0 auto;
-    font-family: "Stymie", san-serif;
+
+const Code = ({ children, ...props }: any) => {
+  console.log(children, props);
+  if (children[0]?.type === 'code' && children[0]?.props?.children) {
+    return <Callout><p>{children[0]?.props?.children}</p></Callout>
   }
-`;
+  // if the first and only child has a src prop, it's an image
+  if (children[0]?.props?.src && children.length === 1) {
+    return <div className="single-image">{children}</div>;
+  }
+  const ParaComponent = (children[0]?.props?.src === 'ModalImg' || children[0]?.type?.name === 'img' || children[0]?.type?.name === 'code') ? 'div' : 'p'
+  return <ParaComponent {...props}>{children}</ParaComponent>
+}
 
 const Story = () => {
   const { storyslug } = useParams();
@@ -146,7 +143,7 @@ const Story = () => {
                 component: ToPOrNotToP,
               },
               pre: {
-                component: ToPOrNotToP,
+                component: Callout,
               },
               img: {
                 component: ModalImg,
