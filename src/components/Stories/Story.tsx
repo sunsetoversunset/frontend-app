@@ -145,6 +145,9 @@ const Story = () => {
               p: {
                 component: ToPOrNotToP,
               },
+              pre: {
+                component: ToPOrNotToP,
+              },
               img: {
                 component: ModalImg,
                 props: {
