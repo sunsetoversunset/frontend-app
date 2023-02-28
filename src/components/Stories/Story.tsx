@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
+import styled from 'styled-components';
 import PhotoViewerModal from "../PhotoViewerModal";
 import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP';
 import ModalImg from './MarkdownOverrides/ModalImg';
@@ -11,6 +12,23 @@ import { StoryMetadata } from '../..';
 import { useAppContext } from '../../hooks';
 import '../../styles/App.scss';
 import '../../styles/Story.scss';
+
+export const Callout = styled.div`
+  width: 100%;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  font-size: 44px;
+  line-height: 42px;
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 100px;
+  p {
+    padding: 100px 0;
+    max-width: 76%;
+    margin: 0 auto;
+    font-family: "Stymie", san-serif;
+  }
+`;
 
 const Story = () => {
   const { storyslug } = useParams();
