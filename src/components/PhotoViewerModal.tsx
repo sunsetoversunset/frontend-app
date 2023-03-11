@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation, } from 'react-router-dom';
 import axios from 'axios';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses,coordinateToAddress, halfPhotoCoordinate } from "../utiliities";
+import { getNearbyAddresses, coordinateToAddress, halfPhotoCoordinate } from "../utiliities";
+import { useAppContext } from "../hooks";
 
 import "../styles/PhotoViewerModalNew.scss";
 
@@ -37,6 +38,7 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
     pageType = 'story';
   }
   const navigate = useNavigate();
+  const { setModalActive } = useAppContext();
   const [photoData, setPhotoData] = useState<PhotoData>();
     const [isExpanded, setIsExpanded] = useState(false);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
@@ -92,6 +94,7 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
         <div
           onClick={() => {
             setModalId(undefined);
+            setModalActive(false);
             if (pageType === 'panorama' || pageType === 'address') {
               navigate(closeTos[pageType]);
             }

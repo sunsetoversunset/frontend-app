@@ -1,6 +1,24 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
 import { useAppContext } from "../../../hooks";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
+
+const Text = styled.text`
+  font-weight: 400;
+  fill: #999999;
+  font-style: italic;
+
+  tspan {
+    font-size: 10px;
+  }
+`;
+
+const TickLabel = styled(Text)`
+  font-size: 10px;
+  font-style: normal;
+
+
+`;
 
 
 const Base = () => {
@@ -21,6 +39,8 @@ const Base = () => {
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((distance, idx) => ({
     distance,
     x: westPoint[0] + (eastPoint[0] - westPoint[0]) * distance,
+    // set a boolean whether to show the text or not so the labels don't overlap on narrow screens
+    showLabel: (distance === 0 || distance === 1) || (width >= 775 && distance === 0.5) || width >= 1200,
   }));
 
   return (
@@ -34,16 +54,32 @@ const Base = () => {
           x2={eastPoint[0]}
           y1={westPoint[1]}
           y2={eastPoint[1]}
-          stroke='grey'
+          stroke='#aaaaaa'
           strokeWidth={2}
         />
-        <text
+        <Text
           x={(eastPoint[0] + westPoint[0]) / 2}
-          y={eastPoint[1] + 18}
+          y={eastPoint[1] + 14}
           textAnchor="middle"
         >
-          MILES
-        </text>
+          miles
+          {(width >= 800) && (
+            <>
+              <tspan
+                x={(eastPoint[0] + westPoint[0]) / 2}
+                dy={14}
+              >
+                (only east-west,
+              </tspan>
+              <tspan
+                x={(eastPoint[0] + westPoint[0]) / 2}
+                dy={14}
+              >
+                not north-south)
+              </tspan>
+            </>
+          )}
+        </Text>
         {ticks.map(tick => (
           <g
             transform={`translate(${tick.x} ${westPoint[1]})`}
@@ -54,15 +90,17 @@ const Base = () => {
               x2={0}
               y1={-5}
               y2={0}
-              stroke='grey'
+              stroke='#aaaaaa'
               strokeWidth={2}
             />
-            <text
-              y={-10}
-              textAnchor="middle"
-            >
-              {tick.distance}
-            </text>
+            {(tick.showLabel) && (
+              <TickLabel
+                y={-10}
+                textAnchor="middle"
+              >
+                {tick.distance}
+              </TickLabel>
+            )}
           </g>
         ))}
       </g>

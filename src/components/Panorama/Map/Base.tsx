@@ -51,12 +51,12 @@ const MapLabels = [
   },
   {
     label: "Thai Town",
-    lat: 34.105,
+    lat: 34.1085,
     lng: -118.303
   },
   {
     label: "Little Armenia",
-    lat: 34.101,
+    lat: 34.102,
     lng: -118.3
   }
 ]

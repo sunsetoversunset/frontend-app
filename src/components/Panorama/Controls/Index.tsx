@@ -36,17 +36,17 @@ const MapControls = () => {
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${yearsStr}` : '';
 
-  // move left or right using arrow keys if the modal isn't active
-  const handleArrowKeysPressed = ((e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      navigate(leftTo, { replace: true });
-    }
-    if (e.key === 'ArrowRight') {
-      navigate(rightTo, { replace: true });
-    }
-  });
-
   useEffect(() => {
+    // move left or right using arrow keys if the modal isn't active
+    const handleArrowKeysPressed = ((e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        navigate(leftTo, { replace: true });
+      }
+      if (e.key === 'ArrowRight') {
+        navigate(rightTo, { replace: true });
+      }
+    });
+
     // only adjust map if the modal isn't open. The modal uses left/right arrow keys too to navigate.
     if (!modalActive) {
       window.addEventListener('keydown', handleArrowKeysPressed);
@@ -56,7 +56,7 @@ const MapControls = () => {
     return () => {
       window.removeEventListener('keydown', handleArrowKeysPressed);
     }
-  });
+  }, [modalActive, leftTo, rightTo, navigate]);
 
   return (
     <div className="map-controls">
