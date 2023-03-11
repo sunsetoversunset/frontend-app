@@ -122,7 +122,7 @@ export const addressToCoordinateUnflipped = (address: string) => {
   return x;
 }
 
-export function getProximateAddress(previousOrNext: 'previous' | 'next', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
+export function getProximateAddress(orientation: 'previous' | 'next' | 'closest', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
   const addressLabelData = ensure(labels.find(d => d.label.toString() === address), `error with label ${address}`);
   const closestLabels = labels
     // filter out addresses on othe side if there is a direction option
@@ -132,12 +132,23 @@ export function getProximateAddress(previousOrNext: 'previous' | 'next', address
     // filter out addresses without boundaries if that option is true
     .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
     // filter for those with a larger coordinate
-    .filter(labelData => (previousOrNext === 'previous')
-      ? labelData.x < addressLabelData.x
-      : labelData.x > addressLabelData.x)
-    .sort((a, b) => (previousOrNext === 'previous')
-      ? b.x - a.x
-      : a.x - b.x);
+    .filter(labelData => (orientation === 'previous') ? labelData.x < addressLabelData.x : true)
+    .filter(labelData => (orientation === 'next') ? labelData.x > addressLabelData.x : true)
+    .sort((a, b) => {
+      if (orientation === 'previous') {
+        return b.x - a.x;
+      }
+      if (orientation === 'next') {
+        return a.x - b.x;
+      }
+      if (Math.abs(b.coordinate - addressLabelData.coordinate) > Math.abs(a.coordinate - addressLabelData.coordinate)) {
+        return -1;
+      }
+      if (Math.abs(b.coordinate - addressLabelData.coordinate) < Math.abs(a.coordinate - addressLabelData.coordinate)) {
+        return 1;
+      }
+      return 0;
+    });
   return (closestLabels.length > 0) ? closestLabels[0].label : undefined;
 }
 
@@ -147,6 +158,10 @@ export function getPreviousAddress(address: string, options?: { direction?: Dire
 
 export function getNextAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
   return getProximateAddress('next', address, options); //
+}
+
+export function getClosestAddressToAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
+  return getProximateAddress('closest', address, options); //
 }
 
 /* with an x value finds the nearest label and offset below it */
@@ -323,3 +338,24 @@ export const convertLngtoX = (lng: number, width: number): number => (lng - midL
 export const convertLattoY = (lat: number): number => 10 - ((lat - midLat) * 55 / (maxLat - midLat));
 
 export const latLngToXY = (latLng: Point, width: number): Point => [convertLngtoX(latLng[1], width), convertLattoY(latLng[0])];
+
+
+export const colors = {
+  mainBg: '#F1EEE8',
+  light1: '#FEFBF5',
+  light2: '#FFF3E5',
+  lightOrange: '#FFD1A6',
+  medOrange: '#FF8A58',
+  darkOrange: '#E95414',
+  rust: '#AD3400',
+  lightPurple: '#994DF6',
+  purple: '#5A15AE',
+  lightBlue: '#66B1EF',
+  blue: '#0164B2',
+  grayLightest: '#DEDEDE',
+  minGrayInterface: '#919191',
+  minGrayInterfacedark: '#5C5C5C',
+  black: '#000000',
+  dropShadow: '#C1C1C1',
+  minGrayText: '#737373',
+};

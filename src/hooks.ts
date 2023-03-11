@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
-import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
+import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs, getClosestAddressToAddress } from './utiliities';
 import type { AddressDataAndNavData, PanoramaData } from './types/hooks.d';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
 import type { StripLabel, Direction, StoryMetadata } from './index.d';
@@ -66,6 +66,7 @@ export function useAddressData(): AddressDataAndNavData {
 
   let previousAddress = (addressData && address) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
   let nextAddress = (addressData && address) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let oppositeAddress = (addressData && address) ? getClosestAddressToAddress(address, { direction: (addressData.side === 'n') ? 's' : 'n', excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
 
   return {
     address,
@@ -73,6 +74,7 @@ export function useAddressData(): AddressDataAndNavData {
     addressHasData,
     previousAddress,
     nextAddress,
+    oppositeAddress,
   };
 }
 

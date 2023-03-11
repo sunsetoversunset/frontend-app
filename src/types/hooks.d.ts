@@ -7,6 +7,7 @@ export type AddressDataAndNavData = {
   address: string;
   previousAddress: string | undefined;
   nextAddress: string | undefined;
+  oppositeAddress: string | undefined;
   addressData: AddressData | undefined;
 }
 

@@ -2,47 +2,7 @@
 #address-page {
   font-family: "Degular-Text", sans-serif;
 
-  nav {
-    width: calc(100% - 40px);
-    padding: 5px 20px;
-    height: 30px;
-    line-height: 30px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 50px;
-    font-family: "Sunset-Gothic", sans-serif;
-    font-size: 20px;
-    background-color: white;
 
-    .previous {
-      justify-self: left;
-    }
-
-    .photos,
-    .next {
-      justify-self: right;
-    }
-
-    a,
-    a:active,
-    a:visited {
-      font-weight: 400;
-      text-decoration: none;
-      padding: 0 10px;
-      border: 1px solid transparent;
-    }
-
-    a,
-    a:visited {
-      color: $black;
-    }
-    a:focus,
-    a:hover {
-      outline: none;
-      border: 1px solid $rust;
-      border-radius: 50px;
-    }
-  }
 
   .nav-header h1 {
     font-size: 16px;
@@ -58,7 +18,8 @@
   }
 
   .header-image {
-    height: 300px; //419px;
+    margin-top: 40px;
+    height: 250px; //419px;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
