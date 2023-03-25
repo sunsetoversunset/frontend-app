@@ -10,7 +10,8 @@ const Button = styled.button`
     padding: 0px 24px;
     height: 36px;
     border: 1px solid ${black};
-    display: inline-block;
+    display: flex;
+    gap: 4px;
     align-items: center;
     font-family: "Sunset-Gothic", sans-serif;
     font-weight: 500;

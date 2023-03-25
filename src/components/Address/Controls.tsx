@@ -74,7 +74,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
         ? (
           <Link to={`../${oppositeAddress}`}>
             <Button>
-              {oppositeAddress} <img src={(side === 's') ? iconArrowDown : iconArrowUp} alt="north-south-arrow" />
+              {(side === 's') ? 'Look North' : 'Look South'}
             </Button>
           </Link>
         )
@@ -105,7 +105,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
           setShow((show === 'photos') ? 'context' : 'photos');
         }}
       >
-        {(show === 'photos') ? 'Show Historical Profile' : 'Show Photographs'}
+        {(show === 'photos') ? 'Show Historical Context' : 'Show Photographs'}
       </ButtonRight>
     </Nav>
   );

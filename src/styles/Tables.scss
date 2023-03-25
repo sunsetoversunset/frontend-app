@@ -3,15 +3,14 @@
   border: 1px solid #000;
   border-radius: 16px;
   background-color: #fefbf5;
-  max-width: 90%;
-  margin: 0 auto 50px 5vw;
   display: inline-block;
+  text-align: left;
 
   h1 {
     font-size: 22px;
     font-weight: 400;
     line-height: 30.8px;
-    margin: 14px 20px 10px;
+    margin: 14px 10px 10px !important;
     display: inline-block;
   }
 
@@ -70,14 +69,27 @@
     th {
       border-left: 1px solid #dedede;
       border-right: 1px solid #dedede;
-      padding: 12px 15px 13px 20px;
+      padding: 10px 3px;
       text-align: right;
+      max-width: 400px;
+
+      @media (min-width: 700px) {
+        padding: 11px 10px 11px 6px;
+      }
+      
+      @media (min-width: 1000px) {
+        padding: 12px 15px 13px 20px;
+      }
     }
 
     td {
       border-left: 0px;
       font-weight: 600;
       line-height: 19px;
+    }
+
+    td.label {
+      position: absolute;
     }
     td.value {
       font-weight: 300;
@@ -155,6 +167,7 @@
     }
   }
 }
+
 .dataTable.active {
   display: block;
 }

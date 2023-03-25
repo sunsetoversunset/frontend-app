@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAddressDataContext } from '../../../hooks';
 import { CensusField, DecadeIndex } from '../../../types/AddressView';
+import { useAppContext } from '../../../hooks';
 import '../../../styles/Tables.scss';
 
 const CensusTable = () => {
   const { census_data } = useAddressDataContext();
+  const { width } = useAppContext();
   const CensusDataColumns = (key: CensusField, unit: '%' | '$' | 'number') => {
     const format = (unit: '%' | '$' | 'number', value: number | string | undefined) => {
       if (value === undefined) {
@@ -14,6 +16,9 @@ const CensusTable = () => {
         return `${Math.round(value * 10000) / 100}%`;
       }
       if (unit === '$' && typeof value === 'number') {
+        if (width <= 1000 && value >= 1000) {
+          return `$${value/1000}K`;
+        }
         return `$${value.toLocaleString()}`;
       }
       if (unit === 'number' && typeof value === 'number') {
@@ -52,7 +57,7 @@ const CensusTable = () => {
           <tr className='year'>
             {[1960, 1970, 1980, 1990, 2000, 2010].map(decade => (
               <th
-                colSpan={(decade === 1960) ? 3 : 1}
+                colSpan={(decade === 1960) ? ((width > 1000) ? 3 : 2) : 1}
                 key={`censusTableHeaderFor${decade}`}
               >
                 {decade}
@@ -65,11 +70,13 @@ const CensusTable = () => {
 
         <tbody>
           <tr className='last-of-type'>
-            <td colSpan={2}>Total Population</td>
+            <td colSpan={(width > 1000) ? 2 : 1}>Total Population</td>
             {CensusDataColumns('total_pop', 'number')}
           </tr>
           <tr>
-            <td rowSpan={3} className='type'>Race</td>
+            {(width > 1000) && (
+              <td rowSpan={3} className='type'>Race</td>
+            )}
             <td>% White</td>
             {CensusDataColumns('race_white', '%')}
           </tr>
@@ -86,11 +93,13 @@ const CensusTable = () => {
           </tr>
 
           <tr>
-            <td rowSpan={3} className='type tooltip'>
-              Foreign-born
-              <span className='tooltiptext'>First reported in 1970</span>
-            </td>
-            <td>% Total</td>
+            {(width > 1000) && (
+              <td rowSpan={3} className='type tooltip'>
+                Foreign-born
+                <span className='tooltiptext'>First reported in 1970</span>
+              </td>
+            )}
+            <td>{(width > 1000) ? '% Total' : '% Foreign Born'}</td>
             {CensusDataColumns('foreign_born_pop', '%')}
           </tr>
           <tr>
@@ -103,7 +112,9 @@ const CensusTable = () => {
           </tr>
 
           <tr>
-            <td rowSpan={3} className='type'>Education</td>
+            {(width > 1000) && (
+              <td rowSpan={3} className='type'>Education</td>
+            )}
             <td className='tooltip'>
               % w/High School
               <span className='tooltiptext'>Data for population 25 years and over. Before 1990, data display persons who attended high school. Data for 1990 and onwards display persons who have graduated with a high school diploma.</span>
@@ -126,23 +137,27 @@ const CensusTable = () => {
           </tr>
 
           <tr>
-            <td rowSpan={2} className='type'>Income</td>
+            {(width > 1000) && (
+              <td rowSpan={2} className='type'>Income</td>
+            )}
             <td className='tooltip'>
-              Average Family
+              {`Average Family${(width <= 1000) ? ' Income' : ''}`}
               <span className='tooltiptext'>First reported in 1970.</span>
             </td>
             {CensusDataColumns('avg_fam_income', '$')}
           </tr>
           <tr className='last-of-type'>
             <td className='tooltip'>
-              Median Family
+              {`Median Family${(width <= 1000) ? ' Income' : ''}`}
               <span className='tooltiptext'>1970 uses tracts from 2010, but with 1970 data. First reported in 1970.</span>
             </td>
             {CensusDataColumns('med_fam_income', '$')}
           </tr>
 
           <tr>
-            <td rowSpan={2} className='type'>Jobs</td>
+            {(width > 1000) && (
+              <td rowSpan={2} className='type'>Jobs</td>
+            )}
             <td className='tooltip'>
               % in Service Industry
               <span className='tooltiptext'>Data for population 16 years and over.</span>
@@ -158,8 +173,10 @@ const CensusTable = () => {
           </tr>
 
           <tr>
-            <td className='type'>Housing</td>
-            <td>% Living in Rented</td>
+            {(width > 1000) && (
+              <td className='type'>Housing</td>
+            )}
+            <td>{`% Living in Rented${(width <= 1000) ? ' Housing' : ''}`}</td>
             {CensusDataColumns('rented_housing', '%')}
           </tr>
         </tbody>

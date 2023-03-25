@@ -69,13 +69,7 @@ const Base = () => {
                 x={(eastPoint[0] + westPoint[0]) / 2}
                 dy={14}
               >
-                (only east-west,
-              </tspan>
-              <tspan
-                x={(eastPoint[0] + westPoint[0]) / 2}
-                dy={14}
-              >
-                not north-south)
+                (only east-west)
               </tspan>
             </>
           )}

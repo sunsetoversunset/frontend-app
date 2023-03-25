@@ -48,12 +48,13 @@ const AddressView = () => {
           <PhotoStrips />
         )}
         {(show === 'context') && (
-          <div>
-            <OccupancyTable />
-            <NewspaperTable />
-            <SocialCulturalTable />
-            <CensusTable />
-            <TaxAssessments />
+          <div id='historicalcontext'>
+
+              <OccupancyTable />
+              <NewspaperTable />
+              <SocialCulturalTable />
+              <CensusTable />
+              <TaxAssessments />
             <div id="building_records">
               <h1>
                 Search Building Records
@@ -65,6 +66,19 @@ const AddressView = () => {
                 <li>Click <strong>"By Address"</strong></li>
                 <li>Enter <strong>{address} W Sunset Blvd</strong>, using exactly that text, including the direction and the abbreviated "Blvd".</li>
                 <li>Click <strong>"Search"</strong> to find building records for this address.</li>
+              </ol>
+            </div>
+            <div id="zimas">
+              <h1>
+                Search ZIMAS (Zone Information and Map Access System)
+              </h1>
+              <p>
+                <a href="https://zimas.lacity.org/" target="_blank">Click here to open the search page on the ZIMAS site</a>
+              </p>
+              <p>You'll then need to do the following:</p>
+              <ol>
+                <li>Enter <strong>{address}</strong> in the "House Number" field and <strong>Sunset</strong> as the "Street Name" (no prefixes or suffixes).</li>
+                <li>Click <strong>"GO"</strong> to find records for this address.</li>
               </ol>
             </div>
           </div>
