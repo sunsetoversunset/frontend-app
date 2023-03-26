@@ -151,7 +151,7 @@ for address_boundary in addresses_with_boundaries:
         'assessor_data': assessor_data,
     }
 
-    with open(f"../../public/address_data/{address_boundary['label']}.json", "w") as f:
+    with open(f"./public/address_data/{address_boundary['label']}.json", "w") as f:
         json.dump(addresses[address_boundary["label"]], f)
 
 
