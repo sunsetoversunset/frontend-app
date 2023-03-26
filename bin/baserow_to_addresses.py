@@ -32,7 +32,7 @@ coordinate_master = get_table(103061)
 
 # addresses = map(get_address, addresses_boundaries)
 
-addresses_with_boundaries = filter(lambda coordinate: coordinate['coordinate_bound_min'] is not None, coordinate_master)
+addresses_with_boundaries = list(filter(lambda coordinate: coordinate['coordinate_bound_min'] is not None, coordinate_master))
 addresses = [address_boundary["label"] for address_boundary in addresses_with_boundaries]
 
 with open("./src/assets/data/addresses_with_boundaries.json", "w") as f:
@@ -77,7 +77,7 @@ for address_boundary in addresses_with_boundaries:
             }
             for photo in value
             # if (photo['coordinate'] and address_boundary['coordinate_min'] and address_boundary['coordinate_max'] and float(photo['coordinate']) >= float(address_boundary['coordinate_min']) - (float(address_boundary['coordinate_max']) - float(address_boundary['coordinate_min'])) * buffer and float(photo['coordinate']) <= float(address_boundary['coordinate_max']) + (float(address_boundary['coordinate_max']) - float(address_boundary['coordinate_min'])) * buffer and photo['street_side'] == address_boundary['street_side'])
-            if (photo['coordinate'] and address_boundary['coordinate_bound_min'] and address_boundary['coordinate_max'] and float(photo['coordinate']) >= float(address_boundary['coordinate_min']) - 0.75 and float(photo['coordinate']) <= float(address_boundary['coordinate_bound_max']) + 0.75 and photo['street_side'] == address_boundary['street_side'])
+            if (photo['coordinate'] and address_boundary['coordinate_bound_min'] and address_boundary['coordinate_bound_max'] and float(photo['coordinate']) >= float(address_boundary['coordinate_bound_min']) - 0.75 and float(photo['coordinate']) <= float(address_boundary['coordinate_bound_max']) + 0.75 and photo['street_side'] == address_boundary['street_side'])
         )
 
     address_census_data = {}
@@ -104,7 +104,7 @@ for address_boundary in addresses_with_boundaries:
             "year": int(city_directory_row["year"]) if city_directory_row["year"].isdigit() else None,
             "entry": city_directory_row["entry"]
         } for city_directory_row in city_directory_data
-        if (city_directory_row["address"] == address_boundary["address"])
+        if (city_directory_row["address"] == address_boundary["label"])
     ]
 
     newspaper_data = [
@@ -119,7 +119,7 @@ for address_boundary in addresses_with_boundaries:
             "entry": newspaper_row["entry"],
             "url": newspaper_row["url"]
         } for newspaper_row in raw_newspaper_data
-        if (newspaper_row["address"] == address_boundary["address"])
+        if (newspaper_row["address"] == address_boundary["label"])
     ]
 
     social_cultural_data = [
@@ -131,16 +131,16 @@ for address_boundary in addresses_with_boundaries:
             "entry": social_cultural_row["entry"],
             "url": social_cultural_row["url"]
         } for social_cultural_row in raw_social_cultural_data
-        if (social_cultural_row["address"] == address_boundary["address"])
+        if (social_cultural_row["address"] == address_boundary["label"])
     ]
 
     assessor_data = [
         assessor_row
         for assessor_row in raw_assessor_data
-        if (assessor_row["address"] == address_boundary["address"])
+        if (assessor_row["address"] == address_boundary["label"])
     ]
 
-    addresses[address_boundary["address"]] = {
+    addresses[address_boundary["label"]] = {
         "side": address_boundary["street_side"],
         "boundaries": [float(address_boundary['coordinate_bound_min']), float(address_boundary['coordinate_bound_max'])],
         'photos': address_photos,
@@ -151,8 +151,8 @@ for address_boundary in addresses_with_boundaries:
         'assessor_data': assessor_data,
     }
 
-    with open(f"./public/address_data/{address_boundary['address']}.json", "w") as f:
-        json.dump(addresses[address_boundary["address"]], f)
+    with open(f"../../public/address_data/{address_boundary['label']}.json", "w") as f:
+        json.dump(addresses[address_boundary["label"]], f)
 
 
 def is_n(item):
