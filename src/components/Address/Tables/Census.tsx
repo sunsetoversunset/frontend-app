@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAddressDataContext } from '../../../hooks';
 import { CensusField, DecadeIndex } from '../../../types/AddressView';
 import { useAppContext } from '../../../hooks';

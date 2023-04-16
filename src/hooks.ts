@@ -114,7 +114,6 @@ export function usePanoramaData(): PanoramaData {
   const { addr: address, offset } = parseAddrOffset(addrOffset);
 
   const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address);
-  console.log(getLabelFromAddress(address));
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth);
 
   const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
@@ -127,7 +126,6 @@ export function usePanoramaData(): PanoramaData {
   const minX = (direction === 'n')
     ? width / 2
     : getOppositeX(Math.max(...years.map(year => maxXs[year])) );
-  console.log(minX, Math.max(...years.map(year => maxXs[year])));
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
 
   const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year]))

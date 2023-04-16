@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import Controls from './Controls';
-import Header from './Header';
-import CensusTable from './Tables/Census';
-import OccupancyTable from './Tables/Occupancy';
-import NewspaperTable from './Tables/Newspaper';
-import SocialCulturalTable from './Tables/SocialCultural';
-import TaxAssessments from './Tables/TaxAssessments';
-import PhotoStrips from '../Panorama/PhotoStrips';
 import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
 import '../../styles/AddressView.scss';
+import PhotoStrips from '../Panorama/PhotoStrips';
+import Controls from './Controls';
+import Header from './Header/Index';
+import CensusTable from './Tables/Census';
+import NewspaperTable from './Tables/Newspaper';
+import OccupancyTable from './Tables/Occupancy';
+import SocialCulturalTable from './Tables/SocialCultural';
+import TaxAssessments from './Tables/TaxAssessments';
 
 const AddressView = () => {
   const {
@@ -47,11 +47,11 @@ const AddressView = () => {
         {(show === 'context') && (
           <div id='historicalcontext'>
 
-              <OccupancyTable />
-              <NewspaperTable />
-              <SocialCulturalTable />
-              <CensusTable />
-              <TaxAssessments />
+            <OccupancyTable />
+            <NewspaperTable />
+            <SocialCulturalTable />
+            <CensusTable />
+            <TaxAssessments />
             <div id="building_records">
               <h1>
                 Search Building Records
@@ -80,7 +80,7 @@ const AddressView = () => {
             </div>
           </div>
         )}
-        </div>
+      </div>
     </AddressDataContext.Provider>
   );
 }

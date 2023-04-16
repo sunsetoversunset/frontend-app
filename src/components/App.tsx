@@ -6,7 +6,7 @@ import StoriesView from './Stories/Index'
 import Story from './Stories/StoriesView';
 import StoryMd from './Stories/Story';
 import Panorama from './Panorama/Index';
-import NavHeader from './NavHeader';
+import NavHeader from './NavHeader/Index';
 import About from './Pages/About.jsx';
 import AddressView from './Address/Index';
 import Footer from './Footer';

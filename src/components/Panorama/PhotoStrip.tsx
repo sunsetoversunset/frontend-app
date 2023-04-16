@@ -118,6 +118,16 @@ const PhotoStrip = ({ year }: { year: number; }) => {
     );
   }
 
+  let startDragX: number;
+  const handleDragStart = (e: any) => {
+    startDragX = e.clientX;
+  }
+
+  function handleDrag(e: any) {
+    console.log("Dragging...");
+    console.log({ startDragX, distance: startDragX - e.clientX } );
+  }
+
   return (
     <>
       <div className={`strip-container strip-${year}-${direction}`}>
@@ -128,6 +138,10 @@ const PhotoStrip = ({ year }: { year: number; }) => {
             width: rightX - leftX,
             transform: `translateX(${translateX}px)`,
           }}
+          draggable={true}
+          onDrag={handleDrag}
+          onDragStart={handleDragStart}
+
         >
           {photos.map(photo => (
             <img

@@ -30,8 +30,6 @@ const MapControls = () => {
   const xScrollingLeft = Math.max(x - scrollDistanceX, minX);
   const xScrollingRight = Math.min(x + scrollDistanceX, maxX);
 
-  console.log(minX, maxX, x, xScrollingLeft);
-
   // create the link paths for the move left, move right, and toggle directions buttons
   const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction }) }/${yearsStr}`;
   const rightTo = `../../${getAddressOffsetString(xScrollingRight, direction, { direction })}/${yearsStr}`;
@@ -59,8 +57,6 @@ const MapControls = () => {
       window.removeEventListener('keydown', handleArrowKeysPressed);
     }
   }, [modalActive, leftTo, rightTo, navigate]);
-
-  console.log(x, minX);
 
   return (
     <div className="map-controls">
