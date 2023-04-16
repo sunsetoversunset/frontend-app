@@ -1,34 +1,111 @@
 
-import { Point } from './index.d';
-import { Direction, StripLabel } from './index.d';
+import { Point, Direction, StripLabel, Year, YearStr, YearValues } from './index.d';
 import stripLabels from './assets/data/strip_labels.json';
 import AddressesWithBoundaries from './assets/data/addresses_with_boundaries.json';
-import GeoJson from './assets/data/sunset.json';
+
+/*
+  coordinates mapped to north addresses
+     coordinates      0 [------------------------------------------------]   1,000
+          n 'x's      0 [------------------------------------------------] 200,000
+       addresses   9201 [------------------------------------------------] 307
+          (coord: 0.76, x: 152)                             (coord: 961.82065, x: 192364.13)
 
 
-// the multiplier used for the placement of the photos on the strip for the panorama view
+  coordinates mapped to south addresses
+    coordinates   1,000 [------------------------------------------------] 0
+         s 'x's 200,000 [------------------------------------------------] 0
+      addresses    9176 [------------------------------------------------] 846 
+        (coord:0.89550, x: 179.1)                            
+
+  north addresses mapped to south addresses
+           n xs       0 [------------------------------------------------] 200,000
+           s xs 200,000 [------------------------------------------------]   1,000 
+*/
+
+
+/**
+ * CONSTANTS
+ */
+
+/**
+ * The multiplier used for the placement of the photos on the strip for the panorama view
+ */
 export const mult = 200;
-// the maximum coordinate value among all the addresses
-export const maxX = Math.max(...stripLabels.map(d => d.c * mult));
-// the images are 294 in width and 200 in height. This is the ratio
-export const widthToHeightRatio = 294 / 200;
-export const halfPhotoX = 294 / 2;
-export const halfPhotoCoordinate = halfPhotoX / mult;
 
+/**
+ * The maximum coordinate
+ * @remarks
+ * The photos and addresses are placed assigned a coordinate value between 0 and 
+ * 1000 for the extent of the photos, not the addresses
+ */
+export const maxCoordinate = 1000;
 
-export const getCoordinateToX = (coordinate: number, direction: Direction) => (direction === 'n') ? coordinate * mult : maxX - coordinate * mult;
+/**
+ * The maximum x value for photos
+ */
+export const maxX = maxCoordinate * mult;
 
-// the raw strip labels data positionin data 
+/**
+ * The display width of each photo
+ */
+export const photoWidth = 294;
+
+/**
+ * The display height of each photo
+ */
+export const photoHeight = 200;
+
+/**
+ * Half the width of the photo not as the x but as a coordiante
+ */
+export const halfPhotoCoordinate = photoWidth / 2 / mult;
+
+/**
+ * The five years of photos as strings
+ */
+export const yearsStrings: YearStr[] = ["1966", "1973", "1985", "1995", "2007"];
+
+/**
+ * The five years of photos as number
+ */
+export const years: Year[] = [1966, 1973, 1985, 1995, 2007];
+
+/**
+ * The max coordinate of the last photo for each year
+ * @remarks
+ * These are just copied out of the baserow data--they shouldn't change, and there's no reason to load the photos data files asyncronously just to get them.
+ */
+const maxCoordinates: YearValues<number> = {
+  '1966': 163.47121,
+  '1973': 977.54089,
+  '1985': 979.36723,
+  '1995': 984.23148,
+  '2007': 993.27018,
+};
+
+/**
+ * The max x values of the last photo for each year
+ */
+export const maxXs: YearValues<number> = {
+  '1966': maxCoordinates['1966'] * mult,
+  '1973': maxCoordinates['1973'] * mult,
+  '1985': maxCoordinates['1985'] * mult,
+  '1995': maxCoordinates['1995'] * mult,
+  '2007': maxCoordinates['2007'] * mult,
+};
+
+/**
+ * The labels with the calculated x and percent along path
+ */
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l))
   // todo: fix the data error instead of ignoring it: theses addresses have incorrecto coordinates
   .filter(d => d.l !== 1332)
-  // map southern view the interverted x
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,
-    x: getCoordinateToX(d.c, d.s as Direction), // (d.s === 'n') ? d.c * mult : (maxX - d.c * mult),
+    x: getCoordinateToX(d.c, d.s as Direction),
     coordinate: d.c,
     lat: d.lat,
     lng: d.lng,
@@ -37,309 +114,34 @@ export const labels: StripLabel[] = stripLabels
   }))
   .sort((a, b) => a.x - b.x);
 
-// these are just copied out of the baserow data--they shouldn't change, and there's no reason to load the photos data files asyncronously just to get them.
-export const maxXs = {
-  '1966': 163.47121 * mult,
-  '1973': 977.54089 * mult,
-  '1985': 979.36723 * mult,
-  '1995': 984.23148 * mult,
-  '2007': 993.27018 * mult,
-};
-
-export const maxMaxX = Math.max(...Object.values(maxXs));
-
-export const easternMostAddresses = {
-  '1966': ensure(getClosestAddressBelow(maxXs['1966'], { direction: 'n' })).addr,
-  '1973': ensure(getClosestAddressBelow(maxXs['1973'], { direction: 'n' })).addr,
-  '1985': ensure(getClosestAddressBelow(maxXs['1985'], { direction: 'n' })).addr,
-  '1995': ensure(getClosestAddressBelow(maxXs['1995'], { direction: 'n' })).addr,
-  '2007': ensure(getClosestAddressBelow(maxXs['2007'], { direction: 'n' })).addr,
-};
-
-export const easternLongitudes = {
-  '1966': ensure(labels.find(d => d.label === easternMostAddresses['1966'])).lng,
-  '1973': ensure(labels.find(d => d.label === easternMostAddresses['1973'])).lng,
-  '1985': ensure(labels.find(d => d.label === easternMostAddresses['1985'])).lng,
-  '1995': ensure(labels.find(d => d.label === easternMostAddresses['1995'])).lng,
-  '2007': ensure(labels.find(d => d.label === easternMostAddresses['2007'])).lng,
+/**
+ * The eastermost longitudes for each year
+ * @remarks
+ * Used on the map to only show the extent of selected years
+ */
+export const easternLongitudes: YearValues<number> = {
+  '1966': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1966'], 'n')).addr).lng,
+  '1973': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1973'], 'n')).addr).lng,
+  '1985': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1985'], 'n')).addr).lng,
+  '1995': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1995'], 'n')).addr).lng,
+  '2007': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['2007'], 'n')).addr).lng,
 }
 
-// the minimum, maximums, and middle latitudes of the addresses
-const minLat = Math.min(...stripLabels.map(d => d.lat));
-const maxLat = Math.max(...stripLabels.map(d => d.lat));
-const minLng = Math.min(...stripLabels.map(d => d.lng));
-const maxLng = Math.max(...stripLabels.map(d => d.lng));
-const midLat = maxLat - ((maxLat - minLat) / 2);
-const midLng = maxLng - ((maxLng - minLng) / 2);
-
-// from https://stackoverflow.com/questions/54738221/typescript-array-find-possibly-undefind
-export function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
-  if (argument === undefined || argument === null) {
-    throw new TypeError(message);
-  }
-
-  return argument;
+/**
+ * The minimum, maximum, and mid latitudes and longituddes of any address
+ */
+const latLngValues = {
+  minLat: Math.min(...stripLabels.map(d => d.lat)),
+  maxLat: Math.max(...stripLabels.map(d => d.lat)),
+  midLat: Math.max(...stripLabels.map(d => d.lat)) - ((Math.max(...stripLabels.map(d => d.lat)) - Math.min(...stripLabels.map(d => d.lat))) / 2),
+  minLng: Math.min(...stripLabels.map(d => d.lng)),
+  maxLng: Math.max(...stripLabels.map(d => d.lng)),
+  midLng: Math.max(...stripLabels.map(d => d.lng)) - ((Math.max(...stripLabels.map(d => d.lng)) - Math.min(...stripLabels.map(d => d.lng))) / 2),
 }
 
-// the ratio of the latitude and longitude, used for sizing the width and height of the map
-export const lngToLatRatio = (maxLng - minLng) / (maxLat - minLat);
-
-
-
-export function getAddressField(address: string, field: keyof StripLabel) {
-  const addressData = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
-  return addressData[field];
-}
-
-export function getAddressX(address: string) {
-  const addressData = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
-  return addressData.x;
-}
-
-export function getAddressCoordinate(address: string) {
-  const addressData = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
-  return addressData.coordinate;
-}
-
-export const getWesternmostLabel = (direction?: Direction): StripLabel => (direction) ? labels.find(label => label.direction === direction) as StripLabel : labels[0];
-
-export const getEasternmostLabel = (direction?: Direction): StripLabel => (direction) ? labels.sort((a, b) => b.x - a.x).find(label => label.direction === direction) as StripLabel : labels[labels.length - 1];
-
-// todo: is this necessary given you've translated the x values in the labels variable above?
-export const getOppositeX = (x: number) => maxX - x;
-
-// `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-export const getCenter = (addrOffset: string, width: number) => Math.min(maxX * mult - width / 2, Math.max(width / 2, addrOffsetToCoordinate(addrOffset)));
-
-
-export const addressToCoordinate = (address: string) => {
-  const { x, direction } = (labels.find(d => d.label.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as StripLabel);
-  return (direction === 'n') ? x : getOppositeX(x);
-}
-
-export const addressToCoordinateUnflipped = (address: string) => {
-  const { x } = (labels.find(d => d.label.toString().replace(/\s+/g, '') === address.replace(/\s+/g, '')) as StripLabel);
-  return x;
-}
-
-export function getProximateAddress(orientation: 'previous' | 'next' | 'closest', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
-  const addressLabelData = ensure(labels.find(d => d.label.toString() === address), `error with label ${address}`);
-  const closestLabels = labels
-    // filter out addresses on othe side if there is a direction option
-    .filter(labelData => (options?.direction) ? labelData.direction === options.direction : true)
-    // filter out cross streets if that option is true
-    .filter(labelData => (options?.excludeCrossStreets) ? !isNaN(Number(labelData.label)) : true)
-    // filter out addresses without boundaries if that option is true
-    .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
-    // filter for those with a larger coordinate
-    .filter(labelData => (orientation === 'previous') ? labelData.x < addressLabelData.x : true)
-    .filter(labelData => (orientation === 'next') ? labelData.x > addressLabelData.x : true)
-    .sort((a, b) => {
-      if (orientation === 'previous') {
-        return b.x - a.x;
-      }
-      if (orientation === 'next') {
-        return a.x - b.x;
-      }
-      if (Math.abs(b.coordinate - addressLabelData.coordinate) > Math.abs(a.coordinate - addressLabelData.coordinate)) {
-        return -1;
-      }
-      if (Math.abs(b.coordinate - addressLabelData.coordinate) < Math.abs(a.coordinate - addressLabelData.coordinate)) {
-        return 1;
-      }
-      return 0;
-    });
-  return (closestLabels.length > 0) ? closestLabels[0].label : undefined;
-}
-
-export function getPreviousAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
-  return getProximateAddress('previous', address, options); //
-}
-
-export function getNextAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
-  return getProximateAddress('next', address, options); //
-}
-
-export function getClosestAddressToAddress(address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
-  return getProximateAddress('closest', address, options); //
-}
-
-/* with an x value finds the nearest label and offset below it */
-// todo direction shouldn't be an option but required as it you can't compare x values for different sides of the street
-export function getClosestAddressBelow(x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }): { addr: string, offset: number } | undefined {
-  const closestAddresses = labels
-    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
-    .filter(d => (options && options.excludeCrossStreets) ? !isNaN(Number(d.label)) : true)
-    .filter(d => d.x <= x)
-    .sort((a, b) => b.x - a.x);
-  if (closestAddresses.length > 0) {
-    if (!options || !options.excludeAddressesWithoutBoundaries) {
-      return {
-        addr: closestAddresses[0].label,
-        offset: Math.round(x - closestAddresses[0].x),
-      }
-    } else {
-      console.log(closestAddresses[0]);
-      return getClosestAddressBelow(closestAddresses[0].x, options);
-    }
-  }
-  return undefined;
-}
-
-export const getClosestAddressBelowString = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
-  const addressAndOffset = getClosestAddressBelow(x, options);
-  if (addressAndOffset) {
-    return `${addressAndOffset.addr.replace(/\s+/g, '')}-${addressAndOffset.offset}`;
-  }
-  return undefined;
-}
-
-/* with an x value finds the nearest label and offset above it */
-export const getClosestAddressAbove = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
-  const closestAddresses = labels
-    .filter(d => (options && options.direction) ? d.direction === options.direction : true)
-    .filter(d => (options && options.excludeCrossStreets) ? !isNaN(Number(d.label)) : true)
-    .filter(d => d.x >= x)
-    .sort((a, b) => a.x - b.x);
-  return (closestAddresses.length > 0) ? {
-    addr: closestAddresses[0].label,
-    offset: x - closestAddresses[0].x,
-  } : null;
-}
-
-export const getClosestAddress = (x: number, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
-  // the 2.2448 here is the standard deviation from all the address boundaries. Those vary quite a bit, so this may be imperfect.
-  const closestBelow = getClosestAddressBelow(x, options);
-  const closestAbove = getClosestAddressAbove(x, options);
-  if (closestBelow && closestAbove) {
-    if (closestBelow.offset <= Math.abs(closestAbove.offset)) {
-      return closestBelow.addr;
-    }
-    return closestAbove.addr;
-  } else if (closestBelow) {
-    return closestBelow.addr;
-  } else if (closestAbove) {
-    return closestAbove.addr;
-  } else {
-    return '9157';
-  }
-}
-
-export const getNearbyAddresses = (coordinate: number, direction: Direction, options?: { excludeCrossStreets?: boolean }) => {
-  const x = getCoordinateToX(coordinate, direction);
-  return labels
-    .filter(d => !options || (options.excludeCrossStreets && !isNaN(parseInt(d.label))))
-    .filter(d => d.direction === direction)
-    .sort((a, b) => Math.abs(a.x - x) - Math.abs(b.x - x))
-    // filter to keep at least three addresses and no more than five addresses if those addresses are within 500pxs of the x coordinate
-    .filter((d, idx) => idx <= 2 || Math.abs(d.x - x) <= 500)
-    .map(d => d.label);
-
-  // the 2.2448 here is the standard deviation from all the address boundaries. Those vary quite a bit, so this may be imperfect.
-  // return labels
-  //   .filter(d => (options && options.direction) ? d.direction === options.direction : true)
-  //   .filter(d => !isNaN(Number(d.label)))
-  //   .filter(d => d.x >= x - 100 && d.x <= x + 100)
-  //   .sort((a, b) => a.x - b.x)
-  //   .map(d => d.label);
-}
-
-/* with an x value finds the nearest label to it, by default below and above it there isn't one below */
-export const coordinateToAddress = (coordinate: number, direction: Direction, options?: { excludeCrossStreets?: boolean }) => {
-  const x = getCoordinateToX(coordinate, direction);
-  // find the address that is closest but less than the coordinate
-  const _options = {
-    ...options,
-    side: direction,
-  }
-  return getClosestAddressBelow(x, _options) || getClosestAddressAbove(x, _options) || null;
-}
-
-export function parseAddrOffset(addrOffset: string) {
-  const lastIndexOfHyphen = addrOffset.lastIndexOf('-');
-  const addr = (lastIndexOfHyphen !== -1) ? addrOffset.slice(0, lastIndexOfHyphen) : addrOffset;
-  const offset = (lastIndexOfHyphen !== -1) ? parseInt(addrOffset.slice(lastIndexOfHyphen + 1)) : 0
-  return {
-    addr,
-    offset,
-  };
-}
-
-export function addrOffsetToCoordinate(addrOffset: string) {
-  const { addr, offset } = parseAddrOffset(addrOffset);
-  return addressToCoordinate(addr) + offset;
-}
-
-/* takes an addrOffset and an x to offset it by and returns another addrOffset adjusted left/right or west/east */
-export function calcAddrOffset(addrOffset: string, direction: Direction, offsetBy: number) {
-  const newAddrData = coordinateToAddress(addrOffsetToCoordinate(addrOffset) + offsetBy, direction);
-  return (newAddrData) ? `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}` : null;
-}
-
-export function toggleDirectionAddrOffset(address: string, direction: Direction, offset?: number) {
-  const newDirection = (direction === 'n') ? 's' : 'n';
-  // get the best cooresponding address across the street
-  // get the x for the address and the x for across the street
-  const oldX = getAddressX(address) + (offset || 0);
-  const newX = maxX - oldX;
-  // find the 
-  return getClosestAddressBelow(newX, { direction: newDirection });
-}
-
-// export function toggleDirectionAddrOffsetOld(addrOffset: string, direction: Direction) {
-//   const newDirection = (direction === 'n') ? 's' : 'n';
-//   // get the best cooresponding address across the street
-//   const coordinate = addrOffsetToCoordinate(addrOffset)
-//   const newAddrData = coordinateToAddress(getOppositeX(coordinate), { direction: newDirection });
-//   return (newAddrData) ? `${newAddrData.addr.toString().replace(/\s+/g, '')}-${Math.round(Math.max(0, newAddrData.offset))}` : null;
-// }
-
-// adapted from https://stackoverflow.com/questions/33907276/calculate-point-between-two-coordinates-based-on-a-percentage
-const midPoint = (point1: Point, point2: Point, per: number) => [point1[0] + (point2[0] - point1[0]) * per, point1[1] + (point2[1] - point1[1]) * per];
-
-export const coordinateToPoint = (coordinate: number, maxCoordinate: number, strip_labels: any) => {
-  // find the point it's on or points it's between
-  const percentAlongPath = coordinate / maxCoordinate;
-  const pointsBelow = strip_labels
-    .filter((d: any) => d.c * mult / maxCoordinate <= percentAlongPath)
-    .sort((a: any, b: any) => b.c - a.c);
-  const pointBelow = (pointsBelow.length > 0) ? pointsBelow[0] : { c: 0 };
-  const pointsAbove = strip_labels
-    .filter((d: any) => d.c * mult / maxCoordinate > percentAlongPath)
-    .sort((a: any, b: any) => a.c - b.c);
-  const pointAbove = (pointsAbove.length > 0) ? pointsAbove[0] : { c: Math.max(strip_labels.map((strip_label: any) => strip_label.c)) };
-
-  const pointBelowPercent = pointBelow.c * mult / maxCoordinate;
-  const pointAbovePercent = pointAbove.c * mult / maxCoordinate;
-  const percentBetween = (percentAlongPath - pointBelowPercent) / (pointAbovePercent - pointBelowPercent)
-
-  // figure out how close the coordinate is to each of the points
-  const point = midPoint([pointBelow.lng, pointBelow.lat], [pointAbove.lng, pointAbove.lat], percentBetween);
-  return point;
-}
-
-export const getRoadPath = (width: number) => {
-  const points = GeoJson.geometry.coordinates[0];
-  const [firstX, firstY] = latLngToXY([points[0][1], points[0][0]], width);
-  const lineSegments = points
-    .slice(1)
-    .map((point) => {
-      const [x, y] = latLngToXY([point[1], point[0]], width)
-      return `L ${x} ${y}`;
-    });
-
-  return `M ${firstX} ${firstY} ${lineSegments.join(" ")}`;
-};
-
-export const hasAddressData = (address: string) => AddressesWithBoundaries.includes(address);
-
-export const convertLngtoX = (lng: number, width: number): number => (lng - midLng) * width / 2 / (maxLng - midLng);
-
-export const convertLattoY = (lat: number): number => 10 - ((lat - midLat) * 55 / (maxLat - midLat));
-
-export const latLngToXY = (latLng: Point, width: number): Point => [convertLngtoX(latLng[1], width), convertLattoY(latLng[0])];
-
-
+/**
+ * colors for the site
+ */
 export const colors = {
   mainBg: '#F1EEE8',
   light1: '#FEFBF5',
@@ -358,4 +160,236 @@ export const colors = {
   black: '#000000',
   dropShadow: '#C1C1C1',
   minGrayText: '#737373',
+};
+
+/**
+ * FUNCTIONS USED ONLY BY UTILITIES
+ */
+
+/**
+* Convert a coordinate to the x value depending on whether the diretion is n or south
+* @param coordinate - The coordinate
+* @param direction - The direction for the x value; is it on the north or the south side?
+* @returns The corresponding x value
+*/
+// 
+function getCoordinateToX(coordinate: number, direction: Direction) {
+  return (direction === 'n') ? coordinate * mult : maxX - coordinate * mult;
+}
+
+/**
+ * Convert an x to the coordinate value depending on whether the diretion is n or south
+ * @param x - The x value
+ * @param direction - The direction for the x value; is it on the north or the south side?
+ * @returns The corresponding coordinate value
+ */
+function getXToCoordinate(x: number, direction: Direction) {
+  return (direction === 'n') ? x / mult : Math.max(...Object.values(maxCoordinates)) - x / mult;
+}
+
+/**
+ * A utility function used as an alternative to type assertion when I know a find function of the like will return a value
+ * @remarks
+ * from https://stackoverflow.com/questions/54738221/typescript-array-find-possibly-undefind
+ * @param argument 
+ * @param message 
+ * @returns the argument
+ */
+function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
+  if (argument === undefined || argument === null) {
+    throw new TypeError(message);
+  }
+  return argument;
+}
+
+/**
+ * FUNCTIONS USED IN COMPONENTS ETC
+ */
+
+/**
+ * Given an x, finds the closest address and offset to the left (previous), right (next), or either (closest).
+ * @param orientation Whether to get the previous address (left), the next (right) or closest
+ * @param x The x positoin along the photo strip
+ * @param direction The direction
+ * @param [options.direction] - A option to include only one side og the street
+ * @param [options.excludeCrossStreets] - An option to exlude cross-streets
+ * @param [option.useCoordinateNotX] Treat the x as a coordinate not the x distance on a photo strip
+ * @returns The address, offset, and x value
+ */
+export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'closest', x: number, direction: Direction, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean; useCoordinateNotX?: boolean; }) {
+  const _x = (x: number) => (options?.useCoordinateNotX) ? getCoordinateToX(x, direction) : x;
+  const closestLabels = labels
+    // filter out addresses on othe side if there is a direction option
+    .filter(labelData => (options?.direction) ? labelData.direction === options.direction : true)
+    // filter out cross streets if that option is true
+    .filter(labelData => (options?.excludeCrossStreets) ? !isNaN(Number(labelData.label)) : true)
+    // filter out addresses without boundaries if that option is true
+    .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
+    // filter for those with a larger coordinate
+    .filter(labelData => (orientation === 'previous') ? labelData.x < _x(x) : true)
+    .filter(labelData => (orientation === 'next') ? labelData.x > _x(x) : true)
+    .sort((a, b) => {
+      const coordinate = getXToCoordinate(x, direction);
+      if (orientation === 'previous') {
+        return _x(b.x) - _x(a.x);
+      }
+      if (orientation === 'next') {
+        return _x(a.x) - _x(b.x);
+      }
+      if (Math.abs(b.coordinate - coordinate) > Math.abs(a.coordinate - coordinate)) {
+        return -1;
+      }
+      if (Math.abs(b.coordinate - coordinate) < Math.abs(a.coordinate - coordinate)) {
+        return 1;
+      }
+      return 0;
+    });
+  return (closestLabels.length > 0) ? {
+    addr: closestLabels[0].label,
+    offset: Math.round(x - closestLabels[0].x),
+    x,
+  } : undefined;
+}
+
+/**
+ * Given an address finds the closest address to the left (previous), right (next), or either (closest).
+ * @param orientation Whether to get the previous address (left), the next (right) or closest
+ * @param address An address
+ * @param [options.direction] - A option to include only one side og the street
+ * @param [options.excludeCrossStreets] - An option to exlude cross-streets
+ * @returns The address, offset, and x value
+ */
+export function getProximateAddress(orientation: 'previous' | 'next' | 'closest', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
+  const { x, direction } = getLabelFromAddress(address);
+  const proximate = getProximateAddressFromX(orientation, x, direction, options);
+  return (proximate) ? proximate.addr : undefined;
+}
+
+/**
+ * Takes an address and finds all it's associated data
+ * @param address - An address 
+ * @returns The associated data for the address (@type {StripLabel})
+ */
+export function getLabelFromAddress(address: string) {
+  return ensure(labels.find(label => label.label.replace(/\s+/g, '') === address.replace(/\s+/g, '')));
+}
+
+/**
+ * Given an x, returns the x from the other side of the street
+ * @param x An x on the number line
+ * @returns An x on the number line on the other side of the street
+ */
+export function getOppositeX(x: number) {
+  return maxX - x;
+}
+
+/**
+ * Takes an x value and returns the corresponding address and offset, primarily used in the url.
+ * @param x - The x value along the photo strip
+ * @param direction - The side of the street
+ * @param [options.direction] - A option to include only one side og the street
+ * @param [options.excludeCrossStreets] - An option to exlude cross-streets
+ * 
+ * @returns The address and offset as a string concatenated by a hyphen or undefined
+ */
+export const getAddressOffsetString = (x: number, direction: Direction, options?: { direction?: Direction, excludeCrossStreets?: boolean }) => {
+  const previousAddrAndOffset = getProximateAddressFromX('previous', x, direction, options);
+  if (previousAddrAndOffset) {
+    return `${previousAddrAndOffset.addr.replace(/\s+/g, '')}-${previousAddrAndOffset.offset}`;
+  }
+  const nextAddressAndOffset = getProximateAddressFromX('next', x, direction, options);
+  if (nextAddressAndOffset) {
+    return `${nextAddressAndOffset.addr.replace(/\s+/g, '')}-${nextAddressAndOffset.offset}`;
+  }
+  return undefined;
+}
+
+/**
+ * Using a coordinate and direction, returns up to 5 of the nearest addresses.
+ * @param coordinate The coordinate along the photo strip
+ * @param direction The side of the street
+ * @param [options.excludeCrossStreets] - An option to exlude cross-streets
+ * 
+ * @returns An array of addresses--just the labels
+ */
+export function getNearbyAddresses(coordinate: number, direction: Direction, options?: { excludeCrossStreets?: boolean }) {
+  const x = getCoordinateToX(coordinate, direction);
+  return labels
+    .filter(d => !options || (options.excludeCrossStreets && !isNaN(parseInt(d.label))))
+    .filter(d => d.direction === direction)
+    .sort((a, b) => Math.abs(a.x - x) - Math.abs(b.x - x))
+    // filter to keep at least three addresses and no more than five addresses if those addresses are within 500pxs of the x coordinate
+    .filter((d, idx) => idx <= 2 || (Math.abs(d.x - x) <= 500 && idx <= 4))
+    .map(d => d.label);
+}
+
+/**
+ * Takes the address-offset string and parses it to return the address and the offset as a number
+ * @param addrOffset An address and offset as a string concatenated with hyphen
+ * 
+ * @returns The address and the offset separately along with the x value
+ */
+export function parseAddrOffset(addrOffset: string) {
+  // look for two hyphens to accommodate negative values; those are necessary at the tail ends of the photo strips when there are photos but no addresses to the left
+  const lastIndexOfHyphen = (addrOffset.includes('--')) ? addrOffset.lastIndexOf('-') - 1 : addrOffset.lastIndexOf('-');
+  const addr = (lastIndexOfHyphen !== -1) ? addrOffset.slice(0, lastIndexOfHyphen) : addrOffset;
+  const offset = (lastIndexOfHyphen !== -1) ? parseInt(addrOffset.slice(lastIndexOfHyphen + 1)) : 0
+  return {
+    addr,
+    offset,
+    x: getLabelFromAddress(addr).x + offset
+  };
+}
+
+/**
+ * Takes and address on one side of the street and an optional offset and returns the addrOffset string value across the street
+ * @param address An address
+ * @param direction The side of the street
+ * @param offset (optional) An x offset
+ * @returns An address, offset, and x value
+ */
+export function toggleDirectionAddrOffset(address: string, direction: Direction, offset?: number) {
+  const newDirection = (direction === 'n') ? 's' : 'n';
+  // get the best cooresponding address across the street
+  // get the x for the address and the x for across the street
+  const oldX = getLabelFromAddress(address).x + (offset || 0);
+  const newX = maxX - oldX;
+  // find the 
+  return getProximateAddressFromX('previous', newX, newDirection, { direction: newDirection });
+}
+
+/**
+ * Confirms an address is in the addresses with boundaries list
+ * @param address An address
+ * @returns Whether the address has boundaries or not
+ */
+export const hasAddressData = (address: string) => AddressesWithBoundaries.includes(address);
+
+/**
+ * Takes a longitude and crudely projects its x value in cartesian space 
+ * @param lng The longitude value
+ * @param width The width of the canvas
+ * @returns The x value for the longitude
+ */
+export function convertLngtoX(lng: number, width: number): number {
+  return (lng - latLngValues.midLng) * width / 2 / (latLngValues.maxLng - latLngValues.midLng);
+}
+
+/**
+ * Takes a latitude and crudely projects its y value in cartesian space 
+ * @param lat The latitude value
+ * @returns The y value for the latitude
+ */
+export function convertLattoY(lat: number): number {
+  return 10 - ((lat - latLngValues.midLat) * 55 / (latLngValues.maxLat - latLngValues.midLat));
+}
+
+/**
+ * Takes a lat/lng point and crudely projects its x/y values in cartesian space 
+ * @param latLng The lat/long value
+ * @param width The width of the canvas
+ * @returns The xand y values on the canvas
+ */
+export function latLngToXY(latLng: Point, width: number): Point {
+  return [convertLngtoX(latLng[1], width), convertLattoY(latLng[0])];
 };

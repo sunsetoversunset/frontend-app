@@ -1,18 +1,46 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 // @ts-ignore
 import { Viewer } from "react-iiif-viewer";
-import { getNearbyAddresses, coordinateToAddress, halfPhotoCoordinate } from "../utiliities";
+import { getNearbyAddresses, halfPhotoCoordinate, getProximateAddressFromX } from "../utiliities";
 import { useAppContext } from "../hooks";
 
 import "../styles/PhotoViewerModalNew.scss";
-
-// import iconRightWhite from "../assets/icons/icon-right-bracket.svg"
-// import iconRightRust from "../assets/icons/icon-right-bracket-rust.svg"
 import iconCloseWhite from "../assets/icons/icon-close-white.svg"
 import iconLeftWhite from "../assets/icons/icon-left-bracket.svg"
 import iconLeftRust from "../assets/icons/icon-left-bracket-rust.svg"
+
+const StyledAddressLink = styled(Link)`
+  text-align: center;
+  font-family: "Sunset-Gothic";
+  font-weight: 300;
+  color: #000000;
+  position: relative;
+
+    &:hover::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #000000;
+    }
+    &,
+    &:active,
+    &:visited {
+        text-decoration: none;
+    }
+
+  
+  div:nth-child(2) {
+    font-size: 0.6em;
+    text-transform: uppercase;
+  }
+
+`;
 
 type Props = {
   id: string;
@@ -40,7 +68,7 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
   const navigate = useNavigate();
   const { setModalActive } = useAppContext();
   const [photoData, setPhotoData] = useState<PhotoData>();
-    const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const [isHoveringCollapse, setIsHoveringCollapse] = useState(false);
 
   const handleArrowKeysPressed = ((e: KeyboardEvent) => {
@@ -74,9 +102,10 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
   // the photo coordinates are from the edge; the addresses should be calculated from the center
   const photoCenterCoordinate = (photoData.side === 'n') ? photoData.coordinate + halfPhotoCoordinate : photoData.coordinate - halfPhotoCoordinate;
   const nearbyAddresses = getNearbyAddresses(photoCenterCoordinate, photoData.side, { excludeCrossStreets: true });
+  // the close button goes to different urls depending on whether the page the modal is opend on is the panorama page or an address page
   const closeTos = {
     panorama: (() => {
-      const addrOffset = coordinateToAddress(photoCenterCoordinate, photoData.side);
+      const addrOffset = getProximateAddressFromX('closest', photoCenterCoordinate, photoData.side, { useCoordinateNotX: true });
       const pathpieces = pathname.split('/');
       return (addrOffset) ? [pathpieces[0], pathpieces[1],`${addrOffset.addr.replace(/\s+/g, '')}-${addrOffset.offset}`, pathpieces[3]].join('/') : pathname;
     })(),
@@ -137,9 +166,11 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
         >
           <div
             className="nearby-addresses-label-container"
-            //onClick={() => setIsExpanded(!isExpanded)}
-          >
-            <span className="nearby-addresses-label">
+            >
+            <span
+              className="nearby-addresses-label"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
               Learn more about nearby addresses:
             </span>
             {/* {
@@ -150,19 +181,21 @@ const PhotoViewerModal = ({ id, setModalId }: Props) => {
                 : null
             } */}
           </div>
-          {(nearbyAddresses) && (
+          {(isExpanded && nearbyAddresses) && (
               <ul className="nearby-addresses-list">
                 {nearbyAddresses.map((address) => {
                   return (
                     <li key={`nearby-address-${address}`}>
-                      <Link
-                        className="nearby-address-link"
+                      <StyledAddressLink
                         to={`/address/${address.replace(/\s+/g, '')}/`}
-                        target="_blank"
-                        rel="noreferrer"
+                        onClick={() => {
+                          setModalId(undefined);
+                          setModalActive(false);
+                        }}
                       >
-                        {`${address} Sunset Blvd.`}
-                      </Link>
+                        <div>{address}</div>
+                        <div>Sunset</div>
+                      </StyledAddressLink>
                     </li>
                   )
               })}

@@ -12,7 +12,7 @@ import AddressView from './Address/Index';
 import Footer from './Footer';
 import Landing from "./Landing";
 import { AppContext } from '../Contexts';
-import { getClosestAddressBelowString } from '../utiliities';
+import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';
 
 export const App = () => {
@@ -48,10 +48,10 @@ export const App = () => {
 
   // use the width to set the preliminary western position if the address isn't specified
   const defaultAddressNorth = (dimensions.width)
-    ? getClosestAddressBelowString(dimensions.width / 2, { direction: 'n' })
+    ? getAddressOffsetString(dimensions.width / 2, 'n', { direction: 'n' })
     : 'DohenyRoad';
   const defaultAddressSouth = (dimensions.width)
-    ? getClosestAddressBelowString(dimensions.width / 2, { direction: 's' })
+    ? getAddressOffsetString(dimensions.width / 2, 's', { direction: 's' })
     : '9176';
 
   // --------------------------------------------------------------------

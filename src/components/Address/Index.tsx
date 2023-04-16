@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Controls from './Controls';
 import Header from './Header';
 import CensusTable from './Tables/Census';
@@ -7,7 +7,6 @@ import NewspaperTable from './Tables/Newspaper';
 import SocialCulturalTable from './Tables/SocialCultural';
 import TaxAssessments from './Tables/TaxAssessments';
 import PhotoStrips from '../Panorama/PhotoStrips';
-import ScrollToTop from '../ScrollToTop';
 import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
 import '../../styles/AddressView.scss';
@@ -20,8 +19,6 @@ const AddressView = () => {
   } = useAddressData();
 
   const [show, setShow] = useState<'photos' | 'context'>('context');
-
-  const historicalProfileRef = useRef<HTMLHeadingElement>(null);
 
   if (!addressHasData) {
     return (

@@ -5,8 +5,8 @@ import Button, { ButtonRight } from '../Styled/Button';
 import { useAddressData } from '../../hooks';
 import iconArrowLeft from "../../assets/icons/icon-arrow-left.svg";
 import iconArrowRight from "../../assets/icons/icon-arrow-right.svg";
-import iconArrowDown from "../../assets/icons/icon-arrow-down.svg";
-import iconArrowUp from "../../assets/icons/icon-arrow-up.svg";
+// import iconArrowDown from "../../assets/icons/icon-arrow-down.svg";
+// import iconArrowUp from "../../assets/icons/icon-arrow-up.svg";
 
 const Nav = styled.nav`
   position: sticky;
@@ -35,7 +35,7 @@ const Nav = styled.nav`
   }
 
   a,
-    a: active,
+    a:active,
       a:visited {
     font-weight: 400;
     text-decoration: none;
@@ -47,7 +47,7 @@ const Nav = styled.nav`
     a:visited {
     color: $black;
   }
-  a: focus,
+  a:focus,
     a:hover {
     outline: none;
     border: 1px solid $rust;

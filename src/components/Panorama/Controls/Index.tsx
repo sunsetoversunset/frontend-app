@@ -6,21 +6,21 @@ import { useAppContext, usePanoramaData } from "../../../hooks";
 import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg"
 import iconSearch from "../../../assets/icons/icon-search.svg"
-import { toggleDirectionAddrOffset, getClosestAddressBelowString } from '../../../utiliities';
+import { toggleDirectionAddrOffset, getAddressOffsetString } from '../../../utiliities';
 import 'rc-slider/assets/index.css';
 import "../../../styles/MapControls.scss";
 
 const MapControls = () => {
   const { modalActive } = useAppContext();
   const {
-    x, 
+    x,
     minX,
     maxX,
     scrollDistanceX,
     address,
     offset,
     direction,
-    yearsStr
+    yearsStr,
   } = usePanoramaData();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -30,9 +30,11 @@ const MapControls = () => {
   const xScrollingLeft = Math.max(x - scrollDistanceX, minX);
   const xScrollingRight = Math.min(x + scrollDistanceX, maxX);
 
+  console.log(minX, maxX, x, xScrollingLeft);
+
   // create the link paths for the move left, move right, and toggle directions buttons
-  const leftTo = `../../${getClosestAddressBelowString(xScrollingLeft, { direction })}/${yearsStr}`;
-  const rightTo = `../../${getClosestAddressBelowString(xScrollingRight, { direction })}/${yearsStr}`;
+  const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction }) }/${yearsStr}`;
+  const rightTo = `../../${getAddressOffsetString(xScrollingRight, direction, { direction })}/${yearsStr}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${yearsStr}` : '';
 
@@ -58,6 +60,8 @@ const MapControls = () => {
     }
   }, [modalActive, leftTo, rightTo, navigate]);
 
+  console.log(x, minX);
+
   return (
     <div className="map-controls">
       <Link
@@ -69,23 +73,22 @@ const MapControls = () => {
         </button>
       </Link>
 
-      {(Math.floor(x) > minX) ?
+      {(Math.floor(x) > minX) ? (
         <Link
           to={leftTo}
-          //className={(calcAddrOffset(addrOffset, direction, width * scrollDistance * -1) === westernmostAddrOffset) ? 'disabled' : ''}
           replace={true}
           id='west'
         >
           <button className={`btn-rounded inactive`} >
             <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
           </button>
-        </Link>
-        :
+        </Link>) : (
         <div id='west'>
           <button className={`btn-rounded inactive disabled`} >
             <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
           </button>
         </div>
+      )
 
       }
 
@@ -100,8 +103,8 @@ const MapControls = () => {
           <button>
             {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
           </button>
-        </Link> 
-        ): (
+        </Link>
+      ) : (
         <div id='east'>
           <button className='disabled'>
             {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />

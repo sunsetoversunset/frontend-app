@@ -2,10 +2,10 @@ import { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
-import { mult, getOppositeX, labels, getPreviousAddress, getNextAddress, getAddressX, easternLongitudes, parseAddrOffset, latLngToXY, maxXs, getClosestAddressToAddress } from './utiliities';
+import { mult, getOppositeX, labels, getProximateAddress, getLabelFromAddress, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
 import type { AddressDataAndNavData, PanoramaData } from './types/hooks.d';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
-import type { StripLabel, Direction, StoryMetadata } from './index.d';
+import type { Direction, StoryMetadata, YearStr } from './index.d';
 import type { PhotoData } from './components/Panorama/index.d';
 import { AddressData } from './types/AddressView';
 import GeoJson from './assets/data/sunset.json';
@@ -64,9 +64,9 @@ export function useAddressData(): AddressDataAndNavData {
     }
   }, [address]);
 
-  let previousAddress = (addressData && address) ? getPreviousAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
-  let nextAddress = (addressData && address) ? getNextAddress(address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
-  let oppositeAddress = (addressData && address) ? getClosestAddressToAddress(address, { direction: (addressData.side === 'n') ? 's' : 'n', excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let previousAddress = (addressData && address) ? getProximateAddress('previous', address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let nextAddress = (addressData && address) ? getProximateAddress('next', address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let oppositeAddress = (addressData && address) ? getProximateAddress('closest', address, { direction: (addressData.side === 'n') ? 's' : 'n', excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
 
   return {
     address,
@@ -113,28 +113,30 @@ export function usePanoramaData(): PanoramaData {
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
   const { addr: address, offset } = parseAddrOffset(addrOffset);
 
-  const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = labels.find(label => label.label.replace(/\s+/g, '') === address) as StripLabel;
+  const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address);
+  console.log(getLabelFromAddress(address));
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth);
 
-  const years = yearsStr.split(',').map(d => parseInt(d));
+  const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
   const x = addressX + offset;
   const leftX = Math.ceil(x - width / 2);
   const rightX = Math.floor(x + width / 2);
   const maxX = (direction === 'n')
-    ? Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])) - width / 2
+    ? Math.max(...years.map(year => maxXs[year])) - width / 2
     : getOppositeX(width / 2);
   const minX = (direction === 'n')
     ? width / 2
-    : getOppositeX(Math.max(...years.map(year => maxXs[year.toString() as keyof typeof maxXs])) - width / 2);
+    : getOppositeX(Math.max(...years.map(year => maxXs[year])) );
+  console.log(minX, Math.max(...years.map(year => maxXs[year])));
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
 
-  const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year.toString() as keyof typeof easternLongitudes]))
+  const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year]))
   return {
     address,
     offset,
     direction,
     yearsStr,
-    years,
+    years: years.map(d => parseInt(d)),
     x,
     leftX,
     rightX,
@@ -192,7 +194,7 @@ export function usePhotoStrip(year: number) {
     offset = addressAndOffset.offset;
   }
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  let x = (getAddressX(address as string) + offset) * widthMultiplier;
+  let x = (getLabelFromAddress(address as string).x + offset) * widthMultiplier;
   const [photoData, setPhotoData] = useState<PhotoData[]>([]);
 
   // set a variable to store what direction the most recent data was loaded for, used to trigger the retrieval of the visible photos when the data has finished loaded

@@ -40,6 +40,12 @@ export type StoryMetadata = {
   };
 };
 
-
-
 export type Point = [number, number];
+
+export type Year = 1966 | 1973 | 1985 | 1995 | 2007;
+
+export type YearStr = "1966" | "1973" | "1985" | "1995" | "2007";
+
+export type YearValues<Type, YearType extends string = YearStr> = {
+  [key in YearType]: Type;
+}
