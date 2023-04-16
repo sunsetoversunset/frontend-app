@@ -32,7 +32,7 @@ coordinate_master = get_table(103061)
 
 # addresses = map(get_address, addresses_boundaries)
 
-addresses_with_boundaries = list(filter(lambda coordinate: coordinate['coordinate_bound_min'] is not None, coordinate_master))
+addresses_with_boundaries = list(filter(lambda coordinate: coordinate['coordinate_bound_min'] is not None and coordinate['coordinate_bound_min'] < coordinate['coordinate_bound_max'], coordinate_master))
 addresses = [address_boundary["label"] for address_boundary in addresses_with_boundaries]
 
 with open("./src/assets/data/addresses_with_boundaries.json", "w") as f:
