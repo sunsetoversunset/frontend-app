@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import ScrollDistanceSlider from "./ScrollDistanceSlider";
-import SearchAndFilter from "./SearchAndFilter";
-import { useAppContext, usePanoramaData } from "../../../hooks";
-import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg"
-import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg"
-import iconSearch from "../../../assets/icons/icon-search.svg"
-import { toggleDirectionAddrOffset, getAddressOffsetString } from '../../../utiliities';
 import 'rc-slider/assets/index.css';
-import "../../../styles/MapControls.scss";
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg";
+import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg";
+import iconSearch from "../../../assets/icons/icon-search.svg";
+import { sizes } from '../../../constants';
+import { useAppContext, usePanoramaData } from "../../../hooks";
+import { getAddressOffsetString, toggleDirectionAddrOffset } from '../../../utiliities';
+import ScrollDistanceSlider from "./ScrollDistanceSlider/Index";
+import SearchAndFilter from "./SearchAndFilter";
+import * as Styled from './styled';
 
 const MapControls = () => {
-  const { modalActive } = useAppContext();
+  const { modalActive, width } = useAppContext();
   const {
     x,
     minX,
@@ -31,7 +32,7 @@ const MapControls = () => {
   const xScrollingRight = Math.min(x + scrollDistanceX, maxX);
 
   // create the link paths for the move left, move right, and toggle directions buttons
-  const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction }) }/${yearsStr}`;
+  const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction })}/${yearsStr}`;
   const rightTo = `../../${getAddressOffsetString(xScrollingRight, direction, { direction })}/${yearsStr}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
   const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${yearsStr}` : '';
@@ -59,67 +60,48 @@ const MapControls = () => {
   }, [modalActive, leftTo, rightTo, navigate]);
 
   return (
-    <div className="map-controls">
-      <Link
+    <Styled.MapControls>
+      <Styled.MoveLink
         to={otherSideTo}
         replace={true}
       >
-        <button>
-          {`Look ${(direction === 'n') ? 'South' : 'North'}`}
-        </button>
-      </Link>
+        {`Look ${(direction === 'n') ? 'South' : 'North'}`}
+      </Styled.MoveLink>
 
-      {(Math.floor(x) > minX) ? (
-        <Link
-          to={leftTo}
-          replace={true}
-          id='west'
-        >
-          <button className={`btn-rounded inactive`} >
-            <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
-          </button>
-        </Link>) : (
-        <div id='west'>
-          <button className={`btn-rounded inactive disabled`} >
-            <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
-          </button>
-        </div>
-      )
+      <Styled.MoveLink
+        to={leftTo}
+        replace={true}
+        justifySelf="right"
+        disabled={(Math.floor(x) <= minX)}
+      >
+        <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
+      </Styled.MoveLink>
 
-      }
-
-      <ScrollDistanceSlider />
-
-      {(Math.ceil(x) < maxX) ? (
-        <Link
-          to={rightTo}
-          replace={true}
-          id='scrollRight'
-        >
-          <button>
-            {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
-          </button>
-        </Link>
-      ) : (
-        <div id='east'>
-          <button className='disabled'>
-            {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
-          </button>
-        </div>
+      {(width >= sizes.tablet) && (
+        <ScrollDistanceSlider />
       )}
 
-      <button
-        id='searchAndFilter'
+      <Styled.MoveLink
+        to={rightTo}
+        replace={true}
+        justifySelf="left"
+        disabled={(Math.ceil(x) >= maxX)}
+      >
+        {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
+      </Styled.MoveLink>
+
+      <Styled.SearchAndFilterButton
         onClick={() => setSearchOpen(!searchOpen)}
       >
         <img src={iconSearch} alt="icon-search" /> Search & Filter
-      </button>
+      </Styled.SearchAndFilterButton>
+
       {(searchOpen) && (
         <SearchAndFilter
           setSearchOpen={setSearchOpen}
         />
       )}
-    </div>
+    </Styled.MapControls>
   )
 }
 

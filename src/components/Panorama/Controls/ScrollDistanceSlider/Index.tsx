@@ -1,15 +1,14 @@
-import React from 'react';
-import Slider from 'rc-slider';
-import { usePanoramaData } from '../../../hooks';
+import { usePanoramaData } from '../../../../hooks';
+import * as Styled from './styled';
 
 const ScrollDistanceSlider = () => {
   const { scrollDistance, setScrollDistance } = usePanoramaData();
 
   return (
-    <div id="scroll_speed_control" >
-      <h6>Scroll Distance </h6>
+    <Styled.SpeedControl>
+      <Styled.Label>Scroll Distance</Styled.Label>
       <label>Less</label>
-      <Slider
+      <Styled.SpeedSlider
         min={2}
         max={10}
         defaultValue={scrollDistance * 10}
@@ -27,11 +26,9 @@ const ScrollDistanceSlider = () => {
         railStyle={{
           backgroundColor: 'grey'
         }}
-        className="slider"
-
       />
       <label>More</label>
-    </div>
+    </Styled.SpeedControl>
   );
 };
 
