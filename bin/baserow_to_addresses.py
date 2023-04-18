@@ -24,7 +24,7 @@ def get_table(table_id, page=1):
 
 
 print("getting address boundaries...")
-coordinate_master = get_table(103061)
+coordinate_master = get_table(158695)
 
 # write the addresses json file
 # def get_address(address_boundary):
