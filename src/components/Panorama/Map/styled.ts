@@ -11,7 +11,7 @@ export const MapLabel = styled.text`
   font-weight: 400;
   fill: grey;
   text-anchor: middle;
-  font-size: 1.5vw;
+  font-size: min(14px, 1.5vw);
 `
 
 export const Text = styled.text`
