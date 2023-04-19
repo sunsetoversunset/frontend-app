@@ -6,11 +6,12 @@ import AddressBar from './AddressBar';
 import XBar from './XBar';
 import PhotoStrips from "./PhotoStrips";
 import { PanoramaContext } from '../../Contexts';
-import { useIsValidAddress } from "../../hooks";
+import { useIsValidAddress, useAppContext } from "../../hooks";
 import "../../styles/Panorama.scss"
 
 export const Panorama = () => {
-  const [scrollDistance, setScrollDistance] = useState(0.6);
+  const { media } = useAppContext();
+  const [scrollDistance, setScrollDistance] = useState((media === 'phone') ? 0.98 : 0.6);
   const isValidAddress = useIsValidAddress();
   const navigate = useNavigate();
   const { pathname } = useLocation();

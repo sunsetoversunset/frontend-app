@@ -100,8 +100,6 @@ export const maxXs: YearValues<number> = {
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l))
-  // todo: fix the data error instead of ignoring it: theses addresses have incorrecto coordinates
-  .filter(d => d.l !== 1332)
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,
@@ -378,18 +376,20 @@ export function convertLngtoX(lng: number, width: number): number {
 /**
  * Takes a latitude and crudely projects its y value in cartesian space 
  * @param lat The latitude value
+ * @param height The height of the canvas
  * @returns The y value for the latitude
  */
-export function convertLattoY(lat: number): number {
-  return 10 - ((lat - latLngValues.midLat) * 55 / (latLngValues.maxLat - latLngValues.midLat));
+export function convertLattoY(lat: number, height: number): number {
+  return height / 6 - ((lat - latLngValues.midLat) * height / 4 / (latLngValues.maxLat - latLngValues.midLat));
 }
 
 /**
  * Takes a lat/lng point and crudely projects its x/y values in cartesian space 
  * @param latLng The lat/long value
  * @param width The width of the canvas
+ * @param height The height of the canvas
  * @returns The xand y values on the canvas
  */
-export function latLngToXY(latLng: Point, width: number): Point {
-  return [convertLngtoX(latLng[1], width), convertLattoY(latLng[0])];
+export function latLngToXY(latLng: Point, width: number, height: number): Point {
+  return [convertLngtoX(latLng[1], width), convertLattoY(latLng[0], height)];
 };

@@ -1,28 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useAppContext } from "../../../hooks";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
-
-const Text = styled.text`
-  font-weight: 400;
-  fill: #999999;
-  font-style: italic;
-
-  tspan {
-    font-size: 10px;
-  }
-`;
-
-const TickLabel = styled(Text)`
-  font-size: 10px;
-  font-style: normal;
+import * as Styled from './styled';
 
 
-`;
 
 
 const Base = () => {
   const { width } = useAppContext();
+  const height = Math.min(100, width / 6);
 
   // the width of the map relative to the width of the full screen and the svg path for the road
   const mapWidth = width * 0.9;
@@ -32,8 +18,8 @@ const Base = () => {
   const eastLatLng = [34.1, -118.2336];
 
   // convert to x, y coordinates
-  const westPoint = [convertLngtoX(westLatLng[1], mapWidth), convertLattoY(westLatLng[0])];
-  const eastPoint = [convertLngtoX(eastLatLng[1], mapWidth), convertLattoY(eastLatLng[0])];
+  const westPoint = [convertLngtoX(westLatLng[1], mapWidth), convertLattoY(westLatLng[0], height)];
+  const eastPoint = [convertLngtoX(eastLatLng[1], mapWidth), convertLattoY(eastLatLng[0], height)];
 
   // create data for ticks every quarter mile
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((distance, idx) => ({
@@ -57,10 +43,9 @@ const Base = () => {
           stroke='#aaaaaa'
           strokeWidth={2}
         />
-        <Text
+        <Styled.Text
           x={(eastPoint[0] + westPoint[0]) / 2}
           y={eastPoint[1] + 14}
-          textAnchor="middle"
         >
           miles
           {(width >= 800) && (
@@ -73,7 +58,7 @@ const Base = () => {
               </tspan>
             </>
           )}
-        </Text>
+        </Styled.Text>
         {ticks.map(tick => (
           <g
             transform={`translate(${tick.x} ${westPoint[1]})`}
@@ -88,12 +73,12 @@ const Base = () => {
               strokeWidth={2}
             />
             {(tick.showLabel) && (
-              <TickLabel
+              <Styled.TickLabel
                 y={-10}
                 textAnchor="middle"
               >
                 {tick.distance}
-              </TickLabel>
+              </Styled.TickLabel>
             )}
           </g>
         ))}

@@ -109,12 +109,13 @@ export function useAddressData(): AddressDataAndNavData {
 export function usePanoramaData(): PanoramaData {
   const { width } = useAppContext();
   const mapWidth = width * 0.9;
+  const mapHeight = Math.min(200, width / 3);
+  
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
   const { addr: address, offset } = parseAddrOffset(addrOffset);
-
   const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address);
-  const [mapX, mapY] = latLngToXY([lat, lng], mapWidth);
+  const [mapX, mapY] = latLngToXY([lat, lng], mapWidth, mapHeight);
 
   const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
   const x = addressX + offset;
@@ -163,11 +164,12 @@ export function useAddresses(direction?: Direction) {
   const { width } = useAppContext();
   const { easternmostLongitude } = usePanoramaData();
   const mapWidth = width * 0.9;
+  const mapHeight = Math.min(200, width / 3);
   return labels
     .filter(d => !direction || direction === d.direction)
     .filter(d => !easternmostLongitude || d.lng <= easternmostLongitude)
     .map(d => {
-      const [mapX, mapY] = latLngToXY([d.lat, d.lng], mapWidth);
+      const [mapX, mapY] = latLngToXY([d.lat, d.lng], mapWidth, mapHeight);
       return {
         ...d,
         mapX,
@@ -259,22 +261,23 @@ export function usePhotoStrip(year: number) {
 export function useRoadPath() {
   const { width, easternmostLongitude } = usePanoramaData();
   const mapWidth = width * 0.9;
+  const mapHeight = Math.min(200, width / 3);
 
   const pointsWithPhotos = GeoJson.geometry.coordinates[0].filter(point => point[0] <= easternmostLongitude);
-  const [firstXActive, firstYActive] = latLngToXY([pointsWithPhotos[0][1], pointsWithPhotos[0][0]], mapWidth);
+  const [firstXActive, firstYActive] = latLngToXY([pointsWithPhotos[0][1], pointsWithPhotos[0][0]], mapWidth, mapHeight);
   const lineSegmentsActive = pointsWithPhotos
     .slice(1)
     .map((point) => {
-      const [x, y] = latLngToXY([point[1], point[0]], mapWidth)
+      const [x, y] = latLngToXY([point[1], point[0]], mapWidth, mapHeight)
       return `L ${x} ${y}`;
     });
 
   const allPoints = GeoJson.geometry.coordinates[0];
-  const [firstX, firstY] = latLngToXY([allPoints[0][1], allPoints[0][0]], mapWidth);
+  const [firstX, firstY] = latLngToXY([allPoints[0][1], allPoints[0][0]], mapWidth, mapHeight);
   const lineSegmentsAll = allPoints
     .slice(1)
     .map((point) => {
-      const [x, y] = latLngToXY([point[1], point[0]], mapWidth)
+      const [x, y] = latLngToXY([point[1], point[0]], mapWidth, mapHeight)
       return `L ${x} ${y}`;
     });
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
 import { useAppContext, useRoadPath } from "../../../hooks"; 
-import '../../../styles/Map.scss';
+import * as Styled from './styled';
 
 const MapLabels = [
   {
@@ -63,28 +63,26 @@ const MapLabels = [
 
 const Base = () => {
   const { width } = useAppContext();
-
+  
   // the width of the map relative to the width of the full screen and the svg path for the road
   const mapWidth = width * 0.9;
+  const mapHeight = Math.min(200, width / 3);
   const { activePath, completePath } = useRoadPath();
 
   return (
     <svg
       width={width}
-      height={250}
+      height={mapHeight}
     >
-      <g transform={`translate(${width / 2} 100) rotate(0)`}>
+      <g transform={`translate(${width / 2} ${mapHeight / 2}) rotate(0)`}>
         {MapLabels.map(mapLabel => (
-          <text
+          <Styled.MapLabel
             x={convertLngtoX(mapLabel.lng, mapWidth)}
-            y={convertLattoY(mapLabel.lat)}
-            fontSize={16}
-            fill='grey'
-            textAnchor="middle"
+            y={convertLattoY(mapLabel.lat, mapHeight)}
             key={`label for ${mapLabel.label}`}
           >
             {mapLabel.label.toUpperCase()}
-          </text>
+          </Styled.MapLabel>
         ))}
         <path d={completePath}
           fill='transparent'

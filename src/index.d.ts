@@ -3,7 +3,7 @@ export type Direction = 'n' | 's'
 export type Dimensions = {
   width: number;
   height: number;
-  media: 'phone' | 'tablet-portrait' | 'desktop';
+  media: 'phone' | 'tablet' | 'laptop';
 }
 
 export type AppContextParams = Dimensions & {

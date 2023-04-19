@@ -9,11 +9,12 @@ import Panorama from './Panorama/Index';
 import NavHeader from './NavHeader/Index';
 import About from './Pages/About.jsx';
 import AddressView from './Address/Index';
-import Footer from './Footer';
+import Footer from './Footer/Index';
 import Landing from "./Landing";
 import { AppContext } from '../Contexts';
 import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';
+import { sizes } from '../constants';
 
 export const App = () => {
   const [landingOpen, setLandingOpen] = useState(localStorage.getItem('SOSArrivalPopup') !== 'dontshow');
@@ -22,12 +23,12 @@ export const App = () => {
     const { clientWidth, clientHeight } = (document.documentElement) ? document.documentElement : { clientWidth: null, clientHeight: null };
     const width = clientWidth || innerWidth;
     let media: Dimensions["media"];
-    if (width <= 480) {
+    if (width < sizes.tablet) {
       media = 'phone';
-    } else if (width < 900) {
-      media = 'tablet-portrait';
+    } else if (width >= sizes.tablet && width < sizes.laptop) {
+      media = 'tablet';
     } else {
-      media = 'desktop';
+      media = 'laptop';
     }
     const dimensions: Dimensions = {
       width,

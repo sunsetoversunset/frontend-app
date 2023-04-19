@@ -1,28 +1,28 @@
-import React from "react";
-import MapMarker from './Marker';
 import { useAppContext } from "../../../hooks";
+import MapMarker from './Marker';
 import Base from './Base';
 import Scale from './Scale';
 import SelectableAddresses from './SelectableAddresses/Index';
-import '../../../styles/Map.scss';
+import * as Styled from './styled';
 
 const Map = () => {
   const { width } = useAppContext();
+  const height = Math.min(200, width / 3);
 
   return (
-    <div className='map'>
+    <Styled.Map height={height}>
       <svg
         width={width}
-        height={200}
+        height={height}
       >
         <Base />
         <Scale />
-        <g transform={`translate(${width / 2} 100) rotate(0)`}>
+        <g transform={`translate(${width / 2} ${height / 2}) rotate(0)`}>
           <SelectableAddresses />
           <MapMarker />
         </g>
       </svg>
-    </div>
+    </Styled.Map>
   )
 }
 
