@@ -5,7 +5,7 @@ import { colors, devices } from '../../../constants';
 const button = css`
     border-radius: 20px;
     background: ${colors.light2};
-    padding: 0;
+    padding: 0 5px;
     border: 1px solid ${colors.black};
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ const button = css`
     color: ${colors.black};
     text-decoration: none;
     height: 40px;
-    width: 60px;
+    width: 70px;
     font-size: 12px;
     text-align: center;
 
@@ -31,7 +31,7 @@ const button = css`
     @media ${devices.tablet} {
       white-space: nowrap;
       height: 36px;
-      padding: 0px 24px;
+      padding: 0px 20px;
       width: auto;
       font-size: 14px;
       border-radius: 18px;
@@ -75,6 +75,7 @@ export const MapControls = styled.div`
   grid-template-columns: repeat(4, auto);
   justify-content: space-evenly;
   background-color: ${colors.mainBg};
+  height: 52px;
 
   @media ${devices.tablet} {
     top: 50px;
@@ -82,5 +83,6 @@ export const MapControls = styled.div`
     padding: 5px 20px;
     justify-items: stretch;
     justify-content: stretch;
+    height: 52px;
   }
 `;

@@ -26,6 +26,10 @@ export const Text = styled.text`
   }
 `;
 
+export const Miles = styled(Text)`
+  font-size: 14px;
+`;
+
 export const TickLabel = styled(Text)`
   font-size: 10px;
   font-style: normal;

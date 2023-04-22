@@ -8,7 +8,7 @@ import { sizes } from '../../../constants';
 import { useAppContext, usePanoramaData } from "../../../hooks";
 import { getAddressOffsetString, toggleDirectionAddrOffset } from '../../../utiliities';
 import ScrollDistanceSlider from "./ScrollDistanceSlider/Index";
-import SearchAndFilter from "./SearchAndFilter";
+import SearchAndFilter from "./SearchAndFilter/Index";
 import * as Styled from './styled';
 
 const MapControls = () => {

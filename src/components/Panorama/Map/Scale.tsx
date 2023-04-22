@@ -1,12 +1,8 @@
-import React from 'react';
 import { useAppContext } from "../../../hooks";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
 import * as Styled from './styled';
 
-
-
-
-const Base = () => {
+const Scale = () => {
   const { width } = useAppContext();
   const height = Math.min(100, width / 6);
 
@@ -43,7 +39,7 @@ const Base = () => {
           stroke='#aaaaaa'
           strokeWidth={2}
         />
-        <Styled.Text
+        <Styled.Miles
           x={(eastPoint[0] + westPoint[0]) / 2}
           y={eastPoint[1] + 14}
         >
@@ -58,7 +54,7 @@ const Base = () => {
               </tspan>
             </>
           )}
-        </Styled.Text>
+        </Styled.Miles>
         {ticks.map(tick => (
           <g
             transform={`translate(${tick.x} ${westPoint[1]})`}
@@ -87,4 +83,4 @@ const Base = () => {
   )
 }
 
-export default Base;
+export default Scale;
