@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { colors, devices } from '../../../constants';
 
 const button = css`
-    
-    border-radius: 50px;
+    border-radius: 20px;
     background: ${colors.light2};
-    padding: 0px;
+    padding: 0;
     border: 1px solid ${colors.black};
     display: flex;
     align-items: center;
@@ -14,14 +13,20 @@ const button = css`
     font-weight: 400;
     color: ${colors.black};
     text-decoration: none;
+    height: 40px;
+    width: 60px;
+    font-size: 12px;
+    text-align: center;
+
     &:hover {
       cursor: pointer;
       background-color: ${colors.medOrange};
     }
-    height: 60px;
-    width: 60px;
-    font-size: 12px;
-    text-align: center;
+
+    img {
+      max-width: 12px;
+      padding: 0 3px;
+    }
 
     @media ${devices.tablet} {
       white-space: nowrap;
@@ -29,6 +34,7 @@ const button = css`
       padding: 0px 24px;
       width: auto;
       font-size: 14px;
+      border-radius: 18px;
     }
 `;
 
@@ -60,18 +66,20 @@ export const SearchAndFilterButton = styled.button`
 
 export const MapControls = styled.div`
   position: sticky;
-  top: 64px;
+  top: 70px;
   z-index: 1001;
-  height: 70px;
   overflow: visible;
   display: grid;
   gap: 10px;
+  padding: 5px 0;
   grid-template-columns: repeat(4, auto);
   justify-content: space-evenly;
+  background-color: ${colors.mainBg};
 
   @media ${devices.tablet} {
+    top: 50px;
     grid-template-columns: min-content auto 200px auto min-content;
-    padding: 0 20px;
+    padding: 5px 20px;
     justify-items: stretch;
     justify-content: stretch;
   }

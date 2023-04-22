@@ -10,7 +10,7 @@ import NavHeader from './NavHeader/Index';
 import About from './Pages/About.jsx';
 import AddressView from './Address/Index';
 import Footer from './Footer/Index';
-import Landing from "./Landing";
+import Landing from "./Landing/Index";
 import { AppContext } from '../Contexts';
 import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';

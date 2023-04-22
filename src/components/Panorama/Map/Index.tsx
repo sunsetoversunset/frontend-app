@@ -6,7 +6,7 @@ import SelectableAddresses from './SelectableAddresses/Index';
 import * as Styled from './styled';
 
 const Map = () => {
-  const { width } = useAppContext();
+  const { width, media } = useAppContext();
   const height = Math.min(200, width / 3);
 
   return (
@@ -16,7 +16,7 @@ const Map = () => {
         height={height}
       >
         <Base />
-        <Scale />
+        {(media !== 'phone') && <Scale />}
         <g transform={`translate(${width / 2} ${height / 2}) rotate(0)`}>
           <SelectableAddresses />
           <MapMarker />

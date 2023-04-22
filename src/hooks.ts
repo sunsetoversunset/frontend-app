@@ -18,8 +18,9 @@ export function useAppContext() {
   return useContext(AppContext);
 }
 
-/* 
- * Used by the address view components, it retrieves the address data asyncronously from the json file and returns:
+/** 
+ * Used by the address view components, it retrieves the address data asyncronously from the json file
+ * @returns
  *  {
  *    addressHasData: boolean;                
  *    address: string;                         // the address
@@ -40,8 +41,6 @@ export function useAppContext() {
  *    assessor_data: AssessorRow[];
  *  }
  */
-
-
 export function useAddressData(): AddressDataAndNavData {
   const { address } = useParams() as { address: string };
   const [addressData, setAddressData] = useState<AddressData>();

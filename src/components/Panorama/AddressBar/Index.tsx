@@ -1,10 +1,10 @@
+import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
-import * as d3 from "d3";
-import ConditionalWrapper from "../ConditionalWrapper";
-import { maxX, hasAddressData } from '../../utiliities';
-import { usePanoramaData } from "../../hooks";
-import '../../styles/AddressBar.scss';
+import { usePanoramaData } from "../../../hooks";
+import { hasAddressData, maxX } from '../../../utiliities';
+import ConditionalWrapper from "../../ConditionalWrapper";
+import * as Styled from './styled';
 
 const AddressBar = () => {
   const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
@@ -58,19 +58,13 @@ const AddressBar = () => {
   });
 
   return (
-    <>        
-      <div
-        id='addressBar'
-      >
-
+    <>
+      <Styled.AddressBar>
         <div
-          id='barContainer'
           ref={ref}
           style={{
             transform: `translateX(${translateX}px)`,
             width: maxX,
-            height: 40,
-            lineHeight: '40px',
           }}
         >
           {visibleAddresses.map(label => (
@@ -79,23 +73,18 @@ const AddressBar = () => {
               condition={hasAddressData(label.label)}
               wrapper={(children: any) => (<Link to={`/address/${label.label}`}>{children}</Link>)}
               children={
-                <span
-                  className={`address ${(hasAddressData(label.label)) ? 'selectable' : 'unselectable'}`}
-                  style={{
-                    left: label.x - 20,
-                    textAlign: 'center',
-                    width: 40,
-                    overflowX: 'visible',
-                  }}
+                <Styled.Address
+                  selectable={hasAddressData(label.label)}
+                  style={{ left: label.x - 20 }}
                 >
                   {label.label}
-                </span>
+                </Styled.Address>
               }
               key={label.label}
             />
           ))}
         </div>
-      </div>
+      </Styled.AddressBar>
       <Outlet />
     </>
   );
