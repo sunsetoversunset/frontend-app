@@ -3,7 +3,7 @@ import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
 import '../../styles/AddressView.scss';
 import PhotoStrips from '../Panorama/PhotoStrips';
-import Controls from './Controls';
+import Controls from './Controls/Index';
 import Header from './Header/Index';
 import CensusTable from './Tables/Census';
 import NewspaperTable from './Tables/Newspaper';
@@ -57,7 +57,7 @@ const AddressView = () => {
                 Search Building Records
               </h1>
               <p>
-                <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearchSelection.aspx" target="_blank">Click here to open the search page on the Los Angeles Department of Buildings and Safety site.</a></p><p>You'll then need to do the following:
+                <a href="https://ladbsdoc.lacity.org/IDISPublic_Records/idis/DocumentSearchSelection.aspx" target="_blank" rel="noreferrer">Click here to open the search page on the Los Angeles Department of Buildings and Safety site.</a></p><p>You'll then need to do the following:
               </p>
               <ol>
                 <li>Click <strong>"By Address"</strong></li>
@@ -70,7 +70,7 @@ const AddressView = () => {
                 Search ZIMAS (Zone Information and Map Access System)
               </h1>
               <p>
-                <a href="https://zimas.lacity.org/" target="_blank">Click here to open the search page on the ZIMAS site</a>
+                <a href="https://zimas.lacity.org/" target="_blank" rel="noreferrer">Click here to open the search page on the ZIMAS site</a>
               </p>
               <p>You'll then need to do the following:</p>
               <ol>

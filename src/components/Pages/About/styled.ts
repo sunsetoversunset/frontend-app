@@ -55,7 +55,6 @@ export const Subtitle = styled.h2`
   font-size: 20px;
   line-height: 26px;
   text-align: center;
-  max-width: 46%;
   ${centering}
 
   @media ${Constants.devices.tablet} {

@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { colors, devices } from '../../../constants';
 
-const button = css`
+export const button = css`
     border-radius: 20px;
     background: ${colors.light2};
     padding: 0 5px;
-    border: 1px solid ${colors.black};
+    border: 1px solid ${colors.black} !important;
     display: flex;
     align-items: center;
     font-family: "Sunset-Gothic", sans-serif;

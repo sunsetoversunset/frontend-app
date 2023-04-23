@@ -5,10 +5,8 @@ import uPenn from '../../../assets/images/logo-UPenn.png'
 import swarthmore from '../../../assets/images/swarthmore.png'
 import * as Styled from './styled';
 
-
 const About = () => {
   return (
-    <div className="app-page about-view" id="about">
       <Styled.About>
         <Styled.PageHeader style={{ backgroundImage: `url('https://media.getty.edu/iiif/image/de285f40-3405-4620-89af-27a0e24ef7c7/full/,1400/0/default.jpg` }}>
           <Styled.Title>
@@ -93,7 +91,6 @@ const About = () => {
         <Styled.Heading>Contact</Styled.Heading>
         <p><a href="mailto:info@sunsetoversunset.org">info@sunsetoversunset.org</a></p>
       </Styled.About>
-    </div >
   );
 }
 
