@@ -88,8 +88,8 @@ const SearchAndFilter = ({ setSearchOpen }: { setSearchOpen: React.Dispatch<Reac
               onClick={(e) => {
                 // remove it from years if it's currently checked; add it if it's not
                 const updatedYears = (selectedYears.includes(year))
-                  ? years.filter(y => y !== year)
-                  : [...years, year].sort();
+                  ? selectedYears.filter(y => y !== year)
+                  : [...selectedYears, year].sort();
                 navigate(`../${updatedYears.sort().join(',')}`);
               }}
             />

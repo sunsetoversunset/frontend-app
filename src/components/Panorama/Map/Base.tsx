@@ -1,6 +1,6 @@
 import React from "react";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
-import { useAppContext, useRoadPath } from "../../../hooks"; 
+import { useAppContext, useRoadPath } from "../../../hooks";
 import * as Styled from './styled';
 
 const MapLabels = [
@@ -63,7 +63,7 @@ const MapLabels = [
 
 const Base = () => {
   const { width } = useAppContext();
-  
+
   // the width of the map relative to the width of the full screen and the svg path for the road
   const mapWidth = width * 0.9;
   const mapHeight = Math.min(200, width / 3);
@@ -75,15 +75,7 @@ const Base = () => {
       height={mapHeight}
     >
       <g transform={`translate(${width / 2} ${mapHeight / 2}) rotate(0)`}>
-        {MapLabels.map(mapLabel => (
-          <Styled.MapLabel
-            x={convertLngtoX(mapLabel.lng, mapWidth)}
-            y={convertLattoY(mapLabel.lat, mapHeight)}
-            key={`label for ${mapLabel.label}`}
-          >
-            {mapLabel.label.toUpperCase()}
-          </Styled.MapLabel>
-        ))}
+
         <path d={completePath}
           fill='transparent'
           stroke='#ddd'
@@ -99,6 +91,24 @@ const Base = () => {
           stroke='#F1EEE8'
           strokeWidth='5'
         />
+        {MapLabels.map(mapLabel => (
+          <g>
+            <Styled.MapLabelHalo
+              x={convertLngtoX(mapLabel.lng, mapWidth)}
+              y={convertLattoY(mapLabel.lat, mapHeight)}
+              key={`label for ${mapLabel.label}`}
+            >
+              {mapLabel.label.toUpperCase()}
+            </Styled.MapLabelHalo>
+            <Styled.MapLabel
+              x={convertLngtoX(mapLabel.lng, mapWidth)}
+              y={convertLattoY(mapLabel.lat, mapHeight)}
+              key={`label for ${mapLabel.label}`}
+            >
+              {mapLabel.label.toUpperCase()}
+            </Styled.MapLabel>
+          </g>
+        ))}
       </g>
     </svg>
   )

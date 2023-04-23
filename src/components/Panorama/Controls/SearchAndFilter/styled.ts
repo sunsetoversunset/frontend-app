@@ -45,6 +45,43 @@ export const YearsHeader = styled.h3`
   margin: 20px 0 0 0;
 `;
 
+/* adapted from https://moderncss.dev/pure-css-custom-checkbox-style/ */
 export const Checkbox = styled.input`
-  background-color: ${Constants.colors.rust}
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(${Constants.colors.mainBg});
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid black;
+  border-radius: 0.35em;
+  transform: translateY(-0.075em);
+  background-color: ${Constants.colors.medOrange};
+
+  display: inline-grid;
+  place-content: center;
+  margin-right: 5px;
+
+  ::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    /* Windows High Contrast Mode */
+    background-color: white;
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
 `;

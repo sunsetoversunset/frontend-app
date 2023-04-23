@@ -12,6 +12,16 @@ export const MapLabel = styled.text`
   fill: grey;
   text-anchor: middle;
   font-size: min(14px, max(1.5vw, 8px));
+`;
+
+export const MapLabelHalo = styled.text`
+  font-weight: 400;
+  fill: ${Constants.colors.mainBg};
+  stroke: ${Constants.colors.mainBg};
+  stroke-width: 4px;
+  stroke-opacity: 0.5;
+  text-anchor: middle;
+  font-size: min(14px, max(1.5vw, 8px));
 `
 
 export const Text = styled.text`
