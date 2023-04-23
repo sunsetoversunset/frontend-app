@@ -92,18 +92,16 @@ const Base = () => {
           strokeWidth='5'
         />
         {MapLabels.map(mapLabel => (
-          <g>
+          <g key={`label for ${mapLabel.label}`}>
             <Styled.MapLabelHalo
               x={convertLngtoX(mapLabel.lng, mapWidth)}
               y={convertLattoY(mapLabel.lat, mapHeight)}
-              key={`label for ${mapLabel.label}`}
             >
               {mapLabel.label.toUpperCase()}
             </Styled.MapLabelHalo>
             <Styled.MapLabel
               x={convertLngtoX(mapLabel.lng, mapWidth)}
               y={convertLattoY(mapLabel.lat, mapHeight)}
-              key={`label for ${mapLabel.label}`}
             >
               {mapLabel.label.toUpperCase()}
             </Styled.MapLabel>

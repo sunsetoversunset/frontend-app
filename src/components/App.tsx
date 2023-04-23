@@ -7,7 +7,7 @@ import Story from './Stories/StoriesView';
 import StoryMd from './Stories/Story';
 import Panorama from './Panorama/Index';
 import NavHeader from './NavHeader/Index';
-import About from './Pages/About.jsx';
+import About from './Pages/About/Index.jsx';
 import AddressView from './Address/Index';
 import Footer from './Footer/Index';
 import Landing from "./Landing/Index";
