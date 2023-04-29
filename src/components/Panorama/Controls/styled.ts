@@ -38,15 +38,15 @@ export const button = css`
     }
 `;
 
-export const MoveLink = styled(Link) <{ justifySelf?: string; disabled?: boolean }>`
+export const MoveLink = styled(Link) <{ justifyself?: string; disabled?: boolean }>`
   ${button}
   ${p => p.disabled && `
     pointer-events: none;
     color: ${colors.grayLightest};
   `}
   @media ${devices.tablet} {
-    ${p => p.justifySelf && `
-      justify-self: ${p.justifySelf};
+    ${p => p.justifyself && `
+      justify-self: ${p.justifyself};
     `}
   }
 `;

@@ -28,7 +28,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
       }
       {(previousAddress)
         ? (
-          <MoveLink to={`../${previousAddress}`} justifySelf='right'>
+          <MoveLink to={`../${previousAddress}`} justifyself='right'>
               <img src={iconArrowLeft} alt="icon-arrow-left" /> {previousAddress}
           </MoveLink>
         )

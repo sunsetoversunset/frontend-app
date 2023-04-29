@@ -99,7 +99,7 @@ export const maxXs: YearValues<number> = {
  */
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
-  .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l))
+  .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l && _d.s === d.s))
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,

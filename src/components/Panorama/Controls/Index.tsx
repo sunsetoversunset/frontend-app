@@ -71,7 +71,7 @@ const MapControls = () => {
       <Styled.MoveLink
         to={leftTo}
         replace={true}
-        justifySelf="right"
+        justifyself="right"
         disabled={(Math.floor(x) <= minX)}
       >
         <img src={iconArrowLeft} alt="icon-arrow-left" /> {(direction === 'n') ? 'Head West' : 'Head East'}
@@ -84,7 +84,7 @@ const MapControls = () => {
       <Styled.MoveLink
         to={rightTo}
         replace={true}
-        justifySelf="left"
+        justifyself="left"
         disabled={(Math.ceil(x) >= maxX)}
       >
         {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />

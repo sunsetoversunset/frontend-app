@@ -1,5 +1,6 @@
 import { useAddressDataContext } from '../../../hooks';
 import '../../../styles/Tables.scss';
+import * as Styled from './styled';
 
 const OccupancyTable = () => {
   const { occupants_data } = useAddressDataContext();
@@ -8,47 +9,45 @@ const OccupancyTable = () => {
   }
 
   return (
-    <div
-      className={"occupancyTable dataTable "}
-    >
-      <h1>Occupants</h1>
-      <h4 className='tooltip sources'>
+    <Styled.DataTable>
+      <Styled.Title>Occupants</Styled.Title>
+      <Styled.Tooltip>
         Sources
-        <span className="tooltiptext">
+        <Styled.TooltipContent>
           <ul>
             <li>The Pacific Telephone and Telegraph Company, <a href="https://bit.ly/3AaPk6R" target="_blank"><cite>Los Angeles Street Address Directory</cite></a>, July 1965, accessed via Los Angeles Public Library.</li>
             <li>Pacific Bell, <a href="https://bit.ly/2WERMok" target="_blank"><cite>Los Angeles Street Address Telephone Directory</cite></a>, July 1973, accessed via Los Angeles Public Library.</li>
             <li>Pacific Bell, <a href="https://bit.ly/3FeQ4vo" target="_blank"><cite>Pacific Bell Street Address Telephone Directory</cite></a>, Los Angeles, July 1987, accessed via Los Angeles Public Library.</li>
           </ul>
-        </span>
-      </h4>
-      <table>
+        </Styled.TooltipContent>
+      </Styled.Tooltip>
+      <Styled.Table>
         <thead>
-          <tr className="year">
-            <th>Year</th>
+          <Styled.Row>
+            <Styled.TableHeader>Year</Styled.TableHeader>
             {occupants_data.some(occupant => occupant.fragment) && (
-              <th>Unit</th>
+              <Styled.TableHeader>Unit</Styled.TableHeader>
             )}
-            <th>Occupants</th>
-          </tr>
+            <Styled.TableHeader>Occupants</Styled.TableHeader>
+          </Styled.Row>
         </thead>
 
         <tbody>
           {occupants_data
             .sort((a, b) => a.year - b.year)
             .map((entry, idx) => (
-              <tr key={`${entry.year}-${entry.fragment}-${entry.entry}-${idx}`}>
-                <td>{entry.year}</td>
+              <Styled.Row key={`${entry.year}-${entry.fragment}-${entry.entry}-${idx}`}>
+                <Styled.Data>{entry.year}</Styled.Data>
                 {occupants_data.some(occupant => occupant.fragment) && (
-                  <td>{entry.fragment}</td>
+                  <Styled.Data>{entry.fragment}</Styled.Data>
                 )}
-                <td>{entry.entry}</td>
-              </tr>
+                <Styled.Data>{entry.entry}</Styled.Data>
+              </Styled.Row>
             )
             )}
         </tbody>
-      </table>
-    </div>
+      </Styled.Table>
+    </Styled.DataTable>
   );
 };
 

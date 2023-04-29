@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import "../../styles/PhotoStrip.scss";
-import PhotoViewerModal from "../PhotoViewerModal";
+import React, { useContext, useState } from "react";
 import { AddressDataContext } from "../../Contexts";
+import "../../styles/PhotoStrip.scss";
 import { AddressData } from '../../types/AddressView';
+import PhotoViewerModal from "../PhotoViewerModal/Index";
 
-const PhotoStripAddress = ({year}: { year: number }) => {
+const PhotoStripAddress = ({ year }: { year: number }) => {
   const { photos: allPhotos } = useContext(AddressDataContext) as AddressData;
   const photos = allPhotos.filter((photo: any) => photo.year === year);
   const [modalId, setModalId] = useState<string>();

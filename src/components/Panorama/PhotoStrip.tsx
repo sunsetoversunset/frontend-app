@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from "react";
 import * as d3 from 'd3';
+import { useEffect, useRef, useState } from "react";
+import { useAppContext, usePhotoStrip } from '../../hooks';
 import "../../styles/PhotoStrip.scss";
-import PhotoViewerModal from "../PhotoViewerModal";
-import { usePhotoStrip, useAppContext } from '../../hooks';
+import PhotoViewerModal from "../PhotoViewerModal/Index";
 
 type Photo = {
   src: string;
@@ -14,7 +14,7 @@ type Photo = {
 const PhotoStrip = ({ year }: { year: number; }) => {
   const { leftX, rightX, photoData, direction, directionLoaded, addressPhotoIds } = usePhotoStrip(year);
   const { setModalActive } = useAppContext();
-  
+
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
   // the translateX value for the strip container
@@ -23,7 +23,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   // the if for the image that is displayed in the modal. Undefined is unopened
   const [modalId, setModalId] = useState<string>();
-  
+
   // refs to track the previous leftX and rightX, which are used to retrieve and display both the last and the next photos during a scroll
   const leftXRef = useRef(leftX);
   const rightXRef = useRef(rightX);
@@ -33,7 +33,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
   const stripContainer = useRef(null);
   const directionRef = useRef(direction);
   const [load, setLoad] = useState(true);
-  
+
   const imageWidth = 299;
 
   const getVisiblePhotosInRange = (left: number, right: number) => {
@@ -43,7 +43,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
-        opacity: (!addressPhotoIds || (addressPhotoIds.length > 0 && addressPhotoIds.includes(d.identifier))) ? 1 : 0.3, 
+        opacity: (!addressPhotoIds || (addressPhotoIds.length > 0 && addressPhotoIds.includes(d.identifier))) ? 1 : 0.3,
       }));
   }
 
@@ -125,7 +125,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
 
   function handleDrag(e: any) {
     console.log("Dragging...");
-    console.log({ startDragX, distance: startDragX - e.clientX } );
+    console.log({ startDragX, distance: startDragX - e.clientX });
   }
 
   return (
