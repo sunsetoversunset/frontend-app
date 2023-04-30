@@ -100,6 +100,9 @@ export const maxXs: YearValues<number> = {
 export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l && _d.s === d.s))
+  // remove three incorrect labels
+  // todo: fix these in the data
+  .filter(d => d.l !== 1332 && d.l !== 9201 && d.l !== 'Doheny Road' && d.l !== 'Cory Avenue')
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,
@@ -217,7 +220,7 @@ function ensure<T>(argument: T | undefined | null, message: string = 'This value
 export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'closest', x: number, direction: Direction, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean; useCoordinateNotX?: boolean; }) {
   const _x = (x: number) => (options?.useCoordinateNotX) ? getCoordinateToX(x, direction) : x;
   const closestLabels = labels
-    // filter out addresses on othe side if there is a direction option
+    // filter out addresses on other side if there is a direction option
     .filter(labelData => (options?.direction) ? labelData.direction === options.direction : true)
     // filter out cross streets if that option is true
     .filter(labelData => (options?.excludeCrossStreets) ? !isNaN(Number(labelData.label)) : true)
@@ -227,7 +230,7 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
     .filter(labelData => (orientation === 'previous') ? labelData.x < _x(x) : true)
     .filter(labelData => (orientation === 'next') ? labelData.x > _x(x) : true)
     .sort((a, b) => {
-      const coordinate = getXToCoordinate(x, direction);
+      const coordinate = getXToCoordinate(_x(x), direction);
       if (orientation === 'previous') {
         return _x(b.x) - _x(a.x);
       }
@@ -244,7 +247,7 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
     });
   return (closestLabels.length > 0) ? {
     addr: closestLabels[0].label,
-    offset: Math.round(x - closestLabels[0].x),
+    offset: Math.round(_x(x) - closestLabels[0].x),
     x,
   } : undefined;
 }

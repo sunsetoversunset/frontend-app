@@ -63,7 +63,7 @@ const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
   // the close button goes to different urls depending on whether the page the modal is opend on is the panorama page or an address page
   const closeTos = {
     panorama: (() => {
-      const addrOffset = getProximateAddressFromX("closest", photoCenterCoordinate, photoData.side, { useCoordinateNotX: true });
+      const addrOffset = getProximateAddressFromX("closest", photoCenterCoordinate, photoData.side, { direction: photoData.side, useCoordinateNotX: true });
       const pathpieces = pathname.split("/");
       return addrOffset ? [pathpieces[0], pathpieces[1], `${addrOffset.addr.replace(/\s+/g, "")}-${addrOffset.offset}`, pathpieces[3]].join("/") : pathname;
     })(),

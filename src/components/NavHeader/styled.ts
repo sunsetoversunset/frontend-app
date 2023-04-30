@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { colors, devices } from '../../constants';
+import { colors, devices, deviceDimensions } from '../../constants';
+const dimensions = deviceDimensions.navHeader;
 
 export const NavLink = styled(Link)`
   border: 1px solid transparent;
@@ -32,16 +33,15 @@ export const NavHeader = styled.nav`
   z-index: 9999;
   text-align: center;
   background-color: ${colors.mainBg};
-  border-bottom: 1px solid ${colors.black};
-  padding: 5px 0;
-  height: 63px;
+  border-bottom: ${dimensions.borderBottom}px solid ${colors.black};
+  padding: ${dimensions.mobile.paddingTopBottom}px 0;
+  height: ${dimensions.mobile.height}px;
 
   @media ${devices.tablet} {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
-
-    padding: 0 30px;
+    height: ${dimensions.tablet.height}px;
+    padding: ${dimensions.tablet.paddingTopBottom}px 30px;
   }
 `;

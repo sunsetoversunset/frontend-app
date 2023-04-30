@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { colors, devices } from '../../../constants';
+import { colors, devices, deviceDimensions } from '../../../constants';
+const dimensions = deviceDimensions.panoramaControls;
 
 export const button = css`
     border-radius: 20px;
@@ -66,23 +67,23 @@ export const SearchAndFilterButton = styled.button`
 
 export const MapControls = styled.div`
   position: sticky;
-  top: 70px;
+  top: ${dimensions.top.mobile}px;
   z-index: 1001;
   overflow: visible;
   display: grid;
   gap: 10px;
-  padding: 5px 0;
   grid-template-columns: repeat(4, auto);
   justify-content: space-evenly;
   background-color: ${colors.mainBg};
-  height: 52px;
+  height: ${dimensions.height}px;
+  padding: ${dimensions.paddingTopBottom}px 0;
 
   @media ${devices.tablet} {
-    top: 50px;
+    top: ${dimensions.top.tablet}px;
     grid-template-columns: min-content auto 200px auto min-content;
-    padding: 5px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     justify-items: stretch;
     justify-content: stretch;
-    height: 52px;
   }
 `;

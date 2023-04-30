@@ -27,3 +27,46 @@ export const devices = {
   tablet: `(min-width: ${sizes.tablet}px)`,
   laptop: `(min-width: ${sizes.laptop}px)`,
 }
+
+
+// set variables for all the vertical dimensions for anything that's sticky or needs to be accounted for in anything that's sticky
+const navHeader = {
+  borderBottom: 1,
+  mobile: {
+    height: 63,
+    paddingTopBottom: 5,
+  },
+  tablet: {
+    height: 50,
+    paddingTopBottom: 0,
+  },
+  laptop: {
+    height: 50,
+    paddingTopBottom: 0,
+  },
+} as const;
+
+const panoramaControls = {
+  height: 52,
+  paddingTopBottom: 5,
+  top: {
+    mobile: navHeader.mobile.height + navHeader.mobile.paddingTopBottom * 2 + navHeader.borderBottom,
+    tablet: navHeader.tablet.height + navHeader.tablet.paddingTopBottom * 2 + navHeader.borderBottom,
+    laptop: navHeader.laptop.height + navHeader.laptop.paddingTopBottom * 2 + navHeader.borderBottom,
+  },
+} as const;
+
+const panoramaAddressBar = {
+  height: 40,
+  top: {
+    mobile: panoramaControls.top.mobile + panoramaControls.paddingTopBottom * 2 + panoramaControls.height,
+    tablet: panoramaControls.top.tablet + panoramaControls.paddingTopBottom * 2 + panoramaControls.height,
+    laptop: panoramaControls.top.laptop + panoramaControls.paddingTopBottom * 2 + panoramaControls.height,
+  }
+} as const;
+
+export const deviceDimensions = {
+  navHeader,
+  panoramaControls,
+  panoramaAddressBar,
+} as const;
