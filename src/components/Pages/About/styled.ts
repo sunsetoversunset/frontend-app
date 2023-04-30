@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link as RRDLink } from 'react-router-dom';
 import * as Constants from '../../../constants';
 
 const centering = css`
@@ -127,4 +128,8 @@ export const TeamList = styled.ul`
       max-width: 95vw;
     }
   }
+`;
+
+export const Link = styled(RRDLink)`
+  font-weight: 600;
 `;
