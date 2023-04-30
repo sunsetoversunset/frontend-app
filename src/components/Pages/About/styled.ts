@@ -141,7 +141,7 @@ export const Figure = styled.figure`
   }
 
   figcaption {
-    width: min(90vw, 800px);
+    width: min(80vw, 800px);
     margin: 10px auto;
     font-style: italic;
     color: ${Constants.colors.minGrayText};
