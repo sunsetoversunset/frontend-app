@@ -133,3 +133,17 @@ export const TeamList = styled.ul`
 export const Link = styled(RRDLink)`
   font-weight: 600;
 `;
+
+export const Figure = styled.figure`
+  img {
+    display: block;
+    margin: 10px auto;
+  }
+
+  figcaption {
+    width: min(90vw, 800px);
+    margin: 10px auto;
+    font-style: italic;
+    color: ${Constants.colors.minGrayText};
+  }
+`;
