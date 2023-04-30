@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAddressData } from '../../../hooks';
+import { useAddressData, useAppContext } from '../../../hooks';
 import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg";
 import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg";
 // import iconArrowDown from "../../assets/icons/icon-arrow-down.svg";
@@ -14,6 +14,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
     oppositeAddress,
     addressData,
   } = useAddressData();
+  const { media } = useAppContext();
   const side = addressData?.side;
 
   return (
@@ -36,7 +37,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
       }
       {(nextAddress)
         ? (
-          <MoveLink to={`../${nextAddress}`}>
+          <MoveLink to={`../${nextAddress}`} justifyself='left'>
               {nextAddress} <img src={iconArrowRight} alt="icon-arrow-right" />
           </MoveLink>
         )
@@ -47,7 +48,8 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
           setShow((show === 'photos') ? 'context' : 'photos');
         }}
       >
-        {(show === 'photos') ? 'Show Historical Context' : 'Show Photographs'}
+        {(media !== 'phone') && 'Show '}
+        {(show === 'photos') ? 'Historical Context' : 'Photographs'}
       </Styled.ToggleButton>
     </Styled.Nav>
   );

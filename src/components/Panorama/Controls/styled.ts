@@ -17,7 +17,7 @@ export const button = css`
     height: 40px;
     width: 70px;
     font-size: 12px;
-    text-align: center;
+    justify-content: center;
 
     &:hover {
       cursor: pointer;
