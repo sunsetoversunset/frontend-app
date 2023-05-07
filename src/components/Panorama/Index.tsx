@@ -33,7 +33,6 @@ export const Panorama = () => {
         <AddressBar />
         <PhotoStrips />
       </div>
-
     </PanoramaContext.Provider>
   )
 }

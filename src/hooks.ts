@@ -45,6 +45,7 @@ export function useAddressData(): AddressDataAndNavData {
   const { address } = useParams() as { address: string };
   const [addressData, setAddressData] = useState<AddressData>();
   const [addressHasData, setAddressHasData] = useState(true);
+  const direction = (parseInt(address) % 2 === 0) ? 's' : 'n';
 
   useEffect(() => {
     if (address) {
@@ -56,16 +57,14 @@ export function useAddressData(): AddressDataAndNavData {
         })
         .catch((reason: AxiosError) => {
           setAddressHasData(false);
-          // if (reason.response!.status === 404) {
-          // };
         });
       return () => { source.cancel(); }
     }
   }, [address]);
 
-  let previousAddress = (addressData && address) ? getProximateAddress('previous', address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
-  let nextAddress = (addressData && address) ? getProximateAddress('next', address, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
-  let oppositeAddress = (addressData && address) ? getProximateAddress('closest', address, { direction: (addressData.side === 'n') ? 's' : 'n', excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let previousAddress = (addressData && address) ? getProximateAddress('previous', address, direction, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let nextAddress = (addressData && address) ? getProximateAddress('next', address, direction, { direction: addressData.side, excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
+  let oppositeAddress = (addressData && address) ? getProximateAddress('closest', address, direction, { direction: (addressData.side === 'n') ? 's' : 'n', excludeCrossStreets: true, excludeAddressesWithoutBoundaries: true }) : undefined;
 
   return {
     address,
@@ -112,8 +111,8 @@ export function usePanoramaData(): PanoramaData {
   
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
-  const { addr: address, offset } = parseAddrOffset(addrOffset);
-  const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address);
+  const { addr: address, offset } = parseAddrOffset(addrOffset, direction);
+  const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address, direction);
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth, mapHeight);
 
   const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
@@ -188,12 +187,15 @@ export function usePhotoStrip(year: number) {
   }
   let offset = 0;
   if (pageType === 'panorama') {
-    const addressAndOffset = parseAddrOffset(addrOffset as string);
+    const addressAndOffset = parseAddrOffset(addrOffset as string, direction as Direction);
     address = addressAndOffset.addr;
     offset = addressAndOffset.offset;
   }
+  if (pageType === 'addressView') {
+    direction = (parseInt(address as string) % 2 === 0) ? 's' : 'n';
+  }
   // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  let x = (getLabelFromAddress(address as string).x + offset) * widthMultiplier;
+  let x = (getLabelFromAddress(address as string, direction as Direction).x + offset) * widthMultiplier;
   const [photoData, setPhotoData] = useState<PhotoData[]>([]);
 
   // set a variable to store what direction the most recent data was loaded for, used to trigger the retrieval of the visible photos when the data has finished loaded
@@ -290,9 +292,9 @@ export function useRoadPath() {
  * returns true or false if the address in the url is valid--used for the panorama to prevent the page from returning nothing
 */
 export function useIsValidAddress() {
-  let { addrOffset, address } = useParams<Partial<URLParamsPanorama> & { address?: string }>();
-  if (addrOffset) {
-    const addressAndOffset = parseAddrOffset(addrOffset as string);
+  let { addrOffset, address, direction } = useParams<Partial<URLParamsPanorama> & { address?: string, direction?: Direction }>();
+  if (addrOffset && direction) {
+    const addressAndOffset = parseAddrOffset(addrOffset, direction);
     address = addressAndOffset.addr;
   }
   return typeof labels.find(label => label.label.replace(/\s+/g, '') === address) !== 'undefined';

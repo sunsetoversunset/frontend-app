@@ -116,17 +116,27 @@ export const labels: StripLabel[] = stripLabels
   .sort((a, b) => a.x - b.x);
 
 /**
+ * Returns the max longitude for any year
+ * @param year 
+ * @returns The longitude
+ */
+const getMaxLng = (year: YearStr) => {
+  const { addr, direction } = ensure(getProximateAddressFromX('closest', maxXs[year], 'n'));
+  return getLabelFromAddress(addr, direction).lng;
+}
+
+/**
  * The eastermost longitudes for each year
  * @remarks
  * Used on the map to only show the extent of selected years
  */
-export const easternLongitudes: YearValues<number> = {
-  '1966': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1966'], 'n')).addr).lng,
-  '1973': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1973'], 'n')).addr).lng,
-  '1985': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1985'], 'n')).addr).lng,
-  '1995': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['1995'], 'n')).addr).lng,
-  '2007': getLabelFromAddress(ensure(getProximateAddressFromX('closest', maxXs['2007'], 'n')).addr).lng,
-}
+export const easternLongitudes: YearValues<number> = ({
+  '1966': getMaxLng('1966'),
+  '1973': getMaxLng('1973'),
+  '1985': getMaxLng('1985'),
+  '1995': getMaxLng('1995'),
+  '2007': getMaxLng('2007'),
+});
 
 /**
  * The minimum, maximum, and mid latitudes and longituddes of any address
@@ -249,6 +259,7 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
     addr: closestLabels[0].label,
     offset: Math.round(_x(x) - closestLabels[0].x),
     x,
+    direction: closestLabels[0].direction,
   } : undefined;
 }
 
@@ -256,12 +267,13 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
  * Given an address finds the closest address to the left (previous), right (next), or either (closest).
  * @param orientation Whether to get the previous address (left), the next (right) or closest
  * @param address An address
+ * @param direction The direction
  * @param [options.direction] - A option to include only one side og the street
  * @param [options.excludeCrossStreets] - An option to exlude cross-streets
  * @returns The address, offset, and x value
  */
-export function getProximateAddress(orientation: 'previous' | 'next' | 'closest', address: string, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
-  const { x, direction } = getLabelFromAddress(address);
+export function getProximateAddress(orientation: 'previous' | 'next' | 'closest', address: string, direction: Direction, options?: { direction?: Direction, excludeCrossStreets?: boolean, excludeAddressesWithoutBoundaries?: boolean }) {
+  const { x } = getLabelFromAddress(address, direction);
   const proximate = getProximateAddressFromX(orientation, x, direction, options);
   return (proximate) ? proximate.addr : undefined;
 }
@@ -269,10 +281,11 @@ export function getProximateAddress(orientation: 'previous' | 'next' | 'closest'
 /**
  * Takes an address and finds all it's associated data
  * @param address - An address 
+ * @param direction (optional) - The direction, only really necessary for crossstreets that have both north and south labels
  * @returns The associated data for the address (@type {StripLabel})
  */
-export function getLabelFromAddress(address: string) {
-  return ensure(labels.find(label => label.label.replace(/\s+/g, '') === address.replace(/\s+/g, '')));
+export function getLabelFromAddress(address: string, direction: Direction) {
+  return ensure(labels.find(label => label.label.replace(/\s+/g, '') === address.replace(/\s+/g, '') && (!direction || label.direction === direction)));
 }
 
 /**
@@ -330,7 +343,7 @@ export function getNearbyAddresses(coordinate: number, direction: Direction, opt
  * 
  * @returns The address and the offset separately along with the x value
  */
-export function parseAddrOffset(addrOffset: string) {
+export function parseAddrOffset(addrOffset: string, direction: Direction) {
   // look for two hyphens to accommodate negative values; those are necessary at the tail ends of the photo strips when there are photos but no addresses to the left
   const lastIndexOfHyphen = (addrOffset.includes('--')) ? addrOffset.lastIndexOf('-') - 1 : addrOffset.lastIndexOf('-');
   const addr = (lastIndexOfHyphen !== -1) ? addrOffset.slice(0, lastIndexOfHyphen) : addrOffset;
@@ -338,7 +351,7 @@ export function parseAddrOffset(addrOffset: string) {
   return {
     addr,
     offset,
-    x: getLabelFromAddress(addr).x + offset
+    x: getLabelFromAddress(addr, direction).x + offset
   };
 }
 
@@ -353,7 +366,7 @@ export function toggleDirectionAddrOffset(address: string, direction: Direction,
   const newDirection = (direction === 'n') ? 's' : 'n';
   // get the best cooresponding address across the street
   // get the x for the address and the x for across the street
-  const oldX = getLabelFromAddress(address).x + (offset || 0);
+  const oldX = getLabelFromAddress(address, direction).x + (offset || 0);
   const newX = maxX - oldX;
   // find the 
   return getProximateAddressFromX('previous', newX, newDirection, { direction: newDirection });

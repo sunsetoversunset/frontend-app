@@ -50,9 +50,8 @@ const SearchAndFilter = ({ setSearchOpen }: { setSearchOpen: React.Dispatch<Reac
     .sort((a, b) => a.coordinate - b.coordinate)
     .map(d => ({
       value: `../../../${d.direction}/${d.label.replace(/\s+/g, '')}/${selectedYears}`,
-      label: `${d.label}${(!Number.isNaN(d.label)) ? ' Sunset Blvd.' : ''}`
+      label: `${d.label}${(!isNaN(parseInt(d.label))) ? ' Sunset Blvd.' : ` (looking ${(d.direction === 'n') ? 'north' : 'south'})`}`
     }));
-    
 
   return (
     <Styled.SearchAndFilter>
@@ -85,7 +84,7 @@ const SearchAndFilter = ({ setSearchOpen }: { setSearchOpen: React.Dispatch<Reac
               type="checkbox"
               checked={selectedYears.includes(year)}
               name={`year-${year}`}
-              onClick={(e) => {
+              onChange={(e) => {
                 // remove it from years if it's currently checked; add it if it's not
                 const updatedYears = (selectedYears.includes(year))
                   ? selectedYears.filter(y => y !== year)

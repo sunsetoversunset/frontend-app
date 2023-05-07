@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import img from '../../assets/images/5025-5007.jpg'
 
-import '../../styles/App.scss'
-import '../../styles/Stories.scss'
 
 const StoriesView = () => {
   //modal states

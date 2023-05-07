@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoriesMetadata } from '../../hooks';
 import '../../styles/App.scss'
-import '../../styles/Stories.scss'
 
 const Stories = () => {
   const storiesMetadata = useStoriesMetadata();

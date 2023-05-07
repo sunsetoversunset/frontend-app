@@ -64,7 +64,17 @@ const MapMarker = () => {
       }
     }
 
-  }, [mapX, mapY]);
+  }, [mapX, mapY, addresses]);
+
+  useEffect(() => {
+    d3.select(halo.current)
+      .transition()
+      .duration(500)
+      .attr('transform', `rotate(${(direction === 'n') ? rotation + 90 : rotation - 90})`)
+      .on('end', () => {
+        setMarkerRotation((direction === 'n') ? rotation + 90 : rotation - 90);
+      });
+  }, [rotation, direction])
 
   return (
     <g
