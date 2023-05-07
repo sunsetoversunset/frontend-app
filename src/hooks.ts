@@ -302,10 +302,12 @@ export function useIsValidAddress() {
 
 export function useStoriesMetadata() {
   const [storiesMetadata, setStoriesMetadata] = useState<StoryMetadata[]>([]);
-  axios.get(`/storiesassets/stories.json`)
-    .then(response => {
-      console.log(response);
-      setStoriesMetadata((response.data as StoryMetadata[]).sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day));
-    });
+  
+  useEffect(() => {
+    axios.get(`/storiesassets/stories.json`)
+      .then(response => {
+        setStoriesMetadata((response.data as StoryMetadata[]).sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day));
+      });
+  }, []);
   return storiesMetadata;
 }
