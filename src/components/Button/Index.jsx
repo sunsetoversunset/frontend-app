@@ -1,10 +1,9 @@
-import "../styles/Buttons.scss"
 import iconArrowLeft from "../assets/icons/icon-arrow-left.svg"
 import iconArrowRight from "../assets/icons/icon-arrow-right.svg"
 import iconSearch from "../assets/icons/icon-search.svg"
+import * as Styled from './styled';
 
 export const RoundedButton = (props) => {
-
   const renderIcon = () => {
     switch (props.icon) {
       case "icon-arrow-left":
@@ -22,14 +21,14 @@ export const RoundedButton = (props) => {
   }
 
   return (
-    <button
+    <Styled.RoundedButton
       id={props.label === "Search & Filter" ? 'search' : ''} 
-      className={`btn-rounded ${props.isActive ? 'active' : 'inactive'}`}
+      inactive={!props.isActive}
       onClick={ () => props.handleOnClicked() }
     >
       {props.icon && props.icon !== "icon-arrow-right" ? renderIcon() : null}
       <span className="button-label">{props.label}</span>
       {props.icon && props.icon === "icon-arrow-right" ? renderIcon() : null}
-    </button>
+    </Styled.RoundedButton>
   )
 }

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PanoramaContext } from '../../Contexts';
 import { useAppContext, useIsValidAddress } from "../../hooks";
-import "../../styles/Panorama.scss";
 import PhotoStrips from "../PhotoStrips/Index";
 import AddressBar from './AddressBar/Index';
 import MapControls from './Controls/Index';
 import Map from "./Map/Index";
 import XBar from './XBar';
+import * as Styled from './styled';
 
 export const Panorama = () => {
   const { media } = useAppContext();
@@ -24,15 +24,13 @@ export const Panorama = () => {
 
   return (
     <PanoramaContext.Provider value={{ scrollDistance: scrollDistance, setScrollDistance: setScrollDistance }}>
-      <div
-        id='panorama'
-      >
+      <Styled.Panorama>
         <Map />
         <MapControls />
         {(refining) && (<XBar />)}
         <AddressBar />
         <PhotoStrips />
-      </div>
+      </Styled.Panorama>
     </PanoramaContext.Provider>
   )
 }

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../styles/App.scss';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 //import { Home } from './Home'
 import StoriesView from './Stories/Index'
@@ -15,6 +14,7 @@ import { AppContext } from '../Contexts';
 import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';
 import { sizes } from '../constants';
+import * as Styled from './styled';
 
 export const App = () => {
   const [landingOpen, setLandingOpen] = useState(localStorage.getItem('SOSArrivalPopup') !== 'dontshow');
@@ -58,6 +58,8 @@ export const App = () => {
   // --------------------------------------------------------------------
   return (
     <AppContext.Provider value={{ ...dimensions, modalActive, setModalActive }}>
+      <Styled.FontStyles />
+      <Styled.GlobalStyle />
       <div className="app">
         <Router basename={'/'}>
           <NavHeader />

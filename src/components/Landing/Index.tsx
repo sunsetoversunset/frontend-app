@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/Buttons.scss';
 import * as Styled from './styled';
 
 
@@ -20,8 +19,7 @@ const Landing = ({ setLandingOpen }: { setLandingOpen: React.Dispatch<React.SetS
     <Styled.Landing>
       <Styled.Content>
         <p>Welcome to Sunset Over Sunset, a project that explores the histories of Los Angeles's iconic Sunset Boulevard through the photographs of artist Ed Ruscha. Find out <span onClick={() => { closeAndNavigate("/about"); }}>About</span> the project's goals and contexts. Navigate across space and time on the <span onClick={() => { closeAndNavigate('/n/9155-124/1966,1973,1985,1995,2007'); }}>Panorama</span>. Click locations on the address band (e.g. < span onClick={() => { closeAndNavigate("/address/9155"); }}> 9155</span>) to learn more about each property. Click on individual photos to zoom in and examine each image in detail. And discover narrative <span onClick={() => { closeAndNavigate("/stories"); }}>Stories</span> that knit together the photographs to reveal Sunset through broader historical themes.</p>
-        <button
-          className='btn-rounded'
+        <Styled.RoundedButton 
           onClick={() => {
             if (checked) {
               localStorage.setItem('SOSArrivalPopup', 'dontshow');
@@ -30,7 +28,7 @@ const Landing = ({ setLandingOpen }: { setLandingOpen: React.Dispatch<React.SetS
           }}
         >
           Explore Sunset Over Sunset
-        </button>
+        </Styled.RoundedButton>
 
         <Styled.DontShow>
           <input

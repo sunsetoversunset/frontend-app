@@ -1,6 +1,4 @@
-import React from "react";
 import { useParams } from 'react-router-dom';
-import "../../styles/MapView.scss";
 import PhotoStrip from "../Panorama/PhotoStrip/Index";
 
 export const PhotoStrips = () => {

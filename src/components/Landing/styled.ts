@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as Constants from '../../constants';
 
 export const Landing = styled.div`
   position: fixed;
@@ -28,20 +29,34 @@ export const Content = styled.div`
   span {
     text-decoration: underline;
     font-weight: 700;
-    color: #E95414;
+    color: ${Constants.colors.medOrange};
 
     &:hover {
-      color: #AD3400;
+      color: ${Constants.colors.darkOrange};
     }
-  }
-
-
-  button {
-    margin: 10px auto;
   }
 `;
 
 export const DontShow = styled.div`
   font-size: 0.9em;
   text-align: right;
+`;
+
+export const RoundedButton = styled.button<{ inactive?: boolean; }>`
+  font-size: 14px;
+  border-radius: 50px;
+  background: ${Constants.colors.light2};
+  padding: 0px 24px;
+  height: 36px;
+  border: 1px solid ${Constants.colors.black};
+  display: flex;
+	align-items: center;
+	column-gap: 4px;
+  font-family: "Sunset-Gothic", sans-serif;
+  font-weight: 500;
+  margin: 10px auto;
+
+  :hover {
+    background-color: ${Constants.colors.medOrange};
+  }
 `;

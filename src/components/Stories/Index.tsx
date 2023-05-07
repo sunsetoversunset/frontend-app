@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoriesMetadata } from '../../hooks';
-import '../../styles/App.scss'
 
 const Stories = () => {
   const storiesMetadata = useStoriesMetadata();
   return (
-    <div className="app-page about-view" id="stories">
+    <div>
       <h1>Stories</h1>
       <p>Explanatory text ...</p>
       <ul>
