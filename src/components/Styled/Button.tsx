@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../utiliities';
+import { colors } from '../../constants';
 
 const { light2, black, medOrange } = colors;
 

@@ -1,6 +1,8 @@
-@import "./global/index.scss";
-#address-page {
-  font-family: "Degular-Text", sans-serif;
+import styled from 'styled-components';
+
+
+export const Address = styled.div`
+font-family: "Degular-Text", sans-serif;
 
   .nav-header h1 {
     font-size: 16px;
@@ -187,4 +189,4 @@
       line-height: 1.6;
     }
   }
-}
+`;

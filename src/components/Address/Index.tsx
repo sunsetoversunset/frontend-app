@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { AddressDataContext } from '../../Contexts';
 import { useAddressData } from '../../hooks';
-import '../../styles/AddressView.scss';
-import PhotoStrips from '../Panorama/PhotoStrips';
+import PhotoStrips from '../PhotoStrips/Index';
 import Controls from './Controls/Index';
 import Header from './Header/Index';
 import CensusTable from './Tables/Census';
@@ -10,6 +9,7 @@ import NewspaperTable from './Tables/Newspaper';
 import OccupancyTable from './Tables/Occupancy';
 import SocialCulturalTable from './Tables/SocialCultural';
 import TaxAssessments from './Tables/TaxAssessments';
+import * as Styled from './styled';
 
 const AddressView = () => {
   const {
@@ -34,7 +34,7 @@ const AddressView = () => {
 
   return (
     <AddressDataContext.Provider value={addressData}>
-      <div className="app-page" id="address-page">
+      <Styled.Address className="app-page">
         {/* <ScrollToTop /> */}
         <Header />
         <Controls
@@ -80,7 +80,7 @@ const AddressView = () => {
             </div>
           </div>
         )}
-      </div>
+      </Styled.Address>
     </AddressDataContext.Provider>
   );
 }

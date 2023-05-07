@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-import PhotoStrip from "./PhotoStrip"
-import "../../styles/MapView.scss"
+import "../../styles/MapView.scss";
+import PhotoStrip from "../Panorama/PhotoStrip/Index";
 
 export const PhotoStrips = () => {
   const state = useParams();
@@ -10,16 +10,16 @@ export const PhotoStrips = () => {
 
   // ---------------------------------------------------------------
   return (
-      <div className={`strips-container`}>
-        {years.map(year => {
-          return (
-            <PhotoStrip
-              year={year}
-              key={`year-${year}`}
-            />
-          )
-        })}
-      </div>
+    <div>
+      {years.map(year => {
+        return (
+          <PhotoStrip
+            year={year}
+            key={`year-${year}`}
+          />
+        )
+      })}
+    </div>
   )
 }
 

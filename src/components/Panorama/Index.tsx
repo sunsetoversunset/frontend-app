@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { PanoramaContext } from '../../Contexts';
 import { useAppContext, useIsValidAddress } from "../../hooks";
 import "../../styles/Panorama.scss";
+import PhotoStrips from "../PhotoStrips/Index";
 import AddressBar from './AddressBar/Index';
 import MapControls from './Controls/Index';
 import Map from "./Map/Index";
-import PhotoStrips from "./PhotoStrips";
 import XBar from './XBar';
 
 export const Panorama = () => {

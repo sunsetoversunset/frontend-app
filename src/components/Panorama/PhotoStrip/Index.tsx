@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from "react";
-import { useAppContext, usePhotoStrip } from '../../hooks';
-import "../../styles/PhotoStrip.scss";
-import PhotoViewerModal from "../PhotoViewerModal/Index";
+import { useAppContext, usePhotoStrip } from '../../../hooks';
+import PhotoViewerModal from "../../PhotoViewerModal/Index";
+import * as Styled from './styled';
 
 type Photo = {
   src: string;
@@ -45,7 +45,7 @@ const PhotoStrip = ({ year }: { year: number; }) => {
         id: d.identifier,
         opacity: (!addressPhotoIds || (addressPhotoIds.length > 0 && addressPhotoIds.includes(d.identifier))) ? 1 : 0.3,
       }));
-  }
+  };
 
   // load the visible photos and immediately set the translateX without any animation
   // this happens on initialization and on a change of the direction
@@ -130,18 +130,14 @@ const PhotoStrip = ({ year }: { year: number; }) => {
 
   return (
     <>
-      <div className={`strip-container strip-${year}-${direction}`}>
-        <div
-          className={`strip-photos-container year-${year}`}
+      <Styled.Strip>
+        <Styled.Photos
           ref={stripContainer}
-          style={{
-            width: rightX - leftX,
-            transform: `translateX(${translateX}px)`,
-          }}
+          width={rightX - leftX}
+          translateX={translateX}
           draggable={true}
           onDrag={handleDrag}
           onDragStart={handleDragStart}
-
         >
           {photos.map(photo => (
             <img
@@ -159,14 +155,9 @@ const PhotoStrip = ({ year }: { year: number; }) => {
               alt={`${photo.src}`}
             />
           ))}
-        </div>
-      </div>
-      <div className={`strip-year-label-outer-container`}>
-        <div className="strip-year-label-inner-container">
-          <span className="strip-year-label">{year}</span>
-        </div>
-      </div>
-      <div className={`strip-divider  year-${year}`}></div>
+        </Styled.Photos>
+      <Styled.Year>{year}</Styled.Year>
+      </Styled.Strip>
       {(modalId) && (
         <PhotoViewerModal
           id={modalId}
