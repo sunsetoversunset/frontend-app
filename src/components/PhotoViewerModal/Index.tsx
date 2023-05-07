@@ -84,9 +84,9 @@ const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
           onClick={() => {
             setModalId(undefined);
             setModalActive(false);
-            if (pageType === "panorama" || pageType === "address") {
-              navigate(closeTos[pageType]);
-            }
+            // if (pageType === "panorama" || pageType === "address") {
+            //   navigate(closeTos[pageType]);
+            // }
           }}
         >
           <img src={iconCloseWhite} alt="icon-close-modal" />
