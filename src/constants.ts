@@ -65,8 +65,17 @@ const panoramaAddressBar = {
   }
 } as const;
 
+const story = {
+  top: {
+    mobile: navHeader.mobile.height + navHeader.mobile.paddingTopBottom * 2 + navHeader.borderBottom,
+    tablet: navHeader.tablet.height + navHeader.tablet.paddingTopBottom * 2 + navHeader.borderBottom,
+    laptop: navHeader.laptop.height + navHeader.laptop.paddingTopBottom * 2 + navHeader.borderBottom,    
+  }
+}
+
 export const deviceDimensions = {
   navHeader,
   panoramaControls,
   panoramaAddressBar,
+  story,
 } as const;

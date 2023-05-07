@@ -1,31 +1,17 @@
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StoryMetadata } from '../..';
 import { useAppContext } from '../../hooks';
-import '../../styles/App.scss';
-import '../../styles/Story.scss';
 import PhotoViewerModal from "../PhotoViewerModal/Index";
-import Callout from './MarkdownOverrides/Callout';
-import ImageList from './MarkdownOverrides/ImageList';
+import Callout from './MarkdownOverrides/Callout/Index';
+import ImageList from './MarkdownOverrides/ImageList/Index';
 import AOrLink from './MarkdownOverrides/Link';
 import ModalImg from './MarkdownOverrides/ModalImg';
-import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP';
+import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP/Index';
+import * as Styled from './styled';
 
-
-const Code = ({ children, ...props }: any) => {
-  console.log(children, props);
-  if (children[0]?.type === 'code' && children[0]?.props?.children) {
-    return <Callout><p>{children[0]?.props?.children}</p></Callout>
-  }
-  // if the first and only child has a src prop, it's an image
-  if (children[0]?.props?.src && children.length === 1) {
-    return <div className="single-image">{children}</div>;
-  }
-  const ParaComponent = (children[0]?.props?.src === 'ModalImg' || children[0]?.type?.name === 'img' || children[0]?.type?.name === 'code') ? 'div' : 'p'
-  return <ParaComponent {...props}>{children}</ParaComponent>
-}
 
 const Story = () => {
   const { storyslug } = useParams();
@@ -39,7 +25,7 @@ const Story = () => {
 
 
   useEffect(() => {
-    axios.get(`/stories/stories.json`)
+    axios.get(`/storiesassets/stories.json`)
       .then(response => {
         const storiesMetadata: StoryMetadata[] = response.data;
         const storyMetadata = storiesMetadata.find(d => d.slug === storyslug);
@@ -50,26 +36,10 @@ const Story = () => {
           setHeaderBgImage(`https://media.getty.edu/iiif/image/${storyMetadata.img_id}/full/,${width}/0/default.jpg`);
         }
       });
-    axios.get(`/stories/${storyslug}.md`)
+    axios.get(`/storiesassets/stories/${storyslug}.md`)
       .then(response => {
         const lines: string[] = response.data.split('\n');
         if (lines && lines.length > 0) {
-          // // the first h1 ('#  {title}') is the title
-          // const titleIdx = lines.findIndex(line => line.startsWith('# '));
-          // if (titleIdx !== -1) {
-          //   // setTitle(lines[titleIdx].substring(2));
-          //   lines.splice(titleIdx, 1);
-          // }
-          // // the first img is the background image
-          // const imgpattern = /!\[[^\]]*\]\((?<filename>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/;
-          // const imgIdx = lines.findIndex(line => line.match(imgpattern));
-          // if (imgIdx !== -1) {
-          //   const matches = lines[imgIdx].match(imgpattern);
-          //   // if (matches?.groups?.filename) {
-          //   //   setHeaderBgImage(matches?.groups.filename);
-          //   // }
-          //   lines.splice(imgIdx, 1);
-          // }
 
           // image bars are coded as lists of images.
           // find consequtive image lists and resize the image to fit the screen
@@ -115,25 +85,15 @@ const Story = () => {
 
   return (
     <>
-      <div className='app-page story'>
+      <Styled.Story>
         {(title && headerBgImage) && (
-          <div
-            className="header-image"
-            style={{
-              backgroundImage: `url(${headerBgImage}`
-            }}
-          >
-            <span className="background-texture"></span>
-            <h1 className="story-title">
-              {title}
-            </h1>
-          </div>
+          <Styled.HeaderImage url={headerBgImage}>
+            <Styled.Title>{title}</Styled.Title>
+          </Styled.HeaderImage>
         )}
 
         {(author && byDate) && (
-          <div className="byline">
-            <strong>By {author}</strong> {byDate}
-          </div>
+          <Styled.Byline><strong>By {author}</strong> {byDate}</Styled.Byline>
         )}
         <Markdown
           options={{
@@ -159,12 +119,15 @@ const Story = () => {
                 component: ImageList,
                 props: {}
               },
+              h3: {
+                component: Styled.SectionTitle,
+              }
             }
           }}
         >
           {story}
         </Markdown>
-      </div>
+      </Styled.Story>
 
       {
         (modalId) && (

@@ -75,7 +75,7 @@ export const About = styled.div`
   }
 `;
 
-export const Callout = styled.p`
+export const Callout = styled.div`
   width: 100% !important;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -83,8 +83,8 @@ export const Callout = styled.p`
   line-height: 27px;
   text-align: center;
   font-weight: 900;
-  margin-bottom: 100px;
-  padding: 100px 0;
+  padding: 25px 0;
+
   margin: 0 auto;
   font-family: "Stymie", san-serif;
 
@@ -93,6 +93,7 @@ export const Callout = styled.p`
     width: calc(100% - 150px) !important;
     font-size: 44px;
     line-height: 42px;
+    padding: 100px 0;
 
   }
 `;

@@ -28,7 +28,7 @@ The Union 76 station at [7979 Sunset Blvd](/address/7979) illustrates a similar 
 
 These last two examples were in relatively close proximity to each other, a common phenomenon. Retail clustering made real estate sense. There were even several instances—such as at [5007](/address/5007) and [5025](/address/5025) Sunset Blvd—where competing gas stations located right next to each other. In this case, these two stations took up the entire northern stretch of Sunset Blvd between North Mariposa Ave and North Alexandria Ave. Although Ruscha had not photographed this area during his 1966 drive, city directories confirm that these sites served as home to gas stations since at least that time; they also continued going forward, through his 2007 photo shoot.
 
-* ![5025-5007.jpg](/stories/assets/5025-5007.jpg "Arco/Gulf at 5025 and Shell at 5007 Sunset Boulevard. From left: 1973, 2007.")
+* ![5025-5007.jpg](/storiesassets/assets/5025-5007.jpg "Arco/Gulf at 5025 and Shell at 5007 Sunset Boulevard. From left: 1973, 2007.")
 
 ### Vacancy and Reuse
 
