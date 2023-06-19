@@ -65,7 +65,16 @@ Single images that are centered in the story have standard markdown syntax. The 
 ````
 This also will work with single images if you want those to take up the full width of the window--just a list with one image.
 
-The title can itself be markdown and include links. If the title doesn't begin with a '[', signalling it's a markdown link, and the title begins with a number, that's automatically linked to the address page. 
+The title can itself be markdown and include links, *but those links have to use an alternate syntax for links called reference syntax*. (The reason is the closing parenthesis closes the whole src.)
+
+```[<text>][<reference>] [reference]: <url>```
+
+The reference can be anything, it just needs to match. Here's an example using of an image with a linked caption:
+
+`![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[View along North Kingsley Drive, looking north, from Sunset Blvd, 1973][url] [url]: /n/8101")`
+
+
+If the title doesn't begin with a '[', signalling it's a markdown link, and the title begins with a number, that's automatically linked to the address page. 
 
 ### Footnotes
 
