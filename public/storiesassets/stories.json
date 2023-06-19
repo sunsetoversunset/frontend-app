@@ -9,5 +9,16 @@
       "month": 7,
       "day": 23
     }
+  },
+  {
+    "slug": "palmtrees",
+    "title": "Palm Trees",
+    "img_id": "dee6908d-40e5-4bcf-a8e6-e29eac9eb2ac",
+    "author": "Francesca Ammon",
+    "date": {
+      "year": 2023,
+      "month": 6,
+      "day": 17
+    }
   }
 ]

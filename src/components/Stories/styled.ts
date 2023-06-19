@@ -18,7 +18,8 @@ export const Story = styled.div`
   }
 
   h3,
-  p {
+  p, 
+  footer {
     max-width: min(95%, 800px);
     margin-left: auto;
     margin-right: auto;
@@ -52,6 +53,10 @@ export const Story = styled.div`
         text-decoration: underline;
       }
     }
+  }
+
+  footer div {
+    margin: 10px 0;
   }
 
   @media ${Constants.devices.tablet} {

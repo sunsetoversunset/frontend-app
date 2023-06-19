@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { StoryMetadata } from '../..';
 import { useAppContext } from '../../hooks';
 import PhotoViewerModal from "../PhotoViewerModal/Index";
@@ -9,12 +9,15 @@ import Callout from './MarkdownOverrides/Callout/Index';
 import ImageList from './MarkdownOverrides/ImageList/Index';
 import AOrLink from './MarkdownOverrides/Link';
 import ModalImg from './MarkdownOverrides/ModalImg';
+import Footnote from './MarkdownOverrides/Footnote';
 import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP/Index';
 import * as Styled from './styled';
 
 
 const Story = () => {
   const { storyslug } = useParams();
+  const { hash } = useLocation();
+  const scrollTo = (hash) ? hash.substring(1) : undefined;
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState<string>();
   const [byDate, setByDate] = useState<string>();
@@ -83,6 +86,13 @@ const Story = () => {
       });
   }, [storyslug, width]);
 
+  useEffect(() => {
+    if (scrollTo && story.length > 0) {
+      const note = document.getElementById(scrollTo);
+      note?.scrollIntoView({ behavior: "smooth", block: 'center'});
+    }
+  }, [scrollTo, story])
+
   return (
     <>
       <Styled.Story>
@@ -121,6 +131,9 @@ const Story = () => {
               },
               h3: {
                 component: Styled.SectionTitle,
+              },
+              div: {
+                component: Footnote,
               }
             }
           }}
