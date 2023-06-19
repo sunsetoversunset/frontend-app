@@ -27,11 +27,11 @@ const ModalImg = ({ children, ...props }: any) => {
       />
     );
   }
-  if (caption) {
+  if (caption !== '') {
     return (
       <figure>
         {img}
-        {(caption !== '') && <figcaption>{caption}</figcaption>}
+        <figcaption>{caption}</figcaption>
       </figure>
     );
   }
