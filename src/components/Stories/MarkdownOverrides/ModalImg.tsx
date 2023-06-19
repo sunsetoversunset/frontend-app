@@ -7,6 +7,8 @@ const ModalImg = ({ children, ...props }: any) => {
   if (captionText) {
     caption = (parseInt(captionText, 10) && !captionText.startsWith('[')) ? <Link to={`/address/${parseInt(captionText, 10)}`}>{captionText}</Link> : <Markdown>{captionText}</Markdown>;
   }
+
+  console.log(captionText, caption);
   let img = <img src={props.src} alt={props.alt} />;
   if (props.src.includes("media.getty.edu")) {
     const params = props.src.split("/");
