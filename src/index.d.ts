@@ -38,6 +38,7 @@ export type StoryMetadata = {
     month: number;
     day: number;
   };
+  published: boolean;
 };
 
 export type Point = [number, number];

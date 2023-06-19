@@ -306,7 +306,10 @@ export function useStoriesMetadata() {
   useEffect(() => {
     axios.get(`/storiesassets/stories.json`)
       .then(response => {
-        setStoriesMetadata((response.data as StoryMetadata[]).sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day));
+        setStoriesMetadata((response.data as StoryMetadata[])
+          .filter(d => d.published)
+          .sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day)
+        );
       });
   }, []);
   return storiesMetadata;

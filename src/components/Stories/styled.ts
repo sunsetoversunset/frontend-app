@@ -17,9 +17,12 @@ export const Story = styled.div`
     font-family: "Sunset-Gothic", sans-serif;
   }
 
+  h1,
+  h2,
   h3,
   p, 
-  footer {
+  footer,
+  pre {
     max-width: min(95%, 800px);
     margin-left: auto;
     margin-right: auto;
