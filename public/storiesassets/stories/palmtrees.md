@@ -9,7 +9,8 @@ Ruscha’s photographs reveal this as a constructed nature, often planted to acc
 
 While palms have populated the missions and estates of Southern California since the nineteenth century, it was only in the twentieth century that the tree became a regional icon. Depression-era labor and anticipation of the Olympic Games of 1932 spurred Los Angeles to plant roughly 40,000 Mexican fan palm trees along its boulevards.[^1] A generation or so later, some of those same trees appear in Ruscha’s images. An occasional view down an intersecting side street captures their scale, rhythm, and street-fronting locations; more common in Ruscha’s photographs, however, was the full or partial depiction of one or two trees in a single frame.
 
-![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[--View along North Kingsley Drive, looking north, from Sunset Blvd, 1973](/n/8101).")
+[8101]: /n/8101
+![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[View along North Kingsley Drive, looking north, from Sunset Blvd, 1973][link] [link]: /n/8101.")
 
 ### Visual Real Estate
 
