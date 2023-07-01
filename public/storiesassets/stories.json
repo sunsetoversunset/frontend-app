@@ -3,8 +3,13 @@
     "slug": "gasstations",
     "title": "The Gradual Disappearance of Gas Stations on Sunset",
     "img_id": "5deb7e9f-cc95-4cbd-9e94-29d154d01da2",
-    "author": "Francesca Ammon",
+    "author": "Francesca Russello Ammon",
     "date": {
+      "year": 2021,
+      "month": 7,
+      "day": 23
+    },
+    "revised_date": {
       "year": 2021,
       "month": 7,
       "day": 23
@@ -13,14 +18,15 @@
   },
   {
     "slug": "palmtrees",
-    "title": "Palm Trees",
-    "img_id": "dee6908d-40e5-4bcf-a8e6-e29eac9eb2ac",
-    "author": "Francesca Ammon",
+    "title": "Constructing Urban Nature with Palm Trees",
+    "img_id": "a1444446-7661-4222-a350-a45347da061a",
+    "author": "Francesca Russello Ammon",
     "date": {
       "year": 2023,
       "month": 6,
-      "day": 17
+      "day": 5
     },
     "published": false
   }
+
 ]

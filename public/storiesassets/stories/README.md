@@ -10,6 +10,8 @@ Standard markdown elements that are used are:
 
 `### <header>`
 
+e.g.:
+
 `### Visual Real Estate`
 
 
@@ -22,6 +24,8 @@ No syntax, just text separated by two line breaks.
 ### Bold (e.g. the opening paragraphs)
 
 `**<text>**`
+
+e.g.:
 
 `**The lens of Ruscha’s incessant and indiscriminate camera ...** `
 
@@ -38,6 +42,8 @@ Markdown has two options
 
 `[<text>](<href>)`
 
+e.g.:
+
 `[5751 Sunset Blvd](/address/5751)`
 
 ### Images
@@ -45,6 +51,8 @@ Markdown has two options
 Single images that are centered in the story have standard markdown syntax. The optional title is used for the caption.
 
 `[<alt text>](<src> <title>)`
+
+e.g.:
 
 `![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "View along North Kingsley Drive, looking north, from Sunset Blvd, 1973")`
 
@@ -57,12 +65,18 @@ Single images that are centered in the story have standard markdown syntax. The 
 * [<alt text>](<src>)
 ````
 
+e.g.:
+
+
 ````
 <!-- -->
 * ![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/5deb7e9f-cc95-4cbd-9e94-29d154d01da2/full/,400/0/default.jpg "8101 Sunset Boulevard. From left: 1966, 1985, 2007")
 * ![8101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/57797332-eb53-4483-b31c-95ec1f47ced3/full/,400/0/default.jpg)
 * ![8101 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/9c0f8a45-41ba-4832-b9a0-e1e79bca457c/full/,400/0/default.jpg)
 ````
+
+**Note: don't use parentheses (or brackets) in the caption. The close parenthesis closes the source.**
+
 This also will work with single images if you want those to take up the full width of the window--just a list with one image.
 
 The title can itself be markdown and include links, *but those links have to use an alternate syntax for links called reference syntax*. (The reason is the closing parenthesis closes the whole src.)
@@ -73,8 +87,7 @@ The reference can be anything, it just needs to match. Here's an example using o
 
 `![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[View along North Kingsley Drive, looking north, from Sunset Blvd, 1973][url] [url]: /n/8101")`
 
-
-If the title doesn't begin with a '[', signalling it's a markdown link, and the title begins with a number, that's automatically linked to the address page. 
+If the title doesn't begin with a '[', signalling it's a markdown link, and the title begins with a number, that's automatically linked to the address page. That means you can't begin a caption with a number if it's not an address. I'd spell it out.
 
 ### Footnotes
 
@@ -82,11 +95,15 @@ The reference is:
 
 `[^<number>]`
 
+e.g.:
+
 `[^8]`
 
 The content is
 
 `[^<number>]: <content>`
+
+e.g.:
 
 `[^8]: “O Council, Plant Those Trees,” _Los Angeles Times_, November 2, 1957.`
 
@@ -99,6 +116,8 @@ This co-ops the markdown syntax—three backticks—for code blocks.
 <callout>
 ```
 ````
+
+e.g.:
 
 ````
 ```
@@ -126,6 +145,8 @@ export type StoryMetadata = {
   published: boolean;
 };
 ```
+
+e.g.:
 
 ```
 {

@@ -35,7 +35,11 @@ const Story = () => {
         if (storyMetadata) {
           setTitle(storyMetadata.title);
           setAuthor(storyMetadata.author);
-          setByDate(`${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][storyMetadata.date.month - 1]} ${storyMetadata.date.day}, ${storyMetadata.date.year}`);
+          let byDate = `${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][storyMetadata.date.month - 1]} ${storyMetadata.date.day}, ${storyMetadata.date.year}`;
+          if (storyMetadata.revised_date) {
+            byDate = `${byDate} (revised ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][storyMetadata.revised_date.month - 1]} ${storyMetadata.revised_date.day}, ${storyMetadata.revised_date.year})`;
+          }
+          setByDate(byDate);
           setHeaderBgImage(`https://media.getty.edu/iiif/image/${storyMetadata.img_id}/full/,${width}/0/default.jpg`);
         }
       });
