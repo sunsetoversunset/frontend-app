@@ -41,7 +41,7 @@ const OccupancyTable = () => {
                 {occupants_data.some(occupant => occupant.fragment) && (
                   <Styled.Data>{entry.fragment}</Styled.Data>
                 )}
-                <Styled.Data>{entry.entry}</Styled.Data>
+                <Styled.Data textAlign='left'>{entry.entry}</Styled.Data>
               </Styled.Row>
             )
             )}

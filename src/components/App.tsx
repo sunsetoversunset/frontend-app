@@ -60,7 +60,7 @@ export const App = () => {
     <AppContext.Provider value={{ ...dimensions, modalActive, setModalActive }}>
       <Styled.FontStyles />
       <Styled.GlobalStyle />
-      <div className="app">
+      <Styled.App>
         <Router basename={'/'}>
           <NavHeader />
           <Routes>
@@ -136,7 +136,7 @@ export const App = () => {
           <Footer />
           {(landingOpen && <Landing setLandingOpen={setLandingOpen} />)}
         </Router>
-      </div>
+      </Styled.App>
     </AppContext.Provider>
   );
 }

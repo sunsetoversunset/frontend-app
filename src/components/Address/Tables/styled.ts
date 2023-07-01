@@ -9,11 +9,11 @@ export const Title = styled.h1`
     display: inline-block;
 `;
 
-export const Data = styled.td`
+export const Data = styled.td<{textAlign?: 'right' | 'center' | 'left'}>`
   border-left: 1px solid #dedede;
   border-right: 1px solid #dedede;
   padding: 10px 3px;
-  text-align: right;
+  text-align: ${p => (p.textAlign) ? p.textAlign : 'right'};
   max-width: 400px;
 
   &:last-of-type {
