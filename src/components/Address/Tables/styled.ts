@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as Constants from '../../../constants';
 
 export const Title = styled.h1`
     font-size: 22px;
@@ -49,6 +50,11 @@ export const TableHeader = styled.th`
       padding: 12px 15px 13px 20px;
     }
 `;
+
+export const EmptyTableHeader = styled(TableHeader)`
+  border-bottom: 1px solid transparent !important;
+  background-color: ${Constants.colors.light1} !important;
+`
 
 
 export const TooltipContent = styled.span`
