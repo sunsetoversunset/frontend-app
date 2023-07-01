@@ -15,6 +15,11 @@ export const Data = styled.td`
   text-align: right;
   max-width: 400px;
 
+  &:last-of-type {
+    border-right: 1px solid transparent;
+  }
+
+
   @media (min-width: 700px) {
     padding: 11px 10px 11px 6px;
   }
@@ -101,6 +106,10 @@ export const Table = styled.table`
 export const Row = styled.tr`
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
+
+  &:last-of-type {
+    border-bottom: 1px solid transparent;
+  }
 `;
 
 export const DataTable = styled.div`
@@ -109,4 +118,8 @@ export const DataTable = styled.div`
   background-color: #fefbf5;
   display: inline-block;
   text-align: left;
+
+  thead tr:last-of-type {
+    border-bottom: 1px solid #dedede !important;
+  }
 `;
