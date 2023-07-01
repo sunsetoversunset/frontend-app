@@ -38,6 +38,11 @@ export type StoryMetadata = {
     month: number;
     day: number;
   };
+  revised_date?: {
+    year: number;
+    month: number;
+    day: number;
+  };
   published: boolean;
 };
 
