@@ -87,7 +87,7 @@ const MapControls = () => {
         justifyself="left"
         disabled={(Math.ceil(x) >= maxX)}
       >
-        {(direction === 'n') ? 'Head East' : 'Head West'} <img src={iconArrowRight} alt="icon-arrow-right" />
+        <span>{(direction === 'n') ? 'Head East' : 'Head West'}</span> <img src={iconArrowRight} alt="icon-arrow-right" />
       </Styled.MoveLink>
 
       <Styled.SearchAndFilterButton

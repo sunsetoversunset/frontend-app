@@ -44,7 +44,9 @@ export const MoveLink = styled(Link) <{ justifyself?: string; disabled?: boolean
   ${p => p.disabled && `
     pointer-events: none;
     color: ${colors.grayLightest};
+    justify-content: center;
   `}
+  text-align: center;
   @media ${devices.tablet} {
     ${p => p.justifyself && `
       justify-self: ${p.justifyself};
