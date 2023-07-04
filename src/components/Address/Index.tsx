@@ -4,7 +4,7 @@ import { useAddressData } from '../../hooks';
 import PhotoStrips from '../PhotoStrips/Index';
 import Controls from './Controls/Index';
 import Header from './Header/Index';
-import CensusTable from './Tables/Census';
+import CensusTable from './Tables/Census/Index';
 import NewspaperTable from './Tables/Newspaper';
 import OccupancyTable from './Tables/Occupancy';
 import SocialCulturalTable from './Tables/SocialCultural';

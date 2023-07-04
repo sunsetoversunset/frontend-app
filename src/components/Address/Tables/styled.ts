@@ -1,83 +1,95 @@
-import styled from 'styled-components';
-import * as Constants from '../../../constants';
+import styled from "styled-components";
+import * as Constants from "../../../constants";
 
-export const Title = styled.h1`
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 30.8px;
-    margin: 14px 10px 10px !important;
-    display: inline-block;
+export const DataTable = styled.table`
+  border: 1px solid #000;
+  border-radius: 16px;
+  background-color: #fefbf5;
+  display: inline-block;
+  text-align: left;
+  border-collapse: collapse;
+  font-weight: 400;
+  line-height: 19px;
+  font-size: 16px;
+
+  thead tr:last-of-type {
+    border-bottom: 1px solid #dedede !important;
+  }
 `;
 
-export const Data = styled.td<{textAlign?: 'right' | 'center' | 'left'}>`
-  border-left: 1px solid #dedede;
-  border-right: 1px solid #dedede;
-  padding: 10px 3px;
-  text-align: ${p => (p.textAlign) ? p.textAlign : 'right'};
-  max-width: 400px;
+export const Title = styled.caption`
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30.8px;
+  margin: 14px 10px 10px !important;
+  display: inline-block;
+  width: calc(100% - 34px);
+  text-align: left;
+`;
 
-  &:last-of-type {
-    border-right: 1px solid transparent;
-  }
+export const Row = styled.tr`
+  border-top: 1px solid #dedede;
 
-
-  @media (min-width: 700px) {
-    padding: 11px 10px 11px 6px;
-  }
-  
-  @media (min-width: 1000px) {
-    padding: 12px 15px 13px 20px;
-  }
-
-  border-left: 0px;
-  font-weight: 600;
-  line-height: 19px;
+  /* &:last-of-type {
+    border-bottom: 1px solid transparent;
+  } */
 `;
 
 export const TableHeader = styled.th`
   text-align: left;
-    border-left: 1px solid #dedede;
-    border-right: 1px solid #dedede;
-    padding: 10px 3px;
-    max-width: 400px;
-    background-color: white;
+  border-right: 1px solid #dedede;
+  padding: 10px 3px;
+  max-width: 400px;
+  background-color: white;
+  line-height: 19px;
 
-    @media (min-width: 700px) {
-      padding: 11px 10px 11px 6px;
-    }
-    
-    @media (min-width: 1000px) {
-      padding: 12px 15px 13px 20px;
-    }
+  @media (min-width: 700px) {
+    padding: 11px 10px 11px 6px;
+  }
+
+  @media (min-width: 1000px) {
+    padding: 12px 15px 13px 20px;
+  }
 `;
 
 export const EmptyTableHeader = styled(TableHeader)`
   border-bottom: 1px solid transparent !important;
   background-color: ${Constants.colors.light1} !important;
-`
+`;
 
+
+
+export const Data = styled(TableHeader)<{ textAlign?: "right" | "center" | "left" }>`
+  text-align: ${(p) => p.textAlign || "right"};
+  font-weight: 600;
+  background-color: inherit;
+
+  &:last-of-type {
+    border-right: 1px solid transparent;
+  }
+`;
 
 export const TooltipContent = styled.span`
- visibility: hidden;
- width: 180px;
- background-color: black;
- color: #fff;
- padding: 5px;
- border-radius: 6px;
- text-align: left;
- /* Position the tooltip text - see examples below! */
- position: absolute;
- top: -5px;
- left: 105%;
- z-index: 1;
+  visibility: hidden;
+  width: 180px;
+  background-color: black;
+  color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  text-align: left;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  top: -5px;
+  left: 105%;
+  z-index: 1;
   width: 250px;
   right: 105%;
   left: auto;
- 
- a {
-   color: silver;
+
+  a {
+    color: silver;
   }
-  
+
   ul {
     margin-left: 20px;
     li {
@@ -93,7 +105,7 @@ export const Tooltip = styled.h4`
   font-size: 16px;
   font-weight: 400;
   line-height: 30.8px;
-  margin: 14px 20px 10px;
+  margin: 0px 5px 10px 20px;
   float: right;
   text-align: right;
 
@@ -102,30 +114,4 @@ export const Tooltip = styled.h4`
   }
 `;
 
-export const Table = styled.table`
-  border-collapse: collapse;
-  font-weight: 400;
-  line-height: 19px;
-  font-size: 16px;
-`;
-
-export const Row = styled.tr`
-  border-top: 1px solid #dedede;
-  border-bottom: 1px solid #dedede;
-
-  &:last-of-type {
-    border-bottom: 1px solid transparent;
-  }
-`;
-
-export const DataTable = styled.div`
-  border: 1px solid #000;
-  border-radius: 16px;
-  background-color: #fefbf5;
-  display: inline-block;
-  text-align: left;
-
-  thead tr:last-of-type {
-    border-bottom: 1px solid #dedede !important;
-  }
-`;
+export const Table = styled.table``;
