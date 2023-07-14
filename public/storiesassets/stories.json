@@ -27,6 +27,29 @@
       "day": 5
     },
     "published": false
+  },
+  {
+    "slug": "banks",
+    "title": "Banking on Sunset",
+    "img_id": "2e985d3d-02a9-4845-9ef0-342aae02c18c",
+    "author": "Brian D. Goldstein",
+    "date": {
+      "year": 2023,
+      "month": 7,
+      "day": 13
+    },
+    "published": false
+  },
+  {
+    "slug": "restaurants",
+    "title": "Immigrant Entrepreneurs, Restaurant Redevelopers",
+    "img_id": "0fe7b7d4-c914-428b-a83e-e4d7913dc4d0",
+    "author": "Brian D. Goldstein",
+    "date": {
+      "year": 2023,
+      "month": 7,
+      "day": 13
+    },
+    "published": false
   }
-
 ]
