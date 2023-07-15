@@ -6,7 +6,7 @@ const Stories = () => {
   return (
     <div>
       <h1>Stories</h1>
-      <p>Explanatory text ...</p>
+      <p>[Explanatory text ...]</p>
       <ul>
         {storiesMetadata.map(d => (
           <li key={d.slug}>
