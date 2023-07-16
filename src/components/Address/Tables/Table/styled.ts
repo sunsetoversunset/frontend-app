@@ -119,7 +119,7 @@ export const Data = styled(TableHeader)`
   }
 
   &:last-of-type {
-    border-right: 1px solid pink;
+    border-right: none;
   }
 `;
 

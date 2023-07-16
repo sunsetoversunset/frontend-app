@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAddressData, useAppContext } from '../../../hooks';
 import iconArrowLeft from "../../../assets/icons/icon-arrow-left.svg";
 import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg";
@@ -14,8 +15,31 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
     oppositeAddress,
     addressData,
   } = useAddressData();
-  const { media } = useAppContext();
+  const navigate = useNavigate();
+  const { media, modalActive } = useAppContext();
   const side = addressData?.side;
+
+  useEffect(() => {
+    // move left or right using arrow keys if the modal isn't active
+    const handleArrowKeysPressed = ((e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        navigate(`../${previousAddress}`, { replace: true });
+      }
+      if (e.key === 'ArrowRight') {
+        navigate(`../${nextAddress}`, { replace: true });
+      }
+    });
+
+        // only adjust map if the modal isn't open. The modal uses left/right arrow keys too to navigate.
+        if (!modalActive) {
+          window.addEventListener('keydown', handleArrowKeysPressed);
+        } else {
+          window.removeEventListener('keydown', handleArrowKeysPressed);
+        }
+        return () => {
+          window.removeEventListener('keydown', handleArrowKeysPressed);
+        }
+      }, [modalActive, nextAddress, previousAddress, navigate]);
 
   return (
     <Styled.Nav>
