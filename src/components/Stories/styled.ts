@@ -2,6 +2,25 @@ import styled from "styled-components";
 import * as Constants from "../../constants";
 import GradientImg from "../../assets/textures/noise-gradient-footer.png";
 
+export const Stories = styled.div`
+  padding-top: ${Constants.deviceDimensions.navHeader.mobile.height}px;
+  max-width: min(95vw, 1300px);
+  margin: 20px auto;
+
+  @media ${Constants.devices.tablet} {
+    padding-top: ${Constants.deviceDimensions.navHeader.tablet.height}px;
+  }
+`;
+
+export const Cards = styled.ul`
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 40px auto;
+  flex-wrap: wrap;
+`;
+
 export const Story = styled.div`
   position: relative;
   margin-top: ${Constants.deviceDimensions.story.top.mobile}px;

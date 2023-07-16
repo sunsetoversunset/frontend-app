@@ -190,3 +190,20 @@ font-family: "Degular-Text", sans-serif;
     }
   }
 `;
+
+export const StoriesHeader = styled.h3`
+  text-align: center;
+  font-weight: 400;
+  font-style: italic;
+  margin: 5px 0;
+`;
+
+export const Stories = styled.ul`
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  max-width: 1300px;
+  margin: 15px auto;
+  flex-wrap: wrap;
+`

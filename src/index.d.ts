@@ -45,6 +45,7 @@ export type StoryMetadata = {
     month: number;
     day: number;
   };
+  addresses: (string | number)[];
   published: boolean;
 };
 
