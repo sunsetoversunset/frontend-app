@@ -12,9 +12,7 @@ export const SingleImgDiv = styled.div`
       margin: 0;
       box-sizing: border-box;
       padding: 4px 30px;
-      white-space: nowrap;
-      // set the width to 1px from keeping the figcaption from growing the li in which it's contained. 
-      width: 1px;
+      width: 100% !important;
     
       a {
         color: ${Constants.colors.black};
@@ -32,5 +30,6 @@ export const SingleImgDiv = styled.div`
 
     @media ${Constants.devices.tablet} {
        width: 62.5%;
+
     }
 `;

@@ -42,10 +42,8 @@ export const Story = styled.div`
     line-height: 26px;
     margin: 0;
     box-sizing: border-box;
-    padding: 4px 30px;
-    white-space: nowrap;
-    // set the width to 1px from keeping the figcaption from growing the li in which it's contained.
-    width: 1px;
+    padding: 4px 15px;
+    width: 100vw;
 
     a {
       color: ${Constants.colors.black};
