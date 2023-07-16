@@ -3,10 +3,12 @@ import * as Constants from '../../../constants';
 import Noise from '../../../assets/textures/noise.png';
 
 export const Strip = styled.div`
-  max-width: 100vw;
-  overflow-x: hidden;
+  width: 300vw;
+  overflow-x: visible;
+  margin-left: -100vw;
+  padding-left: 100vw;
   height: 236px;
-  border-top: 0.125em solid ${Constants.colors.black};
+  border-top: 2px solid ${Constants.colors.black};
   position: relative;
   z-index: 0;
   background-image: url(${Noise});
@@ -43,7 +45,8 @@ export const Year = styled.div`
   position: absolute;
   top: 187px;
   height: 26px;
-  border: 0.125em solid ${Constants.colors.black};
+  left: 0;
+  border: 2px solid ${Constants.colors.black};
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   border-left: none;
@@ -54,9 +57,21 @@ export const Year = styled.div`
   line-height: 26px;
   padding-left: 10px;
   font-weight: 500;
-  overflow: visible;
   z-index: 1000;
 `;
+
+export const YearPanorama = styled.div<{hasPhotos: boolean}>`
+  height: ${p => p.hasPhotos ? 238 : 50}px;
+  position: relative;
+
+  ${Year} {
+    display: ${p => p.hasPhotos ? 'block' : 'none'};
+  }
+`;
+
+export const YearsPanorama = styled.div`
+  padding-top: 40px; /* the height of the address bar */
+`
 
 export const Divider = styled.div`
 

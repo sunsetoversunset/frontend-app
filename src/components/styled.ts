@@ -74,6 +74,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     background-color: ${Constants.colors.mainBg};
     font-family: "Degular", sans-serif;
+    font-display: optional;
   }
 `;
 

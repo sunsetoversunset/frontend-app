@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
@@ -101,7 +101,9 @@ export function useAddressData(): AddressDataAndNavData {
  *    visibleAddresses: StripLabel[],          // the addresses the are visibile with the view bounds
  *    scrollDistance,                          // the selected distance as a percent if the view bounds the user scrolls when going left or right
  *    scrollDistanceX,                         // the selected distance the users scrolls when going left or right
- *    setScrollDistance: React.Dispatch<React.SetStateAction<number>>    // the function to set the scroll distance
+ *    setScrollDistance: React.Dispatch<React.SetStateAction<number>>
+ *                                             // the function to set the scroll distance
+ *    scroll: boolean,                         // whether to scroll or not, allowing the animation to be ignored
  * }
  */
 export function usePanoramaData(): PanoramaData {
@@ -111,21 +113,23 @@ export function usePanoramaData(): PanoramaData {
   
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
-  const { addr: address, offset } = parseAddrOffset(addrOffset, direction);
+  const { addr: address, offset, scroll } = parseAddrOffset(addrOffset, direction);
   const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address, direction);
   const [mapX, mapY] = latLngToXY([lat, lng], mapWidth, mapHeight);
 
   const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
   const x = addressX + offset;
-  const leftX = Math.ceil(x - width / 2);
-  const rightX = Math.floor(x + width / 2);
+  const leftX = Math.floor(x - width / 2);
+  const rightX = Math.ceil(x + width / 2);
+  const farLeftX = Math.floor(leftX - width);
+  const farRightX = Math.ceil(rightX + width);
   const maxX = (direction === 'n')
     ? Math.max(...years.map(year => maxXs[year])) - width / 2
     : getOppositeX(width / 2);
   const minX = (direction === 'n')
     ? width / 2
     : getOppositeX(Math.max(...years.map(year => maxXs[year])) );
-  const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= leftX && d.x <= rightX);
+  const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= farLeftX && d.x <= farRightX + width);
 
   const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year]))
   return {
@@ -137,6 +141,8 @@ export function usePanoramaData(): PanoramaData {
     x,
     leftX,
     rightX,
+    farLeftX,
+    farRightX,
     minX: Math.ceil(minX),
     maxX: Math.floor(maxX),
     width,
@@ -152,6 +158,7 @@ export function usePanoramaData(): PanoramaData {
     scrollDistance,
     scrollDistanceX: scrollDistance * width,
     setScrollDistance,
+    scroll,
   };
 }
 
@@ -182,75 +189,70 @@ export function usePhotoStrip(year: number) {
   const addressData = useAddressData();
   const pageType = (address) ? 'addressView' : 'panorama';
   const widthMultiplier = (pageType === 'panorama') ? 1 : 3.25;
-  if (pageType === 'addressView') {
-    direction = (parseInt(address as string) % 2 === 0) ? 's' : 'n';
-  }
   let offset = 0;
+  let scroll = true;
   if (pageType === 'panorama') {
     const addressAndOffset = parseAddrOffset(addrOffset as string, direction as Direction);
     address = addressAndOffset.addr;
     offset = addressAndOffset.offset;
+    scroll = addressAndOffset.scroll;
   }
   if (pageType === 'addressView') {
     direction = (parseInt(address as string) % 2 === 0) ? 's' : 'n';
   }
-  // `newCenter` is x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
-  let x = (getLabelFromAddress(address as string, direction as Direction).x + offset) * widthMultiplier;
+
+  const directionRef = useRef(direction);
+  // x coordinate centered in the strip. By default, it's half the width of the screen to position the leftmost photos left
+  // it is set as state so it can be tied to the photo data and not updated until the photo data has been loaded if necessary
+  const [x, setX] = useState(Math.round((getLabelFromAddress(address as string, direction as Direction).x + offset) * widthMultiplier));
+  const yearRef = useRef(year);
   const [photoData, setPhotoData] = useState<PhotoData[]>([]);
 
   // set a variable to store what direction the most recent data was loaded for, used to trigger the retrieval of the visible photos when the data has finished loaded
   const [directionLoaded, setDirectionsLoaded] = useState<Direction | undefined>()
   //const [boundaries, setBoundaries] = useState<[number, number]>();
 
-
-  /* retrive the photos coordinates on initial load */
   useEffect(() => {
-    const cancelToken = axios.CancelToken;
-    const source = cancelToken.source();
-    axios.get(`/data/photographs_${year}_${direction}.json`)
-      .then(response => {
-        setPhotoData((response.data as any)
-          // at the moment there are some issues with the 1966 images where those above id 371 are misplaced relative to the other images
-          //.filter((row: any) => year !== 1966 || row.id < 371 || row.coordinate >= 156.58693)
-          .map((row: any) => ({
-            identifier: row.identifier,
-            x: (direction === 'n') ? parseFloat(row.coordinate) * mult * widthMultiplier : getOppositeX(parseFloat(row.coordinate) * mult) * widthMultiplier,
-            facing: direction,
-            year,
-          })));
-        //.sort((a: any, b: any) => a.x - b.x));
-        setDirectionsLoaded(direction);
-      });
-    return () => { source.cancel(); }
-  }, [direction, year, widthMultiplier]);
-
-  // get the address boundaries type is addressView
-  // useEffect(() => {
-  //   const cancelToken = axios.CancelToken;
-  //   const source = cancelToken.source();
-  //   axios.get(`/address_data/${address}.json`)
-  //     .then(response => {
-  //       const { boundaries } = response.data as AddressData;
-  //       setBoundaries([boundaries[0] * mult, boundaries[1] * mult]);
-  //     })
-  //     .catch((reason: AxiosError) => {
-  //       if (reason.response!.status === 404) {
-  //         console.warn('no json file for this address');
-  //       };
-  //     });
-  //   return () => { source.cancel(); }
-  // }, [address]);
+    /* retrive the photos coordinates on initial load or a change of direction */
+    if (photoData.length === 0 || direction !== directionRef.current || year !== yearRef.current) {
+      const cancelToken = axios.CancelToken;
+      const source = cancelToken.source();
+      axios.get(`/data/photographs_${year}_${direction}.json`)
+        .then(response => {
+          setPhotoData((response.data as any)
+            // at the moment there are some issues with the 1966 images where those above id 371 are misplaced relative to the other images
+            //.filter((row: any) => year !== 1966 || row.id < 371 || row.coordinate >= 156.58693)
+            .map((row: any) => ({
+              identifier: row.identifier,
+              x: (direction === 'n') ? parseFloat(row.coordinate) * mult * widthMultiplier : getOppositeX(parseFloat(row.coordinate) * mult) * widthMultiplier,
+              facing: direction,
+              year,
+            })));
+          //.sort((a: any, b: any) => a.x - b.x));
+          setDirectionsLoaded(direction);
+          directionRef.current = direction;
+          setX(Math.round((getLabelFromAddress(address as string, direction as Direction).x + offset)));
+          yearRef.current = year;
+        });
+      return () => { source.cancel(); }
+    } else {
+      setX(Math.round((getLabelFromAddress(address as string, direction as Direction).x + offset) * widthMultiplier));
+    } 
+  }, [direction, year, widthMultiplier, x, address, offset]);
 
   return {
     photoData,
     directionLoaded,
     address,
     x,
-    leftX: x - width / 2,
-    rightX: x + width / 2,
-    direction,
+    leftX: Math.floor(x - width / 2),
+    rightX: Math.ceil(x + width / 2),
+    farLeftX: Math.floor(x - width * 1.5),
+    farRightX: Math.ceil(x + width * 1.5),
+    direction: directionRef.current,
     widthMultiplier,
     addressPhotoIds: addressData?.addressData?.photos?.map(photo => photo.id),
+    scroll,
     //boundaries,
   }
 }

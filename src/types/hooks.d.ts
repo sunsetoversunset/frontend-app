@@ -1,4 +1,4 @@
-import { Direction, StripLabel, Photo } from '../index.d';
+import { Direction, StripLabel } from '../index.d';
 
 import { AddressData } from './AddressView.d';
 
@@ -20,6 +20,8 @@ export type PanoramaData = {
   x: number;
   leftX: number;
   rightX: number;
+  farLeftX: number;
+  farRightX: number;
   minX: number;
   maxX: number;
   width: number;
@@ -35,4 +37,5 @@ export type PanoramaData = {
   scrollDistance: number;
   scrollDistanceX: number;
   setScrollDistance: React.Dispatch<React.SetStateAction<number>>;
+  scroll: boolean;
 }

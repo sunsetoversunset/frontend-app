@@ -2,12 +2,13 @@ import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
 import { usePanoramaData } from "../../../hooks";
-import { hasAddressData, maxX } from '../../../utiliities';
+import { hasAddressData } from '../../../utiliities';
 import ConditionalWrapper from "../../ConditionalWrapper";
 import * as Styled from './styled';
 
 const AddressBar = () => {
-  const { visibleAddresses: addresses, x, leftX, direction } = usePanoramaData();
+  const { visibleAddresses: addresses, x, leftX, rightX, direction, scroll } = usePanoramaData();
+
 
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
@@ -43,9 +44,10 @@ const AddressBar = () => {
 
   useEffect(() => {
     if (scrolling && ref.current) {
+            // only run the transition if the distance is less than 3000 pixels
       d3.select(ref.current)
         .transition()
-        .duration(1500)
+        .duration(scroll ? 1500 : 0)
         .style('transform', `translateX(${leftX * -1}px)`)
         .on('end', () => {
           leftXRef.current = leftX;
@@ -64,7 +66,7 @@ const AddressBar = () => {
           ref={ref}
           style={{
             transform: `translateX(${translateX}px)`,
-            width: maxX,
+            width: (rightX - leftX) * 3,
           }}
         >
           {visibleAddresses.map(label => (

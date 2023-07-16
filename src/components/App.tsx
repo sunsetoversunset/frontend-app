@@ -15,6 +15,7 @@ import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';
 import { sizes } from '../constants';
 import * as Styled from './styled';
+import './fonts.css';
 
 export const App = () => {
   const [landingOpen, setLandingOpen] = useState(localStorage.getItem('SOSArrivalPopup') !== 'dontshow');
@@ -58,7 +59,6 @@ export const App = () => {
   // --------------------------------------------------------------------
   return (
     <AppContext.Provider value={{ ...dimensions, modalActive, setModalActive }}>
-      <Styled.FontStyles />
       <Styled.GlobalStyle />
       <Styled.App>
         <Router basename={'/'}>

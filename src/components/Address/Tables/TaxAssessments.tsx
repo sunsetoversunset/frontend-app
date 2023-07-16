@@ -1,5 +1,5 @@
 import { useAddressDataContext } from '../../../hooks';
-import '../../../styles/Tables.scss';
+//import '../../../styles/Tables.scss';
 
 const TaxAssessments = () => {
   const { assessor_data } = useAddressDataContext();

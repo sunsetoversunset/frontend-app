@@ -3,7 +3,10 @@ import * as Constants from '../../../constants';
 const dimensions = Constants.deviceDimensions.panoramaAddressBar;
 
 export const AddressBar = styled.div`
-  overflow-x: hidden;
+  width: 300vw;
+  margin-left: -100vw;
+  padding-left: 100vw;
+  overflow-x: visible;
   position: sticky;
   top: ${dimensions.top.mobile}px;
   height: ${dimensions.height}px;

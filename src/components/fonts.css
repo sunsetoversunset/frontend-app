@@ -1,0 +1,286 @@
+
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Thin.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Thin.woff') format('woff');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Thin_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Thin_Italic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Light.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Light.woff') format('woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Light_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Light_Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Regular.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Medium.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Medium.woff') format('woff');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Medium_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Medium_Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Semibold.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Semibold.woff') format('woff');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Semibold_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Semibold_Italic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Bold.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Bold.woff') format('woff');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Bold_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Bold_Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Black.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Black.woff') format('woff');
+  font-weight: 800
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: 
+    url('../assets/fonts/Degular/Web/Degular-Black_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular/Web/Degular-Black_Italic.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Thin.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Thin.woff') format('woff');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src:
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Thin_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Thin_Italic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Light.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Light.woff') format('woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Light_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Light_Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Regular.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Medium.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Medium.woff') format('woff');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Medium_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Medium_Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Semibold.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Semibold.woff') format('woff');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Semibold_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Semibold_Italic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Bold.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Bold.woff') format('woff');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Bold_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Bold_Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Black.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Black.woff') format('woff');
+  font-weight: 800
+}
+
+@font-face {
+  font-family: 'Degular-Text';
+  src: 
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Black_Italic.woff2') format('woff2'),
+    url('../assets/fonts/Degular_Text/Web/Degular_Text-Black_Italic.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-light-pro-web/web/sunset-gothic-light-pro.woff2') format('woff2'),
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-light-pro-web/web/sunset-gothic-light-pro.woff') format('woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-regular-pro-web/web/sunset-gothic-regular-pro.woff2') format('woff2'),
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-regular-pro-web/web/sunset-gothic-regular-pro.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Sunset-Gothic';
+  src: 
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-medium-pro-web/web/sunset-gothic-medium-pro.woff2') format('woff2'),
+    url('../assets/fonts/Sunset_Gothic/sunset-gothic-medium-pro-web/web/sunset-gothic-medium-pro.woff') format('woff');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Stymie';
+  src: 
+    url('../assets/fonts/Stymie/Stymie_Extra_Bold.woff2') format('woff2'),
+    url('../assets/fonts/Stymie/Stymie_Extra_Bold.woff') format('woff');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Superette Face';
+  src: 
+    url('../assets/fonts/Superette/Superette-Shaded-Face-Web.woff2') format('woff2'),
+    url('../assets/fonts/Superette/Superette-Shaded-Face-Web.woff') format('woff');
+}
+@font-face {
+  font-family: 'Superette';
+  src: 
+    url('../assets/fonts/Superette/Superette-Shaded-Web.woff2') format('woff2'),
+    url('../assets/fonts/Superette/Superette-Shaded-Web.woff') format('woff');
+}

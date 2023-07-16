@@ -245,7 +245,7 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
  * @param orientation Whether to get the previous address (left), the next (right) or closest
  * @param address An address
  * @param direction The direction
- * @param [options.direction] - A option to include only one side og the street
+ * @param [options.direction] - A option to include only one side of the street
  * @param [options.excludeCrossStreets] - An option to exlude cross-streets
  * @returns The address, offset, and x value
  */
@@ -315,20 +315,24 @@ export function getNearbyAddresses(coordinate: number, direction: Direction, opt
 }
 
 /**
- * Takes the address-offset string and parses it to return the address and the offset as a number
- * @param addrOffset An address and offset as a string concatenated with hyphen
+ * Takes the address-offset string and parses it to return the address and the offset as a number. The address offset string can end in an "x", which indicates to skip scolling
+ * @param addrOffset An address and offset as a string concatenated with hyphen with an optional x to skip animated scrolling
  * 
- * @returns The address and the offset separately along with the x value
+ * @returns The address and the offset separately along with the x value, plus whether to scroll or not
  */
 export function parseAddrOffset(addrOffset: string, direction: Direction) {
+  // look for an x at the end, which is a flag to ignore scrolling
+  const scroll = !addrOffset.endsWith('x');
+  const _addrOffset = (!scroll) ? addrOffset.substring(0, addrOffset.length - 1) : addrOffset;
   // look for two hyphens to accommodate negative values; those are necessary at the tail ends of the photo strips when there are photos but no addresses to the left
-  const lastIndexOfHyphen = (addrOffset.includes('--')) ? addrOffset.lastIndexOf('-') - 1 : addrOffset.lastIndexOf('-');
-  const addr = (lastIndexOfHyphen !== -1) ? addrOffset.slice(0, lastIndexOfHyphen) : addrOffset;
-  const offset = (lastIndexOfHyphen !== -1) ? parseInt(addrOffset.slice(lastIndexOfHyphen + 1)) : 0
+  const lastIndexOfHyphen = (_addrOffset.includes('--')) ? _addrOffset.lastIndexOf('-') - 1 : _addrOffset.lastIndexOf('-');
+  const addr = (lastIndexOfHyphen !== -1) ? _addrOffset.slice(0, lastIndexOfHyphen) : _addrOffset;
+  const offset = (lastIndexOfHyphen !== -1) ? parseInt(_addrOffset.slice(lastIndexOfHyphen + 1)) : 0
   return {
     addr,
     offset,
-    x: getLabelFromAddress(addr, direction).x + offset
+    x: getLabelFromAddress(addr, direction).x + offset,
+    scroll,
   };
 }
 

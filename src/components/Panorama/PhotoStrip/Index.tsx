@@ -1,145 +1,127 @@
-import * as d3 from 'd3';
-import { useEffect, useRef, useState } from "react";
-import { useAppContext, usePhotoStrip } from '../../../hooks';
+import * as d3 from "d3";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useAppContext, usePhotoStrip } from "../../../hooks";
 import PhotoViewerModal from "../../PhotoViewerModal/Index";
-import * as Styled from './styled';
+import * as Styled from "./styled";
 
 type Photo = {
   src: string;
   x: number;
   id: string;
   opacity?: number;
-}
+};
 
-const PhotoStrip = ({ year }: { year: number; }) => {
-  const { leftX, rightX, photoData, direction, directionLoaded, addressPhotoIds } = usePhotoStrip(year);
-  const { setModalActive } = useAppContext();
+const PhotoStrip = ({ year }: { year: number }) => {
+  const { x, photoData, direction, addressPhotoIds, scroll } = usePhotoStrip(year);
+  const { setModalActive, width } = useAppContext();
 
-  // scrolling: whether it's scrolling with an animation
-  const [scrolling, setScrolling] = useState(false);
-  // the translateX value for the strip container
-  const [translateX, setTranslateX] = useState(leftX * -1);
-  // the photos that are visible for the visible part of the strip container
-  const [photos, setPhotos] = useState<Photo[]>([]);
-  // the if for the image that is displayed in the modal. Undefined is unopened
-  const [modalId, setModalId] = useState<string>();
+  const xCoords = useMemo(
+    () => ({
+      canvasLeft: Math.floor(x - width / 2),
+      canvasRight: Math.ceil(x + width / 2),
+      loadedLeft: Math.floor(x - width * 1.5),
+      loadedRight: Math.ceil(x + width * 1.5),
+      translateX: Math.floor(x - width / 2) * -1,
+    }),
+    [x, width]
+  );
 
-  // refs to track the previous leftX and rightX, which are used to retrieve and display both the last and the next photos during a scroll
-  const leftXRef = useRef(leftX);
-  const rightXRef = useRef(rightX);
-  // track the addressPhotoIdsToo 
-  const addressPhotoIdsRef = useRef(addressPhotoIds?.join(','));
-  // the div for the strip container
-  const stripContainer = useRef(null);
-  const directionRef = useRef(direction);
-  const [load, setLoad] = useState(true);
+  const [addressPhotoIdsString, setAddressPhotoIdsString] = useState(addressPhotoIds?.join(","));
 
-  const imageWidth = 299;
 
-  const getVisiblePhotosInRange = (left: number, right: number) => {
+  // determine which photos are visible when the xCoordinate changes or new photoData is loaded
+  const visiblePhotos = useCallback(() => {
+    const _addressPhotoIds = addressPhotoIdsString?.split(',');
+    const imageWidth = 299;
     return photoData
-      .filter(d => d.x >= left - imageWidth && d.x <= right + imageWidth)
-      .map(d => ({
+      .filter((d) => d.x >= xCoords.loadedLeft - imageWidth && d.x <= xCoords.loadedRight + imageWidth)
+      .map((d) => ({
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
-        opacity: (!addressPhotoIds || (addressPhotoIds.length > 0 && addressPhotoIds.includes(d.identifier))) ? 1 : 0.3,
+        opacity: !_addressPhotoIds || (_addressPhotoIds.length > 0 && _addressPhotoIds.includes(d.identifier)) ? 1 : 0.3,
       }));
-  };
+  }, [photoData, xCoords, addressPhotoIdsString]);
 
-  // load the visible photos and immediately set the translateX without any animation
-  // this happens on initialization and on a change of the direction
-  // the conditions with the photoData are needed to test that the photo data has been set or reset
+  // the translateX value for the strip container
+  const [translateX, setTranslateX] = useState(xCoords.translateX);
+  // the photos that are visible for the visible part of the strip container
+  const [photos, setPhotos] = useState<Photo[]>(visiblePhotos);
+  // the if for the image that is displayed in the modal. Undefined is unopened
+  const [modalId, setModalId] = useState<string>();
+
+  // the div for the strip container
+  const stripContainer = useRef(null);
+  // keep track of the direction in order to test whether it's changed
+  const directionRef = useRef(direction);
+
+  // if the addressPhotoIds changes, update the state value, which is stored as a string
   useEffect(() => {
-    if (load && directionLoaded !== directionRef.current) {
-      directionRef.current = directionLoaded;
-      setPhotos(getVisiblePhotosInRange(leftX, rightX));
-      setTranslateX(leftX * -1)
-      setLoad(false);
+    if (addressPhotoIds && addressPhotoIds.join(',') !== addressPhotoIdsString) {
+      setAddressPhotoIdsString(addressPhotoIds.join(','));
     }
-  });
+  }, [addressPhotoIds, addressPhotoIdsString]);
 
-  //set the photos when adddressDataIds are updated
+  // update the photos when new ones are loaded
   useEffect(() => {
-    if (addressPhotoIds && addressPhotoIds.length > 0 && addressPhotoIds.join(',') !== addressPhotoIdsRef.current) {
-      addressPhotoIdsRef.current = addressPhotoIds.join(',');
-      setPhotos(getVisiblePhotosInRange(leftX, rightX));
-    }
-  }, [addressPhotoIds]);
+    setPhotos(visiblePhotos);
+  }, [visiblePhotos]);
 
-
-  // set the photos if the photoData--stemming from the direction--has changed
+  // when the direction changes, set t
   useEffect(() => {
-    if (directionRef.current !== direction) {
-      setLoad(true);
+    if (direction !== directionRef.current) {
+      directionRef.current = direction;
+      setTranslateX(xCoords.translateX);
     }
-  }, [direction]);
+  }, [direction, xCoords]);
 
-  // set the photos on initial load or when the newCenter changes
+  // scroll the strip if the center has changed (and the direction hasn't)
   useEffect(() => {
-    if (directionRef.current === direction) {
-      // get the photoset that will be visible after scrolling 
-      // only retrieve new photos if the distance is 3000px or less
-      const photosForScroll = (Math.abs(leftX * -1 - translateX) < 3000)
-        ? getVisiblePhotosInRange(Math.min(leftX, leftXRef.current), Math.max(rightX, rightXRef.current))
-        : getVisiblePhotosInRange(leftX, rightX);
-      setPhotos(photosForScroll);
-      if (translateX !== leftX * -1) {
-        setScrolling(true);
-      }
-    }
-  }, [leftX, rightX]);
+    d3.select(stripContainer.current)
+      .transition()
+      // only animate if scroll is set to true
+      // it's set to false by a flag in the url to skip any animation if the strip is dragged rather than moved when the user hits the west or east buttons
+      .duration(scroll ? 1500 : 0)
+      .style("transform", `translateX(${xCoords.translateX}px)`)
+      .on("end", () => {
+        // updated the state/ref values to reflect the post-scroll values
+        // todo: This was causing a glitch where the whole app seemed to rerender and caused a quick flash.
+        setTranslateX(xCoords.translateX);
+      });
+  }, [xCoords, scroll]);
 
-  // scroll the bar when after new photos have been loaded
-  useEffect(() => {
-    if (scrolling) {
-      // only run the transition if the distance is less than 3000 pixels
-      d3.select(stripContainer.current)
-        .transition()
-        .duration(1500)
-        .style('transform', `translateX(${leftX * -1}px)`)
-        .on('end', () => {
-          // updated the state/ref values to reflect the post-scroll values
-          leftXRef.current = leftX;
-          rightXRef.current = rightX;
-          setTranslateX(leftX * -1);
-          // set the photos to remove those now off the canvas
-          setPhotos(getVisiblePhotosInRange(leftX, rightX));
-          setScrolling(false);
-        });
-    }
-  });
+  // //set the photos when addressPhotoIds are updated. This is only used by an address page, not the panorama view
+  // useEffect(() => {
+  //   if (addressPhotoIds && addressPhotoIds.length > 0 && addressPhotoIds.join(",") !== addressPhotoIdsRef.current) {
+  //     addressPhotoIdsRef.current = addressPhotoIds.join(",");
+  //     setPhotos(visiblePhotos);
+  //   }
+  // }, [addressPhotoIds, visiblePhotos]);
+
+  // set
+  // useEffect(() => {
+  //   if (directionRef.current === direction) {
+  //     // get the photoset that will be visible after scrolling
+  //     // only retrieve new photos if the distance is 3000px or less
+  //     // const photosForScroll = Math.abs(Math.round(leftX * -1) - translateX) < 3000 ? getVisiblePhotosInRange(Math.min(leftX, leftXRef.current), Math.max(rightX, rightXRef.current)) : getVisiblePhotosInRange(farLeftX, farRightX);
+  //     // setPhotos(photosForScroll);
+  //     if (translateX !== Math.round(leftX * -1) && scroll) {
+  //       setScrolling(true);
+  //     }
+  //     console.log('****');
+  //   }
+  // }, [leftX, rightX, direction, farLeftX, farRightX]);
+
 
   if (photos.length === 0) {
-    return (
-      <div style={{ textAlign: 'center', margin: '5px 0' }}>
-        {`There are no photos for this location for ${year}`}
-      </div>
-    );
-  }
-
-  let startDragX: number;
-  const handleDragStart = (e: any) => {
-    startDragX = e.clientX;
-  }
-
-  function handleDrag(e: any) {
-    console.log("Dragging...");
-    console.log({ startDragX, distance: startDragX - e.clientX });
+    return <div style={{ textAlign: "center", margin: "5px 0", height: 40 }}>{`There are no photos for this location for ${year}`}</div>;
   }
 
   return (
     <>
       <Styled.Strip>
-        <Styled.Photos
-          ref={stripContainer}
-          width={rightX - leftX}
-          translateX={translateX}
-          draggable={true}
-          onDrag={handleDrag}
-          onDragStart={handleDragStart}
-        >
-          {photos.map(photo => (
+        <Styled.Photos ref={stripContainer} width={width * 3} translateX={translateX}>
+          {photos.map((photo) => (
             <img
               src={photo.src}
               style={{
@@ -147,25 +129,21 @@ const PhotoStrip = ({ year }: { year: number; }) => {
                 opacity: photo.opacity,
               }}
               key={photo.src}
-              onClick={() => {
+              onDoubleClick={() => {
                 setModalId(photo.id);
                 setModalActive(true);
               }}
+              draggable={false}
               // TODO: this alt tag is meaningless--is there something that can be added?
               alt={`${photo.src}`}
             />
           ))}
         </Styled.Photos>
-      <Styled.Year>{year}</Styled.Year>
+        {/* <Styled.Year>{year}</Styled.Year> */}
       </Styled.Strip>
-      {(modalId) && (
-        <PhotoViewerModal
-          id={modalId}
-          setModalId={setModalId}
-        />
-      )}
+      {modalId && <PhotoViewerModal id={modalId} setModalId={setModalId} />}
     </>
-  )
-}
+  );
+};
 
 export default PhotoStrip;

@@ -35,7 +35,7 @@ const MapControls = () => {
   const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction })}/${yearsStr}`;
   const rightTo = `../../${getAddressOffsetString(xScrollingRight, direction, { direction })}/${yearsStr}`;
   const otherSide = toggleDirectionAddrOffset(address, direction, offset);
-  const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}/${yearsStr}` : '';
+  const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}x/${yearsStr}` : '';
 
   useEffect(() => {
     // move left or right using arrow keys if the modal isn't active
