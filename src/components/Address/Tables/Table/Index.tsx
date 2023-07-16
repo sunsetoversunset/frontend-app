@@ -60,7 +60,7 @@ const Table = ({ title, sources, headers, rows }: Types.Table) => {
 
       <tbody>
         {rows.map((row) => (
-          <Styled.Row key={row.key}>{row.data.map((data) => (data && typeof data === "object" && "style" in data ? <Styled.Data styling={data.style}>{data.datum}</Styled.Data> : <Styled.Data>{data}</Styled.Data>))}</Styled.Row>
+          <Styled.Row key={row.key}>{row.data.map((data, idx) => (data && typeof data === "object" && "style" in data ? <Styled.Data styling={data.style} key={idx}>{data.datum}</Styled.Data> : <Styled.Data key={idx}>{data}</Styled.Data>))}</Styled.Row>
         ))}
       </tbody>
     </Styled.DataTable>

@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useState, useEffect, useRef } from "react";
+import * as d3 from "d3";
 import { AddressDataContext } from "../../Contexts";
 import { useAddressData, useStoriesFeaturingAddress } from "../../hooks";
 import Card from "../Stories/Card/Index";
@@ -18,6 +18,40 @@ const AddressView = () => {
 
   const [show, setShow] = useState<"photos" | "context">("context");
 
+  const [showStoriesNotification, setShowStoriesNotification] = useState(true);
+
+  const [storiesNotificationHeight, setStoriesNotificationHeight] = useState<number>(0);
+
+  const storiesAlert = useRef(null);
+
+  useEffect(() => {
+    setShowStoriesNotification(true)
+  }, [address]);
+
+  useEffect(() => {
+    if (storiesAlert.current && showStoriesNotification && storiesNotificationHeight === 0) {
+      d3.select(storiesAlert.current)
+        .transition()
+        .duration(500)
+        .style('max-height', '250px')
+        .on('end', () => {
+          setStoriesNotificationHeight(250);
+        });
+    }
+  });
+
+  useEffect(() => {
+    if (storiesAlert.current && !showStoriesNotification && storiesNotificationHeight === 250) {
+      d3.select(storiesAlert.current)
+        .transition()
+        .duration(500)
+        .style('max-height', '0px')
+        .on('end', () => {
+          setStoriesNotificationHeight(0);
+        })
+    }
+  });
+
   const stories = useStoriesFeaturingAddress(address);
 
   if (!addressHasData) {
@@ -32,20 +66,14 @@ const AddressView = () => {
     return null;
   }
 
+  console.log(showStoriesNotification, storiesNotificationHeight);
+
   return (
     <AddressDataContext.Provider value={addressData}>
       <Styled.Address className="app-page">
         {/* <ScrollToTop /> */}
         <Header />
         <Controls show={show} setShow={setShow} />
-        {stories.length > 0 && (
-          <div>
-            <Styled.StoriesHeader>This address is featured in ...</Styled.StoriesHeader>
-            <Styled.Stories>
-              {stories.map((d) => <Card storyMetadata={d} key={d.slug} />)}
-            </Styled.Stories>
-          </div>
-        )}
         {show === "photos" && <PhotoStrips />}
         {show === "context" && (
           <div id="historicalcontext">
@@ -94,6 +122,21 @@ const AddressView = () => {
           </div>
         )}
       </Styled.Address>
+      {(stories.length > 0) && (
+          <Styled.StoriesAlert ref={storiesAlert} maxheight={storiesNotificationHeight}>
+            <div>
+              This address is discussed in the {(stories.length === 1) ? 'story ' : 'stories '}
+              {stories.map((d, idx) =>
+                <>
+                  {(stories.length >= 2 && idx === stories.length -1) && <> and </>}
+                  <Styled.StoriesLink to={`/stories/${d.slug}`} key={d.slug}>{d.title}</Styled.StoriesLink>
+                  {(stories.length >= 3 && idx !== stories.length -1) && <>, </>}
+                </>
+              )}.
+            </div>
+            <Styled.CloseButton onClick={() => { setShowStoriesNotification(false); }}><img src="/static/media/icon-close.ea68c934.svg" alt="icon-close-search" /></Styled.CloseButton>
+          </Styled.StoriesAlert>
+        )}
     </AddressDataContext.Provider>
   );
 };

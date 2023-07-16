@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import * as Constants from '../../constants';
 
 
 export const Address = styled.div`
@@ -191,19 +193,46 @@ font-family: "Degular-Text", sans-serif;
   }
 `;
 
-export const StoriesHeader = styled.h3`
-  text-align: center;
-  font-weight: 400;
-  font-style: italic;
-  margin: 5px 0;
+export const StoriesAlert = styled.div<{maxheight: number}>`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: (100vw - 20px);
+  max-height: ${p => p.maxheight}px;
+  background-color: ${Constants.colors.darkOrange};
+  display: grid;
+  grid-template-columns: auto 30px;
+  grid-column-gap: 20px;
+  padding: 0 0 0 20px;
+  color: ${Constants.colors.grayLightest};
+  justify-items: center;
 `;
 
-export const Stories = styled.ul`
-  padding: 0;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  max-width: 1300px;
-  margin: 15px auto;
-  flex-wrap: wrap;
-`
+export const StoriesLink = styled(Link)`
+  font-size: 1.2em;
+  font-weight: 700;
+  color: white; 
+  text-decoration: none;
+  margin: auto 3px;
+
+  &:hover {
+    color: ${Constants.colors.lightBlue};
+    text-decoration: underline;
+  }
+`;
+
+export const CloseButton = styled.button`
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  padding: 10px;
+  filter: invert(100%) sepia(15%) saturate(0%) hue-rotate(104deg) brightness(103%) contrast(102%);
+  
+  :hover {
+    filter: unset;
+  }
+
+
+
+`;

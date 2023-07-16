@@ -319,6 +319,5 @@ export function useStoriesMetadata() {
 
 export function useStoriesFeaturingAddress(address: string) {
   const storiesMetadata = useStoriesMetadata();
-  console.log(storiesMetadata);
   return storiesMetadata.filter(d => d.addresses && d.addresses.map(_d => (typeof _d === 'number') ? _d.toString() : _d).includes(address));
 }
