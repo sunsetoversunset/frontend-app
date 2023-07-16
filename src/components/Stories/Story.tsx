@@ -4,7 +4,6 @@ import Markdown from 'markdown-to-jsx';
 import { useParams, useLocation } from 'react-router-dom';
 import { StoryMetadata } from '../..';
 import { useAppContext } from '../../hooks';
-import PhotoViewerModal from "../PhotoViewerModal/Index";
 import Callout from './MarkdownOverrides/Callout/Index';
 import ImageList from './MarkdownOverrides/ImageList/Index';
 import AOrLink from './MarkdownOverrides/Link';
@@ -21,8 +20,7 @@ const Story = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState<string>();
   const [byDate, setByDate] = useState<string>();
-  const { width, setModalActive } = useAppContext();
-  const [modalId, setModalId] = useState<string>();
+  const { width, setModalActive, setModalId } = useAppContext();
   const [headerBgImage, setHeaderBgImage] = useState<string>();
   const [story, setStory] = useState('');
 
@@ -98,7 +96,6 @@ const Story = () => {
   }, [scrollTo, story])
 
   return (
-    <>
       <Styled.Story>
         {(title && headerBgImage) && (
           <Styled.HeaderImage url={headerBgImage}>
@@ -145,16 +142,6 @@ const Story = () => {
           {story}
         </Markdown>
       </Styled.Story>
-
-      {
-        (modalId) && (
-          <PhotoViewerModal
-            id={modalId}
-            setModalId={setModalId}
-          />
-        )
-      }
-    </>
   );
 };
 

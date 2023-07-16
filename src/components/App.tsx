@@ -10,6 +10,7 @@ import About from './Pages/About/Index';
 import AddressView from './Address/Index';
 import Footer from './Footer/Index';
 import Landing from "./Landing/Index";
+import PhotoViewerModal from './PhotoViewerModal/Index';
 import { AppContext } from '../Contexts';
 import { getAddressOffsetString } from '../utiliities';
 import type { Dimensions } from '../index.d';
@@ -42,6 +43,8 @@ export const App = () => {
 
   const [dimensions, setDimensions] = useState<Dimensions>(calculateDimensions());
   const [modalActive, setModalActive] = useState(false);
+  // the if for the image that is displayed in the modal. Undefined is unopened
+  const [modalId, setModalId] = useState<string>();
 
   useEffect(() => {
     window.addEventListener('resize', () => setDimensions(calculateDimensions()));
@@ -58,7 +61,7 @@ export const App = () => {
 
   // --------------------------------------------------------------------
   return (
-    <AppContext.Provider value={{ ...dimensions, modalActive, setModalActive }}>
+    <AppContext.Provider value={{ ...dimensions, modalActive, setModalActive, modalId, setModalId }}>
       <Styled.GlobalStyle />
       <Styled.App>
         <Router basename={'/'}>
@@ -134,6 +137,7 @@ export const App = () => {
 
           </Routes>
           <Footer />
+          {modalId && <PhotoViewerModal id={modalId} setModalId={setModalId} />}
           {(landingOpen && <Landing setLandingOpen={setLandingOpen} />)}
         </Router>
       </Styled.App>

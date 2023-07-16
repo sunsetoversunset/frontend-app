@@ -4,7 +4,7 @@ import Noise from '../../../assets/textures/noise.png';
 
 export const Strip = styled.div`
   width: 300vw;
-  overflow-x: visible;
+  overflow: visible;
   margin-left: -100vw;
   padding-left: 100vw;
   height: 236px;

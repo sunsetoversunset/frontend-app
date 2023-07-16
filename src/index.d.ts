@@ -9,6 +9,8 @@ export type Dimensions = {
 export type AppContextParams = Dimensions & {
   modalActive: boolean;
   setModalActive: React.Dispatch<React.SetStateAction<boolean>>
+  modalId: string | undefined;
+  setModalId: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export interface URLParams {

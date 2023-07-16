@@ -1,7 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useAppContext, usePhotoStrip } from "../../../hooks";
-import PhotoViewerModal from "../../PhotoViewerModal/Index";
 import * as Styled from "./styled";
 
 type Photo = {
@@ -13,7 +12,7 @@ type Photo = {
 
 const PhotoStrip = ({ year }: { year: number }) => {
   const { x, photoData, direction, addressPhotoIds, scroll } = usePhotoStrip(year);
-  const { setModalActive, width } = useAppContext();
+  const { setModalActive, width, setModalId } = useAppContext();
 
   const xCoords = useMemo(
     () => ({
@@ -47,8 +46,7 @@ const PhotoStrip = ({ year }: { year: number }) => {
   const [translateX, setTranslateX] = useState(xCoords.translateX);
   // the photos that are visible for the visible part of the strip container
   const [photos, setPhotos] = useState<Photo[]>(visiblePhotos);
-  // the if for the image that is displayed in the modal. Undefined is unopened
-  const [modalId, setModalId] = useState<string>();
+
 
   // the div for the strip container
   const stripContainer = useRef(null);
@@ -141,7 +139,7 @@ const PhotoStrip = ({ year }: { year: number }) => {
         </Styled.Photos>
         {/* <Styled.Year>{year}</Styled.Year> */}
       </Styled.Strip>
-      {modalId && <PhotoViewerModal id={modalId} setModalId={setModalId} />}
+
     </>
   );
 };

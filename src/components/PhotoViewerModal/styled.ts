@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// @ts-ignore
-import { Viewer as IIIFViewer } from "react-iiif-viewer";
 import * as Constants from "../../constants";
 
 export const Container = styled.div`

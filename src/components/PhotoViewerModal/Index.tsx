@@ -15,14 +15,6 @@ import * as Types from "./index.d";
 
 const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
   const { pathname } = useLocation();
-  let pageType: "panorama" | "address" | "story" = "panorama";
-  if (pathname.startsWith("/address/")) {
-    pageType = "address";
-  }
-  if (pathname.startsWith("/stories/")) {
-    pageType = "story";
-  }
-  const navigate = useNavigate();
   const { setModalActive, width, media } = useAppContext();
   const [photoData, setPhotoData] = useState<Types.PhotoData>();
   const [isExpanded, setIsExpanded] = useState(true);
@@ -75,7 +67,7 @@ const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
   // the photo coordinates are the edge to the photo; addresses should be calculated from the center of it
 
   return (
-    <Styled.Container>
+    <Styled.Container className='modal'>
       <Styled.Modal>
         <Styled.Viewer>
           <Viewer iiifUrl={`https://media.getty.edu/iiif/image/${id}/info.json`} />
@@ -84,9 +76,6 @@ const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
           onClick={() => {
             setModalId(undefined);
             setModalActive(false);
-            // if (pageType === "panorama" || pageType === "address") {
-            //   navigate(closeTos[pageType]);
-            // }
           }}
         >
           <img src={iconCloseWhite} alt="icon-close-modal" />
