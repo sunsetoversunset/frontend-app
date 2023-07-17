@@ -1,4 +1,5 @@
 import { useAddressDataContext } from '../../../hooks';
+// import '../../../styles/Tables.scss';
 //import '../../../styles/Tables.scss';
 
 const TaxAssessments = () => {
@@ -20,7 +21,7 @@ const TaxAssessments = () => {
                 <td>
                   <a
                     href={`https://portal.assessor.lacounty.gov/parceldetail/${resource.AIN}`}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     {resource.SitusAddress}  
                   </a> 
