@@ -15,9 +15,9 @@ export const Container = styled.div`
 `;
 
 export const Modal = styled.div`
-  width: calc(90vw);
-  height: calc(95vh);
-  margin: 2.5vh 5vw;
+  width: 90vw;
+  height: 90vh;
+  margin: 2.5vh 5vw 0vh 5vw;
   background: #000000;
   display: flex;
   align-items: center;
@@ -26,6 +26,11 @@ export const Modal = styled.div`
   border-radius: 10px;
   position: relative;
   overflow-x: visible;
+
+  @media ${Constants.devices.tablet} {
+    height: 95vh;
+    margin: 2.5vh 5vw;
+  }
 `;
 
 export const Close = styled.div`
@@ -42,8 +47,11 @@ export const Close = styled.div`
 /* // Overrides for React IIIF Viewer */
 export const Viewer = styled.div`
   .react-iiif-viewer.css-1lo3585 {
-    width: calc(90vw) !important;
-    height: calc(95vh);
+    width: 90vw !important;
+    height: 90vh;
+    @media ${Constants.devices.tablet} {
+      height: 95vh;
+    }
 
     /* The zoom buttons */
     .css-17zjxtl {
