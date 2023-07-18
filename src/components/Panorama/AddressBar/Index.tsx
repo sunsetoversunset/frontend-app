@@ -9,7 +9,6 @@ import * as Styled from './styled';
 const AddressBar = () => {
   const { visibleAddresses: addresses, x, leftX, rightX, direction, scroll } = usePanoramaData();
 
-
   // scrolling: whether it's scrolling with an animation
   const [scrolling, setScrolling] = useState(false);
   // the translateX value for the strip container
