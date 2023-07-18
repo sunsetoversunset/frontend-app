@@ -45,7 +45,7 @@ def calcRotation(point):
 
 
 # retrieve the strip labels data, filtering out any rows with no coordinate
-strip_labels = list(filter(lambda x: x['coordinate'] != None and isfloat(x['coordinate']), get_table(103061)))
+strip_labels = list(filter(lambda x: x['coordinate'] != None and isfloat(x['coordinate']), get_table(158695)))
 
 # get the max coordinate and the total distance of the path
 max_coordinate = max(map(lambda d: float(d['coordinate']), filter(lambda d: d['coordinate'] != None, strip_labels)))
@@ -126,13 +126,53 @@ def is_n(item):
 def is_s(item):
     return item["street_side"] == 's'
 
+def sort_by_coordinate(item):
+  return float(item["coordinate"])
+
+photographs_by_identifier = {}
+
 # write the photographs json files, separate files for n and s addresses
 for year, value in photographs.items():
     n_values_iteratator = filter(is_n, value)
     n_values = list(n_values_iteratator)
+    n_values_sorted = sorted(n_values, key = lambda x: float(x['coordinate']))
     with open(f"./public/data/photographs_{year}_n.json", "w") as f:
-        json.dump(n_values, f)
+        json.dump(n_values_sorted, f)
     s_values_iteratator = filter(is_s, value)
     s_values = list(s_values_iteratator)
+    s_values_sorted = sorted(s_values, key=lambda x: float(x['coordinate']))
     with open(f"./public/data/photographs_{year}_s.json", "w") as f:
-        json.dump(s_values, f)
+        json.dump(s_values_sorted, f)
+    
+    for idx in range(len(n_values_sorted)):
+      # get the first letter of the id
+      letter = n_values_sorted[idx]['identifier'][:2]
+      photographs_by_identifier.setdefault(letter, [])
+      photo_data = {
+        'id': n_values_sorted[idx]['identifier'],
+        'year': int(year),
+        'side': "n",
+        'next_id': n_values_sorted[idx + 1]['identifier'] if idx + 1 < len(n_values) else None,
+        'previous_id': n_values_sorted[idx - 1]['identifier'] if idx > 0 else None,
+        'coordinate': float(n_values_sorted[idx]['coordinate'])
+      }
+      photographs_by_identifier[letter].append(photo_data)
+
+    for idx in range(len(s_values_sorted)):
+        # get the first letter of the id
+        theKey = s_values_sorted[idx]['identifier'][:2]
+        photographs_by_identifier.setdefault(theKey, [])
+        photo_data = {
+            'id': s_values_sorted[idx]['identifier'],
+            'year': int(year),
+            'side': "s",
+            'next_id': s_values_sorted[idx + 1]['identifier'] if idx + 1 < len(s_values) else None,
+            'previous_id': s_values_sorted[idx - 1]['identifier'] if idx > 0 else None,
+            'coordinate': float(s_values_sorted[idx]['coordinate'])
+        }
+        photographs_by_identifier[theKey].append(photo_data)
+    
+for theKey, values in photographs_by_identifier.items():
+  with open(f"./public/photos_data/{theKey}.json", "w") as f:
+      json.dump(values, f)
+      
