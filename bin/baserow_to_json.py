@@ -45,7 +45,7 @@ def calcRotation(point):
 
 
 # retrieve the strip labels data, filtering out any rows with no coordinate
-strip_labels = list(filter(lambda x: x['coordinate'] != None and isfloat(x['coordinate']), get_table(103061)))
+strip_labels = list(filter(lambda x: x['coordinate'] != None and isfloat(x['coordinate']), get_table(158695)))
 
 # get the max coordinate and the total distance of the path
 max_coordinate = max(map(lambda d: float(d['coordinate']), filter(lambda d: d['coordinate'] != None, strip_labels)))
