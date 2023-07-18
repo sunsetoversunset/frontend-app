@@ -127,7 +127,7 @@ const PhotoStrip = ({ year }: { year: number }) => {
                 opacity: photo.opacity,
               }}
               key={photo.src}
-              onClick={() => {
+              onDoubleClick={() => {
                 setModalId(photo.id);
                 setModalActive(true);
               }}
