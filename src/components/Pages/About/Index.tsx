@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import getty from "../../../assets/images/getty.png";
 import mapCenter from "../../../assets/images/logo-MapCenter.png";
 import nEH from "../../../assets/images/logo-NEH.svg";
 import uPenn from "../../../assets/images/logo-UPenn.png";
 import swarthmore from "../../../assets/images/swarthmore.png";
 import { useAppContext } from "../../../hooks";
+import iconCloseWhite from "../../../assets/icons/icon-close-white.svg";
 import * as Styled from "./styled";
 
 const About = () => {
-  const { width } = useAppContext();
+  const { width, media } = useAppContext();
   const date = new Date();
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const dateStr = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  const [largeMapOpen, setLargeMapOpen] = useState(false);
 
   return (
     <Styled.About>
@@ -40,6 +43,22 @@ const About = () => {
         their distinctive identity as individual images. The ten miles they depict represent just a portion of the 22 miles of Sunset Boulevard that Ruscha photographed and only a sample of Los Angeles's neighborhoods, from West Hollywood to Chinatown. Likewise, despite their unusual duration, they index only a brief timespan of land that has been continuously inhabited for generations, including
         by the Tongva, Kizh, and Chumash peoples. Still, even through a geographically and temporally limited lens, this dense, largely commercial extent tells vivid stories of how a diverse range of Angelenos have continuously shaped and reshaped their city.
       </p>
+
+      <Styled.MapFigure onClick={() => {
+        if (media !== 'phone') {
+          setLargeMapOpen(true); 
+        }
+      }}>
+        <img src='/la_maps/map671.jpg' alt='map of LA highlighting Sunset Boulevard' />
+        {(media !== 'phone') && (<figcaption>click to enlarge</figcaption>)}
+      </Styled.MapFigure>
+
+      {(largeMapOpen) && (
+        <Styled.EnlargedMap>
+          <img src='/la_maps/maplarge.jpg' alt='map of LA highlighting Sunset Boulevard' />
+          <Styled.Close onClick={() => { setLargeMapOpen(false); }}><img src={iconCloseWhite} alt='close' /></Styled.Close>
+        </Styled.EnlargedMap>
+      )}
 
       <p>
         To reveal such tales, the site locates Ruscha's Sunset photographs in space and time and joins them with an array of historical data sources—city directories, the U.S. Census, and local newspapers, among others—to provide greater context for the changes seen decade-by-decade. “All I was after was that store-front plane,” Ruscha once said of his Sunset photographs. Yet looking not just at

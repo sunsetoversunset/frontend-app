@@ -136,6 +136,7 @@ export const Link = styled(RRDLink)`
 `;
 
 export const Figure = styled.figure`
+  margin: 18px 0;
   img {
     display: block;
     margin: 10px auto;
@@ -148,3 +149,45 @@ export const Figure = styled.figure`
     color: ${Constants.colors.minGrayText};
   }
 `;
+
+export const MapFigure = styled(Figure)`
+  img {
+    ${centering};
+  }
+  
+  figcaption {
+    text-align: center;
+  }
+`;
+
+export const Close = styled.div`
+  grid-area: close;
+  align-self: start;
+  margin-top: 20px;
+`;
+
+export const EnlargedMap = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: grid;
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: 100vh;
+  grid-template-areas: ". map close";
+  justify-items: center;
+  align-items: center;
+
+  img {
+    grid-area: map;
+    max-height: 96vh;
+    max-width: 96vw;
+  }
+`;
+
+
