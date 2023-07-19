@@ -110,7 +110,7 @@ const About = () => {
       <Styled.Subheading>Design & Development</Styled.Subheading>
       <Styled.TeamList>
         <li>
-          <a target="_blank" rel="noreferrer" href="">
+          <a target="_blank" rel="noreferrer" href="https://americanstudies.richmond.edu/faculty/rnelson2/">
             Rob Nelson
           </a>
           , Design and Development Lead
