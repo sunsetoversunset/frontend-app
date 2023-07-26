@@ -1,4 +1,4 @@
-import { usePanoramaData } from "../../hooks";
+import { usePanoramaData } from "../../../hooks";
 import Year from './Year';
 
 export const PhotoStrips = () => {

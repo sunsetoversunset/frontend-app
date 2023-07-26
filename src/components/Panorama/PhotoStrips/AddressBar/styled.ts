@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Constants from '../../../constants';
+import * as Constants from '../../../../constants';
 const dimensions = Constants.deviceDimensions.panoramaAddressBar;
 
 export const AddressBar = styled.div`

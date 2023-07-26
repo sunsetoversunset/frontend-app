@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
+import { useEffect, useRef, useState } from "react";
 import { AddressDataContext } from "../../Contexts";
 import { useAddressData, useStoriesFeaturingAddress } from "../../hooks";
-import Card from "../Stories/Card/Index";
-import PhotoStrips from "../PhotoStrips/Index";
 import Controls from "./Controls/Index";
 import Header from "./Header/Index";
+import PhotoStrips from "./PhotoStrips/Index";
 import CensusTable from "./Tables/Census/Index";
 import NewspaperTable from "./Tables/Newspaper";
 import OccupancyTable from "./Tables/Occupancy";
@@ -66,8 +65,6 @@ const AddressView = () => {
     return null;
   }
 
-  console.log(showStoriesNotification, storiesNotificationHeight);
-
   return (
     <AddressDataContext.Provider value={addressData}>
       <Styled.Address className="app-page">
@@ -123,20 +120,20 @@ const AddressView = () => {
         )}
       </Styled.Address>
       {(stories.length > 0) && (
-          <Styled.StoriesAlert ref={storiesAlert} maxheight={storiesNotificationHeight}>
-            <div>
-              This address is discussed in the {(stories.length === 1) ? 'story ' : 'stories '}
-              {stories.map((d, idx) =>
-                <>
-                  {(stories.length >= 2 && idx === stories.length -1) && <> and </>}
-                  <Styled.StoriesLink to={`/stories/${d.slug}`} key={d.slug}>{d.title}</Styled.StoriesLink>
-                  {(stories.length >= 3 && idx !== stories.length -1) && <>, </>}
-                </>
-              )}.
-            </div>
-            <Styled.CloseButton onClick={() => { setShowStoriesNotification(false); }}><img src="/static/media/icon-close.ea68c934.svg" alt="icon-close-search" /></Styled.CloseButton>
-          </Styled.StoriesAlert>
-        )}
+        <Styled.StoriesAlert ref={storiesAlert} maxheight={storiesNotificationHeight}>
+          <div>
+            This address is discussed in the {(stories.length === 1) ? 'story ' : 'stories '}
+            {stories.map((d, idx) =>
+              <>
+                {(stories.length >= 2 && idx === stories.length - 1) && <> and </>}
+                <Styled.StoriesLink to={`/stories/${d.slug}`} key={d.slug}>{d.title}</Styled.StoriesLink>
+                {(stories.length >= 3 && idx !== stories.length - 1) && <>, </>}
+              </>
+            )}.
+          </div>
+          <Styled.CloseButton onClick={() => { setShowStoriesNotification(false); }}><img src="/static/media/icon-close.ea68c934.svg" alt="icon-close-search" /></Styled.CloseButton>
+        </Styled.StoriesAlert>
+      )}
     </AddressDataContext.Provider>
   );
 };

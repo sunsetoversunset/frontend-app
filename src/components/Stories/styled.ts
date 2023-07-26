@@ -6,6 +6,9 @@ export const Stories = styled.div`
   padding-top: ${Constants.deviceDimensions.navHeader.mobile.height}px;
   max-width: min(95vw, 1300px);
   margin: 20px auto;
+  h1, h2 {
+    text-align: center;
+  }
 
   @media ${Constants.devices.tablet} {
     padding-top: ${Constants.deviceDimensions.navHeader.tablet.height}px;

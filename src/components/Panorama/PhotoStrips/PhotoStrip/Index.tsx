@@ -1,6 +1,6 @@
 import * as d3 from "d3";
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import { useAppContext, usePhotoStrip } from "../../../hooks";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useAppContext, usePhotoStrip } from "../../../../hooks";
 import * as Styled from "./styled";
 
 type Photo = {
@@ -11,19 +11,11 @@ type Photo = {
 };
 
 const PhotoStrip = ({ year }: { year: number }) => {
-  const { x, photoData, direction, addressPhotoIds, scroll } = usePhotoStrip(year);
+  const { x, photoData, direction, addressPhotoIds, scroll, leftX, rightX, farLeftX, farRightX } = usePhotoStrip(year);
+  console.log(farLeftX, leftX, x, rightX, farRightX);
   const { setModalActive, width, setModalId } = useAppContext();
 
-  const xCoords = useMemo(
-    () => ({
-      canvasLeft: Math.floor(x - width / 2),
-      canvasRight: Math.ceil(x + width / 2),
-      loadedLeft: Math.floor(x - width * 1.5),
-      loadedRight: Math.ceil(x + width * 1.5),
-      translateX: Math.floor(x - width / 2) * -1,
-    }),
-    [x, width]
-  );
+
 
   const [addressPhotoIdsString, setAddressPhotoIdsString] = useState(addressPhotoIds?.join(","));
 
@@ -33,17 +25,17 @@ const PhotoStrip = ({ year }: { year: number }) => {
     const _addressPhotoIds = addressPhotoIdsString?.split(',');
     const imageWidth = 299;
     return photoData
-      .filter((d) => d.x >= xCoords.loadedLeft - imageWidth && d.x <= xCoords.loadedRight + imageWidth)
+      .filter((d) => d.x >= farLeftX - imageWidth && d.x <= farRightX + imageWidth)
       .map((d) => ({
         src: `https://media.getty.edu/iiif/image/${d.identifier}/full/,204/0/default.jpg`,
         x: d.x,
         id: d.identifier,
         opacity: !_addressPhotoIds || (_addressPhotoIds.length > 0 && _addressPhotoIds.includes(d.identifier)) ? 1 : 0.3,
       }));
-  }, [photoData, xCoords, addressPhotoIdsString]);
+  }, [photoData, addressPhotoIdsString, farLeftX, farRightX]);
 
   // the translateX value for the strip container
-  const [translateX, setTranslateX] = useState(xCoords.translateX);
+  const [translateX, setTranslateX] = useState(leftX * -1);
   // the photos that are visible for the visible part of the strip container
   const [photos, setPhotos] = useState<Photo[]>(visiblePhotos);
 
@@ -69,9 +61,9 @@ const PhotoStrip = ({ year }: { year: number }) => {
   useEffect(() => {
     if (direction !== directionRef.current) {
       directionRef.current = direction;
-      setTranslateX(xCoords.translateX);
+      setTranslateX(leftX * -1);
     }
-  }, [direction, xCoords]);
+  }, [direction, leftX]);
 
   // scroll the strip if the center has changed (and the direction hasn't)
   useEffect(() => {
@@ -80,13 +72,13 @@ const PhotoStrip = ({ year }: { year: number }) => {
       // only animate if scroll is set to true
       // it's set to false by a flag in the url to skip any animation if the strip is dragged rather than moved when the user hits the west or east buttons
       .duration(scroll ? 1500 : 0)
-      .style("transform", `translateX(${xCoords.translateX}px)`)
+      .style("transform", `translateX(${leftX * -1}px)`)
       .on("end", () => {
         // updated the state/ref values to reflect the post-scroll values
         // todo: This was causing a glitch where the whole app seemed to rerender and caused a quick flash.
-        setTranslateX(xCoords.translateX);
+        setTranslateX(leftX * -1);
       });
-  }, [xCoords, scroll]);
+  }, [leftX, scroll]);
 
   // //set the photos when addressPhotoIds are updated. This is only used by an address page, not the panorama view
   // useEffect(() => {
@@ -117,8 +109,8 @@ const PhotoStrip = ({ year }: { year: number }) => {
 
   return (
     <>
-      <Styled.Strip>
-        <Styled.Photos ref={stripContainer} width={width * 3} translateX={translateX}>
+      <Styled.Strip width={farRightX - farLeftX}>
+        <Styled.Photos ref={stripContainer} width={farRightX - farLeftX} translateX={translateX}>
           {photos.map((photo) => (
             <img
               src={photo.src}

@@ -1,24 +1,34 @@
 import styled from 'styled-components';
-import * as Constants from '../../../constants';
-import Noise from '../../../assets/textures/noise.png';
+import * as Constants from '../../../../constants';
+import Noise from '../../../../assets/textures/noise.png';
 
-export const Strip = styled.div`
-  width: 300vw;
+export const Strip = styled.div<{ width: number }>`
+  width: ${p => p.width}px;
+  width: 100vw;
   overflow: visible;
-  margin-left: -100vw;
-  padding-left: 100vw;
   height: 236px;
-  border-top: 2px solid ${Constants.colors.black};
+  //border-top: 2px solid ${Constants.colors.black};
+  margin-top: 2px;
   position: relative;
   z-index: 0;
-  background-image: url(${Noise});
+  background: red;
+  //background-image: url(${Noise});
 
+  // styling for the border and background substantially padded on either side to accommodate drag scrolling
   &:before {
     content: '';
     position: absolute;
+    width: 1100vw;
+    height: 100%;
+    margin-left: -500vw;
+    padding-left: 500vw;
+    margin-right: -500vw;
+    padding-right: 500vw; 
+    margin-top: -2px;
+    border-top: 2px solid ${Constants.colors.black};
     background-color: ${Constants.colors.grayLightest};
     padding-bottom: 200px;
-    padding-right: 100vw;
+    background-image: url(${Noise});
   }
 
   img {
@@ -29,7 +39,7 @@ export const Strip = styled.div`
 `;
 
 export const Photos = styled.div<{ width: number, translateX: number }>`
-  width: ${p => p.width};
+  width: 100%;
   transform: translateX(${p => p.translateX}px);
 `;
 
@@ -60,7 +70,7 @@ export const Year = styled.div`
   z-index: 1000;
 `;
 
-export const YearPanorama = styled.div<{hasPhotos: boolean}>`
+export const YearPanorama = styled.div<{ hasPhotos: boolean }>`
   height: ${p => p.hasPhotos ? 238 : 50}px;
   position: relative;
 

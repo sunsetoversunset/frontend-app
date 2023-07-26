@@ -1,9 +1,9 @@
 import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from 'react-router-dom';
-import { usePanoramaData } from "../../../hooks";
-import { hasAddressData } from '../../../utiliities';
-import ConditionalWrapper from "../../ConditionalWrapper";
+import { usePanoramaData } from "../../../../hooks";
+import { hasAddressData } from '../../../../utiliities';
+import ConditionalWrapper from "../../../ConditionalWrapper";
 import * as Styled from './styled';
 
 const AddressBar = () => {
@@ -43,7 +43,7 @@ const AddressBar = () => {
 
   useEffect(() => {
     if (scrolling && ref.current) {
-            // only run the transition if the distance is less than 3000 pixels
+      // only run the transition if the distance is less than 3000 pixels
       d3.select(ref.current)
         .transition()
         .duration(scroll ? 1500 : 0)

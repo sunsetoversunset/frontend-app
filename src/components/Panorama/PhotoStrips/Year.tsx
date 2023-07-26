@@ -1,4 +1,4 @@
-import { usePhotoStrip } from "../../hooks";
+import { usePhotoStrip } from "../../../hooks";
 import * as Styled from "./PhotoStrip/styled";
 
 export const Year = ({ year }: { year: number }) => {

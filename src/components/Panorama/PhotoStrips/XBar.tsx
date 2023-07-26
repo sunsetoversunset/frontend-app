@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { usePanoramaData, useAppContext } from "../../hooks";
-import { mult } from '../../utiliities';
+import { useAppContext, usePanoramaData } from "../../../hooks";
+import { mult } from '../../../utiliities';
+import type { Direction } from '../../../index.d';
 
 const Container = styled.div`
   height: 0;
@@ -34,22 +35,24 @@ const TickLabel = styled.div`
   text-align: center;
 `;
 
+const getTickNums = (leftX: number, rightX: number, direction: Direction, width: number, maxX: number) => {
+  const min = (direction === 'n') ? Math.ceil(leftX / mult) : Math.ceil((maxX + width / 2 - rightX) / mult);
+  const max = (direction === 'n') ? Math.floor(rightX / mult) : Math.floor((maxX + width / 2 - leftX) / mult);
+  return Array.apply(null, Array(1 + max - min))
+    .map((_, idx) => idx + min);
+};
+
 // this renders a simple bar that can be clicked to retrieve the x coordinate for a point.
 const ClickableBar = () => {
   const { width } = useAppContext();
   const { leftX, rightX, direction, maxX } = usePanoramaData();
-  const getTickNums = (leftX: number, rightX: number) => {
-    const min = (direction === 'n') ? Math.ceil(leftX / mult) : Math.ceil((maxX + width / 2 - rightX) / mult);
-    const max = (direction === 'n') ? Math.floor(rightX / mult) : Math.floor((maxX + width / 2 - leftX) / mult);
-    return Array.apply(null, Array(1 + max - min))
-      .map((_, idx) => idx + min);
-  };
 
-  const [ticks, setTicks] = useState(getTickNums(leftX, rightX));
+
+  const [ticks, setTicks] = useState(getTickNums(leftX, rightX, direction, width, maxX));
 
   useEffect(() => {
-    setTicks(getTickNums(leftX, rightX));
-  }, [leftX, rightX, direction]);
+    setTicks(getTickNums(leftX, rightX, direction, width, maxX));
+  }, [leftX, rightX, direction, width, maxX]);
 
   const ticksWithXs = ticks.map(tick => ({
     tick,

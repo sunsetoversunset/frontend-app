@@ -9,6 +9,7 @@ import type { Direction, StoryMetadata, YearStr } from './index.d';
 import type { PhotoData } from './components/Panorama/index.d';
 import { AddressData } from './types/AddressView';
 import GeoJson from './assets/data/sunset.json';
+import { photoWidth } from './utiliities';
 
 export function useAddressDataContext() {
   return useContext(AddressDataContext);
@@ -212,6 +213,8 @@ export function usePhotoStrip(year: number) {
   const [directionLoaded, setDirectionsLoaded] = useState<Direction | undefined>()
   //const [boundaries, setBoundaries] = useState<[number, number]>();
 
+  const getX = (x: number, direction: Direction) => (direction === 'n') ? x * mult * widthMultiplier : getOppositeX(x * mult) * widthMultiplier;
+
   useEffect(() => {
     /* retrive the photos coordinates on initial load or a change of direction */
     if (photoData.length === 0 || direction !== directionRef.current || year !== yearRef.current) {
@@ -224,7 +227,7 @@ export function usePhotoStrip(year: number) {
             //.filter((row: any) => year !== 1966 || row.id < 371 || row.coordinate >= 156.58693)
             .map((row: any) => ({
               identifier: row.identifier,
-              x: (direction === 'n') ? parseFloat(row.coordinate) * mult * widthMultiplier : getOppositeX(parseFloat(row.coordinate) * mult) * widthMultiplier,
+              x: getX(parseFloat(row.coordinate), direction as Direction),
               facing: direction,
               year,
             })));
@@ -240,6 +243,18 @@ export function usePhotoStrip(year: number) {
     } 
   }, [direction, year, widthMultiplier, x, address, offset]);
 
+  // calculate the farLeft and farRight values--defaulting to the panorama values
+  let farLeftX = Math.floor(x - width * 1.5);
+  let farRightX = Math.floor(x + width * 1.5);
+  // for the address view, those values are calculated from the photo coordinates
+  if (pageType === 'addressView' && addressData?.addressData?.photos && direction) {
+    const minPhotoCoordinate = Math.min(...addressData?.addressData.photos.map(d => d.coordinate));
+    const maxPhotoCoordinate = Math.max(...addressData?.addressData.photos.map(d => d.coordinate));
+    farLeftX = Math.floor(getX((direction === 'n') ? minPhotoCoordinate : maxPhotoCoordinate, direction)) - photoWidth / 2;
+    farRightX = Math.ceil(getX((direction === 'n') ? maxPhotoCoordinate : minPhotoCoordinate, direction)) + photoWidth / 2;
+  }
+
+
   return {
     photoData,
     directionLoaded,
@@ -247,8 +262,8 @@ export function usePhotoStrip(year: number) {
     x,
     leftX: Math.floor(x - width / 2),
     rightX: Math.ceil(x + width / 2),
-    farLeftX: Math.floor(x - width * 1.5),
-    farRightX: Math.ceil(x + width * 1.5),
+    farLeftX,
+    farRightX,
     direction: directionRef.current,
     widthMultiplier,
     addressPhotoIds: addressData?.addressData?.photos?.map(photo => photo.id),
@@ -309,7 +324,6 @@ export function useStoriesMetadata() {
     axios.get(`/storiesassets/stories.json`)
       .then(response => {
         setStoriesMetadata((response.data as StoryMetadata[])
-          .filter(d => d.published)
           .sort((a, b) => b.date.year * 10000 + b.date.month * 100 + b.date.day - a.date.year * 10000 + a.date.month * 100 + a.date.day)
         );
       });
@@ -317,7 +331,15 @@ export function useStoriesMetadata() {
   return storiesMetadata;
 }
 
+export function useStoriesMetadataPublished() {
+  return useStoriesMetadata().filter(d => d.published);
+}
+
+export function useStoriesMetadataUnPublished() {
+  return useStoriesMetadata().filter(d => !d.published);
+}
+
 export function useStoriesFeaturingAddress(address: string) {
-  const storiesMetadata = useStoriesMetadata();
+  const storiesMetadata = useStoriesMetadataPublished();
   return storiesMetadata.filter(d => d.addresses && d.addresses.map(_d => (typeof _d === 'number') ? _d.toString() : _d).includes(address));
 }

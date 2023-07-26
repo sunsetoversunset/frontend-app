@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import GradientImg from "../../../assets/textures/noise-gradient-footer.png";
 import * as Constants from '../../../constants';
 
-export const Card = styled.li<{src: string}>`
+export const Card = styled.li<{src: string, published: boolean}>`
   list-style: none;
-  width: min(400px, 95vw);
-  height: 300px;
-
+  width: ${p => (p.published) ? 'min(400px, 95vw)' : 'min(300px, 85vw)'};
+  height: ${p => (p.published) ? 300 : 225}px;
+  color: white;
   background-image: url(${p => p.src});
   background-position: center center;
   background-size: cover;
@@ -25,11 +25,14 @@ export const Card = styled.li<{src: string}>`
     mix-blend-mode: multiply;
   }
 
-  color: white;
 
-  :hover {
-    color: ${Constants.colors.lightOrange};
-  }
+
+  ${p => (p.published) && css`  
+    &:hover {
+      color: ${Constants.colors.lightOrange};
+      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
+    }
+  `}
 `;
 
 export const Title = styled.div`

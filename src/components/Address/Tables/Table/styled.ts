@@ -72,7 +72,7 @@ export const Tooltip = styled.h4`
   text-decoration: underline;
   font-size: 16px;
   font-weight: 400;
-  text-align: right;
+  text-align: left;
 
   &:hover ${TooltipContent} {
     visibility: visible;
