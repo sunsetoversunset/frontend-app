@@ -8,7 +8,10 @@ const Stories = () => {
   const unpublishedStoriesMetadata = useStoriesMetadataUnPublished();
   return (
     <Styled.Stories>
-      <Styled.HeaderImage url={`https://media.getty.edu/iiif/image/b5ae8080-6f5e-4178-a13a-5589446004a2/full/,${width}/0/default.jpg`}>
+      <Styled.HeaderImage
+        url={`https://media.getty.edu/iiif/image/b5ae8080-6f5e-4178-a13a-5589446004a2/full/,${width}/0/default.jpg`}
+        backgroundPosition='bottom center'
+      >
         <Styled.Title>Stories</Styled.Title>
       </Styled.HeaderImage>
 
