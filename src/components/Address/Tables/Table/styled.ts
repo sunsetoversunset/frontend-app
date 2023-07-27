@@ -78,6 +78,10 @@ export const Tooltip = styled.h4`
   &:hover ${TooltipContent} {
     visibility: visible;
   }
+
+  @media ${Constants.devices.tablet} {
+    text-align: right;
+  }
 `;
 
 export const Row = styled.tr`
