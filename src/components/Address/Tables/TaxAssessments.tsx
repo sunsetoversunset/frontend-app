@@ -1,6 +1,5 @@
-import { useAddressDataContext } from '../../../hooks';
-// import '../../../styles/Tables.scss';
-//import '../../../styles/Tables.scss';
+import { useAddressDataContext } from "../../../hooks";
+import * as Styled from "./Table/styled";
 
 const TaxAssessments = () => {
   const { assessor_data } = useAddressDataContext();
@@ -9,28 +8,26 @@ const TaxAssessments = () => {
   }
 
   return (
-    <div
-      className={"taxAssessments dataTable"}
-    >
-      <h1>Tax Assessments</h1>
-      <table>
+    <Styled.DataTable>
+      <Styled.Caption>
+        <Styled.Title>Tax Assessments</Styled.Title>
+      </Styled.Caption>
         <tbody>
-          {assessor_data
-            .map((resource) => (
-              <tr key={resource.AIN}>
-                <td>
-                  <a
-                    href={`https://portal.assessor.lacounty.gov/parceldetail/${resource.AIN}`}
-                    target="_blank" rel="noreferrer"
-                  >
-                    {resource.SitusAddress}  
-                  </a> 
-                </td>
-              </tr>
-            ))}
+          {assessor_data.map((resource) => (
+            <tr key={resource.AIN}>
+              <td
+                style={{
+                  padding: '5px 20px',
+                }}
+              >
+                <a href={`https://portal.assessor.lacounty.gov/parceldetail/${resource.AIN}`} target="_blank" rel="noreferrer">
+                  {resource.SitusAddress}
+                </a>
+              </td>
+            </tr>
+          ))}
         </tbody>
-      </table>
-    </div>
+    </Styled.DataTable>
   );
 };
 

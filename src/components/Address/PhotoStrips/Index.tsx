@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 import { useAppContext, useAddressData, usePhotoStrip } from '../../../hooks';
 import { getLabelFromAddress } from '../../../utiliities';
 import PhotoStrip from "../../Panorama/PhotoStrips/PhotoStrip/Index";
+import Year from "../../Panorama/PhotoStrips/Year";
+import * as Styled from "../../Panorama/PhotoStrips/styled"
 
 export const PhotoStrips = () => {
   const years = [1966, 1973, 1985, 1995, 2007];
@@ -19,6 +21,7 @@ export const PhotoStrips = () => {
   const clientX = useRef<number>();
 
   const [translateX, setTranslateX] = useState(0);
+  const [translateXYears, setTranslateXYears] = useState(0);
 
   useEffect(() => {
     d3.select(ref.current)
@@ -49,7 +52,7 @@ export const PhotoStrips = () => {
       }
       if (startDragX.current && Math.abs(distance) > 3) {
         d3.select(ref.current).style("transform", `translateX(${translateX - distance}px)`);
-        d3.select(yearsRef.current).style("transform", `translateX(${translateX + distance}px)`);
+        d3.select(yearsRef.current).style("transform", `translateX(${translateX - distance * -1}px)`);
       }
     }
   }
@@ -65,6 +68,7 @@ export const PhotoStrips = () => {
       startDragX.current = undefined;
       clientX.current = undefined;
       setTranslateX(translateX - distance);
+      setTranslateXYears(translateX - distance * -1);
     }
   };
 
@@ -92,6 +96,22 @@ export const PhotoStrips = () => {
           />
         )
       })}
+      <Styled.YearsContainer
+        style={{
+          transform: `translateX(${translateXYears}px)`,
+        }}
+        ref={yearsRef}
+      >
+        {years.map(year => {
+          return (
+            <Year
+              year={year}
+              key={`year-${year}`}
+            />
+          )
+        })}
+      </Styled.YearsContainer>
+      
     </div>
   )
 }

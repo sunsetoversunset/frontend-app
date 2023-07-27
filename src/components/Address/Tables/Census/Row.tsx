@@ -19,6 +19,16 @@ const Row = ({ group, category, data, tooltip }: Types.Row) => {
             ) : (
               <>{group.label}</>
             )}
+            {(group.toggle) && (
+              <Styled.Toggle onClick={() => {
+                // this shouldn't be necessary, but ts was showing an error
+                if (group.toggle) {
+                  group.toggle.func(!group.toggle.value)
+                }
+              }}>
+                ({(group.toggle.value) ? group.toggle.labelTrue: group.toggle.labelFalse})
+              </Styled.Toggle>
+            )}
           </Styled.RowHeader>
         )}
         <Styled.RowHeader colSpan={typeof group === "boolean" && !group && width >= Constants.sizes.laptop ? 2 : 1}>

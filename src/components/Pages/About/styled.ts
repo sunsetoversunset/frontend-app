@@ -175,18 +175,18 @@ export const EnlargedMap = styled.div`
   top: 0;
   bottom: 0;
   z-index: 99999;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   display: grid;
   grid-template-columns: 50px auto 50px;
   grid-template-rows: 100vh;
-  grid-template-areas: ". map close";
+  grid-template-areas: ". img close";
   justify-items: center;
   align-items: center;
 
   img {
-    grid-area: map;
+    grid-area: img;
     max-height: 96vh;
-    max-width: 96vw;
+    max-width: 100%;
   }
 `;
 

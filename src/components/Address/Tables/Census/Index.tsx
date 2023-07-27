@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAddressDataContext, useAppContext } from "../../../../hooks";
 import { CensusField, DecadeIndex } from "../../../../types/AddressView";
 import Row from "./Row";
@@ -7,6 +8,35 @@ import * as Constants from '../../../../constants';
 const CensusTable = () => {
   const { census_data } = useAddressDataContext();
   const { width } = useAppContext();
+  const [adjustForInflation, setAdjustForInflation] = useState(false);
+
+  const inflationAdjustments = [
+    {
+      year: 1960,
+      multiplier: 9.89,
+    },
+    {
+      year: 1970,
+      multiplier: 7.54,
+    },
+    {
+      year: 1980,
+      multiplier: 3.55,
+    },
+    {
+      year: 1990,
+      multiplier: 2.24,
+    },
+    {
+      year: 2000,
+      multiplier: 1.7,
+    },
+    {
+      year: 2010,
+      multiplier: 1.34,
+    }
+  ];
+
   const CensusDataColumns = (key: CensusField, unit: "%" | "$" | "number") => {
     const format = (unit: "%" | "$" | "number", value: number | string | undefined) => {
       if (value === undefined) {
@@ -16,10 +46,10 @@ const CensusTable = () => {
         return `${Math.round(value * 10000) / 100}%`;
       }
       if (unit === "$" && typeof value === "number") {
-        if (width < Constants.sizes.laptop && value >= 1000) {
-          return `$${value / 1000}K`;
-        }
-        return `$${value.toLocaleString()}`;
+        return `$${Math.round(value / 100) / 10}K`;
+        // if (width < Constants.sizes.laptop && value >= 1000) {
+        // }
+        // return `$${value.toLocaleString()}`;
       }
       if (unit === "number" && typeof value === "number") {
         return value.toLocaleString();
@@ -29,10 +59,11 @@ const CensusTable = () => {
     return (
       <>
         {[1960, 1970, 1980, 1990, 2000, 2010].map((decade) => {
-          if (census_data[key] && census_data[key][decade as DecadeIndex]) {
+          const value = ((key === 'med_fam_income' || key === 'avg_fam_income') && census_data[key][decade as DecadeIndex] && adjustForInflation) ? Math.round(census_data[key][decade as DecadeIndex] as number * (inflationAdjustments.find(d => d.year === decade) as { year: number;  multiplier: number }).multiplier) : census_data[key][decade as DecadeIndex];
+          if (census_data[key] && value) {
             return (
               <Styled.Data key={`${key}${decade}`} styling={{ text_align: "right" }}>
-                {format(unit, census_data[key][decade as DecadeIndex])}
+                {format(unit, value)}
               </Styled.Data>
             );
           } else {
@@ -153,6 +184,12 @@ const CensusTable = () => {
           group={{
             label: "INCOME",
             count: 2,
+            toggle: {
+              func: setAdjustForInflation,
+              value: adjustForInflation,
+              labelTrue: 'show as original census $',
+              labelFalse: 'show as inflation-adjusted 2022 $'
+            }
           }}
           category={`Average Family${width < Constants.sizes.laptop ? " Income" : ""}`}
           tooltip="First reported in 1970."

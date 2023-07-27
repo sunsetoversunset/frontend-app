@@ -3,11 +3,19 @@ import * as Constants from "../../constants";
 import GradientImg from "../../assets/textures/noise-gradient-footer.png";
 
 export const Stories = styled.div`
-  padding-top: ${Constants.deviceDimensions.navHeader.mobile.height}px;
-  max-width: min(95vw, 1300px);
-  margin: 20px auto;
+  /* padding-top: ${Constants.deviceDimensions.navHeader.mobile.height}px;
+  max-width: min(95vw, 1300px); */
+  margin: 0px auto 20px auto;
   h1, h2 {
     text-align: center;
+  }
+
+  p {
+    font-size: 24px;
+    line-height: 32px;
+    font-family: "Sunset-Gothic", sans-serif;
+    max-width: min(95%, 800px);
+    margin: 20px auto;
   }
 
   @media ${Constants.devices.tablet} {

@@ -10,6 +10,7 @@ import AOrLink from './MarkdownOverrides/Link';
 import ModalImg from './MarkdownOverrides/ModalImg';
 import Footnote from './MarkdownOverrides/Footnote';
 import ToPOrNotToP from './MarkdownOverrides/ToPOrNotToP/Index';
+import EnlargedImg from './EnlargedImg/Index';
 import * as Styled from './styled';
 
 
@@ -23,7 +24,7 @@ const Story = () => {
   const { width, setModalActive, setModalId } = useAppContext();
   const [headerBgImage, setHeaderBgImage] = useState<string>();
   const [story, setStory] = useState('');
-
+  const [enlargedImg, setEnlargedImg] = useState<{ src: string, alt: string } | undefined>();
 
   useEffect(() => {
     axios.get(`/storiesassets/stories.json`)
@@ -121,6 +122,7 @@ const Story = () => {
                 props: {
                   setModalId,
                   setModalActive,
+                  setEnlargedImg,
                 }
               },
               a: {
@@ -140,7 +142,14 @@ const Story = () => {
           }}
         >
           {story}
-        </Markdown>
+      </Markdown>
+      {(enlargedImg) && (
+        <EnlargedImg
+          src={enlargedImg.src}
+          alt={enlargedImg.alt}
+          setEnlargedImg={setEnlargedImg}
+        /> 
+      )}
       </Styled.Story>
   );
 };

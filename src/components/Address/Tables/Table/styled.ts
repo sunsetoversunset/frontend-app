@@ -33,6 +33,7 @@ export const Title = styled.h1`
   line-height: 30.8px;
   display: inline-block;
   width: calc(100% - 34px);
+  white-space: nowrap;
   margin-left: 10px !important;
   text-align: left;
 `;
@@ -151,5 +152,14 @@ export const Deemphasize = styled.span`
   @media ${Constants.devices.tablet} {
     display: block;
   }
+`;
+
+export const Toggle = styled.div`
+  font-size: 0.9em;
+  color: ${Constants.colors.blue};
+  cursor: pointer;
+  width: 90px;
+  text-align: right;
+  margin: 0 0 0 auto;
 `;
 

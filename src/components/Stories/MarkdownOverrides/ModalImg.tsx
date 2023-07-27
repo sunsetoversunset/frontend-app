@@ -8,7 +8,19 @@ const ModalImg = ({ children, ...props }: any) => {
   if (captionText) {
     caption = (parseInt(captionText, 10) && !captionText.startsWith('[')) ? <Link to={`/address/${parseInt(captionText, 10)}`}>{captionText}</Link> : <Markdown options={{ overrides: {a: {component: AOrLink }}}}>{captionText}</Markdown>;
   }
-  let img = <img src={props.src} alt={props.alt} />;
+  let img = <img
+    src={props.src}
+    alt={props.alt}
+    onClick={() => {
+      props.setEnlargedImg({
+        src: props.src,
+        alt: props.alt,
+      })
+    }}
+    style={{
+      cursor: "pointer",
+    }}
+  />;
   if (props.src.includes("media.getty.edu")) {
     const params = props.src.split("/");
     const id = params[5];
