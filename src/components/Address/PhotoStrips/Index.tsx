@@ -1,19 +1,16 @@
 import { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import { useAppContext, useAddressData, usePhotoStrip } from '../../../hooks';
-import { getLabelFromAddress } from '../../../utiliities';
 import PhotoStrip from "../../Panorama/PhotoStrips/PhotoStrip/Index";
 import Year from "../../Panorama/PhotoStrips/Year";
-import * as Styled from "../../Panorama/PhotoStrips/styled"
 
 export const PhotoStrips = () => {
-  const years = [1966, 1973, 1985, 1995, 2007];
   const { width } = useAppContext();
   const { addressData, address } = useAddressData();
   // use the 2007 values to get the far left and right x coordinates as 2007 stretches the whole length of the strip
+  // and is guaranteed to to have photos
   const { farLeftX, farRightX, leftX, rightX } = usePhotoStrip(2007);
-  // todo: fix this issue with addressData being potentially undefined
-  const x = (addressData?.side) ? getLabelFromAddress(address, addressData.side).x * 3.25 : 0;
+
   const ref = useRef(null);
   const yearsRef = useRef(null);
 
@@ -30,14 +27,29 @@ export const PhotoStrips = () => {
       .style('transform', 'translateX(0px)')
       .on('end', () => {
         setTranslateX(0);
+      });
+    d3.select(yearsRef.current)
+      .transition()
+      .duration(1500)
+      .style('transform', 'translateX(0px)')
+      .on('end', () => {
+        setTranslateXYears(0);
       })
   }, [address]);
 
   if (!addressData) {
     return null;
   }
-  const reachedLeftEdge = (distance: number) => translateX - distance >= leftX - farLeftX;
-  const reachedRightEdge = (distance: number) => translateX - distance <= leftX - farRightX + width / 2;
+
+  // set the years that have photos
+  const years = addressData.photos
+    .map(d => d.year)
+    .sort()
+    .filter((d, idx, array) => array.indexOf(d) === idx);
+
+  // set the max and min values for the translation
+  const maxTranslateX = leftX - farLeftX;
+  const minTranslateX = rightX - farRightX;
 
   const handleDragStart = (e: any) => {
     startDragX.current = (e?.clientX as number) || (e?.touches[0]?.clientX as number);
@@ -47,12 +59,10 @@ export const PhotoStrips = () => {
     clientX.current = (e?.clientX as number) || (e?.touches[0]?.clientX as number);
     if (startDragX.current && clientX.current) {
       let distance = startDragX.current - clientX.current;
-      if (reachedLeftEdge(distance) || reachedRightEdge(distance)) {
-        distance = 0;
-      }
       if (startDragX.current && Math.abs(distance) > 3) {
-        d3.select(ref.current).style("transform", `translateX(${translateX - distance}px)`);
-        d3.select(yearsRef.current).style("transform", `translateX(${translateX - distance * -1}px)`);
+        const newTranslateX = Math.max(minTranslateX, Math.min(maxTranslateX, translateX - distance));
+        d3.select(ref.current).style("transform", `translateX(${newTranslateX}px)`);
+        d3.select(yearsRef.current).style("transform", `translateX(${newTranslateX * -1}px)`);
       }
     }
   }
@@ -61,14 +71,11 @@ export const PhotoStrips = () => {
     clientX.current = (e?.clientX as number) || (e?.touches[0]?.clientX as number) || clientX?.current;
     if (startDragX.current && clientX.current) {
       let distance = startDragX.current - clientX.current;
-
-      if (reachedLeftEdge(distance) || reachedRightEdge(distance)) {
-        distance = 0;
-      }
+      const newTranslateX = Math.max(minTranslateX, Math.min(maxTranslateX, translateX - distance));
       startDragX.current = undefined;
       clientX.current = undefined;
-      setTranslateX(translateX - distance);
-      setTranslateXYears(translateX - distance * -1);
+      setTranslateX(newTranslateX);
+      setTranslateXYears(newTranslateX * -1);
     }
   };
 
@@ -96,8 +103,10 @@ export const PhotoStrips = () => {
           />
         )
       })}
-      <Styled.YearsContainer
+      <div
         style={{
+          position: "absolute",
+          top: 0,
           transform: `translateX(${translateXYears}px)`,
         }}
         ref={yearsRef}
@@ -110,7 +119,7 @@ export const PhotoStrips = () => {
             />
           )
         })}
-      </Styled.YearsContainer>
+      </div>
       
     </div>
   )

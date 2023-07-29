@@ -11,14 +11,10 @@ type Photo = {
 };
 
 const PhotoStrip = ({ year }: { year: number }) => {
-  const { x, photoData, direction, addressPhotoIds, scroll, leftX, rightX, farLeftX, farRightX } = usePhotoStrip(year);
-  console.log(farLeftX, leftX, x, rightX, farRightX);
-  const { setModalActive, width, setModalId } = useAppContext();
-
-
+  const { photoData, direction, addressPhotoIds, scroll, leftX, farLeftX, farRightX } = usePhotoStrip(year);
+  const { setModalActive, setModalId } = useAppContext();
 
   const [addressPhotoIdsString, setAddressPhotoIdsString] = useState(addressPhotoIds?.join(","));
-
 
   // determine which photos are visible when the xCoordinate changes or new photoData is loaded
   const visiblePhotos = useCallback(() => {
@@ -79,28 +75,6 @@ const PhotoStrip = ({ year }: { year: number }) => {
         setTranslateX(leftX * -1);
       });
   }, [leftX, scroll]);
-
-  // //set the photos when addressPhotoIds are updated. This is only used by an address page, not the panorama view
-  // useEffect(() => {
-  //   if (addressPhotoIds && addressPhotoIds.length > 0 && addressPhotoIds.join(",") !== addressPhotoIdsRef.current) {
-  //     addressPhotoIdsRef.current = addressPhotoIds.join(",");
-  //     setPhotos(visiblePhotos);
-  //   }
-  // }, [addressPhotoIds, visiblePhotos]);
-
-  // set
-  // useEffect(() => {
-  //   if (directionRef.current === direction) {
-  //     // get the photoset that will be visible after scrolling
-  //     // only retrieve new photos if the distance is 3000px or less
-  //     // const photosForScroll = Math.abs(Math.round(leftX * -1) - translateX) < 3000 ? getVisiblePhotosInRange(Math.min(leftX, leftXRef.current), Math.max(rightX, rightXRef.current)) : getVisiblePhotosInRange(farLeftX, farRightX);
-  //     // setPhotos(photosForScroll);
-  //     if (translateX !== Math.round(leftX * -1) && scroll) {
-  //       setScrolling(true);
-  //     }
-  //     console.log('****');
-  //   }
-  // }, [leftX, rightX, direction, farLeftX, farRightX]);
 
 
   if (photos.length === 0) {

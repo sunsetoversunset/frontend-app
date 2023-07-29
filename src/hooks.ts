@@ -243,15 +243,17 @@ export function usePhotoStrip(year: number) {
     } 
   }, [direction, year, widthMultiplier, x, address, offset]);
 
+  const leftX = Math.floor(x - width / 2);
+  const rightX = Math.ceil(x + width / 2);
+
   // calculate the farLeft and farRight values--defaulting to the panorama values
   let farLeftX = Math.floor(x - width * 1.5);
   let farRightX = Math.floor(x + width * 1.5);
   // for the address view, those values are calculated from the photo coordinates
-  if (pageType === 'addressView' && addressData?.addressData?.photos && direction) {
-    const minPhotoCoordinate = Math.min(...addressData?.addressData.photos.map(d => d.coordinate));
-    const maxPhotoCoordinate = Math.max(...addressData?.addressData.photos.map(d => d.coordinate));
-    farLeftX = Math.floor(getX((direction === 'n') ? minPhotoCoordinate : maxPhotoCoordinate, direction)) - photoWidth / 2;
-    farRightX = Math.ceil(getX((direction === 'n') ? maxPhotoCoordinate : minPhotoCoordinate, direction)) + photoWidth / 2;
+  if (pageType === 'addressView' && addressData?.addressData?.photos && directionRef.current) {
+    const photosXs = addressData?.addressData.photos.map(d => getX(d.coordinate, directionRef.current as Direction));
+    farLeftX = Math.floor(Math.min(...photosXs, leftX));
+    farRightX = Math.ceil(Math.max(...photosXs, rightX) + photoWidth );
   }
 
 
@@ -260,8 +262,8 @@ export function usePhotoStrip(year: number) {
     directionLoaded,
     address,
     x,
-    leftX: Math.floor(x - width / 2),
-    rightX: Math.ceil(x + width / 2),
+    leftX,
+    rightX,
     farLeftX,
     farRightX,
     direction: directionRef.current,

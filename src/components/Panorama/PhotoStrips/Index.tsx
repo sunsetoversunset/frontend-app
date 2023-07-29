@@ -9,6 +9,38 @@ import Years from './Years';
 import XBar from "./XBar";
 import * as Styled from './styled';
 
+/*************************************
+ * The photos are laid out on a long strip along the x axis using the coordinate between 1 and 1000
+ * multiplied by a multipier (200) to space them so they more-or-less line up with each other. So, 
+ * the panorama strip ranges from 0 to around 200,000. 
+ * 
+ * Each photostrip container has a negative transformX value to position it so that the selected
+ * address is centered in the browser window.
+ * 
+ *                         selected address x is, say, 70,000
+ *  0 --------------------|-|---------------------------------------- 200,000
+ *                         transformX for the photo strips is 70,000 - width / 2 * -1
+ * 
+ * or and example
+ *                 screen width = 1000
+ *               ----------------------------
+ *    strip      |  photo transformX 70,000 |
+ *    transformX |            ---           |
+ *   -69,500     |           |  |           |
+ *               |            ___           |
+ *               |                          |
+ *               ----------------------------
+ * 
+ * The photo strips container, which contains all individual photo strips, has it's own transformX
+ * value that allows the user to drag the strip forward and backwards. The individual strips are
+ * padded a screen width on either side. The user can drag the strip forward and backwards up to a
+ * screen width. When they release (mouse up), the component updates the url to reflect the updated
+ * address and resets the transformX value for the strips container.
+ * 
+ * So, this is a little complicated with three nested transformX values.
+ * 
+ **************************************************************************************************/ 
+
 export const Panorama = () => {
   const isValidAddress = useIsValidAddress();
   const navigate = useNavigate();

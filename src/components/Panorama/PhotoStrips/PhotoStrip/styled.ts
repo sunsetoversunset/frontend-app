@@ -11,15 +11,13 @@ export const Strip = styled.div<{ width: number }>`
   margin-top: 2px;
   position: relative;
   z-index: 0;
-  background: red;
-  //background-image: url(${Noise});
 
   // styling for the border and background substantially padded on either side to accommodate drag scrolling
   &:before {
     content: '';
     position: absolute;
     width: 1100vw;
-    height: 100%;
+    height: 236px;
     margin-left: -500vw;
     padding-left: 500vw;
     margin-right: -500vw;
@@ -27,7 +25,7 @@ export const Strip = styled.div<{ width: number }>`
     margin-top: -2px;
     border-top: 2px solid ${Constants.colors.black};
     background-color: ${Constants.colors.grayLightest};
-    padding-bottom: 200px;
+    padding-bottom: 20px;
     background-image: url(${Noise});
   }
 
