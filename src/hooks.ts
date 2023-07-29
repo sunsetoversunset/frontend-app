@@ -248,7 +248,7 @@ export function usePhotoStrip(year: number) {
 
   // calculate the farLeft and farRight values--defaulting to the panorama values
   let farLeftX = Math.floor(x - width * 1.5);
-  let farRightX = Math.floor(x + width * 1.5);
+  let farRightX = Math.ceil(x + width * 1.5);
   // for the address view, those values are calculated from the photo coordinates
   if (pageType === 'addressView' && addressData?.addressData?.photos && directionRef.current) {
     const photosXs = addressData?.addressData.photos.map(d => getX(d.coordinate, directionRef.current as Direction));
