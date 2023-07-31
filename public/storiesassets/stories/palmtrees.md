@@ -14,20 +14,9 @@ While palms have populated the missions and estates of Southern California since
 
 Even as much of the built environment held relatively constant over time, the photographs remind observers that the natural landscape constantly lives and grows, revealing a facet of otherwise imperceptible urban change. [5751 Sunset Boulevard](/address/5751) is typical. After a Denny’s replaced a Chevron on the site, palm trees shifted from framing and fronting the adjacent restaurant to ultimately towering over the structure. By 2007, they were utility pole-like stalks extending beyond the photographic frame. This is because the Mexican fan palm, a common Sunset Boulevard varietal, grows up to six feet per year, with mature trees reaching over 100 feet in total height.[^2] The palm tree’s limited lateral footprint, however, is both virtue and vice. Relatively narrow, dense root balls project straight down. This makes the trees apt for planting strips and keeps their roots from buckling concrete or breaking pipes.[^3] The narrow trunks also barely impede sideways views from passing vehicles. But palm trees do little to cleanse or cool the air, or to block traffic noise, and their compact plumage provides limited shade—as the color photographs particularly reveal—diminishing their beneficial effects on the urban heat island.[^4] Other downsides of “these filthy, littering abominations,” as one Angeleno put it, include the weight and girth of their fronds when they fall, the trees’ attractiveness to rats, and the stain of their fruit—although these are not attributes that the photographs generally reveal.[^5] As historian Jared Farmer notes, “Palms have been planted here for what they mean, not what they do. Or rather, what they mean is what they do.”[^6] And so, their impact is often more aesthetic than environmental, even as their visual real estate in Ruscha’s photographs diminishes as they age.
 
-* ![5751 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/e465675a-9d37-4877-bf72-36e9b121011c/full/,400/0/default.jpg "5751 Sunset Boulevard. 1973")
 * ![5751 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/5ade42c6-f735-4fa1-b50f-6e7843d86dae/full/,400/0/default.jpg "5751 Sunset Boulevard. From left: 1973, 1985, 1995, 2007")
-
-<!-- -->
-* ![5751 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/72962895-164f-4c82-8562-f5c3a79e2957/full/,400/0/default.jpg "5751 Sunset Boulevard. 1985")
 * ![5751 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/04f9eab6-c86f-4df8-9a0a-cd98787fe946/full/,400/0/default.jpg)
-
-<!-- -->
-* ![5751 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/b5ae8bb1-8c62-4794-957c-80d08f70667d/full/,400/0/default.jpg "5751 Sunset Boulevard. 1995")
 * ![5751 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/4ec60bf6-e806-4fc0-8459-14c9642e8c9e/full/,400/0/default.jpg)
-
-<!-- -->
-* ![5751 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/946a537a-bd95-41f3-b216-215a644b8230/full/,400/0/default.jpg "5751 Sunset Boulevard. 2007")
-* ![5751 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ca84434e-13d5-4bf7-93ad-284464718c9a/full/,400/0/default.jpg)
 * ![5751 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/26e7c1f1-6bcf-4914-b3bb-e4a10f778539/full/,400/0/default.jpg)
 
 ### Uneven Geographies

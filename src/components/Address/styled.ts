@@ -207,6 +207,7 @@ export const StoriesAlert = styled.div<{maxheight: number}>`
   padding: 0 0 0 20px;
   color: ${Constants.colors.grayLightest};
   justify-items: center;
+  z-index: 2000;
 `;
 
 export const StoriesLink = styled(Link)`
