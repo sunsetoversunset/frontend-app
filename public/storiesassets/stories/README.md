@@ -56,6 +56,8 @@ e.g.:
 
 `![8101 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "View along North Kingsley Drive, looking north, from Sunset Blvd, 1973")`
 
+[Note: single images should have NO asterisk before ! and include 1000 not 400 as the stated width.]
+
 **Photo strips** are laid out using a combination of the standard image syntax and the standard list syntax, after all they are a list of images. Include a title only for the first image, which will be used as the caption. To separate two lists that occur consecutively, add a comment between them `<!-- --->`. It's probably just a good idea to put that in front of every photo strip.
 
 ````
