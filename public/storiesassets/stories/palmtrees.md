@@ -97,7 +97,7 @@ Planting trees is a different sort of redevelopment from the construction of Sun
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
 
-[^1]: Jared Farmer, _Trees in Paradise: A California History_ (New York: W. W. Norton & Company, 2013), 382-383; Nathan Masters, “A Brief History of Palm Trees in Southern California,” KCET, December 7, 2011, accessed May 25, 2022, [https://www.kcet.org/shows/lost-la/a-brief-history-of-palm-trees-in-southern-california](https://www.kcet.org/shows/lost-la/a-brief-history-of-palm-trees-in-southern-california).
+[^1]: Jared Farmer, _Trees in Paradise: A California History_ (New York: W. W. Norton & Company, 2013), 382-383; Nathan Masters, “A Brief History of Palm Trees in Southern California,” KCET, December 7, 2011, [https://www.kcet.org/shows/lost-la/a-brief-history-of-palm-trees-in-southern-california](https://www.kcet.org/shows/lost-la/a-brief-history-of-palm-trees-in-southern-california).
 [^2]: Dave Gardetta, “Architect of Paradise,” _Los Angeles Times_, October 1, 1995, SM20.
 [^3]: Farmer, _Trees in Paradise_, 382.
 [^4]: David Larsen, “Costly Care: L.A. Palms–A Frond in Need,” _Los Angeles Times_, February 13, 1975, A1.
