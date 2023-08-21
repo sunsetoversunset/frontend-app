@@ -55,5 +55,18 @@
     },
     "addresses": [1525, 1536, 1538, 1822, 1721, 8005, 5050, 6530, 5936, 2621, 5233, 5183, 4929, 8225],
     "published": false
+  },
+  {
+    "slug": "thaitown",
+    "title": "Thai Town, Immigrant Placemaking, and Urban Revitalization",
+    "img_id": "defa8c28-7aec-44bf-b7ce-40f7fd9a3820",
+    "author": "Mark Padoongpatt",
+    "date": {
+      "year": 2023,
+      "month": 10,
+      "day": 1
+    },
+    "addresses":[5265, 5233, 5189, 5211, 5185, 5125, 5127, 5129, 5131, 5133, 5135, 5137],
+    "published": false
   }
 ]
