@@ -91,7 +91,7 @@ Reinterpreting Siam Sunset’s “Thaiest Thai in Thai Town” as a distinction 
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
 
-[^1]: Jonathan Gold, “Siam Sunset: The Thaiest Thai in Thai Town,” _LA Weekly_, July 15, 2010, [https://www.laweekly.com/siam-sunset-the-thaiest-thai-in-thai-town/] (https://www.laweekly.com/siam-sunset-the-thaiest-thai-in-thai-town/).
+[^1]: Jonathan Gold, “Siam Sunset: The Thaiest Thai in Thai Town,” _LA Weekly_, July 15, 2010, [https://www.laweekly.com/siam-sunset-the-thaiest-thai-in-thai-town/](https://www.laweekly.com/siam-sunset-the-thaiest-thai-in-thai-town/).
 [^2]: Gold, “Siam Sunset: The Thaiest Thai in Thai Town.”
 [^3]: Kat Thompson, “Siam Sunset is a Second Home for LA’s Thai Community,” _Vice_, April 27, 2018, [https://www.vice.com/en/article/wj73am/siam-sunset-los-angeles](https://www.vice.com/en/article/wj73am/siam-sunset-los-angeles).
 [^4]: See Natalia Molina’s, _A Place at the Nayarit: How a Mexican Restaurant Nourished a Community_ (Berkeley: University of California Press, 2022) and “The Importance of Place and Place-Makers in the Life of a Los Angeles Community: What Gentrification Erases from Echo Park,” _Southern California Quarterly_ 97, no. 1 (2015).
