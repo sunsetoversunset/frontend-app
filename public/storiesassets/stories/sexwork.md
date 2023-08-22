@@ -99,7 +99,7 @@ In Ruscha’s photographs of this stretch, the landscape too has remarkable stay
 ### Notes
 
 [^1]: Mike Goodman and Jerry Cohen, “Violence, Sex: Hollywood: Community at Crossroads,” _Los Angeles Times_, May 30, 1977, A1. While useful as the local paper of record, scholars have also noted that the _Los Angeles Times_ reported on crime in such a way as to support a conservative political agenda that appealed to Los Angeles elites. Mike Davis argued that to maintain its appeal to “metropolitan Yuppie publics,” the _Times_ was marked by “creeping liberalization” in the late 1960s. See Mike Davis, _City of Quartz: Excavating the Future in Los Angeles_ (New York: Vintage Books, 1992), 127, 140; Robert Gottlieb and Irene Wolt, _Thinking Big: The Story of the Los Angeles Times, Its Publishers and Their Influence on Southern California_ (New York: Putnam, 1977), 227-229.
-[^2]: “Work of Vice Squad Goes ‘Unappreciated,’” _Los Angeles Times_, July 26, 1964, SF_A1; Richard West, “Mills Says Bryant Death Must Spark Citywide Crime Fight,” _Los Angeles Times_, May 18, 1968, B1.
+[^2]: “Work of Vice Squad Goes ‘Unappreciated,’” _Los Angeles Times_, July 26, 1964, SF_A1; Richard West, “Mills Says Bryant Death Must Spark Citywide Crime Fight," _Los Angeles Times_, May 18, 1968, B1.
 [^3]: Dan Morain, “‘Them or Us’ Battle Intensifies: Hollywood Prostitutes Annoy, Anger Residents,” _Los Angeles Times_, March 3, 1983, WS1.
 [^4]: Kevin Starr, _Golden Dreams: California in an Age of Abundance, 1950-1963_ (Oxford: Oxford University Press, 2009), 176.
 [^5]: “Sunset Strip Vice Raid Jails Women,” _Los Angeles Times_, October 28, 1953, 1; Robert Landau, “Excerpt: Live on the Sunset Strip: The Street That Made Music History,” _Boom: A Journal of California_ 2, no. 4 (2012): 81.
