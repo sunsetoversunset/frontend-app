@@ -68,5 +68,18 @@
     },
     "addresses":[5265, 5233, 5189, 5211, 5185, 5123, 5125, 5127, 5129, 5131, 5133, 5135, 5137],
     "published": false
+  },
+  {
+    "slug": "sexwork",
+    "title": "The Open Secret of Sex Work on Sunset Boulevard",
+    "img_id": "739ec69f-1220-433a-af39-d1e6423c99cc",
+    "author": "AnneMarie Kooistra",
+    "date": {
+      "year": 2023,
+      "month": 10,
+      "day": 1
+    },
+    "addresses":[8439, 9009, 6000, 6290, 6087, 7274, 5453, 7051, 7023, 7001, 7006, 7750, 7077],
+    "published": false
   }
 ]
