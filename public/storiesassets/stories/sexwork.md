@@ -83,7 +83,7 @@ Illicit sex on Sunset Boulevard had remarkable staying power.
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/c0bd2897-4790-4f6c-8ef6-c60d35555d1c/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/e188dcb1-26c8-4790-8817-92f1192d70cf/full/,400/0/default.jpg)
 
-<!-- –>
+<!-- -->
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/3fb3b03b-dd67-4a75-bd6e-042b298ddc55/full/,400/0/default.jpg "Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995")
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/1ddeb75b-b9a7-4adb-8035-f8167dc40f26/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/97bb3d0a-a435-4047-afa7-5002cf6805aa/full/,400/0/default.jpg)
