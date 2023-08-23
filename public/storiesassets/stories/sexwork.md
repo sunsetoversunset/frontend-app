@@ -39,7 +39,6 @@ Taken together, the photographs and city directory listings illustrate how an il
 * ![7274 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/f7883fac-6574-4dc4-84ce-eff20cb9df72/full/,400/0/default.jpg)
 * ![7274 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/eb83ae24-5bf7-455e-8678-46cddc251f2d/full/,400/0/default.jpg)
 
-	
 ### Outside the Sunset Strip: The “Problem” of Streetwalkers
 
 Hollywood madams and call girls represented an elite stratum within the hierarchy of prostitution, catering to the wealthiest clients and charging high prices for their services. As such, they provided exciting fodder for newspapers. The majority of prostitution-related arrests in Hollywood from the 1960s through the 1990s, however, came in conjunction with concerns about the prevalence of streetwalkers along “Whore’s Stroll,” part of an approximately five-mile section of Sunset Boulevard east of Crescent Heights Boulevard ending approximately at Normandie Avenue.[^16] Female streetwalkers tended to work Sunset Boulevard as well as Hollywood Boulevard to the north, with a “subdivision by color” on Sunset featuring “blacks at the east end, whites to the west,” the Times reported in 1979.[^17] By 1990, however, Hollywood vice officers believed that the male prostitutes along Santa Monica Boulevard had become “a far worse blight” and posed greater health dangers due to fears that they would transmit the AIDS virus.[^18]
