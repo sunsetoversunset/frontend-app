@@ -38,6 +38,7 @@ Taken together, the photographs and city directory listings illustrate how an il
 * ![7274 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/0678bd20-dc41-4797-940a-30b373f2780a/full/,400/0/default.jpg)
 * ![7274 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/f7883fac-6574-4dc4-84ce-eff20cb9df72/full/,400/0/default.jpg)
 * ![7274 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/eb83ae24-5bf7-455e-8678-46cddc251f2d/full/,400/0/default.jpg)
+
 	
 ### Outside the Sunset Strip: The “Problem” of Streetwalkers
 
