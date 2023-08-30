@@ -15,7 +15,7 @@
       "day": 23
     },
     "addresses": [5007, 5025, 8543, 8101, 7979, 6750, 7980, 8873, 6407, 5278],
-    "published": true
+    "published": false
   },
   {
     "slug": "palmtrees",
@@ -67,7 +67,7 @@
       "day": 1
     },
     "addresses":[5265, 5233, 5189, 5211, 5185, 5123, 5125, 5127, 5129, 5131, 5133, 5135, 5137],
-    "published": false
+    "published": true
   },
   {
     "slug": "sexwork",
@@ -80,6 +80,6 @@
       "day": 1
     },
     "addresses":[8439, 9009, 6000, 6290, 6087, 7274, 5453, 7051, 7023, 7001, 7006, 7750, 7077],
-    "published": false
+    "published": true
   }
 ]
