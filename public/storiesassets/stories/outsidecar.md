@@ -2,7 +2,6 @@
 
 Through a car-centric framing, buses, bikes and pedestrians function as interruptions. In Ed Ruscha’s photographs of Sunset Boulevard, buses quite literally block the frame, obscuring the built landscape beyond. For hurried drivers, buses block traffic as passengers enter and exit. Bus passengers become pedestrians, those rare people caught only in fleeting glimpses from Ruscha’s and other drivers’ moving vehicles. Then they too become interruptions as they stop traffic to cross the street. Even less visible are cyclists—dangerously hard to see from vehicles, and ephemeral at best in the archive—but they also slip into the landscape between cars and buildings along Sunset Boulevard.
 
-<!-- –>
 * ![7901 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/599715e5-0fb2-4a7c-9fef-4c7f94dd01d2/full/,400/0/default.jpg "7901 Sunset Boulevard. From left: 1973, 1985, 1995, and 2007")
 * ![7901 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a3fc3cbe-ecd9-404a-b0ac-f0845daf5df2/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/316fc50c-0895-4f90-841c-ffc8fb6090d7/full/,400/0/default.jpg)
