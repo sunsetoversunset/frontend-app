@@ -25,10 +25,11 @@ In Alex Cox’s Los Angeles cult classic, _Repo Man_ (1984), the eccentric auto 
 
 In fact, the Los Angeles County Metropolitan Transit Authority (Metro) measures the daily users of public transit in the hundreds of thousands. Non-car mobility remains visibly segregated, however, along lines of race, class, age, and ability. In Ruscha’s photos across the decades, the vast majority of people waiting at bus stops present as people of color. Frequently people are dressed for service jobs. They tend to be older, or too young to drive. The camera clearly does not reveal the complexities of people’s life stories or their motivations for taking a bus. People choose public transit for a plethora of reasons: some people are ecologically conscious, others want to avoid hunting for parking, and some are tourists out to see Hollywood and the Sunset Strip. But the vast majority of riders use buses out of necessity: to get to work, school, services, family, or friends across long distances without a car.[^1]
 
-* ![7651 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/82279c50-c663-4f08-951c-d9fb50231929/full/,400/0/default.jpg "Waiting for the Bus. 1985. From left: [7651 Sunset Boulevard](/address/7651), [5067 Sunset Boulevard](/address/5067), [4711 Sunset Boulevard](/address/4771), [3535 Sunset Boulevard](/address/3535)")
-* ![5067 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/1e10dd47-549e-472f-a5d4-02b3687bc2d7/full/,400l/0/default.jpg)
-* ![4711 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/08eea27a-65c6-4102-87b7-c572b174a004/full/,400/0/default.jpg)
-* ![3535 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/3baca4f7-ec52-4fe3-8732-31147b39d435/full/,400/0/default.jpg)
+![5067 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/1e10dd47-549e-472f-a5d4-02b3687bc2d7/full/,1000l/0/default.jpg “5067 Sunset Boulevard. 1985”)
+
+![4711 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/08eea27a-65c6-4102-87b7-c572b174a004/full/,1000/0/default.jpg “4711 Sunset Boulevard. 1985”)
+
+![3535 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/3baca4f7-ec52-4fe3-8732-31147b39d435/full/,1000/0/default.jpg “3535 Sunset Boulevard. 1985”)
 
 Operation of the buses along Sunset Boulevard shifted from the Southern California Rapid Transit District (RTD) to the Los Angeles County Metropolitan Transportation Authority (Metro) after the state forced transit agencies to merge in 1993. Some routes were removed, especially after the opening of the subway that crosses Sunset at Vermont. But throughout these changes, there remained a diverse group of people waiting for the next bus on the 2 or the 4 route.
 
