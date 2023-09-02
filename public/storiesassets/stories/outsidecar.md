@@ -2,7 +2,12 @@
 
 Through a car-centric framing, buses, bikes and pedestrians function as interruptions. In Ed Ruscha’s photographs of Sunset Boulevard, buses quite literally block the frame, obscuring the built landscape beyond. For hurried drivers, buses block traffic as passengers enter and exit. Bus passengers become pedestrians, those rare people caught only in fleeting glimpses from Ruscha’s and other drivers’ moving vehicles. Then they too become interruptions as they stop traffic to cross the street. Even less visible are cyclists—dangerously hard to see from vehicles, and ephemeral at best in the archive—but they also slip into the landscape between cars and buildings along Sunset Boulevard.
 
-* ![7901 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/599715e5-0fb2-4a7c-9fef-4c7f94dd01d2/full/,400/0/default.jpg "7901 Sunset Boulevard. From left: 1973, 1985, 1995, and 2007.")
+* ![8906 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/9b689fc0-9b3d-4ba0-a637-6671de1cf4c9/full/,400/0/default.jpg "8906 Sunset Boulevard. From left: 1966, 1985, 1995, and 2007")
+* ![8906 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/5e2ee576-9300-4fed-995a-e525249d62f8/full/,400/0/default.jpg)
+* ![8906 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/f0b64e9a-ad9a-4d6d-a183-51c5906c7a3a/full/,400/0/default.jpg)
+* ![8906 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ff131d33-b5fd-4494-a869-5976abff2dfa/full/,400/0/default.jpg)
+
+* ![7901 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/599715e5-0fb2-4a7c-9fef-4c7f94dd01d2/full/,400/0/default.jpg "7901 Sunset Boulevard. From left: 1973, 1985, 1995, and 2007")
 * ![7901 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a3fc3cbe-ecd9-404a-b0ac-f0845daf5df2/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/316fc50c-0895-4f90-841c-ffc8fb6090d7/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/d09cdfc3-3751-440f-afce-4f70e94ca53a/full/,400/0/default.jpg)
