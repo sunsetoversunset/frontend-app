@@ -35,6 +35,7 @@ export type StoryMetadata = {
   title: string;
   author: string;
   img_id: string;
+  background_position?: string;
   date: {
     year: number;
     month: number;

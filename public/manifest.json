@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "SOS192.png",
+      "src": "SOSicon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "SOS512.png",
+      "src": "SOSicon512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

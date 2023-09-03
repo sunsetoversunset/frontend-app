@@ -23,6 +23,7 @@ const Story = () => {
   const [byDate, setByDate] = useState<string>();
   const { width, setModalActive, setModalId } = useAppContext();
   const [headerBgImage, setHeaderBgImage] = useState<string>();
+  const [bgPosition, setBGPosition] = useState<string>();
   const [story, setStory] = useState('');
   const [enlargedImg, setEnlargedImg] = useState<{ src: string, alt: string } | undefined>();
 
@@ -39,7 +40,10 @@ const Story = () => {
             byDate = `${byDate} (revised ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][storyMetadata.revised_date.month - 1]} ${storyMetadata.revised_date.day}, ${storyMetadata.revised_date.year})`;
           }
           setByDate(byDate);
-          setHeaderBgImage(`https://media.getty.edu/iiif/image/${storyMetadata.img_id}/full/,${width}/0/default.jpg`);
+    setHeaderBgImage(`https://media.getty.edu/iiif/image/${storyMetadata.img_id}/full/,${width}/0/default.jpg`);
+          if (storyMetadata.background_position) {
+            setBGPosition(storyMetadata.background_position);
+          }
         }
       });
     axios.get(`/storiesassets/stories/${storyslug}.md`)
@@ -76,7 +80,6 @@ const Story = () => {
                 }
               }
 
-
               const params = match.groups.filename.split('/');
               if (params.length === 5) {
                 params[2] = `${Math.floor((width - 2) / count)},`;
@@ -92,14 +95,14 @@ const Story = () => {
   useEffect(() => {
     if (scrollTo && story.length > 0) {
       const note = document.getElementById(scrollTo);
-      note?.scrollIntoView({ behavior: "smooth", block: 'center'});
+      note?.scrollIntoView({ behavior: "smooth", block: 'center' });
     }
-  }, [scrollTo, story])
+  }, [scrollTo, story]);
 
   return (
       <Styled.Story>
         {(title && headerBgImage) && (
-          <Styled.HeaderImage url={headerBgImage}>
+        <Styled.HeaderImage url={headerBgImage} backgroundPosition={bgPosition}>
             <Styled.Title>{title}</Styled.Title>
           </Styled.HeaderImage>
         )}
