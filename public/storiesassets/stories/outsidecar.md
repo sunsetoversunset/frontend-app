@@ -2,11 +2,6 @@
 
 Through a car-centric framing, buses, bikes and pedestrians function as interruptions. In Ed Ruscha’s photographs of Sunset Boulevard, buses quite literally block the frame, obscuring the built landscape beyond. For hurried drivers, buses block traffic as passengers enter and exit. Bus passengers become pedestrians, those rare people caught only in fleeting glimpses from Ruscha’s and other drivers’ moving vehicles. Then they too become interruptions as they stop traffic to cross the street. Even less visible are cyclists—dangerously hard to see from vehicles, and ephemeral at best in the archive—but they also slip into the landscape between cars and buildings along Sunset Boulevard.
 
-* ![8906 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/9b689fc0-9b3d-4ba0-a637-6671de1cf4c9/full/,400/0/default.jpg "8906 Sunset Boulevard. From left: 1966, 1985, 1995, and 2007")
-* ![8906 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/5e2ee576-9300-4fed-995a-e525249d62f8/full/,400/0/default.jpg)
-* ![8906 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/f0b64e9a-ad9a-4d6d-a183-51c5906c7a3a/full/,400/0/default.jpg)
-* ![8906 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ff131d33-b5fd-4494-a869-5976abff2dfa/full/,400/0/default.jpg)
-
 * ![7901 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/599715e5-0fb2-4a7c-9fef-4c7f94dd01d2/full/,400/0/default.jpg "7901 Sunset Boulevard. From left: 1973, 1985, 1995, and 2007")
 * ![7901 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a3fc3cbe-ecd9-404a-b0ac-f0845daf5df2/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/316fc50c-0895-4f90-841c-ffc8fb6090d7/full/,400/0/default.jpg)
@@ -29,14 +24,15 @@ In Alex Cox’s Los Angeles cult classic, _Repo Man_ (1984), the eccentric auto 
 
 In fact, the Los Angeles County Metropolitan Transit Authority (Metro) measures the daily users of public transit in the hundreds of thousands. Non-car mobility remains visibly segregated, however, along lines of race, class, age, and ability. In Ruscha’s photos across the decades, the vast majority of people waiting at bus stops present as people of color. Frequently people are dressed for service jobs. They tend to be older, or too young to drive. The camera clearly does not reveal the complexities of people’s life stories or their motivations for taking a bus. People choose public transit for a plethora of reasons: some people are ecologically conscious, others want to avoid hunting for parking, and some are tourists out to see Hollywood and the Sunset Strip. But the vast majority of riders use buses out of necessity: to get to work, school, services, family, or friends across long distances without a car.[^1]
 
-* ![7651 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/82279c50-c663-4f08-951c-d9fb50231929/full/,400/0/default.jpg "Waiting for the Bus. 1985. From left: [7651 Sunset Boulevard](/address/7651), [5067 Sunset Boulevard](/address/5067), [4711 Sunset Boulevard](/address/4771), [3535 Sunset Boulevard](/address/3535)")
-* ![5067 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/1e10dd47-549e-472f-a5d4-02b3687bc2d7/full/,400l/0/default.jpg)
-* ![4711 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/08eea27a-65c6-4102-87b7-c572b174a004/full/,400/0/default.jpg)
-* ![3535 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/3baca4f7-ec52-4fe3-8732-31147b39d435/full/,400/0/default.jpg)
+![5067 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/1e10dd47-549e-472f-a5d4-02b3687bc2d7/full/,1000l/0/default.jpg “5067 Sunset Boulevard. 1985”)
+
+![4711 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/08eea27a-65c6-4102-87b7-c572b174a004/full/,1000/0/default.jpg “4711 Sunset Boulevard. 1985”)
+
+![3535 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/3baca4f7-ec52-4fe3-8732-31147b39d435/full/,1000/0/default.jpg “3535 Sunset Boulevard. 1985”)
 
 Operation of the buses along Sunset Boulevard shifted from the Southern California Rapid Transit District (RTD) to the Los Angeles County Metropolitan Transportation Authority (Metro) after the state forced transit agencies to merge in 1993. Some routes were removed, especially after the opening of the subway that crosses Sunset at Vermont. But throughout these changes, there remained a diverse group of people waiting for the next bus on the 2 or the 4 route.
 
-* ![4661 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/82279c50-c663-4f08-951c-d9fb50231929/full/,400/0/default.jpg "Metro station at NE corner of Vermont and Sunset Boulevards. From left: 1995 (under construction) and 2007")
+* ![4661 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/ee29bf5e-c807-4be1-9204-a3e17e0f1152/full/full/0/default.jpg "Metro station at NE corner of Vermont and Sunset Boulevards. From left: 1995  and 2007")
 * ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/3e45cc7d-3875-40ec-b656-7e7cff6e6b11/full/,400/0/default.jpg)
 
 Despite regular ridership, access to reliable bus service has remained a social and economic justice issue in Los Angeles. In 1992, transit riders began to organize into the Bus Riders Union, and by 1996 they had brought the Metro to court for violating the Civil Rights Act through its disproportionate spending of federal funds on wealthier, whiter train riders over bus riders. In March 2002, after years of litigation, the US Supreme Court refused to review the case and forced Metro to expand its bus fleet and provide better public transit service to communities of color across the region.[^2] Ruscha’s photos anecdotally illustrate the results. The number of people gathered at bus stops does not change dramatically across the years of photos, but the camera captures significantly more buses passing in front of the lens in 2007 than in 1985.
@@ -77,11 +73,11 @@ Even when pedestrians are not present in the frame, signage marks their presence
 
 ### Two Wheels Too Few
 
+At the start of the 20th century, before Los Angeles became synonymous with car culture, local boosters hailed the city as one of the great bicycle capitals of the world. Free from regular rain and snow, the relatively flat, expansive plain of the Los Angeles basin was crosscut with long, straight roads. Even with the speculative expansion of surface rail lines across the region, plenty of space remained for cyclists to move around. Although the dream of a cycling city did not last long, bicycles remain a popular and often necessary mode of transportation for many in Los Angeles. At various times, city officials and organizers have worked to make the city more bike-friendly and to promote biking as an environmentally friendly alternative to cars.[^4] For most Angelenos, however, sharing a street like Sunset Boulevard with cars—and buses that need to cut in and out of traffic—is an extremely dangerous way to traverse the city. Bikers remain a relatively minor presence on Sunset, with the occasional bike rack and stretch of bike lane being exceptions, rather than dominant forms.
+
 * ![3227 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/105a5f54-3799-4ca9-8c24-72186fabb3a8/full/,400/0/default.jpg "3225-3227 Sunset Boulevard. 2007")
 * ![3227 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ed27da8c-3345-4d00-8371-d8276565fbbb/full/,400/0/default.jpg)
 * ![3225 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/8b893414-24c9-41e0-beaa-742856913b3d/full/,400/0/default.jpg)
-
-At the start of the 20th century, before Los Angeles became synonymous with car culture, local boosters hailed the city as one of the great bicycle capitals of the world. Free from regular rain and snow, the relatively flat, expansive plain of the Los Angeles basin was crosscut with long, straight roads. Even with the speculative expansion of surface rail lines across the region, plenty of space remained for cyclists to move around. Although the dream of a cycling city did not last long, bicycles remain a popular and often necessary mode of transportation for many in Los Angeles. At various times, city officials and organizers have worked to make the city more bike-friendly and to promote biking as an environmentally friendly alternative to cars.[^4] For most Angelenos, however, sharing a street like Sunset Boulevard with cars—and buses that need to cut in and out of traffic—is an extremely dangerous way to traverse the city. Bikers remain a relatively minor presence on Sunset, with the occasional bike rack and stretch of bike lane being exceptions, rather than dominant forms.
 
 ![4483 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/05aee448-1603-4974-927b-cadfb10d24dd/full/,1000/0/default.jpg "4483 Sunset Boulevard. 1985")
 
