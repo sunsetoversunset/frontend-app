@@ -6,7 +6,8 @@ Through a car-centric framing, buses, bikes and pedestrians function as interrup
 * ![7901 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a3fc3cbe-ecd9-404a-b0ac-f0845daf5df2/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/316fc50c-0895-4f90-841c-ffc8fb6090d7/full/,400/0/default.jpg)
 * ![7901 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/d09cdfc3-3751-440f-afce-4f70e94ca53a/full/,400/0/default.jpg)
- 
+
+<!-- -->
 * ![6465 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/0d25cef2-d7b9-4816-ae01-831e6522a3fb/full/,400/0/default.jpg "6465 Sunset Boulevard. 2007. Pedestrians and 2 Bus bound for UCLA")
 * ![6465 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/1b6b8273-2425-405a-ab91-8bda8db9f344/full/,400/0/default.jpg)
 
@@ -56,7 +57,7 @@ One of Los Angeles’s great car-centric myths, frequently satirized in film and
 * ![/n/NewHighStreet/1966,1973,1985,1995,2007. 1985](https://media.getty.edu/iiif/image/40e0f365-060b-4cc9-889c-cc89437f66f9/full/,400/0/default.jpg "Sunset Boulevard at New High Street, looking north. From left: 1985 and 2007")
 * ![/n/NewHighStreet/1966,1973,1985,1995,2007. 2007](https://media.getty.edu/iiif/image/97c5ccc4-e7cf-41c3-85d2-f1f3ed550f14/full/,400/0/default.jpg)
 
-
+<!-- -->
 * ![2111 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/fc561050-1490-4290-8adf-7950903c9058/full/,400/0/default.jpg "2111 Sunset Boulevard. From left: 1973, 1985, and 2007")
 * ![2111 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/f1c187ab-cad0-407d-95ae-3854fd0e9779/full/,400/0/default.jpg)
 * ![2111 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/f8f24031-e4cb-4692-84ce-1fd584bae484/full/,400/0/default.jpg)
@@ -91,6 +92,7 @@ It will be hard to undo a century of investment in a landscape overwhelmingly or
 * ![2222 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/972beac7-5b13-4ea4-9c65-3e01511e4883/full/,400/0/default.jpg)
 * ![2222 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/8b893414-24c9-41e0-beaa-742856913b3d/full/,400/0/default.jpg)
 
+<!-- -->
 * ![2222 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/b2f04245-9396-4092-b099-a9d466dd8347/full/,400/0/default.jpg "2222 Sunset Boulevard. 2007")
 * ![2222 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/859e6397-67f5-40fb-b18c-78f1ee6c5821/full/,400/0/default.jpg)
 * ![2222 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/0c042804-137f-4046-8490-97c82d23b2bf/full/,400/0/default.jpg)
