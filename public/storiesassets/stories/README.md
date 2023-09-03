@@ -113,13 +113,11 @@ e.g.:
 
 This co-ops the markdown syntax—three backticks—for code blocks.
 
-\`\`\`
-
+````markdown
 ```
 <callout>
 ```
-
-\`\`\`
+````
 
 e.g.:
 
@@ -135,7 +133,7 @@ In their arrival and disappearance, palms demonstrate the fragility and ongoing 
 
 The title, author, header image, image positioning, and date for each story is stored in the `/public/storiesassets/stories.json` file using the following format. The published is there so a story can be built and put on the web without appearing on the stories page.
 
-```
+```typescript
 export type StoryMetadata = {
   slug: string;
   title: string;
@@ -153,7 +151,7 @@ export type StoryMetadata = {
 
 e.g.:
 
-```
+```typescript
 {
   "slug": "palmtrees",
   "title": "Palm Trees",
