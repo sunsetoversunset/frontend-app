@@ -113,21 +113,23 @@ e.g.:
 
 This co-ops the markdown syntax—three backticks—for code blocks.
 
-````markdown
+`` ``` ``
+
 ```
 <callout>
 ```
-````
+
+`` ``` ``
 
 e.g.:
 
-\`\`\`
+`` ``` ``
 
 ```
 In their arrival and disappearance, palms demonstrate the fragility and ongoing maintenance that urban nature requires.
 ```
 
-\`\`\`
+`` ``` ``
 
 ## Story metadata
 
