@@ -113,7 +113,7 @@ e.g.:
 
 This co-ops the markdown syntax—three backticks—for code blocks.
 
-`` ``` ``
+` ``` `
 
 ```
 <callout>
