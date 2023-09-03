@@ -113,23 +113,25 @@ e.g.:
 
 This co-ops the markdown syntax—three backticks—for code blocks.
 
-````
+\`\`\`
+
 ```
 <callout>
 ```
-````
+
+\`\`\`
 
 e.g.:
 
-````
+\`\`\`
+
 ```
 In their arrival and disappearance, palms demonstrate the fragility and ongoing maintenance that urban nature requires.
 ```
-````
 
+\`\`\`
 
 ## Story metadata
-
 
 The title, author, header image, image positioning, and date for each story is stored in the `/public/storiesassets/stories.json` file using the following format. The published is there so a story can be built and put on the web without appearing on the stories page.
 
@@ -167,4 +169,8 @@ e.g.:
 }
 ```
 
-The background position is optional. You can use percentages if you want to be quite precise, but it's probably a good idea to use the descriptive values: `left`, `right`, and `center` for horizontal position and `top`, `bottom`, and `center` for vertical. You list those horizontal, then vertical, e.g. `right top`. If you only list one, the other value will be `center`. `center center` is the default.
+The background position is optional. You can use percentages if you want to be quite precise, but it's probably a good idea to use the descriptive values: `left`, `right`, and `center` for horizontal position and `top`, `bottom`, and `center` for vertical.
+
+You list those horizontal, then vertical, e.g. `right top`. If you only list one, the other value will be `center`.
+
+`center center` is the default.
