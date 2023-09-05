@@ -48,7 +48,7 @@ Similarly, as a paint job transformed [4929 Sunset Boulevard](/address/4929) fro
 
 <!-- -->
 * ![4929 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a1444446-7661-4222-a350-a45347da061a/full/,400/0/default.jpg "4929 Sunset Boulevard. 1985")
-* ![4929 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/5d466e2e-5eae-45fb-adf1-a4693004fd2d/full/,400/0/default.jpg)
+* ![4929 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/7bd93521-08ef-40d1-9c42-1da15046ee4e/full/,400/0/default.jpg)
 
 In 1973, Ruscha photographed the Children’s Hospital of Los Angeles at [4661 Sunset Boulevard](/address/4661). By 1985, new construction was in progress there. 2007 finds the finished Saban Research Institute, with numerous palm trees sprouting beside it. Where mass infusions of new palms appeared, often, as here, a new building had inspired them.[^12] A direct relationship existed between developments in the natural and built environments.
 
