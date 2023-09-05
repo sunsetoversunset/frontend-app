@@ -61,7 +61,7 @@ In 1973, Ruscha photographed the Children’s Hospital of Los Angeles at [4661 S
 * ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/3e45cc7d-3875-40ec-b656-7e7cff6e6b11/full/,400/0/default.jpg "4661 Sunset Boulevard. 2007")
 * ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/dee6908d-40e5-4bcf-a8e6-e29eac9eb2ac/full/,400/0/default.jpg)
 * ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/d46022fa-a5e1-49d9-a42c-df69afc69bbd/full/,400/0/default.jpg)
-* ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/5d466e2e-5eae-45fb-adf1-a4693004fd2d/full/,400/0/default.jpg)
+* ![4661 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/5365a27d-fcce-40bc-8f7b-96423203c62c/full/,400/0/default.jpg)
 
 ### Non-Palm Trees
 
