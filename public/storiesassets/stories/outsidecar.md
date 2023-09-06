@@ -58,7 +58,7 @@ One of Los Angeles’s great car-centric myths, frequently satirized in film and
 * ![307 East Cesar E. Chavez Avenue. 2007](https://media.getty.edu/iiif/image/97c5ccc4-e7cf-41c3-85d2-f1f3ed550f14/full/,400/0/default.jpg)
 
 <!-- -->
-* ![2111 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/fc561050-1490-4290-8adf-7950903c9058/full/,400/0/default.jpg "[Sunset Boulevard at North Alvarado Street, nearest [2111 Sunset Boulevard](/address/2111), looking north. From left: 1973, 1985, and 2007]
+* ![2111 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/fc561050-1490-4290-8adf-7950903c9058/full/,400/0/default.jpg "Sunset Boulevard at North Alvarado Street, nearest 2111 Sunset Boulevard, looking north. From left: 1973, 1985, and 2007]
 * ![2111 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/f1c187ab-cad0-407d-95ae-3854fd0e9779/full/,400/0/default.jpg)
 * ![2111 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/f8f24031-e4cb-4692-84ce-1fd584bae484/full/,400/0/default.jpg)
 
