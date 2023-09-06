@@ -90,7 +90,7 @@ It will be hard to undo a century of investment in a landscape overwhelmingly or
 
 * ![2420 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/cf32867e-296e-4da8-8967-18816a3784f1/full/,400/0/default.jpg "2420 Sunset Boulevard. 1985")
 * ![2420 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/972beac7-5b13-4ea4-9c65-3e01511e4883/full/,400/0/default.jpg)
-* ![2420 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/997de51e-277a-4c00-a45d-65a27127c96f/full/,400/0/default.jpg)
+* ![2420 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/a2c6a132-d557-4fa0-803f-6ebb2f8f7d4f/full/,400/0/default.jpg)
 
 <!-- -->
 * ![2420 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/b2f04245-9396-4092-b099-a9d466dd8347/full/,400/0/default.jpg "2420 Sunset Boulevard. 2007")
