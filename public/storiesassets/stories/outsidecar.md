@@ -54,7 +54,7 @@ Transit justice in LA still has a long way to go, but the photographs reveal one
 
 One of Los Angeles’s great car-centric myths, frequently satirized in film and television, is that one needs a car to get anywhere. This myth erases the fact that many people, especially along Sunset, live in relatively self-contained neighborhoods that provide much of what people want and need: from groceries and services to entertainment and nightlife, to say nothing of neighbors and a sense of community. Some people even work near their homes, though most employment still tends to require venturing further afield. The photographs reveal many of the neighborhoods along Sunset changing dramatically as new communities move in and existing residents are, in turn, displaced. Throughout the changes, however, places with dense concentrations of commercial use remain sites of pedestrian mobility. 
 
-* ![307 East Cesar E. Chavez Avenue. 1985](https://media.getty.edu/iiif/image/40e0f365-060b-4cc9-889c-cc89437f66f9/full/,400/0/default.jpg "Sunset Boulevard at New High Street, nearest 307 East Cesar E. Chavez Avenue, looking north. From left: 1985 and 2007")
+* ![307 East Cesar E. Chavez Avenue. 1985](https://media.getty.edu/iiif/image/40e0f365-060b-4cc9-889c-cc89437f66f9/full/,400/0/default.jpg "Intersection at at New High Street, nearest 307 East Cesar E. Chavez Avenue, looking north. From left: 1985 and 2007")
 * ![307 East Cesar E. Chavez Avenue. 2007](https://media.getty.edu/iiif/image/97c5ccc4-e7cf-41c3-85d2-f1f3ed550f14/full/,400/0/default.jpg)
 
 <!-- -->
