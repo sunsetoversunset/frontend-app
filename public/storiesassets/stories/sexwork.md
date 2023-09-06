@@ -43,7 +43,7 @@ Taken together, the photographs and city directory listings illustrate how an il
 
 Hollywood madams and call girls represented an elite stratum within the hierarchy of prostitution, catering to the wealthiest clients and charging high prices for their services. As such, they provided exciting fodder for newspapers. The majority of prostitution-related arrests in Hollywood from the 1960s through the 1990s, however, came in conjunction with concerns about the prevalence of streetwalkers along “Whore’s Stroll,” part of an approximately five-mile section of Sunset Boulevard east of Crescent Heights Boulevard ending approximately at Normandie Avenue.[^16] Female streetwalkers tended to work Sunset Boulevard as well as Hollywood Boulevard to the north, with a “subdivision by color” on Sunset featuring “blacks at the east end, whites to the west,” the Times reported in 1979.[^17] By 1990, however, Hollywood vice officers believed that the male prostitutes along Santa Monica Boulevard had become “a far worse blight” and posed greater health dangers due to fears that they would transmit the AIDS virus.[^18]
 
-* ![Sunset Boulevard and Western Avenue. 1973](https://media.getty.edu/iiif/image/739ec69f-1220-433a-af39-d1e6423c99cc/full/,400/0/default.jpg "Sunset Boulevard and Western Avenue, showing Sunset Theater. From left: 1973, 1985, 1995")
+* ![Sunset Boulevard and Western Avenue. 1973](https://media.getty.edu/iiif/image/739ec69f-1220-433a-af39-d1e6423c99cc/full/,400/0/default.jpg "[Sunset Boulevard and Western Avenue, nearest 5453 Sunset Boulevard, showing Sunset Theater. From left: 1973, 1985, 1995][url] [url]: /address/5453")
 * ![Sunset Boulevard and Western Avenue. 1985](https://media.getty.edu/iiif/image/067e5619-f31f-4d48-a042-55c537a0b153/full/,400/0/default.jpg)
 * ![Sunset Boulevard and Western Avenue. 1995](https://media.getty.edu/iiif/image/6fb2580e-4008-4f78-9494-4824f28f5092/full/,400/0/default.jpg)
 
@@ -75,7 +75,7 @@ Still, illicit sex on Sunset Boulevard had remarkable staying power. Since at le
 Illicit sex on Sunset Boulevard had remarkable staying power.
 ```
 
-* ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/6870258f-1101-4804-a6eb-ae45be10c935/full/,400/0/default.jpg "Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995")
+* ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/6870258f-1101-4804-a6eb-ae45be10c935/full/,400/0/default.jpg "[Sunset Boulevard from North Genesee Avenue to Courtney Avenue, nearest 7715 Sunset Boulevard, looking north. 1995][url] [url]: /address/7715")
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/2b66f927-3c88-40c7-903f-2090ce65fc1a/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/217f432a-e80b-4a83-9a15-c67e817ba63a/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/017d7c73-104f-4a01-a774-aba7e0b2d35a/full/,400/0/default.jpg)
@@ -84,7 +84,7 @@ Illicit sex on Sunset Boulevard had remarkable staying power.
 * ![Sunset Boulevard from North Genesee Avenue to Courtney Avenue, looking north. 1995](https://media.getty.edu/iiif/image/e188dcb1-26c8-4790-8817-92f1192d70cf/full/,400/0/default.jpg)
 
 <!-- -->
-* ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/3fb3b03b-dd67-4a75-bd6e-042b298ddc55/full/,400/0/default.jpg "Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995")
+* ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/3fb3b03b-dd67-4a75-bd6e-042b298ddc55/full/,400/0/default.jpg "[Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, nearest 7700 Sunset Boulevard, looking south. 1995][url] [url]: /address/7700")
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/1ddeb75b-b9a7-4adb-8035-f8167dc40f26/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/97bb3d0a-a435-4047-afa7-5002cf6805aa/full/,400/0/default.jpg)
 * ![Sunset Boulevard from North Spaulding Avenue to North Genesee Avenue, looking south. 1995](https://media.getty.edu/iiif/image/35af2228-de40-4154-a92e-297fd0c60ccd/full/,400/0/default.jpg)
