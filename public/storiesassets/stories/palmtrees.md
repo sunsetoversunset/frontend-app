@@ -8,7 +8,7 @@ Ruscha’s photographs reveal this as a constructed nature, often planted to acc
 
 While palms have populated the missions and estates of Southern California since the nineteenth century, it was only in the twentieth century that the tree became a regional icon. Depression-era labor and anticipation of the Olympic Games of 1932 spurred Los Angeles to plant roughly 40,000 Mexican fan palm trees along its boulevards.[^1] A generation or so later, some of those same trees appear in Ruscha’s images. An occasional view down an intersecting side street captures their scale, rhythm, and street-fronting locations; more common in Ruscha’s photographs, however, was the full or partial depiction of one or two trees in a single frame.
 
-![5201 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[View along North Kingsley Drive, looking north, from Sunset Boulevard, 1973][url] [url]: /n/NorthKingsleyDrive/1966,1973,1985,1995,2007")
+![5201 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/3e423f15-c7f0-463c-b3dd-77ae8d581a8b/full/,1000/0/default.jpg "[View along North Kingsley Drive, nearest 5201 Sunset Boulevard, looking north. 1973][url] [url]: /address/5201")
 
 ### Visual Real Estate
 
@@ -78,7 +78,7 @@ Although the portions of Sunset located east of Vermont have their own tree cano
 
 There are exceptions to this east/west dichotomy, such as the large outcropping of palm trees in front of the modern building complex at [1111-1115 Sunset Boulevard](/address/1115), in Echo Park. Designed by architect William Pereira in 1961 and constructed between 1963 (low-rise portion) and 1973 (eight-story high-rise) as the headquarters of the Metropolitan Water District, these buildings were accompanied from the outset by dozens of new Canary Island date palms and Mexican fan palms. In 1986, the property even won a Special Recognition Award from Los Angeles Beautiful, a business and industry group, for its water-conserving garden on the site.[^13] In the structure’s more recent incarnation as The Elysian apartment building and Holy Hill Community Church, palm trees remain. The unusual appearance of so many palm trees in this eastern locale attests to both the building’s more recent construction and the municipal nature of its original use.
 
-![Metropolitan Water District headquarters](/storiesassets/assets/1111-1115.jpg "[Metropolitan Water District headquarters, 1973, and Holy Hill Community Church, 2007, at 1111-1115 Sunset Boulevard.][link] [link]: /n/1115-450")
+![Metropolitan Water District headquarters](/storiesassets/assets/1111-1115.jpg "[Metropolitan Water District headquarters, 1973, and Holy Hill Community Church, 2007, at 1111-1115 Sunset Boulevard][link] [link]: /n/1115-450")
 
 Indeed, another of the most palm-populous properties along Sunset Boulevard is [Hollywood High School](/n/NorthOrangeDrive-1642/1966,1973,1985,1995,2007) (located between the intersections with North Orange Drive and North Highland Avenue, closest to 6767 Sunset), another public site.
 
