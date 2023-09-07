@@ -8,7 +8,7 @@ Most postwar gas stations were located on corner parcels, affording drivers mult
 
 Gas stations also commonly clustered near one another, even on adjacent properties. At [5007](/address/5007) and [5025](/address/5025) Sunset, for example, two stations occupied the entire northern stretch of the boulevard between North Mariposa and North Alexandria Avenues. Although Ruscha had not photographed this area during his 1966 drive, city directories identify gas stations at these sites since at least that time; those uses continued all the way through his 2007 photo shoot.[^3]
 
-* ![5025-5007.jpg](/storiesassets/assets/5025-5007.jpg "5007 Sunset Boulevard: Arco/Gulf station. From left: 1973, 2007.")
+* ![5025-5007.jpg](/storiesassets/assets/5025-5007.jpg "5007 Sunset Boulevard: Arco/Gulf station. From left: 1973, 2007")
 
 ### Corporate Ownership
 
