@@ -82,7 +82,7 @@ There are exceptions to this east/west dichotomy, such as the large outcropping 
 
 Indeed, another of the most palm-populous properties along Sunset Boulevard is [Hollywood High School](/n/NorthOrangeDrive-1642/1966,1973,1985,1995,2007) (located between the intersections with North Orange Drive and North Highland Avenue, closest to 6767 Sunset), another public site.
 
-* ![HollywoodHighSchool](/storiesassets/assets/HollywoodHighSchool.jpg "[Hollywood High School. From top: 1973 and 2007.][link] [link]: /n/NorthOrangeDrive-1642/1966,1973,1985,1995,2007")
+* ![HollywoodHighSchool](/storiesassets/assets/HollywoodHighSchool.jpg "[Hollywood High School. From top: 1973 and 2007][link] [link]: /n/NorthOrangeDrive-1642/1966,1973,1985,1995,2007")
 
 ### The Endurance and Decline of Urban Nature
 
