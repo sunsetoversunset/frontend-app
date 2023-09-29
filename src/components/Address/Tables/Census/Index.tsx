@@ -59,7 +59,10 @@ const CensusTable = () => {
     return (
       <>
         {[1960, 1970, 1980, 1990, 2000, 2010].map((decade) => {
-          const value = ((key === 'med_fam_income' || key === 'avg_fam_income') && census_data[key][decade as DecadeIndex] && adjustForInflation) ? Math.round(census_data[key][decade as DecadeIndex] as number * (inflationAdjustments.find(d => d.year === decade) as { year: number;  multiplier: number }).multiplier) : census_data[key][decade as DecadeIndex];
+          let value: string | number | undefined;
+          if (census_data?.[key]?.[decade as DecadeIndex]) {
+            value = ((key === 'med_fam_income' || key === 'avg_fam_income') && census_data[key][decade as DecadeIndex] && adjustForInflation) ? Math.round(census_data[key][decade as DecadeIndex] as number * (inflationAdjustments.find(d => d.year === decade) as { year: number;  multiplier: number }).multiplier) : census_data[key][decade as DecadeIndex];
+          }
           if (census_data[key] && value) {
             return (
               <Styled.Data key={`${key}${decade}`} styling={{ text_align: "right" }}>

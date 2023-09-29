@@ -198,13 +198,13 @@ export const StoriesAlert = styled.div<{maxheight: number}>`
   bottom: 0;
   left: 0;
   right: 0;
-  width: (100vw - 20px);
+  width: (100vw - 40px);
   max-height: ${p => p.maxheight}px;
   background-color: ${Constants.colors.darkOrange};
   display: grid;
   grid-template-columns: auto 30px;
   grid-column-gap: 20px;
-  padding: 0 0 0 20px;
+  padding: 0 20px;
   color: ${Constants.colors.grayLightest};
   justify-items: center;
   z-index: 2000;
@@ -232,6 +232,10 @@ export const CloseButton = styled.button`
   
   :hover {
     filter: unset;
+  }
+
+  img {
+    height: 15px;
   }
 
 

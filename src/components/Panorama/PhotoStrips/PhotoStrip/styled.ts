@@ -5,7 +5,7 @@ import Noise from '../../../../assets/textures/noise.png';
 export const Strip = styled.div<{ width: number }>`
   width: ${p => p.width}px;
   width: 100vw;
-  overflow: visible;
+  overflow-x: visible;
   height: 236px;
   //border-top: 2px solid ${Constants.colors.black};
   margin-top: 2px;
@@ -17,11 +17,11 @@ export const Strip = styled.div<{ width: number }>`
     content: '';
     position: absolute;
     width: 1100vw;
-    height: 236px;
+    height: 200px; // the height of the images
     margin-left: -500vw;
     padding-left: 500vw;
     margin-right: -500vw;
-    padding-right: 500vw; 
+    padding-right: 500vw;   
     margin-top: -2px;
     border-top: 2px solid ${Constants.colors.black};
     background-color: ${Constants.colors.grayLightest};

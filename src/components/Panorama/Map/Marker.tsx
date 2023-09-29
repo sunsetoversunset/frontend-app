@@ -28,6 +28,7 @@ const MapMarker = () => {
         })
         // you don't need to traverse a huge number of points, so filter it so there's no more than 11 points
         .filter((d, idx, arr) => d.mapX === newX || idx % Math.round(arr.length / 10) === 0);
+      console.log(pointsToTraverse);
       const transitionLength = 1500 / pointsToTraverse.length;
 
       const pathToTraverse = d3.path();

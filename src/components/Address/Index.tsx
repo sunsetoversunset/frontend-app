@@ -10,6 +10,7 @@ import NewspaperTable from "./Tables/Newspaper";
 import OccupancyTable from "./Tables/Occupancy";
 import SocialCulturalTable from "./Tables/SocialCultural";
 import TaxAssessments from "./Tables/TaxAssessments";
+import CloseButton from '../../assets/icons/icon-close-white.svg';
 import * as Styled from "./styled";
 
 const AddressView = () => {
@@ -131,7 +132,7 @@ const AddressView = () => {
               </>
             )}.
           </div>
-          <Styled.CloseButton onClick={() => { setShowStoriesNotification(false); }}><img src="/static/media/icon-close.ea68c934.svg" alt="icon-close-search" /></Styled.CloseButton>
+          <Styled.CloseButton onClick={() => { setShowStoriesNotification(false); }}><img src={CloseButton} alt="icon-close-modal" /></Styled.CloseButton>
         </Styled.StoriesAlert>
       )}
     </AddressDataContext.Provider>
