@@ -27,7 +27,7 @@
       "month": 6,
       "day": 5
     },
-    "addresses": [5751, 6525, 4929, 4661, 2201, 2203, 2205, 2207, 2009, 2211, 2213, 2215, 1111, 1113, 1115],
+    "addresses": [5201, 5751, 6525, 4929, 4661, 2201, 2203, 2205, 2207, 2009, 2211, 2213, 2215, 1111, 1113, 1115],
     "published": false
   },
   {
@@ -58,8 +58,9 @@
   },
   {
     "slug": "thaitown",
-    "title": "Thai Town, Immigrant Placemaking, and Urban Revitalization",
+    "title": "Thai Town, Placemaking, and Urban Revitalization",
     "img_id": "defa8c28-7aec-44bf-b7ce-40f7fd9a3820",
+    "background_position": "bottom",
     "author": "Mark Padoongpatt",
     "date": {
       "year": 2023,
@@ -93,7 +94,7 @@
       "month": 10,
       "day": 1
     },
-    "addresses":[7901, 6465, 7651, 5067, 4711, 3535, 4661, 4473, 3909, 8906, 2111, 3225, 3227, 4483, 3528, 2222],
+    "addresses":[7901, 6465, 7651, 5067, 4711, 3535, 4661, 4473, 3909, 8906, 307, 2111, 8443,3225, 3227, 4483, 3528, 2420],
     "published": false
   }
 ]
