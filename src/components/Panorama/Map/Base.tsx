@@ -1,6 +1,6 @@
 import React from "react";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
-import { useAppContext, useRoadPath } from "../../../hooks";
+import { useAppContext, useRoadPath, useMapDimensions } from "../../../hooks";
 import * as Styled from './styled';
 
 const MapLabels = [
@@ -65,8 +65,7 @@ const Base = () => {
   const { width } = useAppContext();
 
   // the width of the map relative to the width of the full screen and the svg path for the road
-  const mapWidth = width * 0.9;
-  const mapHeight = Math.min(200, width / 3);
+  const { mapWidth, mapHeight } = useMapDimensions();
   const { activePath, completePath } = useRoadPath();
 
   return (

@@ -6,7 +6,7 @@ import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg";
 import iconSearch from "../../../assets/icons/icon-search.svg";
 import { sizes } from '../../../constants';
 import { useAppContext, usePanoramaData } from "../../../hooks";
-import { getAddressOffsetString, toggleDirectionAddrOffset } from '../../../utiliities';
+import { getAddressOffsetString, toggleDirectionAddrOffset, getOppositeDirection, getOppositeX } from '../../../utiliities';
 import ScrollDistanceSlider from "./ScrollDistanceSlider/Index";
 import SearchAndFilter from "./SearchAndFilter/Index";
 import * as Styled from './styled';
@@ -34,8 +34,7 @@ const MapControls = () => {
   // create the link paths for the move left, move right, and toggle directions buttons
   const leftTo = `../../${getAddressOffsetString(xScrollingLeft, direction, { direction })}/${yearsStr}`;
   const rightTo = `../../${getAddressOffsetString(xScrollingRight, direction, { direction })}/${yearsStr}`;
-  const otherSide = toggleDirectionAddrOffset(address, direction, offset);
-  const otherSideTo = (otherSide) ? `../../../${(direction === 'n') ? 's' : 'n'}/${otherSide.addr.replace(/\s+/g, '')}-${otherSide.offset}x/${yearsStr}` : '';
+  const otherSideTo = `../../../${getOppositeDirection(direction)}/${getAddressOffsetString(getOppositeX(x), getOppositeDirection(direction), { direction: getOppositeDirection(direction) })}/${yearsStr}`;
 
   useEffect(() => {
     // move left or right using arrow keys if the modal isn't active

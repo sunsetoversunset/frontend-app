@@ -19,7 +19,7 @@ import AddressesWithBoundaries from './assets/data/addresses_with_boundaries.jso
 
   north addresses mapped to south addresses
            n xs       0 [------------------------------------------------] 200,000
-           s xs 200,000 [------------------------------------------------]   1,000 
+           s xs 200,000 [------------------------------------------------]       0 
 */
 
 
@@ -30,7 +30,7 @@ import AddressesWithBoundaries from './assets/data/addresses_with_boundaries.jso
 /**
  * The multiplier used for the placement of the photos on the strip for the panorama view
  */
-export const mult = 200;
+export const mult = 200 as const;
 
 /**
  * The maximum coordinate
@@ -38,7 +38,7 @@ export const mult = 200;
  * The photos and addresses are placed assigned a coordinate value between 0 and 
  * 1000 for the extent of the photos, not the addresses
  */
-export const maxCoordinate = 1000;
+export const maxCoordinate = 1000 as const;
 
 /**
  * The maximum x value for photos
@@ -48,12 +48,12 @@ export const maxX = maxCoordinate * mult;
 /**
  * The display width of each photo
  */
-export const photoWidth = 294;
+export const photoWidth = 294 as const;
 
 /**
  * The display height of each photo
  */
-export const photoHeight = 200;
+export const photoHeight = 200 as const;
 
 /**
  * Half the width of the photo not as the x but as a coordiante
@@ -142,12 +142,12 @@ export const easternLongitudes: YearValues<number> = ({
  * The minimum, maximum, and mid latitudes and longituddes of any address
  */
 const latLngValues = {
-  minLat: Math.min(...stripLabels.map(d => d.lat)),
-  maxLat: Math.max(...stripLabels.map(d => d.lat)),
-  midLat: Math.max(...stripLabels.map(d => d.lat)) - ((Math.max(...stripLabels.map(d => d.lat)) - Math.min(...stripLabels.map(d => d.lat))) / 2),
-  minLng: Math.min(...stripLabels.map(d => d.lng)),
-  maxLng: Math.max(...stripLabels.map(d => d.lng)),
-  midLng: Math.max(...stripLabels.map(d => d.lng)) - ((Math.max(...stripLabels.map(d => d.lng)) - Math.min(...stripLabels.map(d => d.lng))) / 2),
+  minLat: Math.min(...labels.map(d => d.lat)),
+  maxLat: Math.max(...labels.map(d => d.lat)),
+  midLat: Math.max(...labels.map(d => d.lat)) - ((Math.max(...labels.map(d => d.lat)) - Math.min(...labels.map(d => d.lat))) / 2),
+  minLng: Math.min(...labels.map(d => d.lng)),
+  maxLng: Math.max(...labels.map(d => d.lng)),
+  midLng: Math.max(...labels.map(d => d.lng)) - ((Math.max(...labels.map(d => d.lng)) - Math.min(...labels.map(d => d.lng))) / 2),
 }
 
 /**
@@ -172,7 +172,7 @@ function getCoordinateToX(coordinate: number, direction: Direction) {
  * @returns The corresponding coordinate value
  */
 function getXToCoordinate(x: number, direction: Direction) {
-  return (direction === 'n') ? x / mult : Math.max(...Object.values(maxCoordinates)) - x / mult;
+  return (direction === 'n') ? x / mult : maxCoordinate - x / mult;
 }
 
 /**
@@ -214,8 +214,8 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
     // filter out addresses without boundaries if that option is true
     .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
     // filter for those with a larger coordinate
-    .filter(labelData => (orientation === 'previous') ? labelData.x < _x(x) : true)
-    .filter(labelData => (orientation === 'next') ? labelData.x > _x(x) : true)
+    .filter(labelData => (orientation === 'previous') ? labelData.x <= _x(x) : true)
+    .filter(labelData => (orientation === 'next') ? labelData.x >= _x(x) : true)
     .sort((a, b) => {
       const coordinate = getXToCoordinate(_x(x), direction);
       if (orientation === 'previous') {
@@ -258,11 +258,11 @@ export function getProximateAddress(orientation: 'previous' | 'next' | 'closest'
 /**
  * Takes an address and finds all it's associated data
  * @param address - An address 
- * @param direction (optional) - The direction, only really necessary for crossstreets that have both north and south labels
+ * @param direction - The direction
  * @returns The associated data for the address (@type {StripLabel})
  */
 export function getLabelFromAddress(address: string, direction: Direction) {
-  return ensure(labels.find(label => label.label.replace(/\s+/g, '') === address.replace(/\s+/g, '') && (!direction || label.direction === direction)));
+  return ensure(labels.find(label => label.label.replace(/\s+/g, '') === address.replace(/\s+/g, '') && label.direction === direction));
 }
 
 /**
@@ -273,6 +273,16 @@ export function getLabelFromAddress(address: string, direction: Direction) {
 export function getOppositeX(x: number) {
   return maxX - x;
 }
+
+/**
+ * Given the direction, toggle it
+ * @param direction n or s
+ * @returns the opposite direction, n or s
+ */
+export function getOppositeDirection(direction: Direction): Direction {
+  return (direction === 'n') ? 's' : 'n';
+}
+
 
 /**
  * Takes an x value and returns the corresponding address and offset, primarily used in the url.
@@ -347,7 +357,9 @@ export function toggleDirectionAddrOffset(address: string, direction: Direction,
   const newDirection = (direction === 'n') ? 's' : 'n';
   // get the best cooresponding address across the street
   // get the x for the address and the x for across the street
-  const oldX = getLabelFromAddress(address, direction).x + (offset || 0);
+  const oldX = (direction === 'n')
+    ? getLabelFromAddress(address, direction).x + (offset || 0)
+    : getLabelFromAddress(address, direction).x - (offset || 0);
   const newX = maxX - oldX;
   // find the 
   return getProximateAddressFromX('previous', newX, newDirection, { direction: newDirection });
@@ -388,5 +400,32 @@ export function convertLattoY(lat: number, height: number): number {
  * @returns The xand y values on the canvas
  */
 export function latLngToXY(latLng: Point, width: number, height: number): Point {
-  return [convertLngtoX(latLng[1], width), convertLattoY(latLng[0], height)];
+  return [Math.round(convertLngtoX(latLng[1], width) * 1000000) / 1000000, Math.round(convertLattoY(latLng[0], height) * 1000000) / 1000000];
 };
+
+export function xToLatLng(x: number, direction: Direction): [number, number] {
+  const coordinate = getXToCoordinate(x, direction);
+  const pointBelow: StripLabel = labels
+    .reduce((candidate, curr) => {
+      if (!candidate || (curr.coordinate <= coordinate && curr.coordinate > candidate.coordinate)) {
+        return curr;
+      }
+      return candidate;
+    });
+  const pointAbove: StripLabel = labels
+    .reduce((candidate, curr) => {
+      if (!candidate || (curr.coordinate >= coordinate && curr.coordinate < candidate.coordinate)) {
+        return curr;
+      }
+      return candidate;
+    });
+  if (pointBelow.coordinate === coordinate) {
+    return [pointBelow.lat, pointBelow.lng];
+  }
+  if (pointAbove.coordinate === coordinate) {
+    return [pointAbove.lat, pointAbove.lng];
+  }
+  const percentAlongPath = coordinate / maxCoordinate;
+  const percentBetween = (percentAlongPath - pointBelow.percentAlongPath) * (pointAbove.percentAlongPath - pointBelow.percentAlongPath);
+  return [pointBelow.lat + (pointAbove.lat - pointBelow.lat) * percentBetween, pointBelow.lng + (pointAbove.lng - pointBelow.lng) * percentBetween];
+}

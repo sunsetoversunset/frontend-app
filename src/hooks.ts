@@ -2,7 +2,7 @@ import { useEffect, useContext, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import { AddressDataContext, AppContext, PanoramaContext } from './Contexts';
-import { mult, getOppositeX, labels, getProximateAddress, getLabelFromAddress, easternLongitudes, parseAddrOffset, latLngToXY, maxXs } from './utiliities';
+import { mult, getOppositeX, labels, getProximateAddress, getLabelFromAddress, easternLongitudes, parseAddrOffset, latLngToXY, maxXs, xToLatLng } from './utiliities';
 import type { AddressDataAndNavData, PanoramaData } from './types/hooks.d';
 import type { URLParamsPanorama } from './components/Panorama/index.d';
 import type { Direction, StoryMetadata, YearStr } from './index.d';
@@ -109,14 +109,12 @@ export function useAddressData(): AddressDataAndNavData {
  */
 export function usePanoramaData(): PanoramaData {
   const { width } = useAppContext();
-  const mapWidth = width * 0.9;
-  const mapHeight = Math.min(200, width / 3);
+  const { mapWidth, mapHeight } = useMapDimensions();
   
   const { scrollDistance, setScrollDistance } = useContext(PanoramaContext);
   const { direction, years: yearsStr, addrOffset } = useParams() as URLParamsPanorama;
   const { addr: address, offset, scroll } = parseAddrOffset(addrOffset, direction);
-  const { x: addressX, coordinate, lat, lng, percentAlongPath, rotation } = getLabelFromAddress(address, direction);
-  const [mapX, mapY] = latLngToXY([lat, lng], mapWidth, mapHeight);
+  const { x: addressX, coordinate, percentAlongPath, rotation } = getLabelFromAddress(address, direction);
 
   const years: YearStr[] = yearsStr.split(',').map(d => d as YearStr);
   const x = addressX + offset;
@@ -131,6 +129,9 @@ export function usePanoramaData(): PanoramaData {
     ? width / 2
     : getOppositeX(Math.max(...years.map(year => maxXs[year])) );
   const visibleAddresses = labels.filter(d => d.direction === direction && d.x >= farLeftX && d.x <= farRightX + width);
+
+  const [lat, lng] = xToLatLng(x, direction);
+  const [mapX, mapY] = latLngToXY([lat, lng], mapWidth, mapHeight);
 
   const easternmostLongitude = Math.max(...years.map(year => easternLongitudes[year]))
   return {
@@ -167,10 +168,8 @@ export function usePanoramaData(): PanoramaData {
   Returns addresses for the map to place them on the canvas
 */
 export function useAddresses(direction?: Direction) {
-  const { width } = useAppContext();
   const { easternmostLongitude } = usePanoramaData();
-  const mapWidth = width * 0.9;
-  const mapHeight = Math.min(200, width / 3);
+  const { mapWidth, mapHeight } = useMapDimensions();
   return labels
     .filter(d => !direction || direction === d.direction)
     .filter(d => !easternmostLongitude || d.lng <= easternmostLongitude)
@@ -274,14 +273,22 @@ export function usePhotoStrip(year: number) {
   }
 }
 
+export function useMapDimensions() {
+  const { width } = useAppContext();
+  return {
+    mapWidth: width * 0.9,
+    mapHeight: Math.min(200, width / 3),
+  }
+
+}
+
 /*
  * Returns two svg paths for Sunset for the map--one the complete path, the other the path just for
  * the area with visible photos for selected years.
 */
 export function useRoadPath() {
-  const { width, easternmostLongitude } = usePanoramaData();
-  const mapWidth = width * 0.9;
-  const mapHeight = Math.min(200, width / 3);
+  const { easternmostLongitude } = usePanoramaData();
+  const { mapWidth, mapHeight } = useMapDimensions();
 
   const pointsWithPhotos = GeoJson.geometry.coordinates[0].filter(point => point[0] <= easternmostLongitude);
   const [firstXActive, firstYActive] = latLngToXY([pointsWithPhotos[0][1], pointsWithPhotos[0][0]], mapWidth, mapHeight);

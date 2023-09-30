@@ -1,4 +1,4 @@
-import { useAppContext } from "../../../hooks";
+import { useAppContext, useMapDimensions } from "../../../hooks";
 import { convertLattoY, convertLngtoX } from '../../../utiliities';
 import * as Styled from './styled';
 
@@ -7,7 +7,7 @@ const Scale = () => {
   const height = Math.min(100, width / 6);
 
   // the width of the map relative to the width of the full screen and the svg path for the road
-  const mapWidth = width * 0.9;
+  const { mapWidth } = useMapDimensions();
 
   // these points are a mile away from one another at the same latitude
   const westLatLng = [34.1, -118.251081]
