@@ -101,8 +101,6 @@ export const labels: StripLabel[] = stripLabels
   // remove duplicates
   .filter((d, i, arr) => i === arr.findIndex(_d => _d.l === d.l && _d.s === d.s))
   // remove three incorrect labels
-  // todo: fix these in the data
-  .filter(d => d.l !== 'Doheny Road' && d.l !== 'Cory Avenue')
   .map(d => ({
     label: d.l.toString(),
     direction: d.s as Direction,

@@ -60,6 +60,7 @@ export const Story = styled.div`
 
   a {
     color: ${Constants.colors.darkOrange};
+    text-decoration: none;
   }
 
   figure {
