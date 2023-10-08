@@ -6,7 +6,15 @@ const ModalImg = ({ children, ...props }: any) => {
   const captionText = props.title;
   let caption: any = '';
   if (captionText) {
-    caption = (parseInt(captionText, 10) && !captionText.startsWith('[')) ? <Link to={`/address/${parseInt(captionText, 10)}`}>{captionText}</Link> : <Markdown options={{ overrides: {a: {component: AOrLink }}}}>{captionText}</Markdown>;
+    caption = (parseInt(captionText, 10) && !captionText.startsWith('['))
+      ? <Link
+        to={`/address/${parseInt(captionText, 10)}`}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        {captionText}
+      </Link>
+      : <Markdown options={{ overrides: { a: { component: AOrLink } } }}>{captionText}</Markdown>;
   }
   let img = <img
     src={props.src}
