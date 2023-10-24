@@ -51,8 +51,8 @@ Most of these followed a similar story of physical transformation, with relative
 ### Sunset & Vine
 
 Where the “winners” of the bank consolidation era were present, a different story unfolded. Such banks—robust enough to acquire rivals—exhibited remarkable continuity of both tenant and form, proof in the built environment of their growing corporate strength. This could be seen vividly at Sunset’s intersection with Vine, where multiple banking vernaculars unfolded simultaneously. Around the crossroads stood two skyscrapers, [6255](/address/6255) and [6290 Sunset Boulevard](/address/6290) (the Sunset Vine Tower, LA’s tallest building upon its 1964 completion), with oft-changing bank tenants; two modernist pavilions, [6320](/address/6320) and [6300 Sunset Boulevard](/address/6300), each housing a single bank; and a third single-occupant design, originally built for Home Savings and Loan (1500 Vine Street).[^6] This last, completed in 1968, is perhaps Sunset’s most renowned bank building. Like other Millard Sheets designs for Home Savings, the modern branch included exterior mosaic murals, here depicting movie stars, an homage to the bank’s Hollywood site. The unusually iconic building’s exceptional exterior remained largely untouched as it transitioned from Home Savings to Washington Mutual in the 1990s, then to Chase Bank.
-
-* ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/9f8dd930-896e-45b1-bde6-95f8e0b9e255/full/,400/0/default.jpg "Sunset and Vine, looking north. 1973")
+  
+* ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/9f8dd930-896e-45b1-bde6-95f8e0b9e255/full/,400/0/default.jpg "[Sunset and Vine, looking north. 1973][url] [url]: /address/6265")
 * ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/c576d85e-818d-480e-b430-2d1342374d17/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/bae4c980-66fd-49d6-88d3-628377d4c1f0/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/32bc3ee1-b359-4a19-8782-e560557e2fa7/full/,400/0/default.jpg)
@@ -69,7 +69,7 @@ Where the “winners” of the bank consolidation era were present, a different 
 * ![Sunset and Vine, looking north. 1973](https://media.getty.edu/iiif/image/59764c47-122f-4a1d-8e02-17bcaa1936d0/full/,400/0/default.jpg)
 
 <!-- -->
-* ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/e393638c-5c22-4113-a79a-6b69896e4b13/full/,400/0/default.jpg "Sunset and Vine, looking south. 1973")
+* ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/e393638c-5c22-4113-a79a-6b69896e4b13/full/,400/0/default.jpg "[Sunset and Vine, looking south. 1973][url] [url]: /address/6300")
 * ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/7bdcba97-ca60-4682-ab7a-d6f69ddfc13d/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/4d7b5b71-00ce-4570-a56b-f186202dabbc/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/c6f0a118-093f-42b1-9a5f-b934360c2c33/full/,400/0/default.jpg)
@@ -86,7 +86,7 @@ Where the “winners” of the bank consolidation era were present, a different 
 * ![Sunset and Vine, looking south. 1973](https://media.getty.edu/iiif/image/bd83309a-e37f-4fe7-9368-31ed1e847def/full/,400/0/default.jpg)
 
 <!-- -->
-* ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/778a05eb-10fe-4173-9559-d3a1174d2ca5/full/,400/0/default.jpg "Sunset and Vine, looking north. 2007")
+* ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/778a05eb-10fe-4173-9559-d3a1174d2ca5/full/,400/0/default.jpg "[Sunset and Vine, looking north. 2007][url] [url]: /address/6265")
 * ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/74a2a2f0-68d1-4aba-8901-8826a4b2fec8/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/00d31d78-4ec8-42f5-967f-4674606e9231/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/3fa13469-5dd8-4f4e-bfa7-8bc42cf6c3c4/full/,400/0/default.jpg)
@@ -103,7 +103,7 @@ Where the “winners” of the bank consolidation era were present, a different 
 * ![Sunset and Vine, looking north. 2007](https://media.getty.edu/iiif/image/18352c6f-47f9-4281-9b5f-9662c5b148f3/full/,400/0/default.jpg)
 
 <!-- -->
-* ![Sunset and Vine, looking south. 2007](https://media.getty.edu/iiif/image/6eafc4a8-41bd-4b66-8b1a-48f97e303292/full/,400/0/default.jpg "Sunset and Vine, looking south. 2007")
+* ![Sunset and Vine, looking south. 2007](https://media.getty.edu/iiif/image/6eafc4a8-41bd-4b66-8b1a-48f97e303292/full/,400/0/default.jpg "[Sunset and Vine, looking south. 2007][url] [url]: /address/6300")
 * ![Sunset and Vine, looking south. 2007](https://media.getty.edu/iiif/image/def77864-6c82-457b-965b-34fbf564a683/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking south. 2007](https://media.getty.edu/iiif/image/af5a1ed3-45ef-4e08-aeac-866b3b95d8ba/full/,400/0/default.jpg)
 * ![Sunset and Vine, looking south. 2007](https://media.getty.edu/iiif/image/7f24ca45-0ddb-4ab3-bb62-cbdba09b1c94/full/,400/0/default.jpg)
