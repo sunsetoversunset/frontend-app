@@ -212,8 +212,8 @@ export function getProximateAddressFromX(orientation: 'previous' | 'next' | 'clo
     // filter out addresses without boundaries if that option is true
     .filter(labelData => (options?.excludeAddressesWithoutBoundaries) ? hasAddressData(labelData.label) : true)
     // filter for those with a larger coordinate
-    .filter(labelData => (orientation === 'previous') ? labelData.x <= _x(x) : true)
-    .filter(labelData => (orientation === 'next') ? labelData.x >= _x(x) : true)
+    .filter(labelData => (orientation === 'previous') ? labelData.x < _x(x) : true)
+    .filter(labelData => (orientation === 'next') ? labelData.x > _x(x) : true)
     .sort((a, b) => {
       const coordinate = getXToCoordinate(_x(x), direction);
       if (orientation === 'previous') {
