@@ -5,7 +5,7 @@ name: Run both of Rob's script for creating data files
 
 on:
   schedule:
-    - cron:  '0 10 * * *'
+    - cron:  '3 20 * * *'
   workflow_dispatch:
 
 
