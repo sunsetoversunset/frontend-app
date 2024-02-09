@@ -210,6 +210,7 @@ const About = () => {
         <li>Dorothy-Rui Corrigan</li>
         <li>Nathaly De La Paz</li>
         <li>Hope Dworkin</li>
+        <li>Min Fruman</li>
         <li>Kimberly La Porte</li>
         <li>Elena Moore</li>
         <li>Juliette S. Morfin</li>
