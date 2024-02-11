@@ -10,7 +10,7 @@ export const Nav = styled(MapControls)`
   }
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.button <{children: React.ReactNode;}>`
   ${button};
   width: auto;
 `;
