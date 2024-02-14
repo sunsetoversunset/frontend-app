@@ -17,7 +17,7 @@ const InteractiveBar = styled.div`
   font-family: monospace;
   font-size: 24px;
 `;
-const Tick = styled.div.attrs((props: { x: number }) => props)`
+const Tick = styled.div<{ x: number }>`
   position: absolute;
   transform: translateX(${props => props.x}px);
 `;
