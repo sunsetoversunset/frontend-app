@@ -11,5 +11,6 @@ export const Nav = styled(MapControls)`
 `;
 
 export const ToggleButton = styled.button <{children: React.ReactNode;}>`
+  ${button};
   width: auto;
 `;
