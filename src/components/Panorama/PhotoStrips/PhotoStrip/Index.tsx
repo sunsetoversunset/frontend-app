@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppContext, usePhotoStrip } from "../../../../hooks";
 import * as Styled from "./styled";
 

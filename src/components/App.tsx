@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 //import { Home } from './Home'
 import StoriesView from './Stories/Index'
-import Story from './Stories/StoriesView';
 import StoryMd from './Stories/Story';
 import Panorama from './Panorama/Index';
 import NavHeader from './NavHeader/Index';
@@ -72,10 +71,6 @@ export const App = () => {
               <Route
                 index
                 element={<StoriesView />}
-              />
-              <Route
-                path='gasstationsold'
-                element={<Story />}
               />
               <Route path=":storyslug" element={<StoryMd />} />
             </Route> 

@@ -11,21 +11,21 @@ const OccupancyTable = () => {
     <ul>
       <li>
         The Pacific Telephone and Telegraph Company,{" "}
-        <a href="https://bit.ly/3AaPk6R" target="_blank">
+        <a href="https://bit.ly/3AaPk6R" target="_blank" rel='noreferrer'>
           <cite>Los Angeles Street Address Directory</cite>
         </a>
         , July 1965, accessed via Los Angeles Public Library.
       </li>
       <li>
         Pacific Bell,{" "}
-        <a href="https://bit.ly/2WERMok" target="_blank">
+        <a href="https://bit.ly/2WERMok" target="_blank" rel='noreferrer'>
           <cite>Los Angeles Street Address Telephone Directory</cite>
         </a>
         , July 1973, accessed via Los Angeles Public Library.
       </li>
       <li>
         Pacific Bell,{" "}
-        <a href="https://bit.ly/3FeQ4vo" target="_blank">
+        <a href="https://bit.ly/3FeQ4vo" target="_blank" rel='noreferrer'>
           <cite>Pacific Bell Street Address Telephone Directory</cite>
         </a>
         , Los Angeles, July 1987, accessed via Los Angeles Public Library.

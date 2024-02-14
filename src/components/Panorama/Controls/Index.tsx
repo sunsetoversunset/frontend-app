@@ -6,7 +6,7 @@ import iconArrowRight from "../../../assets/icons/icon-arrow-right.svg";
 import iconSearch from "../../../assets/icons/icon-search.svg";
 import { sizes } from '../../../constants';
 import { useAppContext, usePanoramaData } from "../../../hooks";
-import { getAddressOffsetString, toggleDirectionAddrOffset, getOppositeDirection, getOppositeX } from '../../../utiliities';
+import { getAddressOffsetString, getOppositeDirection, getOppositeX } from '../../../utiliities';
 import ScrollDistanceSlider from "./ScrollDistanceSlider/Index";
 import SearchAndFilter from "./SearchAndFilter/Index";
 import * as Styled from './styled';
@@ -18,8 +18,6 @@ const MapControls = () => {
     minX,
     maxX,
     scrollDistanceX,
-    address,
-    offset,
     direction,
     yearsStr,
   } = usePanoramaData();

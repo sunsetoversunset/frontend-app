@@ -25,7 +25,7 @@ const SocialCulturalTable = () => {
         <ConditionalWrapper
           condition={!!resource.url}
           wrapper={(children: any) => (
-            <a href={resource.url} target="_blank">
+            <a href={resource.url} target="_blank" rel='noreferrer'>
               {children}
             </a>
           )}
