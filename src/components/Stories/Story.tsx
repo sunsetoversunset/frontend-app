@@ -102,7 +102,7 @@ const Story = () => {
   return (
       <Styled.Story>
         {(title && headerBgImage) && (
-        <Styled.HeaderImage url={headerBgImage} backgroundPosition={bgPosition}>
+        <Styled.HeaderImage $url={headerBgImage} $backgroundPosition={bgPosition}>
             <Styled.Title>{title}</Styled.Title>
           </Styled.HeaderImage>
         )}

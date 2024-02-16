@@ -22,13 +22,13 @@ export const AddressBar = styled.div`
   }
 `;
 
-export const Address = styled.span<{ selectable: boolean }>`
+export const Address = styled.span<{ $selectable: boolean }>`
   white-space: nowrap;
   position: absolute;
   text-shadow: -6px 4px 8px white, -6px -4px 8px white;
-  color: ${p => (p.selectable) ? 'black' : '#999'};
-  font-weight: ${p => (p.selectable) ? 'bold' : 'normal'};
-  cursor: ${p => (p.selectable) ? 'pointer' : 'default'};
+  color: ${p => (p.$selectable) ? 'black' : '#999'};
+  font-weight: ${p => (p.$selectable) ? 'bold' : 'normal'};
+  cursor: ${p => (p.$selectable) ? 'pointer' : 'default'};
   text-align: center;
   width: 40px;
   overflow-x: visible;

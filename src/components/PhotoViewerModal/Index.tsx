@@ -95,7 +95,7 @@ const PhotoViewerModal = ({ id, setModalId }: Types.Props) => {
         )}
 
         {nearbyAddresses.length > 0 && (
-          <Styled.NearbyAddresses isExpanded={isExpanded}>
+          <Styled.NearbyAddresses $isExpanded={isExpanded}>
             <div onClick={() => setIsExpanded(!isExpanded)}>{isExpanded && media !== "phone" ? "Learn more about nearby addresses:" : <img src={iconAddress} alt="addresses" />}</div>
             {isExpanded && (
               <Styled.NearbyAddressesList>

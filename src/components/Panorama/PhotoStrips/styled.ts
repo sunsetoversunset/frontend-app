@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Noise from "../../../assets/textures/noise.png";
 
-export const Panorama = styled.div<{ width: number; translateX: number }>`
-  width: ${(p) => p.width}px;
-  transform: translateX(${(p) => p.translateX}px);
+export const Panorama = styled.div<{ $width: number; $translateX: number }>`
+  width: ${(p) => p.$width}px;
+  transform: translateX(${(p) => p.$translateX}px);
   background-image: url(${Noise});
   overflow-x: visible;
 `;

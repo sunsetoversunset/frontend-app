@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <Styled.Header
       width={width}
-      photoId={(photos && photos.length > 0) ? photos[Math.floor(Math.random() * photos.length)].id : null}
+      $photoId={(photos && photos.length > 0) ? photos[Math.floor(Math.random() * photos.length)].id : null}
     >
       <Styled.HeroAddress>{address} Sunset Boulevard</Styled.HeroAddress>
     </Styled.Header>

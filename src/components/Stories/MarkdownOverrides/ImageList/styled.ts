@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Strip = styled.ul<{count: number}>`
+export const Strip = styled.ul<{$count: number}>`
   list-style: none;
   display: flex;
   align-items: flex-start;
@@ -9,10 +9,10 @@ export const Strip = styled.ul<{count: number}>`
   margin: 40px 0;
   
   li {
-    max-width: calc(100vw / ${p => p.count});
+    max-width: calc(100vw / ${p => p.$count});
   }
 
   img {
-    width: calc(100vw / ${p => p.count});
+    width: calc(100vw / ${p => p.$count});
   }
 `;

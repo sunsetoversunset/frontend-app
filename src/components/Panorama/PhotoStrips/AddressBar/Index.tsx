@@ -75,7 +75,7 @@ const AddressBar = () => {
               wrapper={(children: any) => (<Link to={`/address/${label.label}`}>{children}</Link>)}
               children={
                 <Styled.Address
-                  selectable={hasAddressData(label.label)}
+                  $selectable={hasAddressData(label.label)}
                   style={{ left: label.x - 20 }}
                 >
                   {label.label}

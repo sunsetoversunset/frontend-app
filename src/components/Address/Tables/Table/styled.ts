@@ -38,7 +38,7 @@ export const Title = styled.h1`
   text-align: left;
 `;
 
-export const TooltipContent = styled.span<{position?: 'left' | 'right'}>`
+export const TooltipContent = styled.span<{$position?: 'left' | 'right'}>`
   visibility: hidden;
   width: 180px;
   background-color: black;
@@ -51,8 +51,8 @@ export const TooltipContent = styled.span<{position?: 'left' | 'right'}>`
   top: -5px;
   z-index: 1;
   width: 250px;
-  right: ${(p) => (p.position === 'right') ? 'auto' : '105%' };
-  left: ${(p) => (p.position === 'right') ? '15%' : 'auto' };
+  right: ${(p) => (p.$position === 'right') ? 'auto' : '105%' };
+  left: ${(p) => (p.$position === 'right') ? '15%' : 'auto' };
 
   a {
     color: silver;
@@ -92,12 +92,12 @@ export const Row = styled.tr`
   } */
 `;
 
-export const TableHeader = styled.th<{ styling?: Types.CellStyling }>`
+export const TableHeader = styled.th<{ $styling?: Types.CellStyling }>`
   text-align: center;
-  border-right: 1px solid ${(p) => p.styling?.border_color || "#dedede"};
+  border-right: 1px solid ${(p) => p.$styling?.border_color || "#dedede"};
   padding: 10px 3px;
   max-width: 400px;
-  background-color: ${(p) => p.styling?.background_color || "white"};
+  background-color: ${(p) => p.$styling?.background_color || "white"};
   line-height: 19px;
 
   @media (min-width: 700px) {
@@ -115,8 +115,8 @@ export const EmptyTableHeader = styled(TableHeader)`
 `;
 
 export const Data = styled(TableHeader)`
-  text-align: ${(p) => p.styling?.text_align || "left"};
-  font-weight: ${(p) => p.styling?.weight || 400};
+  text-align: ${(p) => p.$styling?.text_align || "left"};
+  font-weight: ${(p) => p.$styling?.weight || 400};
   background-color: inherit;
 
   a {

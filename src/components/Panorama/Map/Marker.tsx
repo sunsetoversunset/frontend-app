@@ -7,7 +7,6 @@ const MapMarker = () => {
   const addresses = useAddresses(direction);
   const [translate, setTranslate] = useState(`translate(${mapX} ${mapY})`);
   const [markerRotation, setMarkerRotation] = useState((direction === 'n') ? rotation + 90 : rotation - 90);
-  console.log(rotation);
   const [d, setD] = useState<string | undefined>();
   const x = useRef(mapX);
   const y = useRef(mapY);

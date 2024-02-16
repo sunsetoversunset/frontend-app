@@ -116,8 +116,8 @@ export const Panorama = () => {
       onTouchStart={handleDragStart}
       onTouchMove={handleDrag}
       onTouchEnd={handleDragEnd}
-      width={width}
-      translateX={translateX}
+      $width={width}
+      $translateX={translateX}
       ref={ref}
     >
       {refining && <XBar />}

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BackgroundImage from "../../../assets/textures/noise-gradient-footer.png";
 
-export const Header = styled.div<{ photoId: string | null; width: number }>`
+export const Header = styled.div<{ $photoId: string | null; width: number }>`
   margin-top: 40px;
   height: 250px; //419px;
   width: 100%;
@@ -9,8 +9,8 @@ export const Header = styled.div<{ photoId: string | null; width: number }>`
   background-position: center;
   background-size: cover;
   position: relative;
-  ${p => p.photoId && ` 
-    background-image: url("https://media.getty.edu/iiif/image/${p.photoId}/full/,${p.width}/0/default.jpg");
+  ${p => p.$photoId && ` 
+    background-image: url("https://media.getty.edu/iiif/image/${p.$photoId}/full/,${p.width}/0/default.jpg");
     `}
   
   &:after {

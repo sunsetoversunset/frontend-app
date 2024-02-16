@@ -36,9 +36,9 @@ export const Strip = styled.div<{ width: number }>`
   }
 `;
 
-export const Photos = styled.div<{ width: number, translateX: number }>`
+export const Photos = styled.div<{ $translateX: number }>`
   width: 100%;
-  transform: translateX(${p => p.translateX}px);
+  transform: translateX(${p => p.$translateX}px);
 `;
 
 export const YearContainer = styled.div`
@@ -68,12 +68,12 @@ export const Year = styled.div`
   z-index: 1000;
 `;
 
-export const YearPanorama = styled.div<{ hasPhotos: boolean }>`
-  height: ${p => p.hasPhotos ? 238 : 50}px;
+export const YearPanorama = styled.div<{ $hasPhotos: boolean }>`
+  height: ${p => p.$hasPhotos ? 238 : 50}px;
   position: relative;
 
   ${Year} {
-    display: ${p => p.hasPhotos ? 'block' : 'none'};
+    display: ${p => p.$hasPhotos ? 'block' : 'none'};
   }
 `;
 

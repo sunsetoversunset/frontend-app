@@ -50,7 +50,7 @@ const Table = ({ title, sources, headers, rows }: Types.Table) => {
           {headersWithKeys.map((header) => (
             <Styled.TableHeader
               key={header.key}
-              styling={header.style}
+              $styling={header.style}
             >
               {header.content}
             </Styled.TableHeader>
@@ -60,7 +60,7 @@ const Table = ({ title, sources, headers, rows }: Types.Table) => {
 
       <tbody>
         {rows.map((row) => (
-          <Styled.Row key={row.key}>{row.data.map((data, idx) => (data && typeof data === "object" && "style" in data ? <Styled.Data styling={data.style} key={idx}>{data.datum}</Styled.Data> : <Styled.Data key={idx}>{data}</Styled.Data>))}</Styled.Row>
+          <Styled.Row key={row.key}>{row.data.map((data, idx) => (data && typeof data === "object" && "style" in data ? <Styled.Data $styling={data.style} key={idx}>{data.datum}</Styled.Data> : <Styled.Data key={idx}>{data}</Styled.Data>))}</Styled.Row>
         ))}
       </tbody>
     </Styled.DataTable>

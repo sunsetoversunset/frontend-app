@@ -14,7 +14,7 @@ const Row = ({ group, category, data, tooltip }: Types.Row) => {
             {group.tooltip ? (
               <Styled.Tooltip as='span'>
                 {group.label}
-                <Styled.TooltipContent position="right">{group.tooltip}</Styled.TooltipContent>
+                <Styled.TooltipContent $position="right">{group.tooltip}</Styled.TooltipContent>
               </Styled.Tooltip>
             ) : (
               <>{group.label}</>
@@ -35,7 +35,7 @@ const Row = ({ group, category, data, tooltip }: Types.Row) => {
           {tooltip ? (
             <Styled.Tooltip as='span'>
               {category}
-              <Styled.TooltipContent position="right">{tooltip}</Styled.TooltipContent>
+              <Styled.TooltipContent $position="right">{tooltip}</Styled.TooltipContent>
             </Styled.Tooltip>
           ) : (
             <>{category}</>
@@ -51,7 +51,7 @@ const Row = ({ group, category, data, tooltip }: Types.Row) => {
         {tooltip ? (
           <Styled.Tooltip as='span'>
             {category}
-            <Styled.TooltipContent position="right">{tooltip}</Styled.TooltipContent>
+            <Styled.TooltipContent $position="right">{tooltip}</Styled.TooltipContent>
           </Styled.Tooltip>
         ) : (
           <>{category}</>

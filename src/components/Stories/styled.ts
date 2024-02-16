@@ -96,16 +96,16 @@ export const Story = styled.div`
   }
 `;
 
-export const HeaderImage = styled.div<{ url: string; backgroundPosition?: string }>`
+export const HeaderImage = styled.div<{ $url: string; $backgroundPosition?: string }>`
   height: calc(75vh - 40px);
   width: 100%;
   margin-top: 0;
   margin-bottom: 70px;
   background-repeat: no-repeat;
-  background-position: ${(p) => p.backgroundPosition || 'center center'};
+  background-position: ${(p) => p.$backgroundPosition || 'center center'};
   background-size: cover;
   position: relative;
-  background-image: url(${(p) => p.url});
+  background-image: url(${(p) => p.$url});
 
   &:before {
     content: "";

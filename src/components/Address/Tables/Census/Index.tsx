@@ -65,7 +65,7 @@ const CensusTable = () => {
           }
           if (census_data[key] && value) {
             return (
-              <Styled.Data key={`${key}${decade}`} styling={{ text_align: "right" }}>
+              <Styled.Data key={`${key}${decade}`} $styling={{ text_align: "right" }}>
                 {format(unit, value)}
               </Styled.Data>
             );

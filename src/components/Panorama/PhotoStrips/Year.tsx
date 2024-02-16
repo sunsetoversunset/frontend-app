@@ -8,7 +8,7 @@ export const Year = ({ year }: { year: number }) => {
   const hasPhotos = photoData.some((d) => d.x >= leftX - imageWidth && d.x <= rightX + imageWidth);
 
   return (
-    <Styled.YearPanorama hasPhotos={hasPhotos}>
+    <Styled.YearPanorama $hasPhotos={hasPhotos}>
       <Styled.Year>{year}</Styled.Year>
     </Styled.YearPanorama>
   );

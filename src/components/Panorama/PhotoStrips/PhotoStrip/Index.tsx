@@ -84,7 +84,7 @@ const PhotoStrip = ({ year }: { year: number }) => {
   return (
     <>
       <Styled.Strip width={farRightX - farLeftX}>
-        <Styled.Photos ref={stripContainer} width={farRightX - farLeftX} translateX={translateX}>
+        <Styled.Photos ref={stripContainer} $translateX={translateX}>
           {photos.map((photo) => (
             <img
               src={photo.src}

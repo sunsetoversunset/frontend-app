@@ -83,12 +83,12 @@ export const NextImage = styled.img`
   right: -2vw;
 `;
 
-export const NearbyAddresses = styled.div<{ isExpanded: boolean }>`
+export const NearbyAddresses = styled.div<{ $isExpanded: boolean }>`
   position: absolute;
   bottom: 48px;
   left: -2vw;
   height: 56px;
-  padding: ${p => (p.isExpanded) ? '0 30px 0 0': '0'};
+  padding: ${p => (p.$isExpanded) ? '0 30px 0 0': '0'};
   background: ${Constants.colors.light1};
   border: 1px solid ${Constants.colors.black};
   border-radius: 30px;
@@ -97,7 +97,7 @@ export const NearbyAddresses = styled.div<{ isExpanded: boolean }>`
   column-gap: 12px;
 
   @media ${Constants.devices.tablet} {
-    padding: ${p => (p.isExpanded) ? '0 30px' : '0'};
+    padding: ${p => (p.$isExpanded) ? '0 30px' : '0'};
   }
 `;
 
