@@ -6,7 +6,7 @@ const ModalImg = ({ children, ...props }: any) => {
   const captionText = props.title;
   let caption: any = '';
   if (captionText) {
-    caption = (parseInt(captionText, 10) && !captionText.startsWith('['))
+    caption = (parseInt(captionText, 10) && !captionText.startsWith('[') && captionText.includes('Sunset'))
       ? <Link
         to={`/address/${parseInt(captionText, 10)}`}
         target='_blank'

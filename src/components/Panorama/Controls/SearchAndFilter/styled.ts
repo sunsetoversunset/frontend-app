@@ -46,7 +46,7 @@ export const YearsHeader = styled.h3`
 `;
 
 /* adapted from https://moderncss.dev/pure-css-custom-checkbox-style/ */
-export const Checkbox = styled.input`
+export const Checkbox = styled.input<{checked: boolean}>`
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
   /* Remove most all native input styles */
@@ -63,7 +63,7 @@ export const Checkbox = styled.input`
   border: 0.15em solid black;
   border-radius: 0.35em;
   transform: translateY(-0.075em);
-  background-color: ${Constants.colors.medOrange};
+  background-color: ${p => p.checked ? Constants.colors.medOrange : 'transparent'};
 
   display: inline-grid;
   place-content: center;
