@@ -247,7 +247,7 @@ const About = () => {
 
       <Styled.Heading>Citation</Styled.Heading>
       <p>
-        Francesca Russello Ammon, Brian D. Goldstein, and Garrett Dash Nelson, <cite>Sunset Over Sunset</cite>, accessed {dateStr}, https://sunsetoversunset.org.
+        Francesca Russello Ammon, Brian D. Goldstein, and Garrett Dash Nelson, <cite>Sunset Over Sunset</cite>, 2024, accessed {dateStr}, https://www.sunsetoversunset.org.
       </p>
 
       <Styled.Heading>Contact</Styled.Heading>
