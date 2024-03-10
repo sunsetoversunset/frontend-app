@@ -65,6 +65,7 @@ export const Story = styled.div`
 
   figure {
     margin: 0;
+    text-align: center;
   }
 
   figcaption {

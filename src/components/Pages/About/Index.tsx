@@ -30,7 +30,7 @@ const About = () => {
         <b>Between 1965 and 2007</b>, artist Ed Ruscha photographed Los Angeles's Sunset Boulevard twelve times. Working with a team of collaborators, Ruscha devised a method—mounting a motorized 35mm camera atop a pickup truck and loading it with black and white (and later color) motion picture film—that captured continuous panoramas of one of LA's most famous streets. Largely unknown and
         unpublished outside of Ruscha's iconic 1966 book, <cite>Every Building on the Sunset Strip</cite>, these street-view photographs have become visible and available through the digitization efforts of the <a href="https://www.getty.edu/projects/ed-ruschas-streets-los-angeles/">Getty Research Institute</a>. While these images taken from a moving vehicle record the curious and innovative eye
         of a major American artist of the late 20th century, they also provide an unmatched record of small-scale urban change on one of the iconic streets in the United States. On Sunset Boulevard, changing natural and built environments trace local, national, and global histories of migration, economic transformation, architectural innovation, and cultural change. In Ruscha's photographs lies a
-        powerful tool for urban history, and Sunset Over Sunset seeks to reveal that history.
+        powerful tool for urban history, and <cite>Sunset Over Sunset</cite> seeks to reveal that history.
       </p>
 
       <Styled.Figure>
