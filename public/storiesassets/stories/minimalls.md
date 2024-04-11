@@ -59,7 +59,7 @@ If mini-malls were already visible in 1973, by 1985 they were the dominant type 
 
 
 <!-- -->
-* ![7101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/efb098d1-5b45-48b6-bc41-3c40f288d8bf/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
+* ![7101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/efb098d1-5b45-48b6-bc41-3c40f288d8bf/full/,400/0/default.jpg "7101 Sunset Boulevard. 1985")
 * ![7101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/dd91b28d-22bb-4a93-8f0f-340d00dacfb2/full/,400/0/default.jpg)
 
 The entire length of Sunset Boulevard offered desirable sites. The mini-malls on the Sunset Strip provided both convenience and upscale stores that reflected the expensive neighborhoods surrounding them. Mini-malls were most densely clustered in the already developed center of Hollywood, especially at important cross streets. These mini-malls catered to a broad array of shoppers–many passing through on their way to the 101 freeway–with fast food chains, video stores, liquor stores, and dry cleaners. By 1985, the impact of the Immigration and Nationality Act of 1965 had become visible on the eastern end of Sunset, as Los Angeles’ booming economy attracted new immigrants. The region became one of the most diverse in the country; in 1990, 38.4% of the population of the City of Los Angeles was born outside of the U.S. Many of these newcomers became self-employed, starting their own small businesses or buying franchises, a condition economists call hyper-entrepreneurship. In Los Angeles immigrants made up an unusually large percentage of business owners and an even larger portion of so-called Main Street businesses, like neighborhood shops and services.[^5] 
