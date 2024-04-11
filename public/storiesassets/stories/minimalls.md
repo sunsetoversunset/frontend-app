@@ -25,7 +25,7 @@ Developers Marvin Levine and Alan Riseman claimed to have invented the mini-mall
 Mini-malls fit into the category of the commercial vernacular: generic and replicable architectural responses that emerge from new functional needs, economic conditions, and spatial opportunities. On Sunset, they were built alongside earlier vernacular types such as the “taxpayer strip,” one- or two-story storefronts lined up directly along the street. By the 1960s, high-rise buildings, present since the 1920s, had multiplied and modest supermarkets had been replaced by vast stores fronted by gigantic parking lots. For many developers, however, mini-malls were a more efficient product. They could be built on small lots, required no zoning changes–since Sunset and other major roads were already zoned commercial–and could use inexpensive Type V wood frame and cinder block construction. Though easy to overlook, mini-malls did not elude Ruscha’s camera. His photographs document the appearance and proliferation of this flexible, easy-to-develop type as it became ubiquitous in the built environment of Sunset Boulevard.
 
 ```
-Though easy to overlook, mini-malls did not elude Ruscha’s camera. His photographs document the appearance and proliferation of this flexible, easy-to-develop type as it became ubiquitous in the built environment of Sunset Boulevard.
+Though easy to overlook, mini-malls did not elude Ruscha’s camera. His photographs document the proliferation of this flexible, easy-to-develop type as it became ubiquitous along Sunset Boulevard.
 ```
 
 ### The Long History of a New Type 
