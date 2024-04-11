@@ -42,7 +42,7 @@ The standard mini-mall had a flat roof and stucco finish.  This basic format cou
 * ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d1ddfd74-edd8-41c7-b5c7-c7f4c32a908d/full/,400/0/default.jpg)
 
 
-<!-- –>
+<!-- -->
 * ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/298f0191-a2c2-4040-8fd4-28b6b34752d7/full/,400/0/default.jpg "8539 Sunset Boulevard. 2007")
 * ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ff80c79c-5074-46f7-bcd8-823949711b5c/full/,400/0/default.jpg)
 
@@ -58,7 +58,7 @@ If mini-malls were already visible in 1973, by 1985 they were the dominant type 
 * ![7101 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/65c39eb1-4e30-485b-9d36-42f2d64d5c4c/full/,400/0/default.jpg)
 
 
-<!-- –>
+<!-- -->
 * ![7101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/efb098d1-5b45-48b6-bc41-3c40f288d8bf/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
 * ![7101 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/dd91b28d-22bb-4a93-8f0f-340d00dacfb2/full/,400/0/default.jpg)
 
@@ -133,7 +133,7 @@ Very rarely, as in the case of large and prominent new buildings, such as the Di
 * ![6333 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/25944a89-6d33-40e0-b9df-543141336c95/full/,400/0/default.jpg)
 
 
-<!-- –>
+<!-- -->
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/13ef32a1-33ce-492b-985c-d3240ec0d4f6/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/50d0c056-97f5-4405-849a-3acd2e573b1b/full/,400/0/default.jpg)
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/8fba40d4-3ae0-42d7-bc16-2d7c4d3ca504/full/,400/0/default.jpg)
