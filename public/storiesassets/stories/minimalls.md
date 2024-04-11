@@ -38,17 +38,19 @@ By the 1930s, drive-in markets had evolved into small neighborhood shopping cent
 
 The standard mini-mall had a flat roof and stucco finish.  This basic format could be easily varied with any number of decorative embellishments. In early examples, metal mansard roofs, awnings, and red tile roof edging were popular. As tastes changed, unadorned buildings could be upgraded with more fashionable details.  For example, sometime between 1995 and 2007, the owners of [2901](/address/2901)-[2929 Sunset Boulevard](/address/2929) adorned its bare facade with a postmodern false front featuring curved geometric grids and coordinated signage. By 2007, the two-story mall at [8539 Sunset Boulevard](/address/8539) introduced classical touches such as a cornice, arcaded pavilions, and decorative railings. Material choices often depended on the neighborhood. As alternatives to stucco, walls could be faced with tile or brick veneer, as in [5225](/address/5225)-[5237 Sunset Boulevard](/address/5237). As with many vernacular types, there is little stylistic development over time. Instead, the choice of size, material, or configuration depended on the location and cost of land. Two-story malls (such as [7771](/address/7771)-[7799 Sunset Boulevard](/address/7799) or [7101](/address/7101)-[7127 Sunset Boulevard](/address/7127)) were common, although they were more expensive, requiring steel frames, staircases, and elevators, while mid-block U-shaped configurations were rare. On that count, [8539 Sunset Boulevard](/address/8539) was an exception to the rule.  
 
-* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/e781b11b-5617-4e30-ab62-e0140d402c7b/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
-* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d1ddfd74-edd8-41c7-b5c7-c7f4c32a908d/full/,400/0/default.jpg)
+* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/93bf0d3d-666e-459a-9969-3e4fa55e92e4/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
+* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/e781b11b-5617-4e30-ab62-e0140d402c7b/full/,400/0/default.jpg)*
+* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d1ddfd74-edd8-41c7-b5c7-c7f4c32a908d/full/,400/0/default.jpg)*
+* ![8539 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/21446642-a7dd-43f7-a489-0425c46afe66/full/,400/0/default.jpg)
 
 
 <!-- -->
-* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/298f0191-a2c2-4040-8fd4-28b6b34752d7/full/,400/0/default.jpg "8539 Sunset Boulevard. 2007")
+* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/93c0b42e-f835-4b69-970c-0e5feac141e9/full/,400/0/default.jpg "8539 Sunset Boulevard. 2007")
+* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/298f0191-a2c2-4040-8fd4-28b6b34752d7/full/,400/0/default.jpg)
 * ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ff80c79c-5074-46f7-bcd8-823949711b5c/full/,400/0/default.jpg)
+* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/a24bf8e3-d41b-44e4-8f35-25f5d2d1d4f6/full/,400/0/default.jpg)
 
 For drivers along Sunset and many of the extensive boulevards that make up much of Los Angeles’ urban fabric, mini-malls offered easy parking and convenient access to everyday needs. Given the centrality of the automobile to mini-malls’ success, signs were a key element in their design. Placed at right angles to the road to be visible to drivers, signs are hard to decipher in most of Ruscha’s head-on photos. At 30 mph, drivers needed to quickly identify individual stores and restaurants so they could decide whether or not to turn in. Some mini-malls had names at the top of their signs, as was the case at [7300 Sunset Boulevard](/address/7300), called Sunset Fuller Plaza. Names could either be descriptive, such as the street corners where they were located, or aspirational, as in the case of [8539 Sunset Boulevard](/address/8539), called “The Sunset Collection,” a mini-mall completed by the time of Ruscha’s 1985 visit and bedecked with a large sign on its renovated facade by 2007.  Local mini-malls also served many neighborhood shoppers, walking from the apartments and houses on either side of the boulevard, where commerce was only one building deep. For those arriving either by car or on foot, the mini-mall’s easy accessibility allowed them to get in and out quickly, avoiding long supermarket lines or distant mall parking. 
-
-![7300 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/fc4020aa-b525-42bf-a658-13f50e40c406/full/,1000/0/default.jpg "7300 Sunset Boulevard. 1995")
 
 ### The Invasion Begins
 
@@ -148,19 +150,19 @@ Recently, the New York Times noted that Taylor Swift and other celebrities frequ
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
 
-[^1]: Estimates placed the number of mini-malls in Southern California between 2,000 and 3,000 by the mid-1980s. See Mary Melton, “A Brief History of the Mini-Mall,” Los Angeles Times, Nov. 15, 1997 and Hadley Mears, “How LA Became the Land of Strip Malls,” Curbed, Oct. 2, 2019, accessed March 29, 2024, https://la.curbed.com/2019/10/2/20882316/strip-malls-los-angeles.
-[^2]: Judy Pasternak, “The Men of LaMancha: Sam Bachner and Marvin Levine Build Mini-Malls for Your Convenience. They Don’t Understand Why You Think Their Creations Are So Ugly,” Los Angeles Times, Sept. 28, 1986; Melton, “A Brief History of the Mini-Mall.” 
-[^3]: Richard Longstreth, The Drive-In, the Supermarket, and the Transformation of Commercial Space in Los Angeles, 1914–1941 (Cambridge: MIT Press, 1999).
-[^4]: Longstreth, Drive-In.
-[^5]: U.S. Census Bureau, “Table 1: Summary of Social Characteristics,” 1990 Census of Population: Social and Economic Characteristics, California (sec. 1 of 4), 6, accessed March 30, 2024, https://www2.census.gov/library/publications/decennial/1990/cp-2/cp-2-6-1.pdf; Paloma Esquivel, “California Leads U.S. in Immigrant Entrepreneurship, Study Finds,” Los Angeles Times, June 15, 2012; “New Americans in the City of Los Angeles,” New American Economy Research Fund, Dec. 2021, accessed March 18, 2024, https://research.newamericaneconomy.org/wp-content/uploads/sites/2/2021/12/G4G_CityOfLA.pdf.
-[^6]: Erin M. Curtis, “Cambodian Donut Shops and the Negotiation of Identity in Los Angeles,” Eating Asian America: A Food Studies Reader, ed. Robert Ji-Song Ku, Martin F. Manalansan, and Anita Mannur (New York: New York University Press, 2013), 13-29.
-[^7]: James Rainey, “Explosion of Mini-Malls Spurs a Maxi-Dispute: Parking Woes, Visual Blight, Litter Cited,” Los Angeles Times, Sept. 23, 1985.
+[^1]: Estimates placed the number of mini-malls in Southern California between 2,000 and 3,000 by the mid-1980s. See Mary Melton, “A Brief History of the Mini-Mall,” _Los Angeles Times_, Nov. 15, 1997 and Hadley Mears, “How LA Became the Land of Strip Malls,” _Curbed_, Oct. 2, 2019, https://la.curbed.com/2019/10/2/20882316/strip-malls-los-angeles.
+[^2]: Judy Pasternak, “The Men of LaMancha: Sam Bachner and Marvin Levine Build Mini-Malls for Your Convenience. They Don’t Understand Why You Think Their Creations Are So Ugly,” _Los Angeles Times_, Sept. 28, 1986; Melton, “A Brief History of the Mini-Mall.” 
+[^3]: Richard Longstreth, _The Drive-In, the Supermarket, and the Transformation of Commercial Space in Los Angeles, 1914–1941_ (Cambridge: MIT Press, 1999).
+[^4]: Longstreth, _Drive-In_.
+[^5]: U.S. Census Bureau, “Table 1: Summary of Social Characteristics,” _1990 Census of Population: Social and Economic Characteristics, California_ (sec. 1 of 4), 6, https://www2.census.gov/library/publications/decennial/1990/cp-2/cp-2-6-1.pdf (accessed March 30, 2024); Paloma Esquivel, “California Leads U.S. in Immigrant Entrepreneurship, Study Finds,” _Los Angeles Times_, June 15, 2012; “New Americans in the City of Los Angeles,” New American Economy Research Fund, Dec. 2021, https://research.newamericaneconomy.org/wp-content/uploads/sites/2/2021/12/G4G_CityOfLA.pdf.
+[^6]: Erin M. Curtis, “Cambodian Donut Shops and the Negotiation of Identity in Los Angeles,” _Eating Asian America: A Food Studies Reader_, ed. Robert Ji-Song Ku, Martin F. Manalansan, and Anita Mannur (New York: New York University Press, 2013), 13-29.
+[^7]: James Rainey, “Explosion of Mini-Malls Spurs a Maxi-Dispute: Parking Woes, Visual Blight, Litter Cited,” _Los Angeles Times_, Sept. 23, 1985.
 [^8]: Melton, ”A Brief History of the Mini-Mall.”
-[^9]: Janet Nairn, “Museum Holds Mini-Mall Exhibit,” Los Angeles Times, May 25, 1986.
-[^10]: “Southland Mini-Mall Boom May Be Over: Researchers Cite Land Shortage, Rising Property Values, Complaints,” Los Angeles Times, Dec. 13, 1987.
+[^9]: Janet Nairn, “Museum Holds Mini-Mall Exhibit,” _Los Angeles Times_, May 25, 1986.
+[^10]: “Southland Mini-Mall Boom May Be Over: Researchers Cite Land Shortage, Rising Property Values, Complaints,” _Los Angeles Times_, Dec. 13, 1987.
 [^11]: Melton, “A Brief History of the Mini-Mall.”
-[^12]: The writer recalls many such conversations and debates with Davis as the mini-mall became ubiquitous. David Rieff, Los Angeles: Capital of the Third World (New York: Simon & Schuster, 1992).
-[^13]: “Teaching Materials: Catherine Opie: American Photographer, ‘Mini-malls,’” Solomon R. Guggenheim Museum, accessed March 18, 2024, https://www.guggenheim.org/teaching-materials/catherine-opie-american-photographer/mini-malls.
-[^14]: City of Gold, dir. by Laura Gabbert (IFC Films, 2015).
-[^15]: Jade Chang, “In Defense of Mini-malls,” Metropolis, April 1. 2003.
-[^16]: Max Berlinger, “Jennifer Lawrence, Kendall Jenner and Taylor Swift Have Eaten Here,” New York TImes, Feb. 7, 2024; Paula Mejia, “The Hottest New Celebrity Hangout: The LA Strip Mall,” SFGATE, March 2, 2024, accessed March 18, 2024, https://www.sfgate.com/la/article/celebrities-sushi-park-la-strip-mall-hangout-18659419.php.
+[^12]: The writer recalls many such conversations and debates with Davis as the mini-mall became ubiquitous. David Rieff, _Los Angeles: Capital of the Third World_ (New York: Simon & Schuster, 1992).
+[^13]: “Teaching Materials: Catherine Opie: American Photographer, ‘Mini-malls,’” Solomon R. Guggenheim Museum, https://www.guggenheim.org/teaching-materials/catherine-opie-american-photographer/mini-malls (accessed March 18, 2024).
+[^14]: _City of Gold_, dir. by Laura Gabbert (IFC Films, 2015).
+[^15]: Jade Chang, “In Defense of Mini-malls,” _Metropolis_, April 1. 2003.
+[^16]: Max Berlinger, “Jennifer Lawrence, Kendall Jenner and Taylor Swift Have Eaten Here,” _New York Times_, Feb. 7, 2024; Paula Mejia, “The Hottest New Celebrity Hangout: The LA Strip Mall,” _SFGATE_, March 2, 2024, https://www.sfgate.com/la/article/celebrities-sushi-park-la-strip-mall-hangout-18659419.php.
