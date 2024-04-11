@@ -8,7 +8,7 @@ What defines a mini-mall? Sometimes overlapping with the linear strip mall but c
 
 Developers Marvin Levine and Alan Riseman claimed to have invented the mini-mall in 1972 after spotting an empty gas station on a corner lot along a busy street in the San Fernando Valley.[^2] But the evidence of Ruscha’s panorama reveals that there were a number of mini-malls already present on Sunset in 1973. Examples include the one discussed above, constructed in 1968, along with [5225](/address/5225)-[5237 Sunset Boulevard](/address/5237) and [5201](/address/5201)-[5213 Sunset Boulevard](/address/5213), built side-by-side likely around the same time in East Hollywood. Looking at more casual configurations of small shops with some parking in front, such as [5214](/address/5214)-[5230 Sunset Boulevard](/address/5230) and [8477](/address/8477)-[8495 Sunset Boulevard](/address/8495), built during the 1960s, it is possible to see how the mini-mall might have gradually evolved into a recognizable type as its economic and practical benefits became evident. 
 
-* ![5201 to 5237 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/4a21e6d1-fc87-4b39-8076-58c47995d25c/full/,400/0/default.jpg "[View of 5201 to 5237 Sunset Boulevard. 1973][url] [url]: /address/5201")
+* ![5201 to 5237 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/4a21e6d1-fc87-4b39-8076-58c47995d25c/full/,400/0/default.jpg "[5201 to 5237 Sunset Boulevard. 1973][url] [url]: /n/5201")
 * ![5201 to 5237 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/image/163a4c9e-5346-4f40-a606-1927285173a9/full/,400/0/default.jpg)
 * ![5201 to 5237 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/c696bcf0-ac68-4a26-96ec-af571ea72fcc/full/,400/0/default.jpg)
 * ![5201 to 5237 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/9d2494de-3e79-4aa5-82a0-53a1bd56930b/full/,400/0/default.jpg)
@@ -16,7 +16,7 @@ Developers Marvin Levine and Alan Riseman claimed to have invented the mini-mall
 
 
 <!-- -->
-* ![5201 to 5237 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/fe5b9be4-e110-4818-8efa-d87185ef6e5b/full/,400/0/default.jpg "[View of 5201 to 5237 Sunset Boulevard. 2007][url] [url]: /address/5201")
+* ![5201 to 5237 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/fe5b9be4-e110-4818-8efa-d87185ef6e5b/full/,400/0/default.jpg "[5201 to 5237 Sunset Boulevard. 2007][url] [url]: /n/5201")
 * ![5201 to 5237 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/30618f09-804f-4c0a-ad94-953b82fea84a/full/,400/0/default.jpg)
 * ![5201 to 5237 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/04ce241d-34e1-4d41-869e-1072b4312cf2/full/,400/0/default.jpg)
 * ![5201 to 5237 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/8df84e5e-8b90-4eac-b13e-24b54b7e9bd4/full/,400/0/default.jpg)
@@ -93,7 +93,7 @@ Ideas about LA’s ideal urban future also played a part in shaping concerns. As
 
 Ironically, their new model of street life, with broad sidewalks and even outdoor cafes, already existed on Sunset Boulevard. Sunset Plaza ([8600](/address/8600)-[8700 Sunset Boulevard](/address/8700) and [8625](/address/8625)-[8673 Sunset Boulevard](/address/8673)), a neo-Georgian collection of shops and restaurants with parking located behind the structures, was exemplary. Developers had built the complex as an ensemble of commercial and residential buildings between 1925 and 1936, alongside a luxury apartment development designed by Paul R. Williams on Sunset Plaza Drive. Visible in Ruscha’s 1973 and 1985 photographs, the apartments were gone by 2007, replaced by a single-family house hidden by trees. The plaza itself remained a desirable site for exclusive boutiques and chic restaurants, and a reminder of the long history of commercial strips from which later, oft-maligned mini-malls descended. 
 
-* ![8625 to 8673 Sunset Boulevard, looking north. 1966](https://media.getty.edu/iiif/image/ca08e309-639c-4d89-ab26-6d19ba467c80/full/,400/0/default.jpg "[View of 8625 to 8673 Sunset Boulevard, looking north. 1966][url] [url]: /address/8625")
+* ![8625 to 8673 Sunset Boulevard, looking north. 1966](https://media.getty.edu/iiif/image/ca08e309-639c-4d89-ab26-6d19ba467c80/full/,400/0/default.jpg "[8625 to 8673 Sunset Boulevard, looking north. 1966][url] [url]: /n/8625")
 * ![8625 to 8673 Sunset Boulevard, looking north. 1966](https://media.getty.edu/iiif/image/image/b54377ab-b20e-4943-83ee-30f79467b440/full/,400/0/default.jpg)
 * ![8625 to 8673 Sunset Boulevard, looking north. 1966](https://media.getty.edu/iiif/image/72bc1e2c-7cf6-40d9-be63-e9726f981605/full/,400/0/default.jpg)
 * ![8625 to 8673 Sunset Boulevard, looking north. 1966](https://media.getty.edu/iiif/image/96e49077-ef36-4dac-bd94-71c8be3f4206/full/,400/0/default.jpg)
@@ -105,7 +105,7 @@ Ironically, their new model of street life, with broad sidewalks and even outdoo
 
 
 <!-- -->
-* ![8600 to 8700 Sunset Boulevard, looking south. 1966](https://media.getty.edu/iiif/image/a17e06f7-53dc-40fb-a0f9-c271961bf452/full/,400/0/default.jpg "[8600 to 8700 Sunset Boulevard, looking south. 1966][url] [url]: /address/8600")
+* ![8600 to 8700 Sunset Boulevard, looking south. 1966](https://media.getty.edu/iiif/image/a17e06f7-53dc-40fb-a0f9-c271961bf452/full/,400/0/default.jpg "[8600 to 8700 Sunset Boulevard, looking south. 1966][url] [url]: /n/8600")
 * ![8600 to 8700 Sunset Boulevard, looking south. 1966](https://media.getty.edu/iiif/image/3ea50f09-7ac0-4b97-bfa7-f264b43b3403/full/,400/0/default.jpg)
 * ![8600 to 8700 Sunset Boulevard, looking south. 1966](https://media.getty.edu/iiif/image/115b13bc-b3f3-4686-bbf5-26370e65ab30/full/,400/0/default.jpg)
 * ![8600 to 8700 Sunset Boulevard, looking south. 1966](https://media.getty.edu/iiif/image/807e0693-bfd2-40cc-b39b-7aa49c8648b5/full/,400/0/default.jpg)
