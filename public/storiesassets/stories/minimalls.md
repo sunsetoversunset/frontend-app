@@ -134,7 +134,7 @@ Very rarely, as in the case of large and prominent new buildings, such as the Di
 
 
 <!-- -->
-* ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/13ef32a1-33ce-492b-985c-d3240ec0d4f6/full/,400/0/default.jpg "8539 Sunset Boulevard. 1985")
+* ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/13ef32a1-33ce-492b-985c-d3240ec0d4f6/full/,400/0/default.jpg "6333 Sunset Boulevard. 2007")
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/50d0c056-97f5-4405-849a-3acd2e573b1b/full/,400/0/default.jpg)
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/8fba40d4-3ae0-42d7-bc16-2d7c4d3ca504/full/,400/0/default.jpg)
 * ![6333 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/0a1d33a9-9755-473e-96fd-c7d68944695b/full/,400/0/default.jpg)
