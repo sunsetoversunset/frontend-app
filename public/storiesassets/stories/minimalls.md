@@ -45,10 +45,10 @@ The standard mini-mall had a flat roof and stucco finish.  This basic format cou
 
 
 <!-- -->
-* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/93c0b42e-f835-4b69-970c-0e5feac141e9/full/,400/0/default.jpg "8539 Sunset Boulevard. 2007")
+* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/43adbd8d-b6f6-4bf1-8c5e-780a9fe6c521/full/,400/0/default.jpg "8539 Sunset Boulevard. 2007")
 * ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/298f0191-a2c2-4040-8fd4-28b6b34752d7/full/,400/0/default.jpg)
 * ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/ff80c79c-5074-46f7-bcd8-823949711b5c/full/,400/0/default.jpg)
-* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/a24bf8e3-d41b-44e4-8f35-25f5d2d1d4f6/full/,400/0/default.jpg)
+* ![8539 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/9a0338f6-8ab7-4355-aee6-9befae9a822e/full/,400/0/default.jpg)
 
 For drivers along Sunset and many of the extensive boulevards that make up much of Los Angeles’ urban fabric, mini-malls offered easy parking and convenient access to everyday needs. Given the centrality of the automobile to mini-malls’ success, signs were a key element in their design. Placed at right angles to the road to be visible to drivers, signs are hard to decipher in most of Ruscha’s head-on photos. At 30 mph, drivers needed to quickly identify individual stores and restaurants so they could decide whether or not to turn in. Some mini-malls had names at the top of their signs, as was the case at [7300 Sunset Boulevard](/address/7300), called Sunset Fuller Plaza. Names could either be descriptive, such as the street corners where they were located, or aspirational, as in the case of [8539 Sunset Boulevard](/address/8539), called “The Sunset Collection,” a mini-mall completed by the time of Ruscha’s 1985 visit and bedecked with a large sign on its renovated facade by 2007.  Local mini-malls also served many neighborhood shoppers, walking from the apartments and houses on either side of the boulevard, where commerce was only one building deep. For those arriving either by car or on foot, the mini-mall’s easy accessibility allowed them to get in and out quickly, avoiding long supermarket lines or distant mall parking. 
 
