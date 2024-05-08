@@ -45,7 +45,7 @@ At the Black Cat bar at [3909 Sunset Boulevard](/address/3909), [one of the firs
 
 For example, the building housed the underground venue called Basgo's, the site of the weekly queer Club FUCK! event between 1989 and 1993. Historian Josh Kun describes this event as a party where “notorious live performances mixed blistering drum machine alt-disco with hardcore kink, nudity, and the occasional dildo-dangling go-go dancer.”[^10] Afterwards, it became the queer Latinx bar Le Barcito, itself evidence of the multiple queer-of-color communities who occupied space on Sunset.
 
-* ![3909 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/fdb52a85-73c1-4a71-9af7-9a55740013be/full/400/0/default.jpg "3909 Sunset Boulevard. 2007")
+* ![3909 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/1f3c793e-54b1-43ec-af04-2fe485c26c42/full/400l/0/default.jpg "3909 Sunset Boulevard. 2007")
 * ![3909 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/4bbe41f3-3be8-4f8d-a64f-dc2297dd6b65/full/400/0/default.jpg)
 
 Ruscha’s 2007 photograph shows us the presence of Le Barcito, registered in a sign visible shortly before the building was declared a historic site in 2008. It also shows how small the actual bar was before it became today’s Black Cat, which, at some point since 2012, expanded to encompass the former laundromat next door. Though difficult to see, Ruscha’s camera recorded Le Barcito’s pride flag rolled up around a pole or wire cable.  And although the photographs were taken in broad daylight, the bar’s door oddly stands open. 
