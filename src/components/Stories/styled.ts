@@ -58,9 +58,15 @@ export const Story = styled.div`
     margin-right: auto;
   }
 
+
   a {
     color: ${Constants.colors.darkOrange};
     text-decoration: none;
+  }
+  
+  sup {
+    font-size: 0.8em;
+    line-height: 0;
   }
 
   figure {

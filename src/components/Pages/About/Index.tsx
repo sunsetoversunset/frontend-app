@@ -140,6 +140,12 @@ const About = () => {
         </li>
       </Styled.TeamList>
 
+      <Styled.Subheading>Stories Editors</Styled.Subheading>
+      <Styled.TeamList>
+        <li>Francesca Russello Ammon</li>
+        <li>Brian D. Goldstein</li>
+      </Styled.TeamList>
+
       <Styled.Subheading>Advisory Board</Styled.Subheading>
       <Styled.TeamList>
         <li>
