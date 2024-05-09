@@ -152,7 +152,7 @@ queer clientele, though the bar recognizes the establishment’s history on its 
 [^17]: Muñoz, _Cruising Utopia_.
 [^18]: Kenney, _Mapping Gay L.A._, 12.
 [^19]: Muñoz, _Cruising Utopia_, 35.
-[^20]: The transferred film is included on an unreleased DVD with Pat Rocco's film _Autumn Nocturne_, with which it was originally shown (Bizarre Productions 1968, Pat Rocco Collection, Archive Research and Study Center, Film and Television Archive, University of California, Los Angeles).
+[^20]: The transferred film is included on an unreleased DVD with Pat Rocco's film _Autumn Nocturne_, with which it was originally shown (Bizarre Productions 1968, Pat Rocco Collection, Archive Research and Study Center, UCLA Film and Television Archive, University of California, Los Angeles).
 [^21]: Bud Thomas, email to author, October 10, 2023.
 [^22]: John Rechy, _Numbers_ (New York: Grove Press, 1967).
 [^23]: Laud Humphreys, _Tearoom Trade: Impersonal Sex in Public Places_ (Chicago: Aldine Publishing Company, 1970).
