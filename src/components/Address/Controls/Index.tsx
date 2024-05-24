@@ -72,7 +72,7 @@ const Controls = ({ show, setShow }: { show: 'photos' | 'context', setShow: Reac
           setShow((show === 'photos') ? 'context' : 'photos');
         }}
       >
-        {(show === 'photos') ? `${(media !== 'phone') && 'Show '}Historical Context` : `${(media !== 'phone') && 'Show '}Photographs`}
+        {(show === 'photos') ? `${(media == 'phone') ? '' : 'Show '}Historical Context` : `${(media == 'phone') ? '' : 'Show '}Photographs`}
       </Styled.ToggleButton>
     </Styled.Nav>
   );
