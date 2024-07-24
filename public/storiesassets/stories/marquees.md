@@ -7,11 +7,19 @@ Mid-century experimental cinema, from Bruce Conner to Maya Deren, is preoccupied
 
 Ruscha’s city street photography, the Sunset Boulevard corpus in particular, comprises a movie of sorts, one literally produced on film stock. It’s an experimental movie too, the dreams and fantasies that these marquees evoke punctuating what is otherwise a documentary aesthetic. The “dreams” to which I am referring, of course, belong to the particular magic of the Hollywood Dream Factory. After all, we are in Los Angeles.
 
+```
+Ruscha’s city street photography, the Sunset Boulevard corpus in particular, comprises a movie of sorts, one literally produced on film stock. It’s an experimental movie too, the dreams and fantasies that these marquees evoke punctuating what is otherwise a documentary aesthetic. 
+```
+
 And the imaginative, escapist experience of movie-going is signaled by the boulevard’s marquees. They live alongside the signs for dry cleaners or watch repair shops, all three promising service and return on investment. Such an analogy, when it comes to the movies, is both comforting (we all need somewhere to run) and obscene (what are we running from?). In a 1972 television documentary, Dick Cavett intones how “Hollywood, the dream factory, at its worst it was spendthrift, crass and vulgar, but at its best it offered a rich, romantic, compelling world of illusion.”[^5] In the marquees frozen on Ruscha’s film, we see both what Hollywood produces in perpetuity and what it offered audiences at any particular moment: what films were being produced, which genres favored, which stars’ names demanded space on the marquee. 
 
 Across location and year, his marquee photos reveal viewers’ aspirations, their fears, and their ideals, many of which the entertainment industry invented in the first place. (What are movie marquees if not dream journals, doodled mostly by studio executives, dreaming about what “regular people” dream about?) 
 
 Building on the work of Jean Baudrillard, Anne Friedberg writes of the “tension between the material reality of built space and the dematerialized imaginary that the cinema has always provided.”[^6] Perhaps that is what is so disorienting and compelling about these marquees–that abiding, “meta” tension. The marquee is a “material reality,” a plastic or ceramic placard with letters that move, but it also signals or stands in for the “dematerialized imaginary [of cinema].” But just as cinema lives in our memories, our collective preoccupations, it is also a fixture of the urban landscape, recording change over time. Ed Ruscha’s repeated photographs of Sunset Boulevard make this particularly clear. Close examinations of a few of the marquees he captured  illustrate the range of options for cinephiles in a city that, when it sleeps, dreams about the movies.
+
+```
+In short, marquees tell us a lot more than what is, or was, playing. They lay out the imaginations of historical audiences alongside the realities of movie-going at the time; they tap into the histories of Los Angeles (a place where you can live) and Hollywood (a factory made of money and dreams).
+```
 
 In short, marquees tell us a lot more than what is, or was, playing. They lay out the imaginations of historical audiences alongside the realities of movie-going at the time; they tap into the histories of Los Angeles (a place where you can live) and Hollywood (a factory made of money and dreams).
 
@@ -35,6 +43,10 @@ Another “masculinity as genre” marquee, decidedly heightened, comes with Rus
 Together, these titles ask: to whom do movies belong? The critics? The audiences, now or decades into the dystopian future? Or the landscape, where they live as letters on a marquee, floating the possibility of playing hooky and seeing a well-priced matinee? Surely, Vincent Price’s excessive mugging, his anti-Method performance style, is camp. Hester’s hypermasculinity ends up reading as camp too, but perhaps the marquee itself is a kind of camp, particularly in its presence in the montage of street life. The marquee is restricted in its verbiage while its theatrical tightness is, to borrow Susan Sontag’s framing, “too much.” As she writes in her 1964 essay “Notes on ‘Camp,’” “Camp is the consistently aesthetic experience of the world.”[^9] And what sign on the streets of Sunset Boulevard is more pro-aesthetic, more anti-practical, than the marquee’s beckoning to skip work, shirk responsibilities, and go to the movies? 
 
 The marquees on Sunset Boulevard and its neighbors fit easily, if not neatly, into Ruscha’s image-heavy body of work, cousins to the other, more literal, street signage in these photographs. “Open for lunch,” they say; “Do Not Block Intersection”; “Slow”; “Warning.” Street signage tells people what to do with their bodies or their vehicles, as billboards sell passersby vodka and car radios. The movie marquee tells the body what to do – presumably, buy a ticket, come watch – but it has an even more intimate directive, selling them on what, Hollywood’s God willing, they already want. 
+
+```
+Street signage tells people what to do with their bodies or their vehicles, as billboards sell passersby vodka and car radios. The movie marquee tells the body what to do – presumably, buy a ticket, come watch – but it has an even more intimate directive, selling them on what, Hollywood’s God willing, they already want. 
+```
 
 Linda Williams defines “body genres” – melodrama, horror, and pornography – as movies that make the viewer weep, scream, and, _well_.[^10] Just so, the marquee, with its brevity and literal flatness, its campy “detachment” (Sontag, again), cannot decouple from the human body, from the bodies that move around and by it, nor from the bodies promised on the sign.
 
@@ -69,7 +81,11 @@ The marquees track what constituted “big” entertainment in their moments: th
 
 Both the Cinerama and the Vista closed with the 2020 COVID pandemic. The former’s reopening keeps getting pushed back – from 2024 to 2025 – while a remodeled Vista reopened under Quentin Tarantino’s ownership in fall of 2023. In those renovating months prior to the Vista’s grand reopening (screening _True Romance_, from a Tarantino script), the marquee read “To be continued….” 
 
-This sentiment, a nod to the kind of serialized storytelling on which Hollywood relies, speaks just as intimately to the dynamic histories and geographies that Ruscha tracked, auteur-style, in revisiting Sunset Boulevard repeatedly over five decades. The cinematic world Ruscha has created with his photographs belongs to no one genre. And while the images eventually stop, the ending is left open, to say the least. But, together, these photographed marquees speak to cinema’s centrality to the day-to-day lives of Los Angelenos and Americans more broadly. They are ordinary portals, taking people away from their regular routines for two hours at a time.  Even the glimpse or promise of a movie they offer gives viewers now, just as it gave viewers then, the embodied memory of being here-but-not-here, that “silvery feeling” just as Ruscha remembered it.
+```
+The cinematic world Ruscha has created with his photographs belongs to no one genre. And while the images eventually stop, the ending is left open, to say the least. But, together, these photographed marquees speak to cinema’s centrality to the day-to-day lives of Los Angelenos and Americans more broadly. 
+```
+
+This sentiment, a nod to the kind of serialized storytelling on which Hollywood relies, speaks just as intimately to the dynamic histories and geographies that Ruscha tracked, auteur-style, in revisiting Sunset Boulevard repeatedly over five decades. The cinematic world Ruscha has created with his photographs belongs to no one genre. And while the images eventually stop, the ending is left open, to say the least. But, together, these photographed marquees speak to cinema’s centrality to the day-to-day lives of Los Angelenos and Americans more broadly. They are ordinary portals, taking people away from their regular routines for two hours at a time. Even the glimpse or promise of a movie they offer gives viewers now, just as it gave viewers then, the embodied memory of being here-but-not-here, that “silvery feeling” just as Ruscha remembered it.
 
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
