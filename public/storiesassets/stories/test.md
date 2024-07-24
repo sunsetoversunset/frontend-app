@@ -27,18 +27,19 @@ In short, marquees tell us a lot more than what is, or was, playing. They lay ou
 
 The movie marquee is a fossil, a frozen moment in time, not unlike the image itself. It dates the image both literally and subconsciously. One of my favorite family photographs shows my mom, aunt, grandparents, and some unnamed cousins standing on the Atlantic City boardwalk underneath a marquee advertising _Psycho_. For a brief moment, the story of Norman Bates lives in the same visual field as my Italian-Catholic family. But these narratives are always living alongside each other, like neighboring buildings on a city block. If they didn’t, if these demented thrillers didn’t resonate with the pleasant stories we tell ourselves about boys and their mothers, Hitchcock wouldn’t have much of a legacy to uphold.
 
-* ![Boardwalk_Family.jpg](/storiesassets/assets/Boardwalk_Family.jpg "Author’s extended family, Atlantic City boardwalk, ca. 1960")
+![Boardwalk_Family.jpg](/storiesassets/assets/Boardwalk_Family.jpg "Author’s extended family, Atlantic City boardwalk, ca. 1960")
 
 A 1973 image that Ruscha took of the [Oriental Theater](https://losangelestheatres.blogspot.com/2017/02/oriental-theatre.html) [7425 Sunset Boulevard](/address/7425) captures another duplex of cinematic output, Maggie Smith’s _Love and Pain and the Whole Damn Thing_, a romantic comedy-drama, alongside Goldie Hawn’s Dollars, a heist co-starring Warren Beatty. Together, these films showcase Hollywood’s range of aesthetic and narrative formulas in this moment: _Love and Pain_ a twinkly, slapstick-turned-melodrama (as the title promises), filmed through the cheesecloth haze of romance; and Dollars a peppy heist movie, by Roger Ebert’s estimation “a slick and breakneck caper movie that runs like a well-oiled thrill.”[^7] The latter pairs Goldie Hawn as a good-natured prostitute and Warren Beatty reprises his role as a bank robber. In the former, Maggie Smith acts as the priggish British love interest for Timothy Bottom’s naive leading man. In both, European adventures abound, underscoring what it means to be American (energetic, sexy, and/or earnest). 
 
 The Madonna-whore complex is in full swing: are you a Goldie Hawn or are you a Maggie Smith? More subtly, but also there, is ‘are you a Warren Beatty or a Timothy Bottoms?’ The marquee offers up these genres, and their attendant gender ideologies, as options on a menu for pedestrians and viewer-consumers who might cruise by in their vehicles, or be lured in from off the sidewalk. By the time of Ruscha’s 1985 drive, a new building was under construction there; his 1995 photograph reveals an outlet of Guitar Center next occupying the site.
 
+<!-- -->
 * ![7425 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/33aad995-c69a-44e6-98e8-01432d988a34/full/,4000/0/default.jpg “7425 Sunset Boulevard. From left: 1973, 1995”)
 * ![7425 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/2a2eda9e-5aca-4415-8bb4-373deca0dfac/full/,400/0/default.jpg)
 
 Another “masculinity as genre” marquee, decidedly heightened, comes with Ruscha’s 1973 image of the [Century Theater](https://losangelestheatres.blogspot.com/2017/02/century-theatre.html), located on another storied Los Angeles boulevard, Hollywood (5115 Hollywood Boulevard). United Artists’ _Theater of Blood_ is an exploitation comedy about an actor (Vincent Price) who murders critics, while the sober _Soylent Green_, now the stuff of spoofs, was near parody on arrival. Critic Gene Siskel called the film “a silly detective yarn, full of juvenile Hollywood images,” adding, “You may never stop laughing.”[^8] (These words would be enough to warrant a gorey demise in _Theater of Blood_.) The resonance of these titles – the goofy comedy mask, alongside Heston’s self-serious drama mask – is too good to be a coincidence. In the dream factory, it feels, frankly, scripted.
 
-* ![Century Theater, 5115 Hollywood Boulevard. 1973](https://media.getty.edu/iiif/image/c0ca03a2-5b46-4520-a16b-ee1c3513da15/full/,1000/0/default.jpg “5115 Hollywood Boulevard. 1973”)
+![Century Theater, 5115 Hollywood Boulevard. 1973](https://media.getty.edu/iiif/image/c0ca03a2-5b46-4520-a16b-ee1c3513da15/full/,1000/0/default.jpg “5115 Hollywood Boulevard. 1973”)
 
 Together, these titles ask: to whom do movies belong? The critics? The audiences, now or decades into the dystopian future? Or the landscape, where they live as letters on a marquee, floating the possibility of playing hooky and seeing a well-priced matinee? Surely, Vincent Price’s excessive mugging, his anti-Method performance style, is camp. Hester’s hypermasculinity ends up reading as camp too, but perhaps the marquee itself is a kind of camp, particularly in its presence in the montage of street life. The marquee is restricted in its verbiage while its theatrical tightness is, to borrow Susan Sontag’s framing, “too much.” As she writes in her 1964 essay “Notes on ‘Camp,’” “Camp is the consistently aesthetic experience of the world.”[^9] And what sign on the streets of Sunset Boulevard is more pro-aesthetic, more anti-practical, than the marquee’s beckoning to skip work, shirk responsibilities, and go to the movies? 
 
@@ -50,7 +51,7 @@ Street signage tells people what to do with their bodies or their vehicles, as b
 
 Linda Williams defines “body genres” – melodrama, horror, and pornography – as movies that make the viewer weep, scream, and, _well_.[^10] Just so, the marquee, with its brevity and literal flatness, its campy “detachment” (Sontag, again), cannot decouple from the human body, from the bodies that move around and by it, nor from the bodies promised on the sign.
 
-* ![1122 North Western Avenue, 1973](https://media.getty.edu/iiif/image/373f44ac-e083-4d63-9665-ff8df099ee15/full/,1000/0/default.jpg “1122 North Western Avenue. 1973”)
+![1122 North Western Avenue, 1973](https://media.getty.edu/iiif/image/373f44ac-e083-4d63-9665-ff8df099ee15/full/,1000/0/default.jpg “1122 North Western Avenue. 1973”)
 
 The [Cinema Theater](https://losangelestheatres.blogspot.com/2017/03/cinema-theatre.html), located half a mile south of Sunset Boulevard, at 1122 North Western Avenue, was serendipitously captured on a brief side street detour during Ruscha’s 1973 drive along Sunset. The Cinema’s marquee advertises “It Happened in Hollywood.”[^11] This is not, however, the 1937 film that gave birth to numerous remakes with the name “A Star is Born,”; it is, instead, a 1973 porno about a woman trying to make it in Hollywood. These films of the same name – one about a woman whose fame ascends as her lover’s star wanes, the other of a scrappier performer who will do whatever it takes to get on camera – live, side by side, in our dream inventory.
 
@@ -66,6 +67,7 @@ As film historian Ross Melnick explained to me in a conversation last year, Los 
 
 The 2007 marquee zooms out to offer an additional layer of commentary on all the marquees that followed: an image of _Ocean’s Thirteen_, the third in a franchise that is, in turn, a reboot of the Rat Pack’s _Ocean’s Eleven_ movie from 1960. Some dreams are recurring, and these self-consciously stylish heist movies are as much about making money at the box office as they are about stealing money from whichever casino needs robbing. And robbers, like the movie business, are endlessly adaptable, changing plans from moment to moment so that the cash transfer goes smoothly.
 
+<!-- -->
 * ![4473 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/fb9e397b-dce6-49fb-9f36-9fda8709c588/full/,400/0/default.jpg “4473 Sunset Boulevard. From left: 1973, 1985, 2007”)
 * ![4473 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/23854559-8d7d-4173-8f0e-a9149670a7fe/full/,400/0/default.jpg)
 * ![4473 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/750556b7-3c07-43fe-9d3a-3ff8695cc6c9/full/,400/0/default.jpg)
@@ -74,6 +76,7 @@ Theaters track not just change, but also decline. The Cinerama, opened in 1963, 
 
 The marquees track what constituted “big” entertainment in their moments: thriller _The Day of the Jackal_ in 1973; adventure-comedy _Back to the Future_ in 1985; inspirational period piece Apollo 13 in 1997; bleak torture porn _Hostel_ in 2007. It is tempting to see this arc as moving from paranoid to hopeful to masochistic, a dream journal with a downward trajectory that maps onto lagging box office revenues and cinema’s place in society. It might not be: the top-grossing film of 2007 was _Pirates of the Caribbean: At World’s End_; and, for every _Hostel_, there’s a _Ratatouille_ (which came out the same year). Ruscha’s marquees are literal and figurative snapshots of what Los Angelenos were thinking about, what was being projected into their eyeballs, but it can never be the whole story.
 
+<!-- -->
 * ![6360 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/d57b9a8c-0ab1-4e2e-8cbe-2b52c633b4d3/full/,400/0/default.jpg “6360 Sunset Boulevard. From left: 1973, 1985, 1995, 2007”)
 * ![6360 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d714876b-6ec2-4042-93b4-23aca512ab15/full/,400/0/default.jpg)
 * ![6360 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/0c684ce2-c516-4d78-b960-ef982b38e389/full/,400/0/default.jpg)
