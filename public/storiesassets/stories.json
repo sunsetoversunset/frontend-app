@@ -125,4 +125,18 @@
     "addresses":[8711, 8730, 3909, 4001, 8029, 8800],
     "published": true
   }
+  {
+    "slug": "marquees",
+    "title": "The Movie Marquee as Dream Inventory",
+    "img_id": "33aad995-c69a-44e6-98e8-01432d988a34",
+    "background_position": "bottom",
+    "author": "Annie Berke",
+    "date": {
+      "year": 2024,
+      "month": 7,
+      "day": 30
+    },
+    "addresses":[4473, 6360, 7425],
+    "published": true
+  }
 ]
