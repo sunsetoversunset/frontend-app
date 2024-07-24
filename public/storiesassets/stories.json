@@ -112,20 +112,6 @@
     "published": true
   },
   {
-    "slug": "test2",
-    "title": "The Movie Marquee as Dream Inventory",
-    "img_id": "58c29032-772a-4bb8-9305-58e4e69a9cf3",
-    "background_position": "bottom",
-    "author": "Annie Berke",
-    "date": {
-      "year": 2024,
-      "month": 7,
-      "day": 30
-    },
-    "addresses":[4473, 6360, 7425],
-    "published": false
-  },
-  {
     "slug": "queer",
     "title": "Cruising Ed Ruscha’s Accidentally Queer Visual History of Los Angeles",
     "img_id": "58c29032-772a-4bb8-9305-58e4e69a9cf3",
