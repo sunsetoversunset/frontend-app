@@ -1,5 +1,5 @@
 **"There was only one Cinerama, and to appreciate its impact, the intoxicating visual and aural pleasures that it provided for midcentury moviegoers, you had to be there."
-- Foster Hirsch[^1]** 
+-- Foster Hirsch[^1]** 
 
 In 2009, Ed Ruscha told the arts magazine [_Frieze_](https://www.frieze.com/article/life-film-ed-ruscha) about his childhood trips to the movies in Oklahoma. “Most of the films I saw at that time were black and white,” he recalled. “I’ve got a vivid memory of what they looked like on a big screen and the silvery feeling that I got from them.” It was this glittery aura, the promise of staggering scope and scale, that underpinned Ruscha’s disinterest in television, explaining, “I’d rather read a book, see something else or go for a drive along the street.”[^2] Television has historically allowed for, even demanded, liveness, but going to the movie theater puts you in the living world; television is live but always-there, film is pre-recorded, but you have to go to participate. 
 
