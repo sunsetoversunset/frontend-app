@@ -30,7 +30,20 @@
     "addresses": [5201, 5751, 6525, 4929, 4661, 2201, 2203, 2205, 2207, 2009, 2211, 2213, 2215, 1111, 1113, 1115],
     "published": false
   },
-  {
+   {
+    "slug": "marquee",
+    "title": "The Movie Marquee as Dream Inventory",
+    "img_id": "a1444446-7661-4222-a350-a45347da061a",
+    "author": "Annie Berke",
+    "date": {
+      "year": 2023,
+      "month": 6,
+      "day": 5
+    },
+    "addresses": [4473, 6360, 7425],
+    "published": false
+  },
+   {
     "slug": "banks",
     "title": "Banking on Sunset",
     "img_id": "2e985d3d-02a9-4845-9ef0-342aae02c18c",
