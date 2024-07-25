@@ -26,13 +26,12 @@ In short, marquees tell us a lot more than what is, or was, playing. They lay ou
 
 The movie marquee is a fossil, a frozen moment in time, not unlike the image itself. It dates the image both literally and subconsciously. One of my favorite family photographs shows my mom, aunt, grandparents, and some unnamed cousins standing on the Atlantic City boardwalk underneath a marquee advertising _Psycho_. For a brief moment, the story of Norman Bates lives in the same visual field as my Italian-Catholic family. But these narratives are always living alongside each other, like neighboring buildings on a city block. If they didn’t, if these demented thrillers didn’t resonate with the pleasant stories we tell ourselves about boys and their mothers, Hitchcock wouldn’t have much of a legacy to uphold.
 
-![Boardwalk_Family.jpg](/storiesassets/assets/Boardwalk_Family.jpg "Author’s extended family, Atlantic City boardwalk, ca. 1960")
+![BoardwalkFamily](/storiesassets/assets/Boardwalk_Family.jpg "Author’s extended family, Atlantic City boardwalk, ca. 1960.")
 
 A 1973 image that Ruscha took of the [Oriental Theater](https://losangelestheatres.blogspot.com/2017/02/oriental-theatre.html) [7425 Sunset Boulevard](/address/7425) captures another duplex of cinematic output, Maggie Smith’s _Love and Pain and the Whole Damn Thing_, a romantic comedy-drama, alongside Goldie Hawn’s Dollars, a heist co-starring Warren Beatty. Together, these films showcase Hollywood’s range of aesthetic and narrative formulas in this moment: _Love and Pain_ a twinkly, slapstick-turned-melodrama (as the title promises), filmed through the cheesecloth haze of romance; and Dollars a peppy heist movie, by Roger Ebert’s estimation “a slick and breakneck caper movie that runs like a well-oiled thrill.”[^7] The latter pairs Goldie Hawn as a good-natured prostitute and Warren Beatty reprises his role as a bank robber. In the former, Maggie Smith acts as the priggish British love interest for Timothy Bottom’s naive leading man. In both, European adventures abound, underscoring what it means to be American (energetic, sexy, and/or earnest). 
 
 The Madonna-whore complex is in full swing: are you a Goldie Hawn or are you a Maggie Smith? More subtly, but also there, is ‘are you a Warren Beatty or a Timothy Bottoms?’ The marquee offers up these genres, and their attendant gender ideologies, as options on a menu for pedestrians and viewer-consumers who might cruise by in their vehicles, or be lured in from off the sidewalk. By the time of Ruscha’s 1985 drive, a new building was under construction there; his 1995 photograph reveals an outlet of Guitar Center next occupying the site.
 
-<!-- -->
 * ![7425 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/33aad995-c69a-44e6-98e8-01432d988a34/full/,4000/0/default.jpg “7425 Sunset Boulevard. From left: 1973, 1995”)
 * ![7425 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/2a2eda9e-5aca-4415-8bb4-373deca0dfac/full/,400/0/default.jpg)
 
@@ -66,7 +65,6 @@ As film historian Ross Melnick explained to me in a conversation last year, Los 
 
 The 2007 marquee zooms out to offer an additional layer of commentary on all the marquees that followed: an image of _Ocean’s Thirteen_, the third in a franchise that is, in turn, a reboot of the Rat Pack’s _Ocean’s Eleven_ movie from 1960. Some dreams are recurring, and these self-consciously stylish heist movies are as much about making money at the box office as they are about stealing money from whichever casino needs robbing. And robbers, like the movie business, are endlessly adaptable, changing plans from moment to moment so that the cash transfer goes smoothly.
 
-<!-- -->
 * ![4473 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/fb9e397b-dce6-49fb-9f36-9fda8709c588/full/,400/0/default.jpg “4473 Sunset Boulevard. From left: 1973, 1985, 2007”)
 * ![4473 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/23854559-8d7d-4173-8f0e-a9149670a7fe/full/,400/0/default.jpg)
 * ![4473 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/750556b7-3c07-43fe-9d3a-3ff8695cc6c9/full/,400/0/default.jpg)
@@ -75,7 +73,6 @@ Theaters track not just change, but also decline. The Cinerama, opened in 1963, 
 
 The marquees track what constituted “big” entertainment in their moments: thriller _The Day of the Jackal_ in 1973; adventure-comedy _Back to the Future_ in 1985; inspirational period piece Apollo 13 in 1997; bleak torture porn _Hostel_ in 2007. It is tempting to see this arc as moving from paranoid to hopeful to masochistic, a dream journal with a downward trajectory that maps onto lagging box office revenues and cinema’s place in society. It might not be: the top-grossing film of 2007 was _Pirates of the Caribbean: At World’s End_; and, for every _Hostel_, there’s a _Ratatouille_ (which came out the same year). Ruscha’s marquees are literal and figurative snapshots of what Los Angelenos were thinking about, what was being projected into their eyeballs, but it can never be the whole story.
 
-<!-- -->
 * ![6360 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/d57b9a8c-0ab1-4e2e-8cbe-2b52c633b4d3/full/,400/0/default.jpg “6360 Sunset Boulevard. From left: 1973, 1985, 1995, 2007”)
 * ![6360 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d714876b-6ec2-4042-93b4-23aca512ab15/full/,400/0/default.jpg)
 * ![6360 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/0c684ce2-c516-4d78-b960-ef982b38e389/full/,400/0/default.jpg)
