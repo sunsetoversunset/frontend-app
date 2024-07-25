@@ -57,7 +57,20 @@
     "addresses": [7630, 2134, 7014, 7700, 7919, 8150, 1910, 6430, 6565, 8490, 8730, 9000, 6255, 6290, 6320, 6300, 1572, 9021, 1561, 2825, 5609, 6547, 7040],
     "published": false
   },
-  {
+   {
+    "slug": "restaurants",
+    "title": "Immigrant Entrepreneurs, Restaurant Redevelopers",
+    "img_id": "0fe7b7d4-c914-428b-a83e-e4d7913dc4d0",
+    "author": "Brian D. Goldstein",
+    "date": {
+      "year": 2023,
+      "month": 7,
+      "day": 13
+    },
+    "addresses": [1525, 1536, 1538, 1822, 1721, 8005, 5050, 6530, 5936, 2621, 5233, 5183, 4929, 8225],
+    "published": false
+  },
+{
     "slug": "thaitown",
     "title": "Thai Town, Placemaking, and Urban Revitalization",
     "img_id": "defa8c28-7aec-44bf-b7ce-40f7fd9a3820",
