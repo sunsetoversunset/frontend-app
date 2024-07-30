@@ -53,10 +53,14 @@ const Story = () => {
 
           // image bars are coded as lists of images.
           // find consequtive image lists and resize the image to fit the screen
-          const barImgPattern = /\* !\[[^\]]*\]\(https:\/\/media\.getty\.edu\/iiif\/image\/(?<filename>.*?)(?="|\))(?<optionalpart>".*")?\)/;
+          //const barImgPattern = /\* !\[[^\]]*\]\(https:\/\/media\.getty\.edu\/iiif\/image\/(?<filename>.*?)(?="|\))(?<optionalpart>".*")?\)/;
+          const barImgPattern = /\* !\[[^\]]*\]\(https:\/\/media\.getty\.edu\/iiif\/image\/(.*?)(?="|\))(".*")?\)/;
+
           lines.forEach((line, idx) => {
             const match = line.match(barImgPattern);
-            if (match && match.groups?.filename) {
+ 
+            if (match && match[1]) {
+              const filename = match[1];
               // look forward and to determine the number of consequetive images
               let count = 1;
               let isAMatch = true;
@@ -80,10 +84,10 @@ const Story = () => {
                 }
               }
 
-              const params = match.groups.filename.split('/');
+              const params = filename.split('/');
               if (params.length === 5) {
                 params[2] = `${Math.floor((width - 2) / count)},`;
-                lines[idx] = lines[idx].replace(match.groups.filename, params.join('/'));
+                lines[idx] = lines[idx].replace(filename, params.join('/'));
               }
             }
           })
