@@ -30,7 +30,21 @@
     "addresses": [5201, 5751, 6525, 4929, 4661, 2201, 2203, 2205, 2207, 2009, 2211, 2213, 2215, 1111, 1113, 1115],
     "published": false
   },
-  {
+   {
+    "slug": "marquee",
+    "title": "The Movie Marquee as Dream Inventory",
+    "img_id": "33aad995-c69a-44e6-98e8-01432d988a34",
+    "background_position": "bottom",
+    "author": "Annie Berke",
+    "date": {
+      "year": 2024,
+      "month": 7,
+      "day": 25
+    },
+    "addresses": [4473, 6360, 7425],
+    "published": false
+  },
+   {
     "slug": "banks",
     "title": "Banking on Sunset",
     "img_id": "2e985d3d-02a9-4845-9ef0-342aae02c18c",
@@ -43,7 +57,7 @@
     "addresses": [7630, 2134, 7014, 7700, 7919, 8150, 1910, 6430, 6565, 8490, 8730, 9000, 6255, 6290, 6320, 6300, 1572, 9021, 1561, 2825, 5609, 6547, 7040],
     "published": false
   },
-  {
+   {
     "slug": "restaurants",
     "title": "Immigrant Entrepreneurs, Restaurant Redevelopers",
     "img_id": "0fe7b7d4-c914-428b-a83e-e4d7913dc4d0",
@@ -56,7 +70,7 @@
     "addresses": [1525, 1536, 1538, 1822, 1721, 8005, 5050, 6530, 5936, 2621, 5233, 5183, 4929, 8225],
     "published": false
   },
-  {
+{
     "slug": "thaitown",
     "title": "Thai Town, Placemaking, and Urban Revitalization",
     "img_id": "defa8c28-7aec-44bf-b7ce-40f7fd9a3820",
@@ -111,7 +125,7 @@
     "addresses":[7349, 7351, 7355, 7357, 7359, 7363, 7365, 5225, 5229, 5231, 5233, 5235, 5237, 5201, 5203, 5205, 5207, 5209, 5211, 5213, 5214, 5216, 5218, 5220, 5222, 5224, 5230, 8477, 8481, 8485, 8489, 8491, 8495, 2901, 2903, 2905, 2907, 2911, 2917, 2919, 2923, 2925, 2927, 2929, 8539, 7771, 7773, 7775, 7777, 7785, 7799, 7101, 7105, 7107, 7109, 7111, 7115, 7117, 7119, 7123, 7127, 8539, 7300, 8539, 7101, 5185, 5265, 1516, 8600, 8616, 8618, 8620, 8622, 8624, 8630, 8632, 8634, 8640, 8642, 8644, 8650, 8660, 8700, 8625, 8627, 8631, 8633, 8635, 8641, 8645, 8649, 8653, 8657, 8661, 8663, 8667, 8669, 8671, 8673, 7077, 6311, 6333, 5825, 5233, 8539],
     "published": true
   },
-{
+  {
     "slug": "queer",
     "title": "Cruising Ed Ruscha’s Accidentally Queer Visual History of Los Angeles",
     "img_id": "58c29032-772a-4bb8-9305-58e4e69a9cf3",
@@ -123,6 +137,6 @@
       "day": 9
     },
     "addresses":[8711, 8730, 3909, 4001, 8029, 8800],
-    "published": false
+    "published": true
   }
 ]
