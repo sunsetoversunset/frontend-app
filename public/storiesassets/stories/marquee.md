@@ -49,7 +49,7 @@ Street signage tells people what to do with their bodies or their vehicles, as b
 
 Linda Williams defines “body genres” – melodrama, horror, and pornography – as movies that make the viewer weep, scream, and, _well_.[^10] Just so, the marquee, with its brevity and literal flatness, its campy “detachment” (Sontag, again), cannot decouple from the human body, from the bodies that move around and by it, nor from the bodies promised on the sign.
 
-![1122 North Western Avenue, 1973](https://media.getty.edu/iiif/image/373f44ac-e083-4d63-9665-ff8df099ee15/full/,1000/0/default.jpg “1122 North Western Avenue. 1973”)
+![1122 North Western Avenue, 1973](https://media.getty.edu/iiif/image/373f44ac-e083-4d63-9665-ff8df099ee15/full/,1000/0/default.jpg 1122 North Western Avenue. 1973)
 
 The [Cinema Theater](https://losangelestheatres.blogspot.com/2017/03/cinema-theatre.html), located half a mile south of Sunset Boulevard, at 1122 North Western Avenue, was serendipitously captured on a brief side street detour during Ruscha’s 1973 drive along Sunset. The Cinema’s marquee advertises “It Happened in Hollywood.” This is not, however, the 1937 film that gave birth to numerous remakes with the name “A Star is Born,”; it is, instead, a 1973 porno about a woman trying to make it in Hollywood. These films of the same name – one about a woman whose fame ascends as her lover’s star wanes, the other of a scrappier performer who will do whatever it takes to get on camera – live, side by side, in our dream inventory.
 
