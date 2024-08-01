@@ -51,7 +51,7 @@ The [Cinema Theater](https://losangelestheatres.blogspot.com/2017/03/cinema-thea
 
 In her essay on sex work in Los Angeles, [“The Open Secret of Sex Work on Sunset Boulevard,”](https://www.sunsetoversunset.org/stories/sexwork) AnneMarie Kooistra writes of how “Ruscha’s photographs help us recall the forgotten by revealing both traces and the presence of absence.” Unsurprisingly, movie marquees feature in her discussion, with screenings of _The Maids_ and _Ride Hard, Ride Wild_ (1985) at [The Sunset](https://losangelestheatres.blogspot.com/2017/03/sunset-theatre.html) (1508 North Western Avenue, near [5453 Sunset Boulevard](/address/5453), which proclaims loudly on that same signage: “This is a Pussycat Theater.” These examples represent more than a trace, perhaps, to a pedestrian passing by. But in the historical record, these explicit mentions constitute a visual blip at best.
 
-![The Sunset, 1985](https://media.getty.edu/iiif/image/e06ef013-579a-4ebb-8e93-01433513e5ff/full/full/0/default.jpg 1508 North Western Avenue, 1985)
+![The Sunset, 1985](https://media.getty.edu/iiif/image/e06ef013-579a-4ebb-8e93-01433513e5ff/full/full/0/default.jpg 1508 North Western Avenue. 1985)
 
 ### A Tale of Two Theaters
 
