@@ -125,6 +125,20 @@
     "published": true
   },
   {
+    "slug": "signs",
+    "title": "Signs of Life: Billboards, Neon, and Typography in Ed Ruscha’s Los Angeles",
+    "img_id": "ba4eeca4-7b2c-4fe7-9d44-bc2bfef0ec11",
+     "background_position": "bottom",
+    "author": "Elizabeth Goodspeed",
+    "date": {
+      "year": 2025,
+      "month": 10,
+      "day": 3
+    },
+    "addresses": [8789, 8255, 8301, 8349, 8835, 8743, 8349, 7901, 8590, 8570, 8901, 8820, 8301, 8469, 8282, 8469, 9039, 8433, 9009, 6720, 8001, 6410, 801, 6687, 6501, 7575, 6757, 8539, 5138, 6098, 6507, 7425, 8017, 5916, 8533, 8017, 7517, 7500, 5211, 8585, 7023, 8221, 8853, 8373, 9105, 7272, 8497, 8733, 8496, 8874, 7551, 7575, 8849, 8017, 7160, 8600, 8420, 7912, 8351, 9041, 9021, 8873, 7509, 7517, 8371, 9039, 8851, 7180, 7224, 8519, 8645, 4017, 8373, 8157, 8420, 7509, 7511, 7513, 6730, 6920, 5900, 8760, 8878, 9059],
+    "published": false
+  }, 
+  {
     "slug": "queer",
     "title": "Cruising Ed Ruscha’s Accidentally Queer Visual History of Los Angeles",
     "img_id": "58c29032-772a-4bb8-9305-58e4e69a9cf3",
