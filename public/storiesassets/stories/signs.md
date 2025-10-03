@@ -130,16 +130,16 @@ Maybe nothing captures the evolution of signage on Sunset more clearly than this
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
 
-[^1]: Archibald Shamel, “Los Angeles, The Automobile, and Mexican American Life,” Boom California, May 23, 2019, https://boomcalifornia.org/2019/05/23/los-angeles-the-automobile-and-mexican-american-life/.
-[^2]: On the history of the billboard and outdoor advertising, see Catherine Gudis, Buyways: Billboards, Automobiles, and the American Landscape (New York: Routledge, 2004).
-[^3]: Shelby Grad, “L.A.'s Decades of Billboards: Admired and Reviled,” Los Angeles Times, January 25, 2015, https://www.latimes.com/local/california/la-me-billboards-la-20150126-story.html.
+[^1]: Archibald Shamel, “Los Angeles, The Automobile, and Mexican American Life,” _Boom California_, May 23, 2019, https://boomcalifornia.org/2019/05/23/los-angeles-the-automobile-and-mexican-american-life/.
+[^2]: On the history of the billboard and outdoor advertising, see Catherine Gudis, _Buyways: Billboards, Automobiles, and the American Landscape_ (New York: Routledge, 2004).
+[^3]: Shelby Grad, “L.A.'s Decades of Billboards: Admired and Reviled,” _Los Angeles Times_, January 25, 2015, https://www.latimes.com/local/california/la-me-billboards-la-20150126-story.html.
 [^4]: Chris Epting, “Rock ’n’ Roll Billboards of the Sunset Strip,” Visit West Hollywood, March 10, 2020, https://www.visitwesthollywood.com/stories/rock-n-roll-billboards-sunset-strip/.
-[^5]: Claire O'Neill, et al., “A Brief History Of L.A.'s Billboard Art,” NPR, December 3, 2012, https://www.npr.org/sections/pictureshow/2012/12/03/166394769/a-brief-history-of-l-a-s-billboard-art.
-[^6]: Kevin Starr, “Landscape Electric,” Los Angeles Times, July 4, 1999, https://www.latimes.com/archives/la-xpm-1999-jul-04-op-52802-story.html.
-[^7]: Laura Bliss, “'Spectacular Illumination: Neon Los Angeles' Documents the Glowing Past of City Signage,” Bloomberg, August 25, 2016, https://www.bloomberg.com/news/articles/2016-08-25/-spectacular-illumination-neon-los-angeles-documents-the-glowing-past-of-city-signage.
+[^5]: Claire O'Neill, et al., “A Brief History Of L.A.'s Billboard Art,” _NPR_, December 3, 2012, https://www.npr.org/sections/pictureshow/2012/12/03/166394769/a-brief-history-of-l-a-s-billboard-art.
+[^6]: Kevin Starr, “Landscape Electric,” _Los Angeles Times_, July 4, 1999, https://www.latimes.com/archives/la-xpm-1999-jul-04-op-52802-story.html.
+[^7]: Laura Bliss, “'Spectacular Illumination: Neon Los Angeles' Documents the Glowing Past of City Signage,” _Bloomberg_, August 25, 2016, https://www.bloomberg.com/news/articles/2016-08-25/-spectacular-illumination-neon-los-angeles-documents-the-glowing-past-of-city-signage.
 [^8]: Emma Coffman “Glowing Inspiration: Neon Has Sparked the Imagination for More than a Century,” New Orleans Museum of Art, May 29, 2019, https://noma.org/neon.
 [^9]: Joseph Rucker and Jane E. Boyd, “A Blaze of Crimson Light: The Story of Neon,” Science History Institute, August 9, 2012, https://www.sciencehistory.org/distillations/a-blaze-of-crimson-light-the-story-of-neon.
-[^10]: Laila Lalami, “California Builds the Future, for Good and Bad. What’s Next?” New York Times Magazine, May 30, 2023, https://www.nytimes.com/2023/05/30/magazine/california-future.html.
-[^11]: Bridget Gleeson, “Exploring LA's Neon Past,” BBC, August 23, 2012, https://www.bbc.com/travel/article/20120821-exploring-las-neon-past.
-[^12]: One of the most popular instruction manuals for hand-lettering is The Speedball Textbook, which was first published in 1915 by Ross F. George and is now in its 25th edition; Suzanne Cunningham, Carl Rohrs, and Sachin Shah, The Speedball Textbook: A Comprehensive Guide to Pen and Brush Lettering (Statesville, NC: Speedball Art Products Company, 2021).
+[^10]: Laila Lalami, “California Builds the Future, for Good and Bad. What’s Next?” _New York Times Magazine_, May 30, 2023, https://www.nytimes.com/2023/05/30/magazine/california-future.html.
+[^11]: Bridget Gleeson, “Exploring LA's Neon Past,” _BBC_, August 23, 2012, https://www.bbc.com/travel/article/20120821-exploring-las-neon-past.
+[^12]: One of the most popular instruction manuals for hand-lettering is _The Speedball Textbook_, which was first published in 1915 by Ross F. George and is now in its 25th edition; Suzanne Cunningham, Carl Rohrs, and Sachin Shah, _The Speedball Textbook: A Comprehensive Guide to Pen and Brush Lettering_ (Statesville, NC: Speedball Art Products Company, 2021).
 [^13]: Chris Lee, "What’s in a Name? Reading Race, Typography, and the 'Chop Suey' Typeface," Typographics 2024, June 14, 2024, https://2024.typographics.com/conference/chris-lee.
