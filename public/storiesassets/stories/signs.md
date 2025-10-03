@@ -73,7 +73,7 @@ This shift in rarity created a peculiar shift in meaning, however. In Ruscha’s
 * ![7023 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/b96987e0-4430-42bd-825c-7a7ca9204557/full/,400/0/default.jpg)
 * ![7023 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/0741a825-46c9-41f3-ac9d-e4dea4e047ca/full/,400/0/default.jpg)
 
-Seen in 2007, an old neon sign established personality. It also meant a business had been around a while. Just take the Chateau Marmont ([8221 Sunset Boulevard](/address/8221)) and its famous neons, which persist in Ruscha’s photographs from 1966 to 2007 and remain today. Decisive action by historic preservationists who recognized the value of neon to the Angeleno urban character has bolstered the protection of remaining examples, and has kept those signs present on the Strip.[^11] As this resurgence in care broadens, one wonders what Ruscha’s camera would capture now and whether the neon that flickered through his lens might once again be on the rise.
+Seen in 2007, an old neon sign established personality. It also meant a business had been around a while. Just take the Chateau Marmont ([8221 Sunset Boulevard](/address/8221)) and its famous neon signs, which persist in Ruscha’s photographs from 1966 to 2007 and remain today. Decisive action by historic preservationists who recognized the value of neon to the Angeleno urban character has bolstered the protection of remaining examples, and has kept those signs present on the Strip.[^11] As this resurgence in care broadens, one wonders what Ruscha’s camera would capture now and whether the neon that flickered through his lens might once again be on the rise.
 
 ### Typographic Signals
 
