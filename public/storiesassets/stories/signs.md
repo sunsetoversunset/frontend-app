@@ -14,7 +14,7 @@ Though the mention of American signage may conjure the glow of Times Square or t
 * ![8255 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/7facebc2-6569-423e-a7b7-2e0adef06405/full/,400/0/default.jpg "8255 Sunset Boulevard. From left: 1966, 1973, 1985, 1995, 2007")
 * ![8255 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/42d6f54e-c22b-4071-9349-1246d89defce/full/,400/0/default.jpg)
 * ![8255 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/0956133f-7b27-481b-bd55-83eb3a93f6b2/full/,400/0/default.jpg)
- * ![8255 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/3af778f5-4aef-4777-8a86-e64fe3f266f7/full/,400/0/default.jpg)
+* ![8255 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/3af778f5-4aef-4777-8a86-e64fe3f266f7/full/,400/0/default.jpg)
 * ![8255 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/73fa050a-f7d4-4c48-aa0f-5226b6b485ba/full/,400/0/default.jpg)
 
 By the 1970s, LA had earned the dubious title of “the nation’s capital of the billboard,” a distinction that reflected over-saturation more than praise.[^3] Nowhere was this proliferation more visible than the Sunset Strip and West Hollywood. Billboards dot the landscapes of Ruscha’s 1966 photographs of this portion of Sunset Boulevard, advertising everything from liquor [(8255 Sunset Boulevard)](/address/8255) to tourist attractions [(8760 Sunset Boulevard)](/address/8760) and tires [(8878 Sunset Boulevard)](/address/8878). Some of these billboards are more modest in scale, their graphics neatly contained within the frame of the billboard; they occupied inexpensive space to rent and were inexpensive signs to produce. Many of these smaller signs, like an advertisement for Empire Insured Savings Bank at [9059 Sunset Boulevard](/address/9059), sell necessities, not indulgences, and their design reflects that: tidy and functional.
@@ -60,14 +60,10 @@ Unfortunately, that glow was expensive. Neon relies on fragile glass tubing, rar
  
 This shift in rarity created a peculiar shift in meaning, however. In Ruscha’s later photographs, the same glow that once marked a new opening and the buzz of progress instead signaled the exact opposite: the legacy and nostalgia (as at [8585 Sunset Boulevard (2007)](/address/8585)) of the good old days, when Sunset was packed with cocktail lounges and glamorous hotels, not mini-malls and parking garages ([7023 Sunset Boulevard](/address/7023)). On Sunset, these signs became a kind of accidental archive, evidence of an era when signage aspired to dazzle, and dazzling entertainment was plentiful. Neon’s eccentricity became its strength again, helping businesses stand out or borrow credibility from an often imagined past. After all, no two neon signs—each shaped by a different artisan—look exactly alike, while two LCD screens rarely differ beyond their text style.
 
-* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d319ea64-8d36-44da-a22e-b43bd3ac22fc/full/,400/0/default.jpg
- "7023 Sunset Boulevard. 1985")
-* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/e9287dc4-ffa9-4a6b-83a9-9f014f7c2e6c/full/,400/0/default.jpg)*
-* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/789486c3-3e9e-4529-b0d6-041e5d7b31ef/full/,400/0/default.jpg)*
+* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/d319ea64-8d36-44da-a22e-b43bd3ac22fc/full/,400/0/default.jpg "7023 Sunset Boulevard. 1985")
+* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/e9287dc4-ffa9-4a6b-83a9-9f014f7c2e6c/full/,400/0/default.jpg)
+* ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/789486c3-3e9e-4529-b0d6-041e5d7b31ef/full/,400/0/default.jpg)
 * ![7023 Sunset Boulevard. 1985](https://media.getty.edu/iiif/image/16a5b042-184a-4b39-9c99-dd6d46c1bf80/full/,400/0/default.jpg)
-
-
-
 
 <!-- -->
 * ![7023 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/467f758f-8247-4a98-8f67-41bef6a6d34b/full/,400/0/default.jpg "7023 Sunset Boulevard. 2007")
@@ -118,9 +114,12 @@ These visual cues—monograms, gridded layouts, icon-and-wordmark lockups—poin
 **Across Ruscha’s archive, signage emerges not only as a record of commercial intent, but also as an index fossil of shifting cultural conditions. Signage has never been just surface.**
 
 Across Ruscha’s archive, then, signage emerges not only as a record of commercial intent, but also as an index fossil of shifting cultural conditions. Signage has never been just surface. The signs of Sunset Boulevard trace changes in taste, ambition, and the tools available to express them. Increasingly during Ruscha’s visits, signs pointed toward a future of visual consolidation. By 2007, the idiosyncrasy of earlier decades had given way to polish, and with it, a quieter kind of uniformity. Signage, on Sunset and elsewhere, will inevitably continue to act as a proxy for relevance, reflecting the aesthetics, priorities, and technologies of the moment, along with whatever future we’re being sold. But what that signage has to say next is still unclear.
+
 * ![5900 Sunset Boulevard. 1995](https://media.getty.edu/iiif/image/d37af16b-6653-4135-a8af-efea49ed4988/full/,600/0/default.jpg "5900 Sunset Boulevard. From left: 1995, 2007")
 * ![5900 Sunset Boulevard. 2007](https://media.getty.edu/iiif/image/805f9eca-d95a-4471-b88b-ae70f0083f88/full/,600/0/default.jpg)
+
 Maybe nothing captures the evolution of signage on Sunset more clearly than this: by 2007, one of the only sign shops left on the street in 1995, at [5900 Sunset Boulevard](/address/5900), had become a cheap gift store. Even the signmakers have moved on.
+
 <!-- Footnotes themselves at the bottom. -->
 ### Notes
 
