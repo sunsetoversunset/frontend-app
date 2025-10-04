@@ -1,8 +1,11 @@
 **Signs are actors. Some are wallflowers, barely speaking above a whisper, while others shout and flirt, beckoning for attention.** 
 
 A No Parking sign intimidates, while the facade of a car dealership grins ear to ear with wolfish eyes. Typecasting is inevitable—certain typefaces, colors, and treatments carry built-in associations. But as visual tastes shift and cultural values evolve, so too does our sense of what a sign should do and how it should behave.
+
 Just as dialects vary by region, signage speaks in localized accents. On Sunset Boulevard in Los Angeles, a stretch long associated with glamor, entertainment, and counterculture, signs act as anchors for fantasy—fixing it into the physical landscape and offering it up for consumption. Ed Ruscha’s decades-spanning photographic survey of Sunset charts how signage responds to shifting ideas about style, aspiration, and visibility in a city built on performance.
+
 What people desire, and what they are told to desire, is always changing. Consumers want what feels modern: new products, new styles, new technology. Signs both advertise that promise and embody it; a sign that doesn’t look current stops working. These changes register across both culture and surface: from Betty Page to Kim Kardashian, gas to electric, marquee boards to neon, vacuform signage to vinyl lettering.
+
 The evolution of signage along Sunset in the second half of the twentieth century serves as a visual record of changing priorities for Los Angeles and for the American consumer at large. The particulars of each sign—its typefaces, materials, construction, and scale—reveal a gradual turn away from idiosyncrasy and craft. What has replaced them is standardization, speed, and surface. In time, glamour was traded for convenience, individuality for branding, permanence for disposability.
 
 ![8760 Sunset Boulevard. 1966](https://media.getty.edu/iiif/image/bce8410c-225b-408b-9987-8f0ece1ac4bc/full/,1000/0/default.jpg
@@ -23,6 +26,7 @@ By the 1970s, LA had earned the dubious title of “the nation’s capital of th
  "West of 8301 Sunset Boulevard. 1966")
 
 Other 1966 billboards break the frame entirely. As is the case just west of [8301 Sunset Boulevard](/address/8301), image and text extend beyond the edges of a sign’s rectilinear scaffolding, integrating into the landscape like a real world collage—or maybe more like a proto-pop-up ad. Compared to smaller billboards, many more of these oversized signs gesture toward fantasy and indulgence. Take the United Airlines billboard nearest to [8349 Sunset Boulevard](/address/8349), which advertises air travel through portrait photography and sculptural typography that peeks above the frame. Just down the road, a Bank of America ad for traveler’s checks ([8835 Sunset Boulevard](/address/8835)) offers a very different message: set in a utilitarian sans serif and visually contained within the frame. Both speak to travel, but only one is selling a fantasy. These boundary-breaking billboards persist well into the 1980s (see [8743 Sunset Boulevard](/address/8743), for example), 1990s (near [8349 Sunset Boulevard](/address/8349)), and 2000s ([7901 Sunset Boulevard](/address/7901)). They appear less frequently as time goes on.
+
 Despite the presumed driver-centricity of the billboards on the Strip, some signs are so tall that they stretch beyond the viewfinder of the camera Ruscha strapped to the back of his pickup truck (see [8590 Sunset Boulevard](/address/8590), 1973; [8570 Sunset Boulevard](/address/8570), 2007; and [8901 Sunset Boulevard](/address/8901), 1995). Winking at the viewer from beyond the frame, they offer truncated glimpses of text, as in 1966 at [8820 Sunset Boulevard](/address/8820), rather than coherent messages.
 
 ![8590 Sunset Boulevard. 1973](https://media.getty.edu/iiif/image/03b524bb-160d-429a-bca6-e7ede2a67989/full/,1000/0/default.jpg
